@@ -1,3 +1,149 @@
-<div class="h-screen flex items-center justify-center bg-blue-100">
-  <h1 class="text-5xl font-bold text-blue-800">Sección: Características</h1>
-</div>
+---
+import './Features.css';
+---
+
+<section id="ruleta" class="hero-features reveal" style="background-image: linear-gradient(rgba(35, 55, 62, 0.85), rgba(35, 55, 62, 0.95)), url('/images/Ciudad_de_La_Paz_de_noche.jpg');">
+  <div class="hero-content">
+    <h2 class="title-premium">Una experiencia sin igual en La Paz</h2>
+    <p class="subtitle-premium">Descubre las herramientas de nuestra aplicación movil "Wali" que transformarán tu forma de explorar.</p>
+    
+    <div class="roulette-grid">
+      <a href="#feat-audio" class="roulette-item">🎧<br><span>Audioguías</span></a>
+      <a href="#feat-offline" class="roulette-item">🗺️<br><span>Offline</span></a>
+      <a href="#feat-ia" class="roulette-item">🤖<br><span>Asistente IA</span></a>
+      <a href="#feat-food" class="roulette-item">🍲<br><span>Gastronomía</span></a>
+      <a href="#feat-precio" class="roulette-item">💰<br><span>Precio Justo</span></a>
+      <a href="#feat-alertas" class="roulette-item">⚠️<br><span>Alertas</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="feat-audio" class="feature-detail align-left reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('/images/calle_jaen.jpg');">
+  <div class="text-content">
+    <div class="feature-card tilt-card">
+      <span class="feat-tag">Magia en tus oídos</span>
+      <h3>Tus pasos despiertan la historia</h3>
+      <p>Olvídate de leer textos aburridos. Mientras caminas, nuestro GPS detecta cuando te acercas a un atractivo turístico y reproduce automáticamente historias, secretos y datos curiosos. Solo ponte los audífonos y déjate guiar.</p>
+    </div>
+  </div>
+  <div class="image-content">
+    <img src="/images/FEA_audioguia.png" alt="Audioguía en San Francisco" class="feature-img" />
+  </div>
+</section>
+
+<section id="feat-offline" class="feature-detail align-right reveal" style="background-image: linear-gradient(rgba(35, 55, 62, 0.9), rgba(35, 55, 62, 0.9)), url('/images/cordillera.jpg');">
+  <div class="text-content">
+    <div class="feature-card tilt-card">
+      <span class="feat-tag">Cero estrés, Cero Megas</span>
+      <h3>Explora sin depender de tu internet</h3>
+      <p>¿Te quedaste sin señal en medio de un callejón paceño? No hay problema. Descarga nuestros paquetes de mapas y accede a todas las rutas, calles y puntos de interés de forma 100% offline.</p>
+    </div>
+  </div>
+  <div class="image-content">
+    <img src="/images/FEA_offline.png" alt="Mapas Offline 3D" class="feature-img" />
+  </div>
+</section>
+
+<section id="feat-ia" class="feature-detail align-left reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('/images/centro_historico.jpg');">
+  <div class="text-content">
+    <div class="feature-card tilt-card">
+      <span class="feat-tag">Atención 24/7</span>
+      <h3>Tu guía paceño de bolsillo con IA</h3>
+      <p>¿Dudas sobre el horario del teleférico o cómo llegar al Valle de la Luna? Nuestro Asistente Inteligente conoce la ciudad al derecho y al revés, basándose únicamente en información oficial y verificada.</p>
+    </div>
+  </div>
+  <div class="image-content">
+    <img src="/images/FEA_guiaIA.png" alt="Chatbot IA respondiendo" class="feature-img" />
+  </div>
+</section>
+
+<section id="feat-food" class="feature-detail align-right reveal" style="background-image: linear-gradient(rgba(35, 55, 62, 0.9), rgba(35, 55, 62, 0.9)), url('/images/mercado_ancestral.jpg');">
+  <div class="text-content">
+    <div class="feature-card tilt-card">
+      <span class="feat-tag">Sabores sin misterio</span>
+      <h3>Decodificador de menús locales</h3>
+      <p>¿No sabes qué es un 'Fricasé' o qué tan picante es la 'Llajua'? Solo apunta tu cámara al menú y nuestra app te mostrará los ingredientes, nivel de picante y la historia detrás de cada plato tradicional.</p>
+    </div>
+  </div>
+  <div class="image-content">
+    <img src="/images/FEA_gastronomia.png" alt="Escaneo de comida paceña" class="feature-img" />
+  </div>
+</section>
+
+<section id="feat-precio" class="feature-detail align-left reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('/images/calle_de_las_brujas.jpg');">
+  <div class="text-content">
+    <div class="feature-card tilt-card">
+      <span class="feat-tag">Economía Inteligente</span>
+      <h3>Calculadora de Precios Justos</h3>
+      <p>Evita los cobros excesivos. Antes de tomar un taxi o comprar un recuerdo, consulta nuestra calculadora para conocer las tarifas promedio y paga siempre lo justo como un verdadero local.</p>
+    </div>
+  </div>
+  <div class="image-content">
+    <img src="/images/FEA_calculadora.png" alt="Calculadora de precios" class="feature-img" />
+  </div>
+</section>
+
+<section id="feat-alertas" class="feature-detail align-right reveal" style="background-image: linear-gradient(rgba(35, 55, 62, 0.9), rgba(35, 55, 62, 0.9)), url('/images/mirador_killi.jpg');">
+  <div class="text-content">
+    <div class="feature-card tilt-card">
+      <span class="feat-tag">Seguridad y control</span>
+      <h3>Alertas y estado en tiempo real</h3>
+      <p>Tu seguridad es primero. Recibe notificaciones push sobre el estado de los museos (abiertos/cerrados) y advertencias de seguridad proactivas según las zonas por las que te muevas.</p>
+    </div>
+  </div>
+  <div class="image-content">
+    <img src="/images/FEA_seguridad.png" alt="Alertas de seguridad" class="feature-img" />
+  </div>
+</section>
+
+<section class="cta-final reveal" style="background-image: linear-gradient(#13151a03, rgba(15, 152, 138, 0.9)), url('/images/valle_luna.jpg');">
+  <div class="cta-card tilt-card">
+    <h2>¿Listo para vivir la ciudad de otra manera?</h2>
+    <p>Únete a los viajeros que ya están redefiniendo el turismo local.</p>
+    <a href="/descarga" class="btn-mega">Descargar Ahora</a>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // 1. Animación de revelado al hacer scroll
+    const reveals = document.querySelectorAll(".reveal");
+    const revealOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target); 
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.2, // Dispara cuando el 20% de la sección es visible
+      rootMargin: "0px"
+    });
+
+    reveals.forEach((reveal) => revealOnScroll.observe(reveal));
+
+    // 2. Efecto Tilt 3D (Inclinación con el ratón)
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top; 
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      });
+    });
+  });
+</script>

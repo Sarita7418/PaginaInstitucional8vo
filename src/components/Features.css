@@ -1,0 +1,199 @@
+/* === ESTILOS LIMPIOS Y CON ANIMACIONES PREMIUM === */
+html { scroll-behavior: smooth; }
+
+/* REGLA MAESTRA PARA FONDOS DE PANTALLA COMPLETA */
+.hero-features, 
+.feature-detail, 
+.cta-final {
+  background-size: cover; /* Obliga a la imagen a ocupar todo el espacio sin deformarse */
+  background-position: center; /* Mantiene la imagen siempre centrada */
+  background-repeat: no-repeat; /* Evita que la imagen se repita como mosaico */
+  background-attachment: fixed; /* Efecto Parallax premium al hacer scroll */
+}
+
+/* RULETA / HERO */
+.hero-features {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  color: white;
+  border-bottom: 4px solid var(--color-orange); 
+}
+.title-premium {
+  font-size: 3.5rem;
+  color: var(--color-teal);
+  margin-bottom: 0.5rem;
+}
+.subtitle-premium {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin-bottom: 4rem;
+}
+.roulette-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.roulette-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 130px;
+  height: 130px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  font-size: 2.5rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
+}
+.roulette-item span {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  font-weight: 600;
+}
+.roulette-item:hover {
+  transform: translateY(-10px);
+  background: var(--color-teal);
+  border-color: var(--color-teal);
+  box-shadow: 0 15px 30px rgba(15, 152, 138, 0.4); 
+}
+
+/* BLOQUES DE DETALLE */
+.feature-detail {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 8%;
+  gap: 4rem;
+  border-bottom: 4px solid var(--color-orange);
+  overflow: hidden; 
+}
+
+.align-right { flex-direction: row-reverse; }
+.text-content { flex: 1; perspective: 1000px; }
+.image-content { flex: 1; display: flex; justify-content: center; }
+
+/* LAS TARJETITAS (Con Sombras profundas y transición para el JS) */
+.feature-card {
+  background: white;
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; 
+  will-change: transform;
+}
+
+.feature-card:hover {
+  box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.4), 0 20px 30px -10px rgba(15, 152, 138, 0.3);
+}
+
+.feat-tag {
+  background: rgba(210, 120, 23, 0.1);
+  color: var(--color-orange);
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.feature-card h3 {
+  font-size: 2rem;
+  color: var(--color-dark);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.feature-card p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  margin: 0;
+}
+
+/* LAS IMÁGENES (Más sombras) */
+.feature-img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 30px 60px -15px rgba(0,0,0,0.4), 0 15px 25px -10px rgba(0,0,0,0.2);
+  transition: transform 0.4s ease;
+  object-fit: cover;
+}
+.feature-img:hover {
+  transform: scale(1.03) rotate(-1deg);
+  box-shadow: 0 40px 70px -15px rgba(0,0,0,0.5);
+}
+
+/* CTA FINAL */
+.cta-final {
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+}
+.cta-card {
+  background: var(--color-dark);
+  padding: 4rem;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 25px 50px rgba(25, 125, 97, 0.4);
+}
+.cta-card h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+.cta-card p { font-size: 1.1rem; margin-bottom: 2rem; }
+
+.btn-mega {
+  background-color: var(--color-orange);
+  color: white;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+.btn-mega:hover { background-color: var(--color-brown); }
+
+/* === MAGIA DEL ESCALONADO (ANIMACIONES AL HACER SCROLL) === */
+.reveal .text-content {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reveal .image-content {
+  opacity: 0;
+  transform: scale(0.8) translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s; 
+}
+
+/* Cuando el JS añade la clase 'active' */
+.reveal.active .text-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal.active .image-content {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
+  .feature-detail, .align-right { flex-direction: column; text-align: center; gap: 2rem; padding: 4rem 5%; }
+  .title-premium { font-size: 2.5rem; }
+  .feature-card:hover { transform: none; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); } 
+}

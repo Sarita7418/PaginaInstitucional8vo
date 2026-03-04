@@ -1,53 +1,142 @@
+/* === ESTILOS PREMIUM PARA EL HEADER === */
+
 .header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: white;
-  border-bottom: 4px solid var(--color-teal);
-  padding: 1rem 2rem;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1.2rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  /* TU BORDE INFERIOR NARANJA ESTÁ AQUÍ */
+  border-bottom: 4px solid var(--color-orange); 
 }
 
+/* EFECTO AL HACER SCROLL */
+.header.scrolled {
+  padding: 0.6rem 4rem;
+  background-color: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* EL LOGO */
 .header-logo {
-  color: var(--color-teal);
-  font-weight: 700;
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
   text-decoration: none;
+  flex-shrink: 0; /* Evita que el logo se aplaste */
 }
 
+.logo-img {
+  height: 60px; /* Tamaño del logo */
+  width: auto;
+  border-radius: 8px;
+  transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.header.scrolled .logo-img {
+  height: 45px; /* Se achica al bajar */
+}
+
+/* === LOS NUEVOS RELLENOS DE ESPACIO (Líneas Conectoras) === */
+.nav-line-filler {
+  flex-grow: 1; /* Esto hace que ocupe mágicamente todo el blanco disponible */
+  height: 2px;
+  margin: 0 2rem;
+  background: linear-gradient(90deg, transparent, rgba(15, 152, 138, 0.3), transparent);
+  position: relative;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+/* El pequeño "nodo" brillante en el medio de la línea */
+.nav-line-filler::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-teal);
+  box-shadow: 0 0 10px var(--color-teal);
+}
+
+/* NAVEGACIÓN */
 .header-nav {
   display: flex;
-  gap: 1.5rem;
+  gap: 2.5rem;
   align-items: center;
   list-style: none;
   margin: 0;
   padding: 0;
+  flex-shrink: 0; /* Evita que los textos se junten feo */
 }
 
-.header-nav a {
+.nav-link {
   color: var(--color-dark);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 1.05rem;
+  position: relative;
+  padding: 0.5rem 0;
   transition: color 0.3s ease;
 }
 
-.header-nav a:hover {
-  color: var(--color-orange);
+.nav-link:hover {
+  color: var(--color-teal);
 }
 
-.btn-descarga {
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: var(--color-orange);
+  transition: width 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* BOTÓN DE DESCARGA */
+.btn-descarga {
+  background: linear-gradient(135deg, var(--color-orange), #e68a00);
   color: white !important;
-  padding: 0.5rem 1.2rem;
+  padding: 0.7rem 1.8rem;
   border-radius: 50px;
   text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(210, 120, 23, 0.3);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .btn-descarga:hover {
-  background-color: var(--color-brown);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(210, 120, 23, 0.5);
+  background: linear-gradient(135deg, #e68a00, var(--color-brown));
+}
+
+/* RESPONSIVO */
+@media (max-width: 1100px) {
+  .nav-line-filler {
+    display: none; /* Las ocultamos si la pantalla se hace muy pequeña */
+  }
+}
+
+@media (max-width: 992px) {
+  .header, .header.scrolled { padding: 1rem 2rem; }
+  .header-nav { display: none; }
 }
