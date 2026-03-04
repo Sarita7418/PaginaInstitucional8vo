@@ -1,3 +1,234 @@
-<div class="h-screen flex items-center justify-center bg-slate-100">
-  <h1 class="text-5xl font-bold text-slate-800">Sección: Nosotros</h1>
+---
+/* src/components/Nosotros.astro */
+import './Inicio.css';
+
+const team = [
+  { name: "Jhovanni", role: "Estrategia & Proyectos", icon: "🗺️", desc: "Lidera la planificación estratégica y el análisis de impacto territorial en la región andina bajo estándares de ingeniería." },
+  { name: "Kiara", role: "UX & Diseño Narrativo", icon: "✨", desc: "Arquitecta de interfaces que fusionan la estética moderna con la mística y la simbología cultural paceña." },
+  { name: "Cris", role: "CTO & Ciberseguridad", icon: "🛡️", desc: "Responsable de la integridad de datos, cifrado y arquitectura de sistemas de misión crítica en entornos digitales." },
+  { name: "Nestor", role: "Ingeniería de Software", icon: "🚀", desc: "Desarrollador full-stack enfocado en la optimización de algoritmos de búsqueda y experiencias interactivas." }
+];
+
+const slidesHero = ["/images/Chacaltaya.jpg", "/images/calle_jaen.jpg", "/images/Ciudad_de_La_Paz_de_noche.jpg"];
+
+// Postales repartidas estratégicamente por TODO el largo de la página
+const allPostales = [
+  { img: "/images/mercado_ancestral.jpg", label: "Tradición", rot: "-8deg", side: "left", top: "10%" },
+  { img: "/images/valle_luna.jpg", label: "Geología", rot: "10deg", side: "right", top: "15%" },
+  { img: "/images/altiplano.jpg", label: "Horizontes", rot: "-12deg", side: "left", top: "30%" },
+  { img: "/images/cordillera.jpg", label: "Aventura", rot: "15deg", side: "right", top: "35%" },
+  { img: "/images/centro_historico.jpg", label: "Historia", rot: "-5deg", side: "left", top: "50%" },
+  { img: "/images/mirador_killi.jpg", label: "Panoramas", rot: "12deg", side: "right", top: "55%" },
+  { img: "/images/calle_de_las_brujas.jpg", label: "Mística", rot: "-10deg", side: "left", top: "70%" },
+  { img: "/images/twanaku.jpg", label: "Legado", rot: "8deg", side: "right", top: "75%" },
+  { img: "/images/Lago_Titicaca.jpg", label: "Titicaca", rot: "-7deg", side: "left", top: "85%" },
+  { img: "/images/centro_historico.jpg", label: "Paceñidad", rot: "6deg", side: "right", top: "90%" }
+];
+---
+
+<div class="inicio-root" id="nosotros-premium-v10">
+
+  <div class="extreme-gallery">
+    {allPostales.map((p) => (
+      <div class={`postal-ext reveal ${p.side === 'left' ? 'from-left' : 'from-right'}`} 
+           style={`top: ${p.top}; ${p.side}: 30px; transform: rotate(${p.rot});`}>
+        <img src={p.img} alt={p.label} />
+        <div class="postal-pin"></div>
+        <span>{p.label}</span>
+      </div>
+    ))}
+  </div>
+
+  <section class="n-hero-dynamic">
+    <div class="hero-slides-bg">
+      {slidesHero.map((img, i) => (
+        <div class={`hero-slide-bg ${i === 0 ? 'active' : ''}`} style={`background-image: url('${img}')`}></div>
+      ))}
+    </div>
+    <div class="n-overlay-glass"></div>
+    <div class="n-safe-content reveal">
+      <div class="badge"><span class="bdot"></span> Ingeniería Turística · EMI</div>
+      <h1 class="hero-title mega-text">Exploración con<br/><em>Precisión Digital</em></h1>
+      <p class="hero-sub text-big-bright">
+        Somos un ecosistema tecnológico nacido en la **EMI** que redefine el concepto de acompañamiento. 
+        Unimos la ciencia de datos con la mística de los Andes para guiarte donde otros solo ven caminos.
+      </p>
+    </div>
+  </section>
+
+  <section class="s-stats-bar" style="background: var(--color-green); padding: 60px 24px; color: white; position: relative; z-index: 5;">
+    <div class="hero-stats center-stats text-xl">
+      <div class="hst"><div class="hst-n">EMI</div><div class="hst-l">Base Académica</div></div>
+      <div class="hst"><div class="hst-n">100%</div><div class="hst-l">Digitalización</div></div>
+      <div class="hst"><div class="hst-n">2026</div><div class="hst-l">Visión de Futuro</div></div>
+    </div>
+  </section>
+
+  <section class="section-v textured-paper" style="padding: 120px 24px;">
+    <div class="container-v reveal">
+      <div class="stag-dk">Nuestro Manifiesto</div>
+      <h2 class="stit-dk title-xxl">Misión y <em>Visión</em></h2>
+      
+      <div class="mv-detailed-grid">
+        <div class="mv-card-big bg-white-glass">
+          <div class="n-icon">🎯</div>
+          <h3 class="pc-name title-md">Nuestra Misión</h3>
+          <p class="pc-desc">
+            Nuestra labor se centra en proporcionar información crítica sobre los riesgos y oportunidades del sector turístico. Buscamos empoderar al viajero mediante herramientas de ingeniería que analizan el entorno en tiempo real, garantizando que la esencia de La Paz sea descubierta de forma segura, ética y profunda.
+          </p>
+        </div>
+        
+        <div class="mv-card-big bg-white-glass">
+          <div class="n-icon">👁️</div>
+          <h3 class="pc-name title-md">Nuestra Visión</h3>
+          <p class="pc-desc">
+            Consolidarnos para el año 2030 como el **Think Tank** tecnológico referente en Bolivia. Aspiramos a ser el estándar de oro en la integración de Inteligencia Artificial y preservación cultural, transformando la manera en que el mundo interactúa con la identidad andina a través de la modernidad.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-decoration compass">🧭</div>
+  </section>
+
+  <section class="n-parallax-section" style="background-image: url('/images/altiplano.jpg');">
+    <div class="n-overlay-dark"></div>
+    <div class="n-safe-content reveal text-center">
+      <div class="stag">Compromiso Técnico</div>
+      <h2 class="stit title-xxl">Seguridad en cada <em>Paso</em></h2>
+      <p class="hero-sub text-big-bright" style="max-width: 850px; margin-inline: auto;">
+        La tecnología es nuestra herramienta para cuidarte. Validamos cada ruta con protocolos técnicos de ingeniería, asegurando que la protección de tus datos y tu integridad física sean nuestra prioridad absoluta en la montaña o la ciudad.
+      </p>
+      <div class="check-grid-nosotros text-xl">
+        <div class="c-item"><span>✔</span> Cifrado de Datos de Extremo a Extremo</div>
+        <div class="c-item"><span>✔</span> Soporte Técnico Personalizado 24/7</div>
+        <div class="c-item"><span>✔</span> Alianzas con Guías Locales Certificados</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-galeria grey-texture" style="padding: 120px 24px;">
+    <div class="g-header reveal">
+      <div class="stag">Comité Rector</div>
+      <h2 class="stit title-xxl" style="color: var(--color-dark);">El Talento de la <em>EMI</em></h2>
+    </div>
+    <div class="pgrid" style="max-width: 1100px; margin-inline: auto;">
+      {team.map((member, index) => (
+        <div class={`pc reveal scale-in reveal-delay-${index + 1}`} style="background: #fff; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.05);">
+          <div class="pc-icon-header" style="background: #fdfdfd; height: 110px; font-size: 3.5rem; border-bottom: 1px solid #f0f0f0;">
+            {member.icon}
+          </div>
+          <div class="pc-body" style="text-align: center; padding: 35px;">
+            <div class="pc-name title-md" style="color: var(--color-dark);">{member.name}</div>
+            <div class="pc-role text-lg" style="color: var(--color-orange); font-weight: bold; margin-bottom: 15px;">{member.role}</div>
+            <p class="pc-desc" style="font-size: 1.05rem; min-height: 80px; color: #555;">{member.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="bg-decoration maps-stamp">🗺️</div>
+  </section>
+
+  <section class="n-parallax-section" style="background-image: url('/images/valle_luna.jpg');">
+    <div class="n-overlay-dark"></div>
+    <div class="n-safe-content reveal text-center">
+      <h2 class="stit title-xxl">Canales de <em>Enlace</em></h2>
+      <p class="hero-sub text-big-bright" style="margin-bottom: 40px;">Como investigadores universitarios, valoramos la conexión global. ¡Escríbenos!</p>
+      <div class="contact-links-nosotros">
+        <div class="cl-item"><span>📧</span> proyecto.turismo@estudiantes.emi.edu.bo</div>
+        <div class="cl-item"><span>📍</span> La Paz - Campus Irpavi, EMI</div>
+        <div class="cl-item"><span>📱</span> Línea de Atención: +591 70000000</div>
+      </div>
+    </div>
+  </section>
+
 </div>
+
+<style>
+  /* TEXTURAS PARA RELLENAR EL VACÍO */
+  .textured-paper {
+    background-color: var(--color-cream);
+    background-image: url("https://www.transparenttextures.com/patterns/felt.png");
+    position: relative;
+    overflow: hidden;
+  }
+  .grey-texture {
+    background-color: #f8f9fa;
+    background-image: url("https://www.transparenttextures.com/patterns/white-diamond.png");
+    position: relative;
+  }
+
+  /* DECORACIONES DE FONDO */
+  .bg-decoration {
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.04;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .compass { top: 50px; right: 5%; transform: rotate(15deg); }
+  .maps-stamp { bottom: 50px; left: 5%; transform: rotate(-15deg); }
+
+  /* TIPOGRAFÍA MEGA */
+  .mega-text { font-size: clamp(3.2rem, 8vw, 6rem) !important; line-height: 1; text-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+  .title-xxl { font-size: clamp(2.8rem, 6.5vw, 4.8rem) !important; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .title-md { font-size: 2rem !important; font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+  .text-big-bright { color: rgba(255,255,255,0.98); font-size: 1.5rem !important; line-height: 1.6; margin-top: 25px; }
+
+  /* POSTALES (POLAROIDS) CON CHINCHETAS */
+  .extreme-gallery { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 20; pointer-events: none; overflow: hidden; }
+  .postal-ext { position: absolute; width: 160px; background: white; padding: 10px 10px 32px 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); pointer-events: auto; transition: transform 0.4s ease; border: 1px solid #eee; }
+  .postal-ext img { width: 100%; height: 130px; object-fit: cover; margin-bottom: 6px; }
+  .postal-ext span { font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 0.95rem; color: #333; display: block; text-align: center; }
+  .postal-pin { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: radial-gradient(circle, #ff4d4d, #b30000); border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+  .postal-ext:hover { transform: scale(1.25) rotate(0deg) !important; z-index: 100; cursor: pointer; }
+
+  /* SECCIONES PARALLAX & HERO */
+  .n-hero-dynamic { position: relative; height: 95vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hero-slides-bg { position: absolute; inset: 0; z-index: 1; }
+  .hero-slide-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease; }
+  .hero-slide-bg.active { opacity: 1; }
+  .n-overlay-glass { position: absolute; inset: 0; background: rgba(11, 26, 32, 0.75); z-index: 2; }
+  .n-parallax-section { position: relative; min-height: 75vh; display: flex; align-items: center; justify-content: center; background-attachment: fixed; background-size: cover; }
+  .n-overlay-dark { position: absolute; inset: 0; background: rgba(11, 26, 32, 0.82); z-index: 2; }
+
+  /* CONTENIDO & CARDS */
+  .n-safe-content { position: relative; z-index: 10; width: 100%; max-width: 950px; margin-inline: auto; padding-inline: 40px; text-align: center; }
+  .mv-detailed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 50px; margin-top: 60px; text-align: left; }
+  .mv-card-big { border-left: 6px solid var(--color-orange); padding: 35px; background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); border-radius: 0 20px 20px 0; }
+  
+  .check-grid-nosotros { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 40px; }
+  .c-item { color: #fff; font-weight: 500; display: flex; align-items: center; gap: 12px; font-size: 1.2rem; }
+  .c-item span { color: var(--color-orange); font-weight: bold; font-size: 1.6rem; }
+
+  .contact-links-nosotros { display: flex; flex-direction: column; align-items: center; gap: 25px; color: white; font-weight: 600; font-size: 1.3rem; margin-top: 40px; }
+
+  @media (max-width: 1000px) {
+    .extreme-gallery, .bg-decoration { display: none; }
+    .n-parallax-section { background-attachment: scroll; }
+    .mv-detailed-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Carrusel Hero
+  const slidesHero = document.querySelectorAll('.hero-slide-bg');
+  let currentHero = 0;
+  function nextSlideHero() {
+    slidesHero[currentHero].classList.remove('active');
+    currentHero = (currentHero + 1) % slidesHero.length;
+    slidesHero[currentHero].classList.add('active');
+  }
+  setInterval(nextSlideHero, 5500);
+
+  // Animaciones Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
