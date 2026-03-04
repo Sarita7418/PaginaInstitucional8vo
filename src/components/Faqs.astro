@@ -1,3 +1,48 @@
-<div class="h-screen flex items-center justify-center bg-blue-100">
-  <h1 class="text-5xl font-bold text-blue-800">Sección: Preguntas Frecuentes (FAQ)</h1>
-</div>
+---
+import './Faqs.css';
+---
+
+<section class="faqs-root" aria-labelledby="faqs-title">
+  <div class="faqs-inner">
+    <h1 id="faqs-title" class="faqs-title">Preguntas Frecuentes — Uso de la app</h1>
+    <p class="faqs-lead">Respuestas rápidas sobre descarga, permisos, mapas offline, audioguías y seguridad.</p>
+
+    <div class="faq-list" role="list">
+      <details class="faq-item" open>
+        <summary class="faq-q">¿Cómo descargo la app?</summary>
+        <div class="faq-a">
+          Escanea el QR desde la página de descarga o abre los enlaces directos a Google Play / App Store desde tu teléfono. También puedes visitar la sección <a href="/descarga">Descarga</a>.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">¿Qué permisos solicita la app?</summary>
+        <div class="faq-a">
+          Solo pide los permisos mínimos: ubicación para activar audioguías y navegación, y almacenamiento para descargar mapas offline. Puedes revisar y revocar permisos desde la configuración del sistema.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">¿Cómo funcionan las audioguías por GPS?</summary>
+        <div class="faq-a">
+          Las audioguías se activan automáticamente al entrar en geocercas (geofencing) de puntos de interés. No necesitas buscarlas manualmente; basta con mantener la ubicación activada en segundo plano.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">¿Puedo usar los mapas sin conexión?</summary>
+        <div class="faq-a">
+          Sí. Descarga los paquetes de mapa desde el menú de la app (modo Offline‑First). La navegación y las rutas básicas funcionarán sin conexión, aunque algunas funciones en línea (pagos, chat IA) requerirán datos.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">¿Qué es el asistente IA RAG y cómo usa mis datos?</summary>
+        <div class="faq-a">
+          El asistente se basa en RAG: responde solo con información verificada cargada por los administradores del sistema. No “inventa” datos. La gestión de datos y privacidad cumple con las políticas indicadas en la app.
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
