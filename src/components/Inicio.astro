@@ -7,6 +7,7 @@ import './Inicio.css';
 
 <div class="inicio-root">
 
+
   <section class="hero">
 
     <!-- Slides de fondo (fotos de La Paz) -->
@@ -53,23 +54,21 @@ import './Inicio.css';
       <div>
         <div class="badge">
           <span class="bdot"></span>
-          Turismo Receptivo · La Paz, Bolivia
+          Operadora de Turismo Receptivo · La Paz, Bolivia
         </div>
 
         <h1 class="hero-title">
-          Descubre la magia de<br />
-          <em>La Paz</em>
-          como nunca antes
+          <em>Aventuras Paceñas</em>
+          S.R.L.
         </h1>
 
         <p class="hero-sub">
-          Somos tu guía en la ciudad más fascinante de los Andes. Calles llenas
-          de historia, mercados ancestrales y miradores que te dejan sin aliento,
-          todo a 3,640 metros sobre el mar.
+          Somos una operadora de turismo receptivo con sede en La Paz, dedicada a conectar al viajero con el patrimonio cultural y geográfico andino. Organizamos experiencias de viaje integrales: guiado especializado, traslados estratégicos y asesoría personalizada para que descubras La Paz como nunca antes.
         </p>
 
         <div class="hero-btns">
           <a href="/nosotros" class="btn-p">Conoce quiénes somos →</a>
+          <a href="#paquetes" class="btn-s">Ver nuestros paquetes</a>
         </div>
 
         <div class="hero-stats">
@@ -88,21 +87,26 @@ import './Inicio.css';
         </div>
       </div>
 
-      <!-- Tarjeta flotante -->
+      <!-- Tarjeta flotante — qué ofrecemos -->
       <div class="fcard">
         <div class="fcard-top">
           <div class="fcard-pin"><img src="/icons/ubicacion.png" style="width:14px;height:14px;object-fit:contain" alt="" /></div>
           <div>
-            <div class="fcard-loc">La Paz, Bolivia</div>
-            <div class="fcard-alt">3,640 msnm · Capital Andina</div>
+            <div class="fcard-loc">Aventuras Paceñas S.R.L.</div>
+            <div class="fcard-alt">La Paz, Bolivia · Turismo Receptivo</div>
           </div>
         </div>
         <div class="fcard-list">
-          <div class="fcard-item"><span class="fdot"></span>Calle de las Brujas</div>
-          <div class="fcard-item"><span class="fdot"></span>Valle de la Luna</div>
-          <div class="fcard-item"><span class="fdot"></span>Mirador Killi Killi</div>
-          <div class="fcard-item"><span class="fdot"></span>Teleférico Mi Teleférico</div>
-          <div class="fcard-item"><span class="fdot"></span>Plaza Murillo</div>
+          <div class="fcard-item"><span class="fdot"></span>Guiado especializado andino</div>
+          <div class="fcard-item"><span class="fdot"></span>Traslados y logística integral</div>
+          <div class="fcard-item"><span class="fdot"></span>Patrimonio cultural y natural</div>
+          <div class="fcard-item"><span class="fdot"></span>Asesoría personalizada</div>
+          <div class="fcard-item"><span class="fdot"></span>App de acompañamiento</div>
+        </div>
+        <div class="fcard-stats">
+          <div class="fcard-stat"><span class="fcard-stat-n">3,640</span><span class="fcard-stat-l">msnm · La ciudad más alta</span></div>
+          <div class="fcard-stat"><span class="fcard-stat-n">9+</span><span class="fcard-stat-l">destinos disponibles</span></div>
+          <div class="fcard-stat"><span class="fcard-stat-n">365</span><span class="fcard-stat-l">días operando</span></div>
         </div>
       </div>
     </div>
@@ -111,39 +115,38 @@ import './Inicio.css';
       <span>Explorar</span>
       <div class="scroll-bar"></div>
     </div>
-  </section>
 
-
-  <div class="ticker">
-    <div class="ticker-track">
-      <span class="ticker-item">Calle de las Brujas<span class="tsep"></span></span>
-      <span class="ticker-item">Valle de la Luna<span class="tsep"></span></span>
-      <span class="ticker-item">Mirador Killi Killi<span class="tsep"></span></span>
-      <span class="ticker-item">Plaza Murillo<span class="tsep"></span></span>
-      <span class="ticker-item">Tiwanaku<span class="tsep"></span></span>
-      <span class="ticker-item">Lago Titicaca<span class="tsep"></span></span>
-      <span class="ticker-item">Nevado Charquini<span class="tsep"></span></span>
-      <span class="ticker-item">Chacaltaya<span class="tsep"></span></span>
-      <span class="ticker-item">Calle Jaén<span class="tsep"></span></span>
-      <span class="ticker-item">Iglesia San Francisco<span class="tsep"></span></span>
-      <span class="ticker-item">Mercado de las Brujas<span class="tsep"></span></span>
-      <span class="ticker-item">Teleférico Mi Teleférico<span class="tsep"></span></span>
-      <!-- duplicado para loop continuo -->
-      <span class="ticker-item">Calle de las Brujas<span class="tsep"></span></span>
-      <span class="ticker-item">Valle de la Luna<span class="tsep"></span></span>
-      <span class="ticker-item">Mirador Killi Killi<span class="tsep"></span></span>
-      <span class="ticker-item">Plaza Murillo<span class="tsep"></span></span>
-      <span class="ticker-item">Tiwanaku<span class="tsep"></span></span>
-      <span class="ticker-item">Lago Titicaca<span class="tsep"></span></span>
-      <span class="ticker-item">Nevado Charquini<span class="tsep"></span></span>
-      <span class="ticker-item">Chacaltaya<span class="tsep"></span></span>
-      <span class="ticker-item">Calle Jaén<span class="tsep"></span></span>
-      <span class="ticker-item">Iglesia San Francisco<span class="tsep"></span></span>
-      <span class="ticker-item">Mercado de las Brujas<span class="tsep"></span></span>
-      <span class="ticker-item">Teleférico Mi Teleférico<span class="tsep"></span></span>
+    <!-- Ticker dentro del hero, pegado al fondo -->
+    <div class="ticker">
+      <div class="ticker-track">
+        <span class="ticker-item">Calle de las Brujas<span class="tsep"></span></span>
+        <span class="ticker-item">Valle de la Luna<span class="tsep"></span></span>
+        <span class="ticker-item">Mirador Killi Killi<span class="tsep"></span></span>
+        <span class="ticker-item">Plaza Murillo<span class="tsep"></span></span>
+        <span class="ticker-item">Tiwanaku<span class="tsep"></span></span>
+        <span class="ticker-item">Lago Titicaca<span class="tsep"></span></span>
+        <span class="ticker-item">Nevado Charquini<span class="tsep"></span></span>
+        <span class="ticker-item">Chacaltaya<span class="tsep"></span></span>
+        <span class="ticker-item">Calle Jaén<span class="tsep"></span></span>
+        <span class="ticker-item">Iglesia San Francisco<span class="tsep"></span></span>
+        <span class="ticker-item">Mercado de las Brujas<span class="tsep"></span></span>
+        <span class="ticker-item">Teleférico Mi Teleférico<span class="tsep"></span></span>
+        <span class="ticker-item">Calle de las Brujas<span class="tsep"></span></span>
+        <span class="ticker-item">Valle de la Luna<span class="tsep"></span></span>
+        <span class="ticker-item">Mirador Killi Killi<span class="tsep"></span></span>
+        <span class="ticker-item">Plaza Murillo<span class="tsep"></span></span>
+        <span class="ticker-item">Tiwanaku<span class="tsep"></span></span>
+        <span class="ticker-item">Lago Titicaca<span class="tsep"></span></span>
+        <span class="ticker-item">Nevado Charquini<span class="tsep"></span></span>
+        <span class="ticker-item">Chacaltaya<span class="tsep"></span></span>
+        <span class="ticker-item">Calle Jaén<span class="tsep"></span></span>
+        <span class="ticker-item">Iglesia San Francisco<span class="tsep"></span></span>
+        <span class="ticker-item">Mercado de las Brujas<span class="tsep"></span></span>
+        <span class="ticker-item">Teleférico Mi Teleférico<span class="tsep"></span></span>
+      </div>
     </div>
-  </div>
 
+  </section>
 
   <section class="s-galeria">
     <div class="g-header reveal">
@@ -224,127 +227,63 @@ import './Inicio.css';
       <h2 class="stit stit-dk">Recorre La Paz con nosotros</h2>
     </div>
 
-    <div class="pgrid">
+    <div class="paq-slider-wrap">
+      <button class="paq-btn p" id="paq-prev" aria-label="Anterior">&#8592;</button>
+      <div class="paq-slider-outer">
+        <div class="pgrid" id="paq-track">
 
-      <div class="pc reveal scale-in reveal-delay-1" data-modal="brujas">
-        <div class="pc-thumb">
-          <img src="/images/calle_de_las_brujas.jpg" alt="Calle de las Brujas" loading="lazy" />
-          <div class="pc-thumb-ov"></div>
-          <span class="pc-cat">Cultura y Misticismo</span>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Calle de las Brujas y Centro Histórico</div>
-          <p class="pc-desc">Sumérgete en la cosmovisión aymara en la famosa Calle Linares, rodeado de amuletos, hierbas y yatiris.</p>
-          <button class="pc-cta">Ver más →</button>
+          <div class="pc" data-modal="brujas">
+            <div class="pc-thumb"><img src="/images/calle_de_las_brujas.jpg" alt="Calle de las Brujas" loading="lazy" /><div class="pc-thumb-ov"></div><span class="pc-cat">Cultura y Misticismo</span></div>
+            <div class="pc-body"><div class="pc-name">Calle de las Brujas y Centro Histórico</div><p class="pc-desc">Sumérgete en la cosmovisión aymara en la famosa Calle Linares, rodeado de amuletos, hierbas y yatiris.</p><button class="pc-cta">Ver más →</button></div>
+          </div>
+
+          <div class="pc" data-modal="luna">
+            <div class="pc-thumb"><img src="/images/valle_luna.jpg" alt="Valle de la Luna" loading="lazy" /><div class="pc-thumb-ov"></div><span class="pc-cat">Naturaleza Urbana</span></div>
+            <div class="pc-body"><div class="pc-name">Valle de la Luna</div><p class="pc-desc">Formaciones de arcilla y arenisca que crean un paisaje de otro mundo a solo 10 km del centro paceño.</p><button class="pc-cta">Ver más →</button></div>
+          </div>
+
+          <div class="pc" data-modal="killi">
+            <div class="pc-thumb"><img src="/images/mirador_killi.jpg" alt="Mirador Killi Killi" loading="lazy" /><div class="pc-thumb-ov"></div><span class="pc-cat">Panorámico</span></div>
+            <div class="pc-body"><div class="pc-name">Mirador Killi Killi y Teleférico</div><p class="pc-desc">La hoyada paceña entera desde el mirador histórico, combinado con el teleférico más alto del mundo.</p><button class="pc-cta">Ver más →</button></div>
+          </div>
+
+          <div class="pc" data-modal="jaen">
+            <div class="pc-thumb"><img src="/images/calle_jaen.jpg" alt="Calle Jaén" loading="lazy" /><div class="pc-thumb-ov"></div><span class="pc-cat">Historia Colonial</span></div>
+            <div class="pc-body"><div class="pc-name">Calle Jaén y Museos Coloniales</div><p class="pc-desc">La calle colonial mejor conservada de Bolivia con sus cuatro museos y casas de la independencia.</p><button class="pc-cta">Ver más →</button></div>
+          </div>
+
+          <div class="pc" data-modal="tiwanaku">
+            <div class="pc-thumb"><img src="/images/twanaku.jpg" alt="Tiwanaku" loading="lazy" /><div class="pc-thumb-ov"></div><span class="pc-cat">Arqueología</span></div>
+            <div class="pc-body"><div class="pc-name">Tiwanaku Arqueológico</div><p class="pc-desc">Patrimonio de la Humanidad UNESCO. La civilización preincaica más importante de los Andes bolivianos.</p><button class="pc-cta">Ver más →</button></div>
+          </div>
+
+          <div class="pc" data-modal="titicaca">
+            <div class="pc-thumb"><img src="/images/Lago_Titicaca.jpg" alt="Lago Titicaca" loading="lazy" /><div class="pc-thumb-ov"></div><span class="pc-cat">Lago y Naturaleza</span></div>
+            <div class="pc-body"><div class="pc-name">Lago Titicaca e Isla del Sol</div><p class="pc-desc">El lago navegable más alto del mundo a 3,800 msnm. Tour de 2 días hasta la mítica Isla del Sol.</p><button class="pc-cta">Ver más →</button></div>
+          </div>
+
+          <div class="pc" data-modal="chacaltaya">
+            <div class="pc-thumb"><img src="/images/Chacaltaya.jpg" alt="Chacaltaya" loading="lazy" /><div class="pc-thumb-ov"></div><span class="pc-cat">Alta Montaña</span></div>
+            <div class="pc-body"><div class="pc-name">Chacaltaya</div><p class="pc-desc">A 5,400 msnm, la antigua pista de esquí más alta del mundo con vistas de La Paz y la Cordillera Real.</p><button class="pc-cta">Ver más →</button></div>
+          </div>
+
+          <div class="pc" data-modal="charquini">
+            <div class="pc-thumb"><img src="/images/charquini.jpg" alt="Nevado Charquini" loading="lazy" /><div class="pc-thumb-ov"></div><span class="pc-cat">Aventura y Trekking</span></div>
+            <div class="pc-body"><div class="pc-name">Nevado Charquini y Laguna Esmeralda</div><p class="pc-desc">A 39 km de La Paz en la Cordillera Real. La Laguna Esmeralda de aguas turquesas junto al glaciar.</p><button class="pc-cta">Ver más →</button></div>
+          </div>
+
+          <div class="pc" data-modal="citytour">
+            <div class="pc-thumb"><img src="/images/city_tour.jpg" alt="La Paz City Tour" loading="lazy" /><div class="pc-thumb-ov"></div><span class="pc-cat">Tour Urbano</span></div>
+            <div class="pc-body"><div class="pc-name">La Paz City Tour</div><p class="pc-desc">Los puntos más emblemáticos de La Paz en un solo día con guía especializado paceño.</p><button class="pc-cta">Ver más →</button></div>
+          </div>
+
         </div>
       </div>
-
-      <div class="pc reveal scale-in reveal-delay-2" data-modal="luna">
-        <div class="pc-thumb">
-          <img src="/images/valle_luna.jpg" alt="Valle de la Luna" loading="lazy" />
-          <div class="pc-thumb-ov"></div>
-          <span class="pc-cat">Naturaleza Urbana</span>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Valle de la Luna</div>
-          <p class="pc-desc">Formaciones de arcilla y arenisca que crean un paisaje de otro mundo a solo 10 km del centro paceño.</p>
-          <button class="pc-cta">Ver más →</button>
-        </div>
-      </div>
-
-      <div class="pc reveal scale-in reveal-delay-3" data-modal="killi">
-        <div class="pc-thumb">
-          <img src="/images/mirador_killi.jpg" alt="Mirador Killi Killi" loading="lazy" />
-          <div class="pc-thumb-ov"></div>
-          <span class="pc-cat">Panorámico</span>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Mirador Killi Killi y Teleférico</div>
-          <p class="pc-desc">La hoyada paceña entera desde el mirador histórico, combinado con el teleférico más alto del mundo.</p>
-          <button class="pc-cta">Ver más →</button>
-        </div>
-      </div>
-
-      <div class="pc reveal scale-in reveal-delay-1" data-modal="jaen">
-        <div class="pc-thumb">
-          <img src="/images/calle_jaen.jpg" alt="Calle Jaén" loading="lazy" />
-          <div class="pc-thumb-ov"></div>
-          <span class="pc-cat">Historia Colonial</span>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Calle Jaén y Museos Coloniales</div>
-          <p class="pc-desc">La calle colonial mejor conservada de Bolivia con sus cuatro museos y casas de la independencia.</p>
-          <button class="pc-cta">Ver más →</button>
-        </div>
-      </div>
-
-      <div class="pc reveal scale-in reveal-delay-2" data-modal="tiwanaku">
-        <div class="pc-thumb">
-          <img src="/images/twanaku.jpg" alt="Tiwanaku" loading="lazy" />
-          <div class="pc-thumb-ov"></div>
-          <span class="pc-cat">Arqueología</span>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Tiwanaku Arqueológico</div>
-          <p class="pc-desc">Patrimonio de la Humanidad UNESCO. La civilización preincaica más importante de los Andes bolivianos.</p>
-          <button class="pc-cta">Ver más →</button>
-        </div>
-      </div>
-
-      <div class="pc reveal scale-in reveal-delay-3" data-modal="titicaca">
-        <div class="pc-thumb">
-          <img src="/images/Lago_Titicaca.jpg" alt="Lago Titicaca" loading="lazy" />
-          <div class="pc-thumb-ov"></div>
-          <span class="pc-cat">Lago y Naturaleza</span>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Lago Titicaca e Isla del Sol</div>
-          <p class="pc-desc">El lago navegable más alto del mundo a 3,800 msnm. Tour de 2 días hasta la mítica Isla del Sol.</p>
-          <button class="pc-cta">Ver más →</button>
-        </div>
-      </div>
-
-      <div class="pc reveal scale-in reveal-delay-1" data-modal="chacaltaya">
-        <div class="pc-thumb">
-          <img src="/images/Chacaltaya.jpg" alt="Chacaltaya" loading="lazy" />
-          <div class="pc-thumb-ov"></div>
-          <span class="pc-cat">Alta Montaña</span>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Chacaltaya</div>
-          <p class="pc-desc">A 5,400 msnm, la antigua pista de esquí más alta del mundo con vistas de La Paz y la Cordillera Real.</p>
-          <button class="pc-cta">Ver más →</button>
-        </div>
-      </div>
-
-      <div class="pc reveal scale-in reveal-delay-2" data-modal="charquini">
-        <div class="pc-thumb">
-          <img src="/images/charquini.jpg" alt="Nevado Charquini" loading="lazy" />
-          <div class="pc-thumb-ov"></div>
-          <span class="pc-cat">Aventura y Trekking</span>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Nevado Charquini y Laguna Esmeralda</div>
-          <p class="pc-desc">A 39 km de La Paz en la Cordillera Real. La Laguna Esmeralda de aguas turquesas junto al glaciar.</p>
-          <button class="pc-cta">Ver más →</button>
-        </div>
-      </div>
-
-      <div class="pc reveal scale-in reveal-delay-3" data-modal="citytour">
-        <div class="pc-thumb">
-          <img src="/images/city_tour.jpg" alt="La Paz City Tour" loading="lazy" />
-          <div class="pc-thumb-ov"></div>
-          <span class="pc-cat">Tour Urbano</span>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">La Paz City Tour</div>
-          <p class="pc-desc">Los puntos más emblemáticos de La Paz en un solo día con guía especializado paceño.</p>
-          <button class="pc-cta">Ver más →</button>
-        </div>
-      </div>
-
+      <button class="paq-btn n" id="paq-next" aria-label="Siguiente">&#8594;</button>
     </div>
+    <div class="paq-dots" id="paq-dots"></div>
   </section>
+
 
 
   <section class="s-why">
@@ -406,6 +345,9 @@ import './Inicio.css';
   </section>
 
 
+  <!-- ══════════════════════════════════════
+       MAPA INTERACTIVO
+  ══════════════════════════════════════ -->
   <section class="s-mapa">
     <div class="mp-in">
       <div class="mp-hdr reveal">
@@ -448,16 +390,54 @@ import './Inicio.css';
     </div>
   </section>
 
+
+  <!-- ══════════════════════════════════════
+       CTA FINAL
+  ══════════════════════════════════════ -->
   <section class="s-cta">
-    <h2 class="reveal">¿Listo para descubrir La Paz?</h2>
-    <p class="reveal reveal-delay-1">
-      Descarga nuestra app y lleva un guía paceño en tu bolsillo. Explora la Calle de las Brujas,
-      el Teleférico y cada rincón de la ciudad de forma autónoma.
+    <div class="s-cta::before"></div>
+
+    <div class="cta-tag reveal">📱 Disponible ahora</div>
+
+    <h2 class="reveal reveal-delay-1">¿Listo para descubrir<br /><em>La Paz</em>?</h2>
+
+    <p class="reveal reveal-delay-2">
+      Lleva un guía paceño en tu bolsillo. Nuestra app te acompaña en cada rincón de la ciudad —
+      desde la Calle de las Brujas hasta el Charquini — con mapas offline, información de sitios
+      y rutas personalizadas.
     </p>
-    <div class="cta-btns reveal reveal-delay-2">
-      <a href="/descarga" class="btn-p"><img src="/icons/telefono.png" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:4px" alt="" /> Descargar la App</a>
+
+    <div class="cta-features reveal reveal-delay-3">
+      <div class="cta-feat">
+        <span class="cta-feat-ic">🗺</span>
+        <span>Mapas offline</span>
+      </div>
+      <div class="cta-feat">
+        <span class="cta-feat-ic">🧭</span>
+        <span>Guía de sitios</span>
+      </div>
+      <div class="cta-feat">
+        <span class="cta-feat-ic">⭐</span>
+        <span>Rutas personalizadas</span>
+      </div>
+      <div class="cta-feat">
+        <span class="cta-feat-ic">🔒</span>
+        <span>Sin conexión</span>
+      </div>
+    </div>
+
+    <div class="cta-btns reveal reveal-delay-4">
+      <a href="/descarga" class="btn-p">
+        <img src="/icons/telefono.png" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:4px" alt="" />
+        Descargar la App
+      </a>
+    </div>
+
+    <div class="cta-note reveal reveal-delay-5">
+      Gratis · Funciona sin internet
     </div>
   </section>
+
 
 
   <div class="mb" id="modal-backdrop">
@@ -490,6 +470,7 @@ import './Inicio.css';
 
 
 <script>
+
 function loadLeaflet() {
   return new Promise((resolve) => {
     if (window.L) { resolve(); return; }
@@ -675,6 +656,7 @@ const MD = {
   },
 };
 
+
 function closeMd() {
   document.getElementById('modal-backdrop').classList.remove('open');
   document.body.style.overflow = '';
@@ -789,6 +771,50 @@ document.getElementById('ph-prev').addEventListener('click', () => goPhoto(phIdx
 document.getElementById('ph-next').addEventListener('click', () => goPhoto(phIdx + 1));
 phTimer = setInterval(() => goPhoto(phIdx + 1), 4200);
 
+const paqTrack  = document.getElementById('paq-track');
+const paqDots   = document.getElementById('paq-dots');
+const paqCards  = paqTrack ? paqTrack.querySelectorAll('.pc') : [];
+let paqIdx = 0;
+let paqTimer;
+
+const paqVisible = () => {
+  if (window.innerWidth < 580) return 1;
+  if (window.innerWidth < 960) return 2;
+  return 3;
+};
+const paqTotal = () => Math.max(1, paqCards.length - paqVisible() + 1);
+
+function buildPaqDots() {
+  if (!paqDots) return;
+  paqDots.innerHTML = '';
+  for (let i = 0; i < paqTotal(); i++) {
+    const d = document.createElement('button');
+    d.className = 'paq-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goPaq(i));
+    paqDots.appendChild(d);
+  }
+}
+buildPaqDots();
+window.addEventListener('resize', () => { buildPaqDots(); goPaq(0); });
+
+function goPaq(n) {
+  paqIdx = (n + paqTotal()) % paqTotal();
+  const cardW = paqCards[0] ? paqCards[0].offsetWidth + 20 : 320;
+  paqTrack.style.transform = `translateX(-${paqIdx * cardW}px)`;
+  document.querySelectorAll('.paq-dot').forEach((d, i) =>
+    d.classList.toggle('active', i === paqIdx)
+  );
+  clearInterval(paqTimer);
+  paqTimer = setInterval(() => goPaq(paqIdx + 1), 3800);
+}
+
+if (document.getElementById('paq-prev')) {
+  document.getElementById('paq-prev').addEventListener('click', () => goPaq(paqIdx - 1));
+  document.getElementById('paq-next').addEventListener('click', () => goPaq(paqIdx + 1));
+}
+paqTimer = setInterval(() => goPaq(paqIdx + 1), 3800);
+
+
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach(entry => {
@@ -805,7 +831,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 const sections = [
   document.querySelector('.hero'),
-  document.querySelector('.ticker'),
   document.querySelector('.s-galeria'),
   document.querySelector('.s-paq'),
   document.querySelector('.s-why'),
@@ -833,7 +858,10 @@ function scrollToSection(idx) {
   if (idx < 0 || idx >= sections.length || isScrolling) return;
   isScrolling = true;
   currentSection = idx;
-  sections[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const el = sections[idx];
+  const headerH = document.querySelector('.header')?.offsetHeight || 0;
+  const top = el.getBoundingClientRect().top + window.scrollY - headerH;
+  window.scrollTo({ top, behavior: 'smooth' });
   setTimeout(() => { isScrolling = false; }, 900);
 }
 
