@@ -1,0 +1,56 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import Sidebar from '../../components/dashboard/Sidebar.astro';
+import Inicio from '../../components/dashboard/Inicio.astro';
+import Usuarios from '../../components/dashboard/Usuarios.astro';
+import Audios from '../../components/dashboard/Audios.astro';
+import Rutas from '../../components/dashboard/Rutas.astro';
+import Mapas from '../../components/dashboard/Mapas.astro';
+import RAGContext from '../../components/dashboard/RAGContext.astro';
+---
+
+<DashboardLayout title="Tourism Dashboard">
+  <Sidebar />
+  
+  <div class="dashboard-main">
+    <header class="dashboard-header">
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div class="header-logo">T</div>
+        <h1 class="header-title" id="headerTitle">Inicio</h1>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+      <Inicio />
+      <Usuarios />
+      <Audios />
+      <Rutas />
+      <Mapas />
+      <RAGContext />
+    </main>
+  </div>
+
+  <script>
+    // Actualizar el título del header cuando se cambia de sección
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('[data-section]');
+      const headerTitle = document.getElementById('headerTitle');
+
+      const sectionTitles = {
+        'inicio': 'Inicio',
+        'usuarios': 'Gestión de Usuarios',
+        'audios': 'Gestión de Audioguías',
+        'rutas': 'Gestión de Rutas',
+        'mapas': 'Mapas Interactivos',
+        'rag': 'Contexto del RAG'
+      };
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const sectionId = link.getAttribute('data-section');
+          headerTitle.textContent = sectionTitles[sectionId] || 'Dashboard';
+        });
+      });
+    });
+  </script>
+</DashboardLayout>

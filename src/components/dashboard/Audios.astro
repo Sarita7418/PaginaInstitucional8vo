@@ -1,0 +1,198 @@
+---
+// Componente Audios - CRUD
+---
+
+<section data-section-target="audios" class="section card">
+  <div class="card-header">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h2 class="card-title"> Gestión de Audioguías</h2>
+        <p class="card-subtitle">Administra todas las audioguías disponibles en la plataforma</p>
+      </div>
+      <button class="button button-primary" onclick="openModal('audiosModal')">
+        ➕ CARGAR
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título Atractivo</th>
+          <th>Estado Sitio</th>
+          <th>Radio Geocerca (m)</th>
+          <th>Peso Audio (MB)</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#A001</td>
+          <td>Catedral Metropolitana</td>
+          <td><span style="background-color: #6b6b6b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Abierto</span></td>
+          <td>500</td>
+          <td>32.5</td>
+          <td>
+            <button class="button button-secondary button-small" onclick="openModal('editarAudiosModal')">ACTUALIZAR</button>
+            <button class="button button-danger button-small">DAR DE BAJA</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#A002</td>
+          <td>Museo Nacional</td>
+          <td><span style="background-color: #6b6b6b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Abierto</span></td>
+          <td>750</td>
+          <td>48.3</td>
+          <td>
+            <button class="button button-secondary button-small" onclick="openModal('editarAudiosModal')">ACTUALIZAR</button>
+            <button class="button button-danger button-small">DAR DE BAJA</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#A003</td>
+          <td>Convento de San Francisco</td>
+          <td><span style="background-color: #6b6b6b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Abierto</span></td>
+          <td>600</td>
+          <td>28.7</td>
+          <td>
+            <button class="button button-secondary button-small" onclick="openModal('editarAudiosModal')">ACTUALIZAR</button>
+            <button class="button button-danger button-small">DAR DE BAJA</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#A004</td>
+          <td>Mercado Indígena</td>
+          <td><span style="background-color: #8a8a8a; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Cerrado Temp.</span></td>
+          <td>400</td>
+          <td>21.4</td>
+          <td>
+            <button class="button button-secondary button-small" onclick="openModal('editarAudiosModal')">ACTUALIZAR</button>
+            <button class="button button-danger button-small">DAR DE BAJA</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Modal Cargar Audioguía -->
+<div id="audiosModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">➕ CARGAR Nueva Audioguía</h3>
+      <button class="modal-close" onclick="closeModal('audiosModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Título Atractivo</label>
+        <input type="text" class="form-control" placeholder="Ej: Catedral Metropolitana" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descripción Ficha</label>
+        <textarea class="form-control" rows="3" placeholder="Contexto cultural e histórico del lugar..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Archivo de Audio (URL)</label>
+        <input type="text" class="form-control" placeholder="Ej: https://storage.com/audio-catedral.mp3" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Imagen Ilustrativa (URL)</label>
+        <input type="text" class="form-control" placeholder="Ej: https://storage.com/image-catedral.jpg" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Coordenadas (Lat)</label>
+          <input type="number" class="form-control" placeholder="-16.5" step="0.0001" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Coordenadas (Long)</label>
+          <input type="number" class="form-control" placeholder="-68.1" step="0.0001" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Radio Geocerca (m)</label>
+          <input type="number" class="form-control" placeholder="Ej: 500" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peso Descarga (MB)</label>
+          <input type="number" class="form-control" placeholder="Ej: 32.5" step="0.1" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Estado del Sitio</label>
+        <select class="form-control">
+          <option>Abierto</option>
+          <option>Cerrado Temporalmente</option>
+          <option>Inactivo</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="button button-secondary" onclick="closeModal('audiosModal')">Cancelar</button>
+      <button class="button button-primary">Guardar Audioguía</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Actualizar Audioguía -->
+<div id="editarAudiosModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">✎ ACTUALIZAR Audioguía</h3>
+      <button class="modal-close" onclick="closeModal('editarAudiosModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Título Atractivo</label>
+        <input type="text" class="form-control" value="Catedral Metropolitana" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descripción Ficha</label>
+        <textarea class="form-control" rows="3">La Catedral Metropolitana es un ícono del patrimonio colonial boliviano...</textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Archivo de Audio (URL)</label>
+        <input type="text" class="form-control" value="https://storage.com/audio-catedral.mp3" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Imagen Ilustrativa (URL)</label>
+        <input type="text" class="form-control" value="https://storage.com/image-catedral.jpg" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Coordenadas (Lat)</label>
+          <input type="number" class="form-control" value="-16.5001" step="0.0001" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Coordenadas (Long)</label>
+          <input type="number" class="form-control" value="-68.1345" step="0.0001" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Radio Geocerca (m)</label>
+          <input type="number" class="form-control" value="500" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peso Descarga (MB)</label>
+          <input type="number" class="form-control" value="32.5" step="0.1" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Estado del Sitio</label>
+        <select class="form-control">
+          <option selected>Abierto</option>
+          <option>Cerrado Temporalmente</option>
+          <option>Inactivo</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="button button-secondary" onclick="closeModal('editarAudiosModal')">Cancelar</button>
+      <button class="button button-primary">Actualizar Audioguía</button>
+    </div>
+  </div>
+</div>

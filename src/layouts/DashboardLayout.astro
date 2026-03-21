@@ -1,0 +1,104 @@
+---
+import '../styles/dashboard.css';
+
+const { title = "Dashboard" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title} - Tourism Dashboard</title>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <button id="hamburger-toggle" class="hamburger-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div id="sidebar-overlay" class="sidebar-overlay"></div>
+      <slot />
+    </div>
+
+    <script>
+      // Gestión del menú lateral y secciones
+      document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelectorAll('[data-section]');
+        const sections = document.querySelectorAll('[data-section-target]');
+        const hamburger = document.getElementById('hamburger-toggle');
+        const sidebar = document.querySelector('.dashboard-sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        // Toggle del hamburger menu en mobile
+        if (hamburger) {
+          hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('show');
+          });
+        }
+
+        // Cerrar sidebar cuando se haga click en el overlay
+        if (overlay) {
+          overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+          });
+        }
+
+        // Cerrar sidebar cuando se hace click en un link de navegación
+        navLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const sectionId = link.getAttribute('data-section');
+            
+            // Remover clase active de todos los links
+            navLinks.forEach(l => l.classList.remove('active'));
+            // Agregar clase active al link clickeado
+            link.classList.add('active');
+
+            // Ocultar todas las secciones
+            sections.forEach(section => section.classList.remove('active'));
+            // Mostrar la sección seleccionada
+            const targetSection = document.querySelector(`[data-section-target="${sectionId}"]`);
+            if (targetSection) {
+              targetSection.classList.add('active');
+            }
+
+            // Cerrar sidebar en mobile después de hacer click
+            if (window.innerWidth <= 768) {
+              sidebar.classList.remove('open');
+              if (overlay) overlay.classList.remove('show');
+            }
+          });
+        });
+
+        // Activar la sección de inicio por defecto
+        const defaultLink = document.querySelector('[data-section="inicio"]');
+        if (defaultLink) {
+          defaultLink.click();
+        }
+      });
+
+      // Funciones para modales
+      window.openModal = (modalId) => {
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.add('show');
+      };
+
+      window.closeModal = (modalId) => {
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.remove('show');
+      };
+
+      // Cerrar modal al clickear fuera
+      document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+          e.target.classList.remove('show');
+        }
+      });
+    </script>
+  </body>
+</html>

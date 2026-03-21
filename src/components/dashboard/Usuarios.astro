@@ -1,0 +1,197 @@
+---
+// Componente Usuarios - CRUD
+---
+
+<section data-section-target="usuarios" class="section card">
+  <div class="card-header">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h2 class="card-title"> Gestión de Usuarios</h2>
+        <p class="card-subtitle">Administra todos los usuarios del sistema</p>
+      </div>
+      <button class="button button-primary" onclick="openModal('usuariosModal')">
+        ➕ CARGAR
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombres</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>Teléfono</th>
+          <th>Fecha Nacimiento</th>
+          <th>Rol</th>
+          <th>Email</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#001</td>
+          <td>Jhovanni Michael</td>
+          <td>Gutierrez</td>
+          <td>Jimenez</td>
+          <td>76599447</td>
+          <td>2004-07-06</td>
+          <td>Administrador</td>
+          <td>jhovanni@email.com</td>
+          <td>
+            <button class="button button-secondary button-small" onclick="openModal('editarUsuariosModal')">ACTUALIZAR</button>
+            <button class="button button-danger button-small">DAR DE BAJA</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#002</td>
+          <td>María</td>
+          <td>López</td>
+          <td>García</td>
+          <td>76512345</td>
+          <td>1998-03-15</td>
+          <td>Guía Turístico</td>
+          <td>maria@email.com</td>
+          <td>
+            <button class="button button-secondary button-small" onclick="openModal('editarUsuariosModal')">ACTUALIZAR</button>
+            <button class="button button-danger button-small">DAR DE BAJA</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#003</td>
+          <td>Carlos</td>
+          <td>Ríos</td>
+          <td>Soto</td>
+          <td>76567890</td>
+          <td>2001-11-22</td>
+          <td>Usuario Regular</td>
+          <td>carlos@email.com</td>
+          <td>
+            <button class="button button-secondary button-small" onclick="openModal('editarUsuariosModal')">ACTUALIZAR</button>
+            <button class="button button-danger button-small">DAR DE BAJA</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#004</td>
+          <td>Ana</td>
+          <td>García</td>
+          <td>Martínez</td>
+          <td>76534567</td>
+          <td>1999-05-18</td>
+          <td>Guía Turístico</td>
+          <td>ana@email.com</td>
+          <td>
+            <button class="button button-secondary button-small" onclick="openModal('editarUsuariosModal')">ACTUALIZAR</button>
+            <button class="button button-danger button-small">DAR DE BAJA</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Modal Cargar Usuario -->
+<div id="usuariosModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">➕ CARGAR Nuevo Usuario</h3>
+      <button class="modal-close" onclick="closeModal('usuariosModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nombres</label>
+        <input type="text" class="form-control" placeholder="Ej: Juan Michael" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Apellido Paterno</label>
+          <input type="text" class="form-control" placeholder="Ej: Gutiérrez" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Apellido Materno</label>
+          <input type="text" class="form-control" placeholder="Ej: Jiménez" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Teléfono</label>
+          <input type="tel" class="form-control" placeholder="Ej: 76599447" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fecha Nacimiento</label>
+          <input type="date" class="form-control" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" placeholder="Ej: usuario@email.com" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Rol</label>
+        <select class="form-control">
+          <option>Usuario Regular</option>
+          <option>Guía Turístico</option>
+          <option>Administrador</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="button button-secondary" onclick="closeModal('usuariosModal')">Cancelar</button>
+      <button class="button button-primary">Guardar Usuario</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Actualizar Usuario -->
+<div id="editarUsuariosModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">✎ ACTUALIZAR Usuario</h3>
+      <button class="modal-close" onclick="closeModal('editarUsuariosModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nombres</label>
+        <input type="text" class="form-control" value="Jhovanni Michael" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Apellido Paterno</label>
+          <input type="text" class="form-control" value="Gutierrez" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Apellido Materno</label>
+          <input type="text" class="form-control" value="Jimenez" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Teléfono</label>
+          <input type="tel" class="form-control" value="76599447" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fecha Nacimiento</label>
+          <input type="date" class="form-control" value="2004-07-06" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" value="jhovanni@email.com" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Rol</label>
+        <select class="form-control">
+          <option>Usuario Regular</option>
+          <option>Guía Turístico</option>
+          <option selected>Administrador</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="button button-secondary" onclick="closeModal('editarUsuariosModal')">Cancelar</button>
+      <button class="button button-primary">Actualizar Usuario</button>
+    </div>
+  </div>
+</div>
