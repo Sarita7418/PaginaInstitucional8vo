@@ -140,3 +140,54 @@
   .header, .header.scrolled { padding: 1rem 2rem; }
   .header-nav { display: none; }
 }
+/* === GRUPO DE ACCIONES (LOGIN + DESCARGA) === */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Espacio entre el Login y el botón de Descarga */
+  flex-shrink: 0;
+}
+
+/* ESTILO ESPECÍFICO PARA EL BOTÓN LOGIN */
+.btn-login-nav {
+  color: var(--color-orange) !important;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.btn-login-nav:hover {
+  color: var(--color-teal) !important;
+  transform: translateY(-2px);
+}
+
+/* El subrayado especial para el Login */
+.btn-login-nav::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  right: 0;
+  background-color: var(--color-teal);
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-login-nav:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Ajuste sutil al botón de descarga para que no compita */
+.btn-descarga {
+  /* Ya tienes tus estilos, solo asegúrate de que el margen sea coherente */
+  margin-left: 0.5rem;
+}
+.header.scrolled .btn-login-nav {
+  font-size: 0.85rem; /* Se hace un poco más pequeño al bajar */
+}
