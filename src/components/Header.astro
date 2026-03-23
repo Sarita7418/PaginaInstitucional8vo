@@ -1,4 +1,5 @@
 ---
+/* src/components/Header.astro */
 import './Header.css';
 ---
 
@@ -18,7 +19,10 @@ import './Header.css';
 
   <div class="nav-line-filler"></div>
 
-  <a href="/descarga" class="btn-descarga">Descargar App</a>
+  <div class="header-actions">
+    <a href="/login" class="nav-link btn-login-nav">Login</a>
+    <a href="/descarga" class="btn-descarga">Descargar App</a>
+  </div>
 </header>
 
 <script>
@@ -27,9 +31,9 @@ import './Header.css';
     
     window.addEventListener("scroll", () => {
       if (window.scrollY > 50) {
-        header.classList.add("scrolled");
+        header?.classList.add("scrolled");
       } else {
-        header.classList.remove("scrolled");
+        header?.classList.remove("scrolled");
       }
     });
   });
