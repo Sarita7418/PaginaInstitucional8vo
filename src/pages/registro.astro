@@ -1,0 +1,278 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import './Registro.css';
+---
+
+<MainLayout title="Registro | Aventuras Paceñas">
+    <div class="reg-root">
+        <div class="reg-split-container">
+
+            <!-- Panel izquierdo decorativo -->
+            <div class="reg-image-pane">
+                <div class="bg-image"></div>
+                <div class="bg-overlay"></div>
+                <div class="brand-content">
+                    <img src="/images/logo.png" alt="Logo Aventuras Paceñas" class="pane-logo" />
+                    <div class="badge-adventure">ÚNETE A LA AVENTURA</div>
+                    <h1>Crea tu Cuenta</h1>
+                    <p>Accede a experiencias únicas en La Paz. Rutas, guías y destinos andinos te esperan.</p>
+                    <div class="benefits-list">
+                        <div class="benefit-item"><span class="benefit-dot"></span>Acceso a todos nuestros paquetes turísticos</div>
+                        <div class="benefit-item"><span class="benefit-dot"></span>Historial y seguimiento de tus reservas</div>
+                        <div class="benefit-item"><span class="benefit-dot"></span>App de acompañamiento con mapas offline</div>
+                        <div class="benefit-item"><span class="benefit-dot"></span>Atención personalizada 365 días al año</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel derecho — formulario -->
+            <div class="reg-form-pane">
+                <div class="form-wrapper">
+
+                    <div class="mobile-header">
+                        <img src="/images/logo.png" alt="Logo Aventuras Paceñas" class="mobile-logo" />
+                        <h1>Crear Cuenta</h1>
+                        <p>Completa tus datos para registrarte</p>
+                    </div>
+
+                    <div class="form-title-desktop">
+                        <h2>Crear Cuenta</h2>
+                        <p>Completa todos los campos para registrarte</p>
+                    </div>
+
+                    <div id="error-msg" class="error-msg"></div>
+
+                    <form id="reg-form" class="reg-form" novalidate>
+
+                        <div class="field full">
+                            <label for="nombres">Nombres <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                <input type="text" id="nombres" name="nombres" placeholder="Tus nombres" required autocomplete="given-name" />
+                            </div>
+                        </div>
+
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="ap-paterno">Apellido Paterno <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <input type="text" id="ap-paterno" name="ap_paterno" placeholder="Apellido paterno" required autocomplete="family-name" />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="ap-materno">Apellido Materno</label>
+                                <div class="input-wrapper">
+                                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <input type="text" id="ap-materno" name="ap_materno" placeholder="Apellido materno" autocomplete="additional-name" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="telefono">Teléfono <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.32 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <input type="tel" id="telefono" name="telefono" placeholder="Ej: 76599447" required autocomplete="tel" />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="fecha-nac">Fecha de Nacimiento <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                    <input type="date" id="fecha-nac" name="fecha_nacimiento" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field full">
+                            <label for="email">Correo Electrónico <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                <input type="email" id="email" name="email" placeholder="tu@correo.com" required autocomplete="email" />
+                            </div>
+                        </div>
+
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="password">Contraseña <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    <input type="password" id="password" name="password" placeholder="Mínimo 6 caracteres" required autocomplete="new-password" />
+                                    <button type="button" class="toggle-pw" data-target="password" tabindex="-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="password2">Confirmar Contraseña <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    <input type="password" id="password2" name="password2" placeholder="Repite tu contraseña" required autocomplete="new-password" />
+                                    <button type="button" class="toggle-pw" data-target="password2" tabindex="-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="terms-row">
+                            <input type="checkbox" id="terminos" class="terms-check" required />
+                            <label for="terminos" class="terms-label">
+                                Acepto los <a href="#">Términos y Condiciones</a> y la
+                                <a href="#">Política de Privacidad</a> de Aventuras Paceñas S.R.L.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="btn-submit">
+                            <span id="btn-text">Crear mi Cuenta</span>
+                            <svg id="btn-icon" class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            <div class="spinner" id="btn-spinner" style="display:none"></div>
+                        </button>
+
+                    </form>
+
+                    <div class="reg-footer">
+                        <p>¿Ya tienes una cuenta?</p>
+                        <a href="/login" class="btn-secondary">Iniciar Sesión →</a>
+                        <div class="footer-copy">© 2026 Aventuras Paceñas.</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</MainLayout>
+
+<!-- Modal de éxito -->
+<div class="modal-bg" id="reg-modal">
+    <div class="modal-box">
+        <div class="modal-icon">
+            <img src="/images/logo.png" alt="Logo Aventuras Paceñas" style="height:80px;width:auto;border-radius:12px;" />
+        </div>
+        <h2 class="modal-title">¡Bienvenido!</h2>
+        <p class="modal-msg">
+            Tu cuenta ha sido creada exitosamente,
+            <strong class="modal-name" id="modal-nombre"></strong>.<br /><br />
+            Ya eres parte de la comunidad de Aventuras Paceñas.
+        </p>
+        <a href="/" class="modal-btn">Ir al Inicio →</a>
+    </div>
+</div>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script is:inline>
+const SB_URL = 'https://bimfxpcxnltubnpzqirs.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpbWZ4cGN4bmx0dWJucHpxaXJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjI2MTEsImV4cCI6MjA4OTUzODYxMX0.bWkii_XX_tuvyA10h7L_OpxxLPoaOfQkY8cisr9X2Y8';
+const _sb = supabase.createClient(SB_URL, SB_KEY);
+
+document.querySelectorAll('.toggle-pw').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const input = document.getElementById(btn.dataset.target);
+        input.type = input.type === 'password' ? 'text' : 'password';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form      = document.getElementById('reg-form');
+    const errorDiv  = document.getElementById('error-msg');
+    const modal     = document.getElementById('reg-modal');
+    const modalNm   = document.getElementById('modal-nombre');
+    const btnSubmit = document.getElementById('btn-submit');
+    const btnText   = document.getElementById('btn-text');
+    const btnIcon   = document.getElementById('btn-icon');
+    const spinner   = document.getElementById('btn-spinner');
+
+    function showError(msg) {
+        errorDiv.textContent = msg;
+        errorDiv.style.display = 'block';
+        errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => { errorDiv.style.display = 'none'; }, 7000);
+    }
+
+    function setLoading(val) {
+        btnSubmit.disabled = val;
+        btnText.textContent = val ? 'Creando cuenta...' : 'Crear mi Cuenta';
+        btnIcon.style.display = val ? 'none' : 'inline';
+        spinner.style.display = val ? 'inline-block' : 'none';
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorDiv.style.display = 'none';
+
+        const nombres  = form.nombres.value.trim();
+        const apPat    = form.ap_paterno.value.trim();
+        const apMat    = form.ap_materno.value.trim();
+        const telefono = form.telefono.value.trim();
+        const fechaNac = form.fecha_nacimiento.value;
+        const email    = form.email.value.trim();
+        const pass     = form.password.value;
+        const pass2    = form.password2.value;
+        const terminos = form.terminos.checked;
+
+        if (!nombres || !apPat || !telefono || !fechaNac || !email || !pass) {
+            showError('Por favor completa todos los campos obligatorios (*).');
+            return;
+        }
+        if (pass.length < 6) {
+            showError('La contraseña debe tener al menos 6 caracteres.');
+            return;
+        }
+        if (pass !== pass2) {
+            showError('Las contraseñas no coinciden. Verifícalas.');
+            return;
+        }
+        if (!terminos) {
+            showError('Debes aceptar los Términos y Condiciones para continuar.');
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const { data: authData, error: authErr } = await _sb.auth.signUp({ email, password: pass });
+
+            if (authErr) {
+                showError('Error al crear la cuenta: ' + authErr.message);
+                setLoading(false);
+                return;
+            }
+
+            const userId = authData?.user?.id;
+            if (!userId) {
+                showError('Error inesperado. Inténtalo de nuevo.');
+                setLoading(false);
+                return;
+            }
+
+            const { error: personaErr } = await _sb.from('personas').insert({
+                id_usuario:       userId,
+                nombres:          nombres,
+                apellido_paterno: apPat,
+                apellido_materno: apMat || null,
+                telefono:         telefono,
+                fecha_nacimiento: fechaNac,
+                estado:           true,
+                id_rol:           1,
+            });
+
+            if (personaErr) {
+                showError('Error al guardar el perfil: ' + personaErr.message);
+                setLoading(false);
+                return;
+            }
+
+            modalNm.textContent = nombres;
+            modal.classList.add('open');
+
+        } catch (err) {
+            console.error(err);
+            showError('Error de conexión. Verifica tu internet e inténtalo de nuevo.');
+            setLoading(false);
+        }
+    });
+});
+</script>
