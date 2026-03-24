@@ -1,5 +1,4 @@
 ---
-/* src/components/Header.astro */
 import './Header.css';
 ---
 
@@ -8,33 +7,70 @@ import './Header.css';
     <img src="/images/logo.png" alt="Logo Aventuras Paceñas" class="logo-img" />
   </a>
 
-  <div class="nav-line-filler"></div>
+  <button class="mobile-menu-toggle" aria-label="Abrir menú" id="menu-toggle">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
 
-  <ul class="header-nav">
-    <li><a href="/" class="nav-link">Inicio</a></li>
-    <li><a href="/features" class="nav-link">Características</a></li>
-    <li><a href="/nosotros" class="nav-link">Nosotros</a></li>
-    <li><a href="/faqs" class="nav-link">FAQ</a></li>
-  </ul>
+  <div class="nav-container" id="nav-menu">
+    <div class="mobile-menu-header">
+      <img src="/images/logo.png" alt="Logo" class="menu-top-logo" />
+      <span class="menu-top-name">Aventuras Paceñas</span>
+      <div class="menu-header-line"></div>
+    </div>
 
-  <div class="nav-line-filler"></div>
+    <div class="mobile-menu-content">
+      <ul class="header-nav">
+        <li><a href="/" class="nav-link">Inicio</a></li>
+        <li class="nav-divider"></li> 
+        <li><a href="/features" class="nav-link">Aplicación Móvil "WALI"</a></li>
+        <li class="nav-divider"></li>
+        <li><a href="/nosotros" class="nav-link">Nosotros</a></li>
+        <li class="nav-divider"></li>
+        <li><a href="/faqs" class="nav-link">Preguntas Frecuentes</a></li>
+      </ul>
 
-  <div class="header-actions">
-    <a href="/login" class="nav-link btn-login-nav">Iniciar Sesión</a>
-    <a href="/descarga" class="btn-descarga">Registrarse</a>
+      <div class="header-actions">
+        <a href="/login" class="btn-nav btn-login">Iniciar Sesión</a>
+        <div class="separator-line"></div>
+        <a href="/descarga" class="btn-nav btn-register">Registrarse</a>
+      </div>
+    </div>
+
+    <div class="mobile-menu-footer">
+        <p class="menu-copyright">&copy; {new Date().getFullYear()} Derechos Reservados</p>
+    </div>
   </div>
 </header>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const header = document.getElementById("main-header");
-    
+    const menuToggle = document.getElementById("menu-toggle");
+    const navMenu = document.getElementById("nav-menu");
+
     window.addEventListener("scroll", () => {
       if (window.scrollY > 50) {
         header?.classList.add("scrolled");
       } else {
         header?.classList.remove("scrolled");
       }
+    });
+
+    menuToggle?.addEventListener("click", () => {
+      menuToggle.classList.toggle("active");
+      navMenu?.classList.toggle("active");
+      document.body.classList.toggle("no-scroll");
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link, .btn-nav');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle?.classList.remove("active");
+        navMenu?.classList.remove("active");
+        document.body.classList.remove("no-scroll");
+      });
     });
   });
 </script>

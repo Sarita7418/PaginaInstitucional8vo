@@ -2,123 +2,51 @@
 import './Footer.css';
 ---
 
-<footer class="footer">
-  <div class="modal-overlay" id="modal-overlay"></div>
-
+<footer class="site-footer">
   <div class="footer-container">
+    
     <div class="footer-brand">
-      <img src="/images/logo.png" alt="Logo Aventuras Paceñas" class="footer-logo" />
-      <p class="brand-text">Redefiniendo el turismo en La Paz con tecnología, cultura y experiencias inolvidables.</p>
+      <a href="/" class="footer-logo-link">
+        <img src="/images/logo.png" alt="Logo Aventuras Paceñas" class="footer-logo-img" />
+      </a>
+      <p class="brand-description">
+        Descubre lo mejor del turismo y la aventura. Tu próxima gran experiencia comienza aquí.
+      </p>
     </div>
 
-    <div>
-      <h3>Contacto</h3>
-      <ul>
-        <li>📍 La Paz, Bolivia</li>
-        <li>📞 +591 76599447</li>
-        <li>✉️ hola@aventuras-pacenas.com.bo</li>
+    <div class="footer-links">
+      <h3 class="footer-title">Mapa del Sitio</h3>
+      <ul class="footer-nav">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/features">Aplicación Móvil "WALI"</a></li>
+        <li><a href="/nosotros">Nosotros</a></li>
+        <li><a href="/faqs">Preguntas Frecuentes</a></li>
       </ul>
     </div>
 
-    <div>
-      <h3>Síguenos</h3>
-      <ul>
-        <li><a href="#" class="social-link">Facebook</a></li>
-        <li><a href="#" class="social-link">Instagram</a></li>
-        <li><a href="#" class="social-link">TikTok</a></li>
-      </ul>
+    <div class="footer-contact">
+      <h3 class="footer-title">Contáctanos</h3>
+      <a href="mailto:aventuraspacenas@gmail.com" class="contact-email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        aventuraspacenas@gmail.com
+      </a>
+      
+      <div class="social-icons">
+        <a href="https://www.facebook.com/profile.php?id=61577431886507" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/aventuraspacenas/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.tiktok.com/@aventuraspacenas" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+        </a>
+      </div>
     </div>
 
-    <div>
-      <h3>Legal</h3>
-      <ul>
-        <li><button class="modal-trigger" data-target="modal-terminos">Términos y Condiciones</button></li>
-        <li><button class="modal-trigger" data-target="modal-privacidad">Políticas de Privacidad</button></li>
-      </ul>
-    </div>
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; 2026 Aventuras Paceñas. Todos los derechos reservados.</p>
-  </div>
-
-  <div class="modal" id="modal-terminos">
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Cerrar">&times;</button>
-      <div class="modal-header">
-        <h2>Términos y Condiciones</h2>
-      </div>
-      <div class="modal-body">
-        <p><strong>1. Aceptación de los Términos:</strong> Al descargar y utilizar la aplicación "Aventuras Paceñas", usted acepta estar sujeto a estos términos y condiciones. Si no está de acuerdo, le rogamos no utilizar nuestros servicios.</p>
-        <p><strong>2. Uso del Servicio:</strong> La aplicación proporciona audioguías, mapas offline y herramientas informativas. La precisión del Asistente IA está sujeta a la base de datos oficial, pero se recomienda siempre usar el sentido común durante sus recorridos físicos por la ciudad de La Paz.</p>
-        <p><strong>3. Responsabilidad:</strong> Aventuras Paceñas no se hace responsable por alteraciones en los horarios de los museos, problemas de conectividad de terceros, ni por objetos perdidos durante las rutas sugeridas.</p>
-        <p><strong>4. Actualizaciones:</strong> Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios entrarán en vigencia inmediatamente después de su publicación en la plataforma.</p>
-      </div>
-      <div class="modal-footer-action">
-        <button class="btn-acepto">Acepto los términos</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal" id="modal-privacidad">
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Cerrar">&times;</button>
-      <div class="modal-header">
-        <h2>Políticas de Privacidad</h2>
-      </div>
-      <div class="modal-body">
-        <p><strong>1. Recopilación de Datos:</strong> Respetamos profundamente su privacidad. Solo recopilamos datos esenciales para el funcionamiento de la app, como su ubicación GPS en tiempo real estricta y únicamente cuando la función de audioguía está activa.</p>
-        <p><strong>2. Mapas Offline:</strong> Los paquetes descargados se almacenan localmente en su dispositivo. Aventuras Paceñas no rastrea sus consultas realizadas sin conexión a internet.</p>
-        <p><strong>3. Uso de la Información:</strong> Su información no será vendida a terceros. Los datos de búsqueda en el Asistente IA se utilizan de forma anónima para mejorar las respuestas y sugerir mejores rutas turísticas.</p>
-        <p><strong>4. Seguridad:</strong> Implementamos medidas de seguridad avanzadas para proteger su información personal contra accesos no autorizados, alteraciones o destrucción.</p>
-      </div>
-      <div class="modal-footer-action">
-        <button class="btn-acepto">Acepto las políticas</button>
-      </div>
-    </div>
+    <p>&copy; {new Date().getFullYear()} Aventuras Paceñas. Todos los derechos reservados.</p>
   </div>
 </footer>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const triggers = document.querySelectorAll(".modal-trigger");
-    const modals = document.querySelectorAll(".modal");
-    const overlay = document.getElementById("modal-overlay");
-    const closeBtns = document.querySelectorAll(".modal-close, .btn-acepto");
-
-    // Función para abrir la ventana desde el punto exacto del botón
-    triggers.forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        const targetId = btn.getAttribute("data-target");
-        const modal = document.getElementById(targetId);
-        
-        // Magia 1: Calcular la posición del clic para el origen de la animación
-        const rect = btn.getBoundingClientRect();
-        const originX = rect.left + (rect.width / 2);
-        const originY = rect.top + (rect.height / 2);
-        
-        // Aplicamos el origen de la transformación basado en la pantalla del usuario
-        modal.style.transformOrigin = `${originX}px ${originY}px`;
-
-        // Activamos la ventana y el fondo oscuro
-        modal.classList.add("active");
-        overlay.classList.add("active");
-        
-        // Bloqueamos el scroll de la página de fondo
-        document.body.style.overflow = "hidden";
-      });
-    });
-
-    // Función para cerrar las ventanas
-    const closeModal = () => {
-      modals.forEach(modal => modal.classList.remove("active"));
-      overlay.classList.remove("active");
-      document.body.style.overflow = "auto"; // Devolvemos el scroll
-    };
-
-    closeBtns.forEach(btn => btn.addEventListener("click", closeModal));
-    
-    // Si hace clic en el fondo oscuro difuminado, también se cierra
-    overlay.addEventListener("click", closeModal);
-  });
-</script>
