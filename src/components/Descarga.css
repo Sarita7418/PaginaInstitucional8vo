@@ -3,104 +3,238 @@
   --color-teal: #0F988A;
   --color-orange: #D27817;
   --color-brown: #7A3928;
-  --font-main: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-main: 'DM Sans', system-ui, -apple-system, sans-serif;
 }
 
 .descarga-root {
   font-family: var(--font-main);
   color: var(--color-dark);
-  padding: 48px 20px;
-  max-width: 1200px;
+  padding: 80px 20px;
+  max-width: 1100px;
   margin: 0 auto 64px;
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 48px;
 }
 
+/* --- HERO SECTION --- */
 .desc-hero {
   display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 28px;
-  align-items: start;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
+  align-items: center; /* Alineación vertical central */
 }
 
-.desc-title { font-size: 2rem; margin: 0 0 10px; }
-.desc-lead { margin: 0 0 18px; color: rgba(35,55,62,0.8); }
+/* Columna Izquierda */
+.desc-left {
+  display: flex;
+  flex-direction: column;
+}
 
-.store-buttons { display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
+.desc-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  margin: 0 0 12px;
+  line-height: 1.1;
+  color: var(--color-dark);
+}
+
+.desc-lead {
+  margin: 0 0 24px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(35,55,62,0.8);
+}
+
+/* Botones de Tienda */
+.store-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
 
 .store-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  background: linear-gradient(90deg, var(--color-orange), var(--color-brown));
   color: #fff;
-  padding: 10px 14px;
-  border-radius: 10px;
+  padding: 12px 20px;
+  border-radius: 12px;
   text-decoration: none;
-  min-width: 170px;
-  box-shadow: 0 6px 18px rgba(34,55,62,0.08);
+  min-width: 190px;
+  box-shadow: 0 6px 18px rgba(35,55,62,0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.store-btn img { width:48px; height:auto; display:block; }
-.store-txt { font-size:0.9rem; line-height:1; }
-
-.store-btn.app { background: linear-gradient(90deg, #0F988A, #197D61); }
-
-.desc-features { margin: 14px 0 8px; padding-left: 18px; color: rgba(35,55,62,0.85); }
-.desc-features li { margin-bottom: 8px; }
-
-.desc-note { font-size: 0.92rem; color: rgba(35,55,62,0.6); margin-top: 12px; }
-
-.desc-right { display:flex; flex-direction:column; gap:14px; align-items:center; }
-
-.device-card {
-  width: 240px;
-  height: 480px;
-  background: linear-gradient(180deg,#fff,#f7f7f7);
-  border-radius: 22px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow: 0 10px 30px rgba(35,55,62,0.09);
-  overflow:hidden;
+.store-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(35,55,62,0.2);
 }
 
-.device-img { width:60%; filter: saturate(0.95); }
+.store-btn.play {
+  background: linear-gradient(90deg, var(--color-orange), var(--color-brown));
+}
+
+.store-btn.app {
+  background: linear-gradient(90deg, var(--color-teal), #197D61);
+}
+
+.store-btn img {
+  width: 32px;
+  height: auto;
+  display: block;
+}
+
+.store-txt {
+  font-size: 0.95rem;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* Lista de Características */
+.desc-features {
+  margin: 10px 0;
+  padding-left: 20px;
+  color: rgba(35,55,62,0.85);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.desc-features li {
+  margin-bottom: 8px;
+}
+
+.desc-note {
+  font-size: 0.85rem;
+  color: rgba(35,55,62,0.6);
+  margin-top: 16px;
+  font-style: italic;
+}
+
+/* Columna Derecha (QR) */
+.desc-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .qr-box {
-  width: 160px;
+  width: 200px;
   text-align: center;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 16px;
+  border-radius: 16px;
   background: #fff;
-  border: 1px solid rgba(35,55,62,0.06);
+  border: 1px solid rgba(35,55,62,0.1);
+  box-shadow: 0 10px 30px rgba(35,55,62,0.08);
 }
 
-.qr-box img { width:100%; height:auto; display:block; }
-.qr-caption { font-size:0.85rem; color: rgba(35,55,62,0.6); margin-top:8px; }
+.qr-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
 
-.desc-gallery h2 { margin: 0 0 12px; color: var(--color-dark); }
-.gallery-grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-.gallery-grid img { width:100%; height:160px; object-fit:cover; border-radius:8px; border:1px solid rgba(35,55,62,0.06); }
+.qr-caption {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-teal);
+  margin-top: 12px;
+}
 
+/* --- SECCIÓN LEGAL --- */
 .desc-legal {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  gap: 30px;
   background: rgba(15,152,138,0.04);
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid rgba(15,152,138,0.08);
+  padding: 24px 32px;
+  border-radius: 12px;
+  border: 1px solid rgba(15,152,138,0.1);
 }
 
-@media (max-width: 980px) {
-  .desc-hero { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: repeat(2,1fr); }
+.legal-item h3 {
+  font-size: 1.1rem;
+  color: var(--color-dark);
+  margin: 0 0 8px;
 }
-@media (max-width: 560px) {
-  .gallery-grid { grid-template-columns: 1fr; }
-  .store-btn img { display: none; }
-  .device-card { width: 200px; height: 380px; }
-  .qr-box { width: 140px; }
+
+.legal-item p {
+  font-size: 0.9rem;
+  color: rgba(35,55,62,0.7);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.legal-item a {
+  color: var(--color-teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.legal-item a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   RESPONSIVE (Móviles y Tablets)
+========================================= */
+
+@media (max-width: 960px) {
+  .desc-hero {
+    grid-template-columns: 1fr; /* Pasa a 1 sola columna */
+    text-align: center; /* Centra los textos */
+    gap: 32px;
+  }
+
+  .desc-left {
+    align-items: center; /* Centra los elementos de la izquierda */
+  }
+
+  .store-buttons {
+    justify-content: center; /* Centra los botones */
+  }
+
+  .desc-features {
+    text-align: left; /* Mantiene la lista alineada a la izquierda para mejor lectura */
+    display: inline-block; /* Permite que el bloque de la lista se centre */
+  }
+
+  .desc-right {
+    order: -1; /* Mueve el QR hacia arriba, debajo del título (opcional, pero se ve bien en móviles) */
+  }
+}
+
+@media (max-width: 600px) {
+  .descarga-root {
+    padding: 60px 20px;
+    gap: 32px;
+  }
+
+  /* Los botones ocupan el 100% del ancho */
+  .store-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .store-btn {
+    width: 100%;
+  }
+
+  /* La sección legal se apila */
+  .desc-legal {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 20px;
+    gap: 24px;
+  }
+  
+  .qr-box {
+    width: 160px; /* QR un poco más pequeño en móviles */
+  }
 }
