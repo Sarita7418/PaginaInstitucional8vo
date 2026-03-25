@@ -1,18 +1,12 @@
----
-// Componente Sidebar para el Dashboard
----
-
 <aside class="dashboard-sidebar">
-  <!-- Brand / Logo -->
   <div class="sidebar-brand">
-    <div class="sidebar-brand-logo">T</div>
-    <div class="sidebar-brand-text">TourHub</div>
+    <div class="sidebar-brand-logo" id="sidebar-initial">A</div>
+    <div class="sidebar-brand-text">Aventuras Paceñas</div>
   </div>
 
-  <!-- Navegación Principal -->
   <nav class="sidebar-nav">
     <li class="sidebar-nav-item">
-      <a href="#inicio" class="sidebar-nav-link" data-section="inicio">
+      <a href="#inicio" class="sidebar-nav-link active" data-section="inicio">
         <span class="sidebar-nav-icon">•</span>
         <span>Inicio</span>
       </a>
@@ -49,16 +43,149 @@
     </li>
   </nav>
 
-  <!-- Perfil del Usuario -->
   <div class="sidebar-profile">
     <div class="sidebar-profile-item">
       <div class="profile-avatar">
-        <img src="https://i.pravatar.cc/150?img=12" alt="User Avatar" />
+        <div id="avatar-placeholder" class="avatar-circle">?</div>
       </div>
       <div class="profile-info">
-        <div class="profile-name">Juan González</div>
-        <div class="profile-email">admin@tourhub.com</div>
+        <div class="profile-name" id="sidebar-user-name">Cargando...</div>
+        <div class="profile-email" id="sidebar-user-email">
+          email@ejemplo.com
+        </div>
       </div>
     </div>
   </div>
+  <div class="sidebar-back-container">
+    <a href="/" class="btn-back-web">
+      <span class="icon">←</span>
+      <span>Volver a la Web</span>
+    </a>
+  </div>
 </aside>
+
+<script>
+  import { supabase } from "../../lib/supabase";
+
+  const initSidebar = async () => {
+    // 1. SELECTORES (Usamos una función interna para asegurar que existan)
+    const getElements = () => ({
+      nameDisplay: document.getElementById("sidebar-user-name"),
+      emailDisplay: document.getElementById("sidebar-user-email"),
+      avatarPlaceholder: document.getElementById("avatar-placeholder"),
+      brandLogo: document.getElementById("sidebar-initial"),
+    });
+
+    const updateSidebarUI = async (session: any) => {
+      const el = getElements();
+
+      if (!session?.user) {
+        console.log("Sidebar: Sin sesión activa.");
+        return;
+      }
+
+      // Mostrar email del Auth inmediatamente
+      if (el.emailDisplay) el.emailDisplay.textContent = session.user.email;
+
+      try {
+        // Consultar a la tabla personas
+        const { data: persona, error } = await supabase
+          .from("personas")
+          .select("nombres")
+          .eq("id_usuario", session.user.id)
+          .maybeSingle();
+
+        if (error) throw error;
+
+        if (persona && persona.nombres) {
+          console.log("Sidebar: Nombre cargado ->", persona.nombres);
+
+          if (el.nameDisplay) el.nameDisplay.textContent = persona.nombres;
+
+          const initial = persona.nombres.charAt(0).toUpperCase();
+          if (el.avatarPlaceholder) el.avatarPlaceholder.textContent = initial;
+          if (el.brandLogo) el.brandLogo.textContent = initial;
+        } else {
+          // Fallback: Si no hay datos en 'personas', usar el correo
+          console.warn("Sidebar: Usuario no encontrado en tabla personas.");
+          const fallback = session.user.email.split("@")[0];
+          if (el.nameDisplay) el.nameDisplay.textContent = fallback;
+        }
+      } catch (err) {
+        console.error("Error cargando datos del Sidebar:", err);
+      }
+    };
+
+    // --- EJECUCIÓN ---
+    // Escuchar cambios de sesión
+    supabase.auth.onAuthStateChange((_event, session) => {
+      updateSidebarUI(session);
+    });
+
+    // Carga inicial forzada con un pequeño retraso para asegurar el DOM
+    setTimeout(async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      await updateSidebarUI(session);
+    }, 100);
+  };
+
+  // Inicializar en carga y en transiciones de página
+  initSidebar();
+  document.addEventListener("astro:page-load", initAuth); // IMPORTANTE: usa el nombre de tu función
+</script>
+
+<style>
+  /* === Estilos del Botón Volver === */
+  .sidebar-back-container {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+  }
+
+  .btn-back-web {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fcc010; /* Tu color naranja */
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: 0.3s;
+    border: 1px solid rgba(252, 192, 16, 0.2);
+  }
+
+  .btn-back-web:hover {
+    background: rgba(252, 192, 16, 0.1);
+    border-color: #fcc010;
+    transform: translateX(-5px);
+  }
+
+  .avatar-circle {
+    width: 40px;
+    height: 40px;
+    background: #fcc010;
+    color: #1a1a1a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .profile-name {
+    color: white !important;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .profile-email {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+  }
+</style>

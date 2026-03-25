@@ -46,14 +46,37 @@ body { font-family: 'Open Sans', sans-serif; background-color: var(--dark-bg); o
 @keyframes fadeInLeft { from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
 
 .pane-logo {
-    height: 90px; width: auto; margin-bottom: 18px; border-radius: 15px;
+    /* --- NUEVAS PROPIEDADES PARA REDUCIR TAMAÑO --- */
+    height: 125px; /* Ajusta este número (ej. 50px, 70px) para cambiar el tamaño */
+ /* Mantiene la proporción de la imagen original */
+    
+    /* --- TUS PROPIEDADES ORIGINALES --- */
+    margin-bottom: 18px; 
+    border-radius: 15px;
     filter: drop-shadow(0 4px 14px rgba(15,152,138,.35));
 }
+.brand-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra todo horizontalmente */
+}
+
 .badge-adventure {
-    background: rgba(255,250,240,.1); color: var(--adventure-orange);
-    padding: 6px 16px; border-radius: 50px; font-size: .75rem; font-weight: 800;
-    display: inline-block; border: 1px solid rgba(251,211,141,.3);
-    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;
+    order: 3; /* Esto lo manda al final de la lista de hijos */
+    margin-top: 16px; /* Espacio arriba para que no pegue al párrafo */
+    margin-bottom: 0; /* Quitamos el margen de abajo original */
+    
+    /* Tus estilos originales se mantienen... */
+    background: rgba(255,250,240,.1); 
+    color: var(--adventure-orange);
+    padding: 6px 16px; 
+    border-radius: 50px; 
+    font-size: .75rem; 
+    font-weight: 800;
+    display: inline-block; 
+    border: 1px solid rgba(251,211,141,.3);
+    letter-spacing: 1px; 
+    text-transform: uppercase;
 }
 .brand-content h1 {
     font-size: 2.6rem; font-weight: 800; margin-bottom: 12px;
