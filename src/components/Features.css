@@ -118,22 +118,63 @@
   padding-top: 60px; /* Pequeño respiro por si el header es fijo */
 }
 
-/* --- SECCIÓN HERO --- */
-.hero-wali { text-align: center; }
-.hero-wali-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; }
+/* --- SECCIÓN HERO WALI --- */
+.hero-wali { 
+  text-align: left; /* Alineación del texto a la izquierda */
+}
+
+.hero-wali-bg { 
+  position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; 
+}
+
 .hero-wali-overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(108deg, rgba(11,26,32,.95) 0%, rgba(11,26,32,.85) 50%, rgba(11,26,32,.95) 100%);
+  /* Gradiente modificado para ser más oscuro a la izquierda y dar mejor lectura al texto alineado ahí */
+  background: linear-gradient(110deg, rgba(11,26,32,.97) 0%, rgba(11,26,32,.92) 38%, rgba(11,26,32,.65) 65%, rgba(11,26,32,.28) 100%);
 }
-.hero-wali-inner {
-  position: relative; z-index: 3; max-width: 800px; padding: 0 24px;
-  display: flex; flex-direction: column; align-items: center;
-}
-.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.8vw, 3.6rem); font-weight: 700; line-height: 1.1; margin-bottom: 10px; }
-.hero-title em { font-style: italic; color: var(--color-orange); }
-.hero-sub { font-size: 1.08rem; font-weight: 400; line-height: 1.78; color: rgba(255,255,255,.92); max-width: 600px; margin: 14px auto 0; text-align: center; }
-.hero-btns { margin-top: 24px; display: flex; gap: 11px; flex-wrap: wrap; justify-content: center; }
 
+.hero-wali-inner {
+  position: relative; z-index: 3; 
+  width: 100%; 
+  max-width: 1200px; /* Ensanchamos el contenedor para alinearlo con la grilla global */
+  padding: 0 40px;
+  display: flex; flex-direction: column; 
+  align-items: flex-start; /* Empuja todos los elementos a la izquierda */
+}
+
+.hero-title { 
+  font-family: 'Cormorant Garamond', serif; 
+  font-size: clamp(3rem, 7vw, 5.5rem); /* Letras mucho más grandes y adaptables */
+  font-weight: 900; /* Mayor negrilla para el impacto Hero */
+  line-height: 0.95; 
+  letter-spacing: -1.5px;
+  margin-bottom: 16px; 
+  color: var(--white);
+}
+
+.hero-title em { 
+  font-style: italic; color: var(--color-orange); 
+  display: block; /* Obliga al texto resaltado a bajar a la siguiente línea para más estilo */
+  margin-top: 5px;
+}
+
+.hero-sub { 
+  font-size: clamp(1.1rem, 2vw, 1.4rem); /* Texto más grande */
+  font-weight: 500; 
+  line-height: 1.6; 
+  color: rgba(255,255,255,.9); 
+  max-width: 650px; 
+  margin: 0 0 16px 0; /* Quita el 'auto' para que no se centre */
+  text-align: left; /* Refuerza la alineación */
+}
+
+.hero-btns { 
+  margin-top: 24px; 
+  display: flex; 
+  gap: 11px; 
+  flex-wrap: wrap; 
+  justify-content: flex-start; /* Alinea los botones a la izquierda */
+}
 /* --- SECCIONES DE FUNCIONES (Con Tarjetas) --- */
 .feat-section {
   color: var(--white);

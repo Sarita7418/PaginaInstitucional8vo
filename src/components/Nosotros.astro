@@ -6,17 +6,12 @@ import './Nosotros.css';
 
 <div class="nos-root">
 
-  <!-- ══════════════════════════════════════
-       HERO — QUIÉNES SOMOS
-  ══════════════════════════════════════ -->
-  <section class="nos-hero">
+  <section class="n-section nos-hero">
     <div class="nos-hero-bg" style="background-image: url('/images/Ciudad_de_La_Paz_de_noche.jpg')"></div>
     <div class="nos-hero-overlay"></div>
     
     <div class="nos-hero-inner">
       <h1 class="nos-hero-title">
-        
-        <br />
         <em>Nosotros</em>Somos Aventuras Paceñas
       </h1>
 
@@ -37,6 +32,10 @@ import './Nosotros.css';
       </div>
     </div>
 
+    <div class="nos-scroll-ind">
+      <div class="nos-scroll-bar"></div>
+    </div>
+
     <div class="nos-ticker">
       <div class="nos-ticker-track">
         <span class="nos-ti">Calle de las Brujas<span class="nos-tsep"></span></span>
@@ -54,20 +53,11 @@ import './Nosotros.css';
         <span class="nos-ti">Tiwanaku UNESCO<span class="nos-tsep"></span></span>
         <span class="nos-ti">Lago Titicaca<span class="nos-tsep"></span></span>
         <span class="nos-ti">Nevado Charquini<span class="nos-tsep"></span></span>
-        <span class="nos-ti">Guías Paceños<span class="nos-tsep"></span></span>
-        <span class="nos-ti">Turismo Receptivo<span class="nos-tsep"></span></span>
-        <span class="nos-ti">Chacaltaya 5,400 msnm<span class="nos-tsep"></span></span>
-        <span class="nos-ti">Calle Jaén Colonial<span class="nos-tsep"></span></span>
-        <span class="nos-ti">Mi Teleférico<span class="nos-tsep"></span></span>
       </div>
     </div>
   </section>
 
-
-  <!-- ══════════════════════════════════════
-       NUESTRA HISTORIA
-  ══════════════════════════════════════ -->
-  <section class="nos-historia">
+  <section class="n-section nos-historia">
     <div class="nos-historia-in">
 
       <div class="nos-hist-visual reveal from-left">
@@ -93,12 +83,12 @@ import './Nosotros.css';
 
         <p class="nos-section-lead reveal reveal-delay-2">
           Aventuras Paceñas es una empresa recién fundada, pero nuestra conexión con La Paz no es nueva.
-          Somos un equipo de paceños que ha caminado cada calle, conoce cada historia y vive cada rincón de esta ciudad extraordinaria.
+          Somos un equipo de paceños que ha caminado cada calle y conoce cada historia.
         </p>
 
         <p class="nos-hist-p reveal reveal-delay-3">
           La idea nació de una pregunta simple: <em>¿por qué los turistas se van de La Paz sin haber visto lo que nosotros vemos cada día?</em>
-          Decidimos hacer algo al respecto — armamos un equipo de guías locales, coordinadores apasionados y conductores de confianza.
+          Decidimos hacer algo al respecto — armamos un equipo de expertos locales y conductores de confianza.
         </p>
 
         <p class="nos-hist-p reveal reveal-delay-4">
@@ -107,27 +97,23 @@ import './Nosotros.css';
 
         <div class="nos-pilares reveal reveal-delay-5">
           <div class="nos-pilar"><div class="nos-pilar-ic">🤝</div><div class="nos-pilar-t">Equipo paceño</div></div>
-          <div class="nos-pilar"><div class="nos-pilar-ic">🗺</div><div class="nos-pilar-t">Conocimiento local</div></div>
-          <div class="nos-pilar"><div class="nos-pilar-ic">🔒</div><div class="nos-pilar-t">Seguridad total</div></div>
-          <div class="nos-pilar"><div class="nos-pilar-ic">⭐</div><div class="nos-pilar-t">Atención única</div></div>
+          <div class="nos-pilar"><div class="nos-pilar-ic">🗺</div><div class="nos-pilar-t">Conocimiento</div></div>
+          <div class="nos-pilar"><div class="nos-pilar-ic">🔒</div><div class="nos-pilar-t">Seguridad</div></div>
+          <div class="nos-pilar"><div class="nos-pilar-ic">⭐</div><div class="nos-pilar-t">Atención</div></div>
         </div>
       </div>
 
     </div>
   </section>
 
-
-  <!-- ══════════════════════════════════════
-       MISIÓN · VISIÓN · VALORES
-  ══════════════════════════════════════ -->
-  <section class="nos-mvv">
+  <section class="n-section nos-mvv">
     <div class="nos-mvv-glow1"></div>
     <div class="nos-mvv-glow2"></div>
     <div class="nos-mvv-in">
 
       <div class="nos-mvv-hdr">
-        <div class="nos-chip nos-chip-lt reveal">Quiénes Somos</div>
-        <h2 class="nos-section-title nos-title-lt reveal reveal-delay-1">
+        <div class="nos-chip reveal">Quiénes Somos</div>
+        <h2 class="nos-section-title reveal reveal-delay-1" style="color: #ffffff;">
           Lo que nos mueve<br /><em>cada mañana</em>
         </h2>
         <p class="nos-mvv-intro reveal reveal-delay-2">
@@ -135,240 +121,209 @@ import './Nosotros.css';
         </p>
       </div>
 
-      <div class="nos-mvv-grid">
+      <div class="nos-slider-wrapper">
+        <div class="nos-mvv-grid">
 
-        <div class="nos-mvv-card reveal scale-in reveal-delay-1">
-          <div class="nos-mvv-num">01</div>
-          <div class="nos-mvv-card-head">
-            <div class="nos-mvi nos-mvi-teal"><img src="/icons/guias.png" alt="Misión"/></div>
-            <span class="nos-mvv-chip nos-mc-teal">Misión</span>
+          <div class="nos-mvv-card slider-item reveal scale-in reveal-delay-1">
+            <div class="nos-mvv-num">01</div>
+            <div class="nos-mvv-card-head">
+              <div class="nos-mvi nos-mvi-teal"><img src="/icons/guias.png" alt="Misión"/></div>
+              <span class="nos-mvv-chip nos-mc-teal">Misión</span>
+            </div>
+            <h3 class="nos-mvv-title">Conectar al mundo con La Paz</h3>
+            <p class="nos-mvv-desc">
+              Organizamos experiencias de turismo receptivo auténticas y memorables que permiten a cada viajero descubrir La Paz y los Andes bolivianos tal como los vivimos nosotros.
+            </p>
+            <div class="nos-mvv-bar nos-bar-teal"></div>
           </div>
-          <h3 class="nos-mvv-title">Conectar al mundo con La Paz</h3>
-          <p class="nos-mvv-desc">
-            Organizamos experiencias de turismo receptivo auténticas y memorables que permiten a cada viajero descubrir La Paz y los Andes bolivianos tal como los vivimos nosotros.
-          </p>
-          <div class="nos-mvv-bar nos-bar-teal"></div>
-        </div>
 
-        <div class="nos-mvv-card nos-mvv-featured reveal scale-in reveal-delay-2">
-          <div class="nos-mvv-num nos-num-or">02</div>
-          <div class="nos-mvv-card-head">
-            <div class="nos-mvi nos-mvi-orange"><img src="/icons/telefono.png" alt="Visión"/></div>
-            <span class="nos-mvv-chip nos-mc-orange">Visión</span>
+          <div class="nos-mvv-card nos-mvv-featured slider-item reveal scale-in reveal-delay-2">
+            <div class="nos-mvv-num nos-num-or">02</div>
+            <div class="nos-mvv-card-head">
+              <div class="nos-mvi nos-mvi-orange"><img src="/icons/telefono.png" alt="Visión"/></div>
+              <span class="nos-mvv-chip nos-mc-orange">Visión</span>
+            </div>
+            <h3 class="nos-mvv-title">Ser la referencia del turismo andino</h3>
+            <p class="nos-mvv-desc">
+              Convertirnos en la operadora de turismo más reconocida del altiplano boliviano, posicionando a La Paz como un destino mundial que todo viajero debe conocer.
+            </p>
+            <div class="nos-mvv-bar nos-bar-orange"></div>
           </div>
-          <h3 class="nos-mvv-title">Ser la referencia del turismo andino</h3>
-          <p class="nos-mvv-desc">
-            Convertirnos en la operadora de turismo más reconocida del altiplano boliviano, posicionando a La Paz como un destino mundial que todo viajero debe conocer.
-          </p>
-          <div class="nos-mvv-bar nos-bar-orange"></div>
-        </div>
 
-        <div class="nos-mvv-card reveal scale-in reveal-delay-3">
-          <div class="nos-mvv-num">03</div>
-          <div class="nos-mvv-card-head">
-            <div class="nos-mvi nos-mvi-green"><img src="/icons/seguro.png" alt="Valores"/></div>
-            <span class="nos-mvv-chip nos-mc-green">Valores</span>
+          <div class="nos-mvv-card slider-item reveal scale-in reveal-delay-3">
+            <div class="nos-mvv-num">03</div>
+            <div class="nos-mvv-card-head">
+              <div class="nos-mvi nos-mvi-green"><img src="/icons/seguro.png" alt="Valores"/></div>
+              <span class="nos-mvv-chip nos-mc-green">Valores</span>
+            </div>
+            <h3 class="nos-mvv-title">Lo que nos define cada día</h3>
+            <ul class="nos-vals">
+              <li><span class="nos-vd nos-vd1"></span>Orgullo paceño y boliviano</li>
+              <li><span class="nos-vd nos-vd2"></span>Autenticidad en cada recorrido</li>
+              <li><span class="nos-vd nos-vd3"></span>Seguridad y responsabilidad</li>
+              <li><span class="nos-vd nos-vd4"></span>Respeto cultural</li>
+              <li><span class="nos-vd nos-vd1"></span>Atención personalizada</li>
+            </ul>
+            <div class="nos-mvv-bar nos-bar-green"></div>
           </div>
-          <h3 class="nos-mvv-title">Lo que nos define cada día</h3>
-          <ul class="nos-vals">
-            <li><span class="nos-vd nos-vd1"></span>Orgullo paceño y boliviano</li>
-            <li><span class="nos-vd nos-vd2"></span>Autenticidad en cada recorrido</li>
-            <li><span class="nos-vd nos-vd3"></span>Seguridad y responsabilidad</li>
-            <li><span class="nos-vd nos-vd4"></span>Respeto cultural y medioambiental</li>
-            <li><span class="nos-vd nos-vd1"></span>Atención personalizada siempre</li>
-          </ul>
-          <div class="nos-mvv-bar nos-bar-green"></div>
-        </div>
 
+        </div>
       </div>
+      <div class="nos-swipe-hint">Desliza para ver más →</div>
+
     </div>
   </section>
 
-
-  <!-- ══════════════════════════════════════
-       NUESTRO EQUIPO
-  ══════════════════════════════════════ -->
-  <section class="nos-equipo">
+  <section class="n-section nos-equipo">
     <div class="nos-equipo-in">
 
       <div class="nos-equipo-hdr">
         <div class="nos-chip reveal">Nuestro Equipo</div>
-        <h2 class="nos-section-title reveal reveal-delay-1">
+        <h2 class="nos-section-title nos-title-lt reveal reveal-delay-1">
           La mente técnica<br /><em>de tu expedición</em>
         </h2>
         <p class="nos-equipo-lead reveal reveal-delay-2">
-          Ingenieros de sistemas y creativos digitales. Un equipo local que une la pasión por La Paz con la innovación tecnológica para ofrecerte la mejor experiencia.
+          Ingenieros de sistemas y creativos digitales. Un equipo local que une la pasión por La Paz con la innovación tecnológica.
         </p>
       </div>
 
-      <div class="nos-team-grid">
+      <div class="nos-slider-wrapper">
+        <div class="nos-team-grid">
 
-        <div class="nos-tcard reveal scale-in reveal-delay-1">
-          <div class="nos-tcard-top nos-tc1">
-            <div class="nos-tcard-aro"><div class="nos-tcard-av nos-av1"></div></div>
-            <div class="nos-tcard-badge">Fundador</div>
+          <div class="nos-tcard slider-item reveal scale-in reveal-delay-1">
+            <div class="nos-tcard-top nos-tc1">
+              <div class="nos-tcard-aro"><div class="nos-tcard-av nos-av1"></div></div>
+              <div class="nos-tcard-badge">Fundador</div>
+            </div>
+            <div class="nos-tcard-body">
+              <div class="nos-tcard-name">Jhovanni Gutierrez</div>
+              <div class="nos-tcard-rol">Ingeniero · Scrum Master</div>
+              <p class="nos-tcard-bio">Líder ágil. Orquesta el desarrollo técnico de nuestra plataforma, asegurando entregas de valor.</p>
+              <div class="nos-tcard-langs"><span>🇪🇸 ES</span><span>🇬🇧 EN</span><span> Agilidad </span></div>
+            </div>
           </div>
-          <div class="nos-tcard-body">
-            <div class="nos-tcard-name">Jhovanni Michael Gutierrez Jimenez</div>
-            <div class="nos-tcard-rol">Ingeniero de Sistemas · Scrum Master</div>
-            <p class="nos-tcard-bio">Líder ágil. Orquesta el desarrollo técnico de nuestra plataforma, asegurando entregas de valor constantes y la máxima eficiencia del equipo.</p>
-            <div class="nos-tcard-langs"><span>🇪🇸 Español</span><span>🇬🇧 Inglés</span><span> Agilidad </span></div>
-          </div>
-        </div>
 
-        <div class="nos-tcard reveal scale-in reveal-delay-2">
-          <div class="nos-tcard-top nos-tc2">
-            <div class="nos-tcard-aro"><div class="nos-tcard-av nos-av2"></div></div>
+          <div class="nos-tcard slider-item reveal scale-in reveal-delay-2">
+            <div class="nos-tcard-top nos-tc2">
+              <div class="nos-tcard-aro"><div class="nos-tcard-av nos-av2"></div></div>
+            </div>
+            <div class="nos-tcard-body">
+              <div class="nos-tcard-name">Kiara Pino</div>
+              <div class="nos-tcard-rol">Diseñadora de Experiencia</div>
+              <p class="nos-tcard-bio">Arquitecta de sensaciones. Crea interfaces intuitivas y estéticas que convierten cada interacción en aventura.</p>
+              <div class="nos-tcard-langs"><span>🇪🇸 ES</span><span>🇬🇧 EN</span><span>UI/UX</span></div>
+            </div>
           </div>
-          <div class="nos-tcard-body">
-            <div class="nos-tcard-name">Kiara Carmen Pino Morales</div>
-            <div class="nos-tcard-rol">Diseñadora de Experiencia e Interfaz</div>
-            <p class="nos-tcard-bio">Arquitecta de sensaciones. Crea interfaces intuitivas y estéticas que convierten cada interacción digital en una aventura visual fluida y memorable.</p>
-            <div class="nos-tcard-langs"><span>🇪🇸 Español</span><span>🇬🇧 Inglés</span><span>UI/UX</span></div>
+
+          <div class="nos-tcard slider-item reveal scale-in reveal-delay-3">
+            <div class="nos-tcard-top nos-tc4">
+              <div class="nos-tcard-aro"><div class="nos-tcard-av nos-av3"></div></div>
+            </div>
+            <div class="nos-tcard-body">
+              <div class="nos-tcard-name">Nestor Alarcon</div>
+              <div class="nos-tcard-rol">Ingeniero · Lider Técnico</div>
+              <p class="nos-tcard-bio">Cerebro del código. Diseña la arquitectura y lidera la implementación técnica, garantizando rendimiento.</p>
+              <div class="nos-tcard-langs"><span>🇪🇸 ES</span><span>🇬🇧 EN</span><span>Dev </span></div>
+            </div>
           </div>
-        </div>
 
-        <div class="nos-tcard reveal scale-in reveal-delay-3">
-          <div class="nos-tcard-top nos-tc3">
-            <div class="nos-tcard-aro"><div class="nos-tcard-av nos-av3"></div></div>
+          <div class="nos-tcard slider-item reveal scale-in reveal-delay-4">
+            <div class="nos-tcard-top nos-tc3">
+              <div class="nos-tcard-aro"><div class="nos-tcard-av nos-av4"></div></div>
+            </div>
+            <div class="nos-tcard-body">
+              <div class="nos-tcard-name">Cristhian Rojas</div>
+              <div class="nos-tcard-rol">Ingeniero · Datos</div>
+              <p class="nos-tcard-bio">Inteligencia turística. Analiza datos para personalizar rutas y enriquecer la experiencia con historia.</p>
+              <div class="nos-tcard-langs"><span>🇪🇸 ES</span><span>🇬🇧 EN</span><span> Data </span></div>
+            </div>
           </div>
-          <div class="nos-tcard-body">
-            <div class="nos-tcard-name">Nestor Andre Alarcon Luque</div>
-            <div class="nos-tcard-rol">Ingeniero de Sistemas · Lider Técnico</div>
-            <p class="nos-tcard-bio">Cerebro del código. Diseña la arquitectura y lidera la implementación técnica de nuestra app, garantizando su rendimiento y escalabilidad.</p>
-            <div class="nos-tcard-langs"><span>🇪🇸 Español</span><span>🇬🇧 Inglés</span><span>Dev </span></div>
-          </div>
-        </div>
 
-        <div class="nos-tcard reveal scale-in reveal-delay-4">
-          <div class="nos-tcard-top nos-tc4">
-            <div class="nos-tcard-aro"><div class="nos-tcard-av nos-av4"></div></div>
-          </div>
-          <div class="nos-tcard-body">
-            <div class="nos-tcard-name">Cristhian Brandon Rojas Cussi</div>
-            <div class="nos-tcard-rol">Ingeniero de Sistemas · Especialista en Datos</div>
-            <p class="nos-tcard-bio">Inteligencia turística. Analiza datos para personalizar rutas y enriquecer la experiencia con información histórica y curiosidades locales precisas.</p>
-            <div class="nos-tcard-langs"><span>🇪🇸 Español</span><span>🇬🇧 Inglés</span><span> Data </span></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       POR QUÉ ELEGIRNOS
-  ══════════════════════════════════════ -->
-  <section class="nos-porque">
-    <div class="nos-porque-glow"></div>
-    <div class="nos-porque-in">
-
-      <div class="nos-porque-hdr">
-        <div class="nos-chip nos-chip-lt reveal">Por Qué Elegirnos</div>
-        <h2 class="nos-section-title nos-title-lt reveal reveal-delay-1">
-          Somos nuevos.<br /><em>Pero somos de aquí.</em>
-        </h2>
-        <p class="nos-porque-lead reveal reveal-delay-2">
-          No llevamos décadas en el negocio, pero llevamos toda la vida en La Paz. Eso nos da algo que ninguna franquicia puede comprar: autenticidad.
-        </p>
-      </div>
-
-      <div class="nos-pq-grid">
-        <div class="nos-pq-card reveal from-left reveal-delay-1">
-          <div class="nos-pq-ico"><img src="/icons/guias.png" alt="Guías"/></div>
-          <div class="nos-pq-body">
-            <h4 class="nos-pq-title">Guías Locales Paceños</h4>
-            <p class="nos-pq-desc">Nacimos y crecimos en La Paz. Conocemos cada callejón, cada mercado y cada secreto que no aparece en ninguna guía de viaje.</p>
-          </div>
-          <span class="nos-pq-num">01</span>
-        </div>
-
-        <div class="nos-pq-card reveal from-right reveal-delay-2">
-          <div class="nos-pq-ico"><img src="/icons/telefono.png" alt="App"/></div>
-          <div class="nos-pq-body">
-            <h4 class="nos-pq-title">App de Acompañamiento</h4>
-            <p class="nos-pq-desc">Nuestra app te guía por La Paz incluso después del tour, con mapas offline y datos de cada sitio.</p>
-          </div>
-          <span class="nos-pq-num">02</span>
-        </div>
-
-        <div class="nos-pq-card reveal from-left reveal-delay-3">
-          <div class="nos-pq-ico"><img src="/icons/seguro.png" alt="Traslados"/></div>
-          <div class="nos-pq-body">
-            <h4 class="nos-pq-title">Traslados Seguros</h4>
-            <p class="nos-pq-desc">Vehículos verificados y conductores certificados. Tu seguridad no es negociable desde el primer recorrido.</p>
-          </div>
-          <span class="nos-pq-num">03</span>
-        </div>
-
-        <div class="nos-pq-card reveal from-right reveal-delay-4">
-          <div class="nos-pq-ico"><img src="/icons/atencion.png" alt="Atención"/></div>
-          <div class="nos-pq-body">
-            <h4 class="nos-pq-title">Atención Personalizada</h4>
-            <p class="nos-pq-desc">Coordinamos tu recorrido desde antes de llegar. Cada viaje se adapta a tus intereses y tu ritmo.</p>
-          </div>
-          <span class="nos-pq-num">04</span>
         </div>
       </div>
-
-      
+      <div class="nos-swipe-hint hint-dark">Desliza para ver más →</div>
 
     </div>
   </section>
-
-
-  <!-- ══════════════════════════════════════
-       CTA FINAL
-  ══════════════════════════════════════ -->
-  <section class="nos-cta">
-  <div class="nos-cta-glow"></div>
-  <div class="nos-cta-in">
-    
-    <div class="nos-cta-split">
-      
-      <div class="nos-frase reveal">
-        <blockquote class="nos-frase-q">
-          "La Paz no es solo un destino. Es una experiencia que te cambia.<br />
-          <em>Nosotros te ayudamos a vivirla de verdad.</em>"
-        </blockquote>
-        <div class="nos-frase-firma">— El equipo de Aventuras Paceñas</div>
-      </div>
-
-      <div class="nos-cta-content">
-        <div class="nos-chip nos-chip-lt reveal">¿Listo para explorar?</div>
-        <h2 class="nos-cta-title reveal reveal-delay-1">
-          Somos tu equipo en <em>La Paz</em>
-        </h2>
-        <p class="nos-cta-desc reveal reveal-delay-2">
-          Escríbenos y armamos tu experiencia a medida. 
-          Cada cliente importa más que nunca para nosotros.
-        </p>
-        
-        <div class="nos-cta-feats reveal reveal-delay-3">
-          <div class="nos-cf"><span>🗺</span> Mapas</div>
-          <div class="nos-cf"><span>🧭</span> Guías</div>
-          <div class="nos-cf"><span>⭐</span> Rutas</div>
-        </div>
-
-        <div class="nos-cta-btns reveal reveal-delay-4">
-          <a href="/#paquetes" class="nos-btn-p">Ver paquetes →</a>
-        </div>
-        <p class="nos-cta-note reveal reveal-delay-5">Respondemos en menos de 24 horas</p>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 </div>
 
 <script>
   const observer = new IntersectionObserver(
-    entries => entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-    }),
-    { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); 
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
   );
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sections = Array.from(document.querySelectorAll('.n-section'));
+  let currentSection = 0;
+  let isScrolling = false;
+
+  function getActiveSection() {
+    const mid = window.innerHeight / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    sections.forEach((s, i) => {
+      const rect = s.getBoundingClientRect();
+      const dist = Math.abs(rect.top + rect.height / 2 - mid);
+      if (dist < closestDist) { closestDist = dist; closest = i; }
+    });
+    return closest;
+  }
+
+  window.scrollToSection = function(idx) {
+    if (idx < 0 || idx >= sections.length || isScrolling) return;
+    isScrolling = true;
+    currentSection = idx;
+    const el = sections[idx];
+    const headerH = document.querySelector('header')?.offsetHeight || 0;
+    const top = el.getBoundingClientRect().top + window.scrollY - headerH;
+    window.scrollTo({ top, behavior: 'smooth' });
+    setTimeout(() => { isScrolling = false; }, 900);
+  }
+
+  const navDots = document.createElement('div');
+  navDots.id = 'section-nav';
+  navDots.innerHTML = sections.map((_, i) =>
+    `<button class="snav-dot" data-i="${i}" aria-label="Ir a sección ${i + 1}"></button>`
+  ).join('');
+  document.querySelector('.nos-root').appendChild(navDots);
+
+  const kbHint = document.createElement('div');
+  kbHint.id = 'kb-hint';
+  kbHint.innerHTML = `<div class="kb-key">▲</div><div class="kb-key">▼</div>`;
+  document.querySelector('.nos-root').appendChild(kbHint);
+
+  navDots.querySelectorAll('.snav-dot').forEach(dot => {
+    dot.addEventListener('click', () => window.scrollToSection(+dot.dataset.i));
+  });
+
+  function updateActiveDot() {
+    const active = getActiveSection();
+    currentSection = active;
+    navDots.querySelectorAll('.snav-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === active)
+    );
+  }
+
+  window.addEventListener('scroll', updateActiveDot, { passive: true });
+  updateActiveDot();
+
+  document.addEventListener('keydown', e => {
+    if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      window.scrollToSection(getActiveSection() + 1);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      window.scrollToSection(getActiveSection() - 1);
+    }
+  });
 </script>
