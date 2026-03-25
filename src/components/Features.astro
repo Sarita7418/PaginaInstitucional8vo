@@ -1,149 +1,212 @@
 ---
 import './Features.css';
+
+// Ahora TODAS las secciones tienen una imagen de fondo (bg)
+const features = [
+  {
+    id: 'audioguia', tag: 'Contexto Histórico', title: 'Audioguías Narrativas',
+    desc: 'Wali te enviará una notificación al acercarte a un sitio turístico, activando audioguías inmersivas que te explicarán toda la historia y el contexto del lugar.',
+    img: '/images/CRaudioguia.png', theme: 'dark', bg: '/images/calle_jaen.jpg'
+  },
+  {
+    id: 'mapas', tag: 'Cartografía Avanzada', title: 'Mapas y Geolocalización',
+    desc: 'Observa tu entorno con precisión. Encuentra sitios de interés, descubre rutas turísticas recomendadas y visualiza el mapa interactivo offline.',
+    img: '/images/CRmapas.png', theme: 'cream', bg: '/images/altiplano.jpg'
+  },
+  {
+    id: 'itinerarios', tag: 'Planificación a Medida', title: 'Itinerarios Inteligentes',
+    desc: 'Dinos qué te gusta y nosotros armamos el plan. Escoge tus actividades y Wali generará un itinerario recomendado, completamente editable.',
+    img: '/images/CRitinerario.png', theme: 'dark', bg: '/images/valle_luna.jpg'
+  },
+  {
+    id: 'asistente', tag: 'Atención 24/7', title: 'Asistente Inteligente',
+    desc: 'Tu guía paceño de bolsillo. Nuestro chatbot de IA está listo para hacerte recomendaciones de rutas y resolver dudas turísticas en tiempo real.',
+    img: '/images/CRIA.png', theme: 'cream', bg: '/images/mirador_killi.jpg'
+  },
+  {
+    id: 'gastronomia', tag: 'Sabores sin Riesgos', title: 'Decodificador Gastronómico',
+    desc: 'Apunta tu cámara al menú. Wali identificará el plato, mostrará sus ingredientes y preparación para prevenir reacciones alérgicas y sorpresas.',
+    img: '/images/CRcomida.png', theme: 'dark', bg: '/images/mercado_ancestral.jpg'
+  },
+  {
+    id: 'seguridad', tag: 'Exploración Segura', title: 'Seguridad y Tranquilidad',
+    desc: 'Muévete con confianza. El mapa marca zonas de precaución y cuentas con un botón de pánico integrado para llamar a la policía en emergencias.',
+    img: '/images/CRseguridad.png', theme: 'cream', bg: '/images/twanaku.jpg'
+  },
+  {
+    id: 'tarifas', tag: 'Economía Justa', title: 'Recomendador de Tarifas',
+    desc: 'Evita cobros excesivos. En una ciudad sin taxímetros, nuestra herramienta te calcula la tarifa recomendada para tu ruta de transporte.',
+    img: '/images/CRtarifa.png', theme: 'dark', bg: '/images/Ciudad_de_La_Paz_de_noche.jpg'
+  }
+];
 ---
 
-<section id="ruleta" class="hero-features reveal" style="background-image: linear-gradient(rgba(35, 55, 62, 0.85), rgba(35, 55, 62, 0.95)), url('/images/Ciudad_de_La_Paz_de_noche.jpg');">
-  <div class="hero-content">
-    <h2 class="title-premium">Una experiencia sin igual en La Paz</h2>
-    <p class="subtitle-premium">Descubre las herramientas de nuestra aplicación movil "Wali" que transformarán tu forma de explorar.</p>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<div class="inicio-root wali-root">
+
+  <section class="w-section hero-wali">
+    <div class="hero-wali-bg" style="background-image: url('/images/lapaz.jpg')"></div>
+    <div class="hero-wali-overlay"></div>
     
-    <div class="roulette-grid">
-      <a href="#feat-audio" class="roulette-item">🎧<br><span>Audioguías</span></a>
-      <a href="#feat-offline" class="roulette-item">🗺️<br><span>Offline</span></a>
-      <a href="#feat-ia" class="roulette-item">🤖<br><span>Asistente IA</span></a>
-      <a href="#feat-food" class="roulette-item">🍲<br><span>Gastronomía</span></a>
-      <a href="#feat-precio" class="roulette-item">💰<br><span>Precio Justo</span></a>
-      <a href="#feat-alertas" class="roulette-item">⚠️<br><span>Alertas</span></a>
+    <div class="hero-wali-inner">
+      <div class="badge reveal scale-in">
+        <span class="bdot"></span>
+        Aventuras Paceñas S.R.L.
+      </div>
+      
+      <h1 class="hero-title reveal from-left reveal-delay-1">
+        Conoce a <em>Wali</em>
+      </h1>
+      
+      <p class="hero-sub reveal from-left reveal-delay-2">
+        Tu navaja suiza para explorar La Paz. La aplicación móvil diseñada exclusivamente para turistas, fusionando la sabiduría local con tecnología de punta para que tu experiencia sea inolvidable.
+      </p>
+      
+      <div class="hero-btns reveal from-left reveal-delay-3">
+        <button class="btn-p" onclick="scrollToSection(1)">Descubrir Funciones ↓</button>
+        <a href="/descarga" class="btn-s">Descargar App</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="feat-audio" class="feature-detail align-left reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('/images/calle_jaen.jpg');">
-  <div class="text-content">
-    <div class="feature-card tilt-card">
-      <span class="feat-tag">Magia en tus oídos</span>
-      <h3>Tus pasos despiertan la historia</h3>
-      <p>Olvídate de leer textos aburridos. Mientras caminas, nuestro GPS detecta cuando te acercas a un atractivo turístico y reproduce automáticamente historias, secretos y datos curiosos. Solo ponte los audífonos y déjate guiar.</p>
+  {features.map((feat, index) => (
+    <section class={`w-section feat-section`}>
+      
+      <div class="feat-bg-img" style={`background-image: url('${feat.bg}')`}></div>
+      <div class={`feat-bg-overlay overlay-${feat.theme}`}></div>
+
+      <div class={`feat-container ${index % 2 !== 0 ? 'row-reverse' : ''}`}>
+        
+        <div class="feat-text-content">
+          <div class={`feat-text-card card-${feat.theme} reveal from-left`}>
+            <div class={`stag ${feat.theme === 'cream' ? 'stag-dk' : ''}`}>
+              {feat.tag}
+            </div>
+            <h2 class={`stit ${feat.theme === 'cream' ? 'stit-dk' : ''}`}>
+              {feat.title}
+            </h2>
+            <p class={`feat-desc ${feat.theme === 'cream' ? 'desc-dk' : ''}`}>
+              {feat.desc}
+            </p>
+          </div>
+        </div>
+
+        <div class="feat-visual-content reveal scale-in reveal-delay-2">
+          <img src={feat.img} alt={feat.title} class="feat-app-img" loading="lazy" />
+          <div class="feat-glass">
+            <span>Wali App</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  ))}
+
+  <section class="w-section s-cta">
+    <div class="s-cta::before"></div>
+    <div class="cta-tag reveal">📱 Disponible para iOS y Android</div>
+
+    <h2 class="stit reveal reveal-delay-1" style="text-align: center;">
+      ¿Listo para llevar<br />a <em>La Paz</em> en tu bolsillo?
+    </h2>
+
+    <p class="reveal reveal-delay-2" style="text-align: center; margin: 0 auto 32px;">
+      Únete a los viajeros que ya están redefiniendo el turismo local con la tecnología desarrollada por Aventuras Paceñas.
+    </p>
+
+    <div class="cta-btns reveal reveal-delay-4">
+      <a href="/descarga" class="btn-p">
+        <img src="/icons/telefono.png" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:4px" alt="" />
+        Descargar Wali Ahora
+      </a>
     </div>
-  </div>
-  <div class="image-content">
-    <img src="/images/FEA_audioguia.png" alt="Audioguía en San Francisco" class="feature-img" />
-  </div>
-</section>
 
-<section id="feat-offline" class="feature-detail align-right reveal" style="background-image: linear-gradient(rgba(35, 55, 62, 0.9), rgba(35, 55, 62, 0.9)), url('/images/cordillera.jpg');">
-  <div class="text-content">
-    <div class="feature-card tilt-card">
-      <span class="feat-tag">Cero estrés, Cero Megas</span>
-      <h3>Explora sin depender de tu internet</h3>
-      <p>¿Te quedaste sin señal en medio de un callejón paceño? No hay problema. Descarga nuestros paquetes de mapas y accede a todas las rutas, calles y puntos de interés de forma 100% offline.</p>
-    </div>
-  </div>
-  <div class="image-content">
-    <img src="/images/FEA_offline.png" alt="Mapas Offline 3D" class="feature-img" />
-  </div>
-</section>
+  </section>
 
-<section id="feat-ia" class="feature-detail align-left reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('/images/centro_historico.jpg');">
-  <div class="text-content">
-    <div class="feature-card tilt-card">
-      <span class="feat-tag">Atención 24/7</span>
-      <h3>Tu guía paceño de bolsillo con IA</h3>
-      <p>¿Dudas sobre el horario del teleférico o cómo llegar al Valle de la Luna? Nuestro Asistente Inteligente conoce la ciudad al derecho y al revés, basándose únicamente en información oficial y verificada.</p>
-    </div>
-  </div>
-  <div class="image-content">
-    <img src="/images/FEA_guiaIA.png" alt="Chatbot IA respondiendo" class="feature-img" />
-  </div>
-</section>
-
-<section id="feat-food" class="feature-detail align-right reveal" style="background-image: linear-gradient(rgba(35, 55, 62, 0.9), rgba(35, 55, 62, 0.9)), url('/images/mercado_ancestral.jpg');">
-  <div class="text-content">
-    <div class="feature-card tilt-card">
-      <span class="feat-tag">Sabores sin misterio</span>
-      <h3>Decodificador de menús locales</h3>
-      <p>¿No sabes qué es un 'Fricasé' o qué tan picante es la 'Llajua'? Solo apunta tu cámara al menú y nuestra app te mostrará los ingredientes, nivel de picante y la historia detrás de cada plato tradicional.</p>
-    </div>
-  </div>
-  <div class="image-content">
-    <img src="/images/FEA_gastronomia.png" alt="Escaneo de comida paceña" class="feature-img" />
-  </div>
-</section>
-
-<section id="feat-precio" class="feature-detail align-left reveal" style="background-image: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('/images/calle_de_las_brujas.jpg');">
-  <div class="text-content">
-    <div class="feature-card tilt-card">
-      <span class="feat-tag">Economía Inteligente</span>
-      <h3>Calculadora de Precios Justos</h3>
-      <p>Evita los cobros excesivos. Antes de tomar un taxi o comprar un recuerdo, consulta nuestra calculadora para conocer las tarifas promedio y paga siempre lo justo como un verdadero local.</p>
-    </div>
-  </div>
-  <div class="image-content">
-    <img src="/images/FEA_calculadora.png" alt="Calculadora de precios" class="feature-img" />
-  </div>
-</section>
-
-<section id="feat-alertas" class="feature-detail align-right reveal" style="background-image: linear-gradient(rgba(35, 55, 62, 0.9), rgba(35, 55, 62, 0.9)), url('/images/mirador_killi.jpg');">
-  <div class="text-content">
-    <div class="feature-card tilt-card">
-      <span class="feat-tag">Seguridad y control</span>
-      <h3>Alertas y estado en tiempo real</h3>
-      <p>Tu seguridad es primero. Recibe notificaciones push sobre el estado de los museos (abiertos/cerrados) y advertencias de seguridad proactivas según las zonas por las que te muevas.</p>
-    </div>
-  </div>
-  <div class="image-content">
-    <img src="/images/FEA_seguridad.png" alt="Alertas de seguridad" class="feature-img" />
-  </div>
-</section>
-
-<section class="cta-final reveal" style="background-image: linear-gradient(#13151a03, rgba(15, 152, 138, 0.9)), url('/images/valle_luna.jpg');">
-  <div class="cta-card tilt-card">
-    <h2>¿Listo para vivir la ciudad de otra manera?</h2>
-    <p>Únete a los viajeros que ya están redefiniendo el turismo local.</p>
-    <a href="/descarga" class="btn-mega">Descargar Ahora</a>
-  </div>
-</section>
+</div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // 1. Animación de revelado al hacer scroll
-    const reveals = document.querySelectorAll(".reveal");
-    const revealOnScroll = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
+  // Observer para animaciones
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("active");
+          entry.target.classList.add('visible');
           observer.unobserve(entry.target); 
         }
       });
-    }, {
-      root: null,
-      threshold: 0.2, // Dispara cuando el 20% de la sección es visible
-      rootMargin: "0px"
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Lógica de Navegación por Secciones
+  const sections = Array.from(document.querySelectorAll('.w-section'));
+  let currentSection = 0;
+  let isScrolling = false;
+
+  function getActiveSection() {
+    const mid = window.innerHeight / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    sections.forEach((s, i) => {
+      const rect = s.getBoundingClientRect();
+      const dist = Math.abs(rect.top + rect.height / 2 - mid);
+      if (dist < closestDist) { closestDist = dist; closest = i; }
     });
+    return closest;
+  }
 
-    reveals.forEach((reveal) => revealOnScroll.observe(reveal));
+  window.scrollToSection = function(idx) {
+    if (idx < 0 || idx >= sections.length || isScrolling) return;
+    isScrolling = true;
+    currentSection = idx;
+    const el = sections[idx];
+    const headerH = document.querySelector('header')?.offsetHeight || 0; // Compensa el header si existe
+    const top = el.getBoundingClientRect().top + window.scrollY - headerH;
+    window.scrollTo({ top, behavior: 'smooth' });
+    setTimeout(() => { isScrolling = false; }, 900);
+  }
 
-    // 2. Efecto Tilt 3D (Inclinación con el ratón)
-    const tiltCards = document.querySelectorAll('.tilt-card');
-    
-    tiltCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top; 
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = ((y - centerY) / centerY) * -8;
-        const rotateY = ((x - centerX) / centerX) * 8;
+  // Dots de navegación derecha
+  const navDots = document.createElement('div');
+  navDots.id = 'section-nav';
+  navDots.innerHTML = sections.map((_, i) =>
+    `<button class="snav-dot" data-i="${i}" aria-label="Ir a sección ${i + 1}"></button>`
+  ).join('');
+  document.querySelector('.wali-root').appendChild(navDots);
 
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      });
+  // Hint teclado
+  const kbHint = document.createElement('div');
+  kbHint.id = 'kb-hint';
+  kbHint.innerHTML = `<div class="kb-key">▲</div><div class="kb-key">▼</div>`;
+  document.querySelector('.wali-root').appendChild(kbHint);
 
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-      });
-    });
+  navDots.querySelectorAll('.snav-dot').forEach(dot => {
+    dot.addEventListener('click', () => window.scrollToSection(+dot.dataset.i));
+  });
+
+  function updateActiveDot() {
+    const active = getActiveSection();
+    currentSection = active;
+    navDots.querySelectorAll('.snav-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === active)
+    );
+  }
+
+  window.addEventListener('scroll', updateActiveDot, { passive: true });
+  updateActiveDot();
+
+  // Atajos Teclado
+  document.addEventListener('keydown', e => {
+    if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      window.scrollToSection(getActiveSection() + 1);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      window.scrollToSection(getActiveSection() - 1);
+    }
   });
 </script>

@@ -1,199 +1,310 @@
-/* === ESTILOS LIMPIOS Y CON ANIMACIONES PREMIUM === */
-html { scroll-behavior: smooth; }
-
-/* REGLA MAESTRA PARA FONDOS DE PANTALLA COMPLETA */
-.hero-features, 
-.feature-detail, 
-.cta-final {
-  background-size: cover; /* Obliga a la imagen a ocupar todo el espacio sin deformarse */
-  background-position: center; /* Mantiene la imagen siempre centrada */
-  background-repeat: no-repeat; /* Evita que la imagen se repita como mosaico */
-  background-attachment: fixed; /* Efecto Parallax premium al hacer scroll */
+/* =========================================
+   VARIABLES GLOBALES Y RESET
+========================================= */
+:root {
+  --color-dark:   #23373E;
+  --color-green:  #197D61;
+  --color-teal:   #0F988A;
+  --color-brown:  #7A3928;
+  --color-orange: #D27817;
+  --color-cream:  #F2EBE0;
+  --bg-deep:      #0b1a20;
+  --white:        #fff;
 }
 
-/* RULETA / HERO */
-.hero-features {
+.wali-root *, .wali-root *::before, .wali-root *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+.wali-root {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--white);
+  overflow-x: hidden;
+  background-color: var(--bg-deep);
+}
+
+/* =========================================
+   NAVEGACIÓN LATERAL
+========================================= */
+#section-nav {
+  position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 8px; z-index: 500;
+}
+.snav-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.35);
+  cursor: pointer; transition: all 0.3s; padding: 0;
+}
+.snav-dot.active {
+  background: var(--color-orange); border-color: var(--color-orange);
+  transform: scale(1.4); height: 20px; border-radius: 4px;
+}
+.snav-dot:hover { background: rgba(210,120,23,0.6); }
+
+#kb-hint {
+  position: fixed; bottom: 90px; right: 20px; display: flex;
+  flex-direction: column; align-items: center; gap: 3px; z-index: 500;
+  opacity: 0.35; transition: opacity 0.3s;
+}
+#kb-hint:hover { opacity: 0.8; }
+.kb-key {
+  width: 22px; height: 22px; border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06);
+}
+
+@media(max-width:680px) { #section-nav, #kb-hint { display: none; } }
+
+/* =========================================
+   ELEMENTOS UI COMPARTIDOS
+========================================= */
+.badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid rgba(210,120,23,.35); border-radius: 2px;
+  padding: 5px 13px; font-size: 12px; font-weight: 500;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: rgba(255,255,255,.58); background: rgba(210,120,23,.05);
+  margin-bottom: 20px;
+}
+.bdot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--color-orange); animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+.btn-p {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 12px 26px; background: var(--color-orange); color: var(--white);
+  font-family: 'DM Sans', sans-serif; font-size: .95rem; font-weight: 600;
+  border: none; border-radius: 50px; cursor: pointer; text-decoration: none;
+  transition: all .2s; box-shadow: 0 4px 20px rgba(210,120,23,.28);
+}
+.btn-p:hover { background: var(--color-brown); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(210,120,23,.38); }
+
+.btn-s {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 12px 26px; background: transparent; color: rgba(255,255,255,.72);
+  font-family: 'DM Sans', sans-serif; font-size: .95rem; font-weight: 500;
+  border: 1px solid rgba(255,255,255,.22); border-radius: 50px; cursor: pointer;
+  text-decoration: none; transition: all .2s;
+}
+.btn-s:hover { border-color: rgba(255,255,255,.5); color: var(--white); }
+
+/* =========================================
+   ANIMACIONES (.reveal)
+========================================= */
+.reveal { opacity: 0; transform: translateY(36px); transition: all .75s cubic-bezier(.22,1,.36,1); }
+.reveal.from-left  { transform: translateX(-44px); }
+.reveal.scale-in   { transform: translateY(20px) scale(.96); }
+.reveal.visible    { opacity: 1; transform: translate(0,0) scale(1); }
+.reveal-delay-1 { transition-delay: .08s; }
+.reveal-delay-2 { transition-delay: .16s; }
+.reveal-delay-3 { transition-delay: .24s; }
+.reveal-delay-4 { transition-delay: .32s; }
+.reveal-delay-5 { transition-delay: .40s; }
+
+/* =========================================
+   ESTRUCTURA DE SECCIONES (Centrado Perfecto)
+========================================= */
+.w-section {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
-  color: white;
-  border-bottom: 4px solid var(--color-orange); 
-}
-.title-premium {
-  font-size: 3.5rem;
-  color: var(--color-teal);
-  margin-bottom: 0.5rem;
-}
-.subtitle-premium {
-  font-size: 1.2rem;
-  color: #e0e0e0;
-  margin-bottom: 4rem;
-}
-.roulette-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-}
-.roulette-item {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 130px;
-  height: 130px;
-  border-radius: 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: white;
-  transition: all 0.3s ease;
-  font-size: 2.5rem;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
-}
-.roulette-item span {
-  font-size: 0.9rem;
-  margin-top: 10px;
-  font-weight: 600;
-}
-.roulette-item:hover {
-  transform: translateY(-10px);
-  background: var(--color-teal);
-  border-color: var(--color-teal);
-  box-shadow: 0 15px 30px rgba(15, 152, 138, 0.4); 
+  justify-content: center; /* Centrado vertical estricto */
+  align-items: center;     /* Centrado horizontal estricto */
+  position: relative;
+  overflow: hidden;
+  padding-top: 60px; /* Pequeño respiro por si el header es fijo */
 }
 
-/* BLOQUES DE DETALLE */
-.feature-detail {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  padding: 6rem 8%;
-  gap: 4rem;
-  border-bottom: 4px solid var(--color-orange);
-  overflow: hidden; 
+/* --- SECCIÓN HERO --- */
+.hero-wali { text-align: center; }
+.hero-wali-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; }
+.hero-wali-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(108deg, rgba(11,26,32,.95) 0%, rgba(11,26,32,.85) 50%, rgba(11,26,32,.95) 100%);
+}
+.hero-wali-inner {
+  position: relative; z-index: 3; max-width: 800px; padding: 0 24px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.8vw, 3.6rem); font-weight: 700; line-height: 1.1; margin-bottom: 10px; }
+.hero-title em { font-style: italic; color: var(--color-orange); }
+.hero-sub { font-size: 1.08rem; font-weight: 400; line-height: 1.78; color: rgba(255,255,255,.92); max-width: 600px; margin: 14px auto 0; text-align: center; }
+.hero-btns { margin-top: 24px; display: flex; gap: 11px; flex-wrap: wrap; justify-content: center; }
+
+/* --- SECCIONES DE FUNCIONES (Con Tarjetas) --- */
+.feat-section {
+  color: var(--white);
 }
 
-.align-right { flex-direction: row-reverse; }
-.text-content { flex: 1; perspective: 1000px; }
-.image-content { flex: 1; display: flex; justify-content: center; }
-
-/* LAS TARJETITAS (Con Sombras profundas y transición para el JS) */
-.feature-card {
-  background: white;
-  padding: 3rem;
-  border-radius: 16px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 10px 20px -5px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(0,0,0,0.05);
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; 
-  will-change: transform;
+/* Fondos Fotográficos Universales */
+.feat-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
 }
 
-.feature-card:hover {
-  box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.4), 0 20px 30px -10px rgba(15, 152, 138, 0.3);
+/* Superposiciones de Filtro */
+.feat-bg-overlay {
+  position: absolute; inset: 0; z-index: 1;
+}
+.overlay-dark {
+  background: rgba(11,26,32, 0.75); /* Oscuro semi-transparente */
+}
+.overlay-cream {
+  background: rgba(242, 235, 224, 0.85); /* Crema semi-transparente para que luzca la foto */
 }
 
-.feat-tag {
-  background: rgba(210, 120, 23, 0.1);
-  color: var(--color-orange);
-  padding: 6px 14px;
-  border-radius: 30px;
-  font-weight: bold;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  display: inline-block;
-  margin-bottom: 1rem;
+/* Contenedor Flex */
+.feat-container {
+  position: relative; z-index: 3;
+  max-width: 1240px; margin: 0 0 0 0; width: 100%;
+  padding: 0 64px; display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
 }
-.feature-card h3 {
-  font-size: 2rem;
-  color: var(--color-dark);
-  margin-bottom: 1rem;
-  line-height: 1.2;
+.feat-container.row-reverse { direction: rtl; }
+.feat-container.row-reverse > * { direction: ltr; }
+
+/* 🌟 Tarjetas Redondeadas para el Texto */
+.feat-text-card {
+  padding: 45px 40px;
+  border-radius: 24px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.3s ease;
 }
-.feature-card p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #444;
-  margin: 0;
+.card-dark {
+  background: rgba(11, 26, 32, 0.8);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.card-cream {
+  background: rgba(255, 255, 255, 0.85); /* Tarjeta blanca/crema traslúcida */
+  border: 1px solid rgba(35,55,62,0.1);
+  box-shadow: 0 20px 40px rgba(35,55,62,0.1);
 }
 
-/* LAS IMÁGENES (Más sombras) */
-.feature-img {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 16px;
-  box-shadow: 0 30px 60px -15px rgba(0,0,0,0.4), 0 15px 25px -10px rgba(0,0,0,0.2);
-  transition: transform 0.4s ease;
-  object-fit: cover;
+/* Textos dentro de las Tarjetas */
+.stag {
+  display: inline-block; font-size: .75rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--color-orange); margin-bottom: 15px;
 }
-.feature-img:hover {
-  transform: scale(1.03) rotate(-1deg);
-  box-shadow: 0 40px 70px -15px rgba(0,0,0,0.5);
+.stag-dk { color: var(--color-teal); }
+
+.stit {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.2vw, 2.8rem);
+  font-weight: 700; line-height: 1.15; color: var(--white); margin: 0 0 15px 0;
+}
+.stit-dk { color: var(--color-dark); }
+
+.feat-desc { font-size: 1.05rem; color: rgba(255,255,255,.8); line-height: 1.7; margin: 0; }
+.desc-dk { color: rgba(35,55,62,.85); }
+
+/* Imágenes UI */
+.feat-visual-content { position: relative; display: flex; justify-content: center; }
+.feat-app-img {
+  width: 100%; max-width: 340px; height: auto; border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+.overlay-cream ~ .feat-container .feat-app-img { box-shadow: 0 20px 50px rgba(35,55,62,0.25); }
+
+.feat-glass {
+  position: absolute; bottom: -15px; right: 10%; background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 30px;
+  font-size: 0.8rem; font-weight: 600; color: var(--white); box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.overlay-cream ~ .feat-container .feat-glass {
+  background: rgba(35,55,62,0.85); border-color: rgba(35,55,62,0.2);
 }
 
-/* CTA FINAL */
-.cta-final {
-  padding: 6rem 2rem;
-  display: flex;
-  justify-content: center;
-  perspective: 1000px;
+/* --- SECCIÓN CTA FINAL --- */
+.s-cta {
+  background: var(--bg-deep); border-top: 3px solid var(--color-teal);
+  text-align: center; padding: 0 64px;
 }
-.cta-card {
-  background: var(--color-dark);
-  padding: 4rem;
-  border-radius: 20px;
-  text-align: center;
-  color: white;
-  max-width: 800px;
-  width: 100%;
-  box-shadow: 0 25px 50px rgba(25, 125, 97, 0.4);
+.s-cta::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 50% at 50% 40%, rgba(15,152,138,.13), transparent 70%),
+              radial-gradient(ellipse 40% 40% at 20% 80%, rgba(210,120,23,.06), transparent 60%);
 }
-.cta-card h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-.cta-card p { font-size: 1.1rem; margin-bottom: 2rem; }
-
-.btn-mega {
-  background-color: var(--color-orange);
-  color: white;
-  padding: 1rem 3rem;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-  display: inline-block;
-}
-.btn-mega:hover { background-color: var(--color-brown); }
-
-/* === MAGIA DEL ESCALONADO (ANIMACIONES AL HACER SCROLL) === */
-.reveal .text-content {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.reveal .image-content {
-  opacity: 0;
-  transform: scale(0.8) translateY(40px);
-  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s; 
+.cta-tag {
+  display: inline-flex; align-items: center; gap: 6px; background: rgba(15,152,138,.12);
+  border: 1px solid rgba(15,152,138,.3); color: var(--color-teal); font-size: .75rem;
+  font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 50px; margin-bottom: 24px; position: relative; z-index: 2;
 }
 
-/* Cuando el JS añade la clase 'active' */
-.reveal.active .text-content {
-  opacity: 1;
-  transform: translateY(0);
-}
-.reveal.active .image-content {
-  opacity: 1;
-  transform: scale(1) translateY(0);
+/* =========================================
+   RESPONSIVE MOBILE (Ajuste a pantalla completa)
+========================================= */
+@media (max-width: 960px) {
+  .feat-container { 
+    grid-template-columns: 1fr; 
+    text-align: center; 
+    padding: 0 24px; /* Reducimos el padding lateral */
+    gap: 20px; /* Reducimos el espacio entre texto e imagen para que todo entre en la pantalla */
+  }
+  
+  .feat-container.row-reverse { 
+    direction: ltr; 
+  }
+  
+  /* Tarjetas más compactas para ahorrar espacio vertical */
+  .feat-text-card { 
+    padding: 20px 20px; 
+  }
+  
+  /* Hacemos la imagen mucho más pequeña */
+  .feat-app-img {
+    max-width: 220px; /* Antes estaba en 340px, ahora es más pequeña */
+  }
+
+  .feat-glass { 
+    right: 50%; 
+    transform: translateX(50%); 
+    bottom: -10px;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+  }
+  
+  /* Forzamos que CADA sección ocupe exactamente 1 pantalla en móvil */
+  .w-section { 
+    min-height: 100vh; 
+    height: 100dvh; /* dvh se adapta mejor a la barra de direcciones de los celulares */
+    padding: 70px 0 20px; /* Dejamos espacio arriba para el header y abajo para respirar */
+    justify-content: center;
+  }
+  
+  .hero-wali { 
+    min-height: 100vh; 
+    height: 100dvh; 
+  }
+  
+  .s-cta { 
+    padding: 0 24px; 
+  }
+
+  /* Ajustamos textos ligeramente para que quepan bien */
+  .stit { margin-bottom: 10px; font-size: clamp(1.8rem, 6vw, 2.2rem); }
+  .feat-desc { font-size: 0.95rem; line-height: 1.5; }
+  .stag { margin-bottom: 8px; }
 }
 
-/* RESPONSIVO */
-@media (max-width: 992px) {
-  .feature-detail, .align-right { flex-direction: column; text-align: center; gap: 2rem; padding: 4rem 5%; }
-  .title-premium { font-size: 2.5rem; }
-  .feature-card:hover { transform: none; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); } 
+@media (max-width: 580px) {
+  .hero-title { font-size: clamp(1.9rem, 8vw, 2.8rem); }
+  .hero-btns { flex-direction: column; gap: 10px; }
+  .btn-p, .btn-s { width: 100%; justify-content: center; }
+  
+  /* En teléfonos muy pequeños, la imagen se reduce aún más */
+  .feat-app-img { 
+    max-width: 170px; 
+  }
+  
+  /* Tarjetas aún más optimizadas */
+  .feat-text-card { 
+    padding: 15px 15px; 
+  }
 }
