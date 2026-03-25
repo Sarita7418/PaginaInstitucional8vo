@@ -74,15 +74,9 @@ import MainLayout from "../layouts/MainLayout.astro";
         </div>
     </div>
 </MainLayout>
-
-<script is:inline src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script is:inline>
-  // === CONFIGURACIÓN DE SUPABASE (ACTUALIZAR CON DATOS REALES) ===
-  const SB_URL = 'https://bimfxpcxnltubnpzqirs.supabase.co'; 
-  const SB_KEY = 'sb_publishable_6oELE6LopjsUI7-_JR2CoA_vwBpodUN'; // La clave larga "eyJ..."
-
-  const _supabase = supabase.createClient(SB_URL, SB_KEY);
+<script>
+  // IMPORTANTE: Importamos el cliente centralizado
+  import { supabase } from '../lib/supabase';
 
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('login-form');
@@ -93,27 +87,27 @@ import MainLayout from "../layouts/MainLayout.astro";
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        btnText.innerHTML = '<span>Verificando...</span> <div class="spinner"></div>';
+        // Estado de carga
+        btnText.innerHTML = '<span>Verificando...</span>';
         btnText.style.opacity = '0.8';
-        btnText.style.pointerEvents = 'none';
         
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+        const email = (document.getElementById('email') as HTMLInputElement).value;
+        const password = (document.getElementById('password') as HTMLInputElement).value;
 
-        const { data, error } = await _supabase.auth.signInWithPassword({
-          email: email,
-          password: password,
+        // Iniciar sesión usando el cliente compartido
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
         });
 
         if (error) {
-          btnText.innerHTML = '<span>Iniciar Sesión</span> <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+          btnText.innerHTML = '<span>Iniciar Sesión</span>';
           btnText.style.opacity = '1';
-          btnText.style.pointerEvents = 'all';
-          
           errorDiv.textContent = "Error: " + error.message;
           errorDiv.style.display = 'block';
         } else {
-          window.location.href = '/dashboard';
+          // Al usar el mismo cliente, el Header detectará el cambio automáticamente
+          window.location.href = '/';
         }
       });
     }
@@ -198,7 +192,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 
     @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
 
-    .pane-logo { height: 90px; width: auto; margin-bottom: 20px; border-radius: 15px; }
+    .pane-logo {  width: auto; margin-bottom: 20px; border-radius: 15px; }
 
     .brand-content h1 { 
         font-size: 3rem; 
@@ -395,4 +389,5 @@ import MainLayout from "../layouts/MainLayout.astro";
         .login-footer { margin-top: 25px; padding-top: 18px; }
         .btn-secondary { padding: 8px 20px; font-size: 0.9rem; }
     }
+    
 </style>

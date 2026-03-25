@@ -1,17 +1,17 @@
 ---
-import DashboardLayout from '../../layouts/DashboardLayout.astro';
-import Sidebar from '../../components/dashboard/Sidebar.astro';
-import Inicio from '../../components/dashboard/Inicio.astro';
-import Usuarios from '../../components/dashboard/Usuarios.astro';
-import Audios from '../../components/dashboard/Audios.astro';
-import Rutas from '../../components/dashboard/Rutas.astro';
-import Mapas from '../../components/dashboard/Mapas.astro';
-import RAGContext from '../../components/dashboard/RAGContext.astro';
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+import Sidebar from "../../components/dashboard/Sidebar.astro";
+import Inicio from "../../components/dashboard/Inicio.astro";
+import Usuarios from "../../components/dashboard/Usuarios.astro";
+import Audios from "../../components/dashboard/Audios.astro";
+import Rutas from "../../components/dashboard/Rutas.astro";
+import Mapas from "../../components/dashboard/Mapas.astro";
+import RAGContext from "../../components/dashboard/RAGContext.astro";
 ---
 
 <DashboardLayout title="Tourism Dashboard">
   <Sidebar />
-  
+
   <div class="dashboard-main">
     <header class="dashboard-header">
       <div style="display: flex; align-items: center; gap: 15px;">
@@ -31,26 +31,47 @@ import RAGContext from '../../components/dashboard/RAGContext.astro';
   </div>
 
   <script>
-    // Actualizar el título del header cuando se cambia de sección
-    document.addEventListener('DOMContentLoaded', () => {
-      const navLinks = document.querySelectorAll('[data-section]');
-      const headerTitle = document.getElementById('headerTitle');
+    import { supabase } from "../../lib/supabase";
 
-      const sectionTitles = {
-        'inicio': 'Inicio',
-        'usuarios': 'Gestión de Usuarios',
-        'audios': 'Gestión de Audioguías',
-        'rutas': 'Gestión de Rutas',
-        'mapas': 'Mapas Interactivos',
-        'rag': 'Contexto del RAG'
-      };
+    const checkAdmin = async () => {
+      const loading = document.getElementById("loading-overlay");
+      const container = document.getElementById("dashboard-container");
 
-      navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          const sectionId = link.getAttribute('data-section');
-          headerTitle.textContent = sectionTitles[sectionId] || 'Dashboard';
-        });
-      });
-    });
+      // 1. Obtener sesión
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (!session) {
+        console.log("No hay sesión, fuera.");
+        window.location.href = "/login";
+        return;
+      }
+
+      // 2. Obtener Rol
+      const { data: persona } = await supabase
+        .from("personas")
+        .select("id_rol")
+        .eq("id_usuario", session.user.id)
+        .maybeSingle();
+
+      console.log("Rol detectado en Dashboard:", persona?.id_rol);
+
+      // 3. Validar Rol 2
+      if (persona && Number(persona.id_rol) === 2) {
+        if (loading) loading.style.display = "none";
+        if (container)
+          container.style.setProperty("display", "flex", "important");
+      } else {
+        alert("Acceso restringido: No tienes permisos de Administrador.");
+        window.location.href = "/";
+      }
+    };
+
+    // Ejecutar al cargar
+    checkAdmin();
+
+    // Si usas ViewTransitions de Astro
+    document.addEventListener("astro:page-load", checkAdmin);
   </script>
 </DashboardLayout>

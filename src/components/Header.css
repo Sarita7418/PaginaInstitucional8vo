@@ -244,3 +244,270 @@
 }
 
 .no-scroll { overflow: hidden; }
+/* --- ESTILOS DE USUARIO LOGUEADO --- */
+.auth-user-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.user-trigger {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(210, 120, 23, 0.3);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.user-trigger:hover {
+    background: rgba(210, 120, 23, 0.1);
+    border-color: #D27817;
+}
+
+.user-avatar-circle {
+    width: 32px;
+    height: 32px;
+    background: #D27817;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+.user-name-text {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chevron-icon {
+    color: rgba(255, 255, 255, 0.5);
+    transition: 0.3s;
+}
+
+.user-trigger:hover .chevron-icon {
+    transform: translateY(2px);
+    color: #D27817;
+}
+
+/* Dropdown */
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: #ffffff;
+    min-width: 200px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+.user-dropdown.active {
+    display: flex;
+    animation: slideUp 0.3s ease-out;
+}
+
+.dropdown-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 5px;
+}
+
+.dropdown-header p {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #999;
+    letter-spacing: 1px;
+}
+
+.admin-badge {
+    color: #D27817 !important;
+}
+
+.dropdown-item {
+    padding: 12px 15px;
+    color: #333 !important;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.2s;
+    text-align: left;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background: #f8f9fa;
+    color: #D27817 !important;
+}
+
+.btn-logout {
+    color: #e53e3e !important;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 5px;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive: En móvil el menú es vertical */
+@media (max-width: 1024px) {
+    .user-dropdown {
+        position: static;
+        background: rgba(255,255,255,0.05);
+        box-shadow: none;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .dropdown-item { color: white !important; }
+}
+.auth-user-info {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.user-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 12px;
+    border-radius: 30px;
+    border: 1px solid rgba(210, 120, 23, 0.4);
+    transition: 0.3s;
+}
+
+.user-avatar-small {
+    width: 28px;
+    height: 28px;
+    background: #D27817; /* Tu color naranja */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.user-name-text {
+    color: white;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: white;
+    min-width: 160px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    padding: 8px 0;
+    z-index: 1000;
+}
+
+.user-dropdown.active {
+    display: flex;
+}
+
+.dropdown-link {
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    font-family: inherit;
+    color: #333;
+    font-size: 0.85rem;
+}
+
+.dropdown-link.logout {
+    color: #e53e3e;
+    border-top: 1px solid #eee;
+    font-weight: bold;
+}
+
+.dropdown-link:hover {
+    background: #f5f5f5;
+}
+
+.dropdown-header {
+    padding: 5px 15px;
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#user-role-tag.admin {
+    color: #D27817;
+}
+.user-details-mini {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.user-email-text {
+  font-size: 0.7rem;
+  color: rgba(23, 98, 119, 0.6);
+  font-weight: 400;
+}
+
+.user-name-text {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Forzar ocultamiento si hay problemas de especificidad */
+#auth-user[style*="display: none"] {
+    display: none !important;
+}
+
+
+/* Forzamos el color de la letra para que NO sea blanca sobre fondo blanco */
+#user-name-display {
+    color: #fd9c00 !important; /* Color crema de tu marca */
+    font-weight: 700 !important;
+    display: inline-block !important;
+}
+
+/* Cuando el header tiene la clase .scrolled (fondo blanco) */
+#main-header.scrolled #user-name-display {
+    color: #23373E !important; /* Azul oscuro para que se vea */
+}
+
+/* Asegurar que el botón de cerrar sesión sea visible en el dropdown */
+.dropdown-link.logout {
+    color: #ff4d4d !important;
+    display: block !important;
+    padding: 10px !important;
+    cursor: pointer !important;
+}

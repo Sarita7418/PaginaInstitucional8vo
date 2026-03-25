@@ -1,0 +1,1262 @@
+/* ══════════════════════════════════════
+   Nosotros.css — Aventuras Paceñas S.R.L.
+   Diseño: tipografía dominante, jerarquía
+   clara, responsivo total (320px → 2560px)
+══════════════════════════════════════ */
+
+:root {
+  --color-dark:   #23373E;
+  --color-green:  #197D61;
+  --color-teal:   #0F988A;
+  --color-brown:  #7A3928;
+  --color-orange: #D27817;
+  --color-cream:  #F2EBE0;
+  --bg-deep:      #0b1a20;
+  --white:        #fff;
+}
+
+/* ── Reset base ── */
+.nos-root *, .nos-root *::before, .nos-root *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+.nos-root {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--white);
+  overflow-x: hidden;
+  background: var(--bg-deep);
+}
+
+/* ══════════════════════════════════════
+   TIPOGRAFÍA GLOBAL — JERARQUÍA FUERTE
+══════════════════════════════════════ */
+
+/* Título de sección principal: el más grande */
+.nos-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.6rem, 5.5vw, 5rem);   /* 42px → 80px */
+  font-weight: 700;
+  line-height: 1.06;
+  color: var(--white);
+  margin-bottom: 1.2rem;
+}
+.nos-section-title em {
+  font-style: italic;
+  color: var(--color-orange);
+  display: block;
+}
+.nos-title-lt { color: var(--white); }
+
+/* Sub-título / lead: segundo nivel */
+.nos-section-lead {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);  /* 17px → 21px */
+  font-weight: 500;
+  line-height: 1.75;
+  color: rgba(255,255,255,.82);
+  margin-bottom: 1rem;
+}
+
+/* Texto corriente: tercer nivel */
+.nos-hist-p,
+.nos-mvv-desc,
+.nos-tcard-bio,
+.nos-pq-desc,
+.nos-cta-desc {
+  font-size: clamp(.88rem, 1.5vw, 1rem);   /* 14px → 16px */
+  line-height: 1.80;
+  color: rgba(255,255,255,.6);
+}
+.nos-hist-p em { color: var(--color-orange); font-style: italic; }
+
+/* Chip / etiqueta de sección */
+.nos-chip {
+  display: inline-block;
+  font-size: clamp(.65rem, 1.1vw, .78rem);
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  border: 1px solid rgba(15,152,138,.35);
+  background: rgba(15,152,138,.07);
+  padding: 5px 14px;
+  border-radius: 2px;
+  margin-bottom: 14px;
+}
+.nos-chip-lt { color: var(--color-teal); }
+
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.nos-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.nos-hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
+  animation: nos-zoom 20s ease-in-out infinite alternate;
+}
+@keyframes nos-zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+
+.nos-hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(110deg,
+    rgba(11,26,32,.97) 0%,
+    rgba(11,26,32,.92) 38%,
+    rgba(11,26,32,.65) 65%,
+    rgba(11,26,32,.28) 100%);
+}
+
+/* Etiqueta "Nosotros" muy visible centrada arriba */
+.nos-seccion-label {
+  position: absolute;
+  top: clamp(18px, 5vh, 48px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: nos-up .7s ease both;
+}
+.nos-seccion-barra {
+  display: block;
+  width: clamp(28px, 4vw, 56px);
+  height: 1.5px;
+  background: var(--color-teal);
+  opacity: .7;
+}
+.nos-seccion-txt {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 1000;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  white-space: nowrap;
+}
+
+.nos-hero-inner {
+  position: relative; z-index: 3;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(120px,18vh,180px) clamp(20px,5vw,80px) clamp(180px,22vh,220px);
+}
+
+.nos-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid rgba(210,120,23,.35); border-radius: 2px;
+  padding: 5px 13px;
+  font-size: clamp(.7rem, 1.2vw, .82rem);
+  font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
+  color: rgba(255,255,255,.55); background: rgba(210,120,23,.05);
+  margin-bottom: 22px;
+  animation: nos-up .7s ease both;
+}
+.nos-bdot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--color-orange); animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+/* Título hero: el más grande de toda la página */
+.nos-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 8vw, 7.5rem);  /* 51px → 120px */
+  font-weight: 700;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: clamp(16px, 2.5vh, 28px);
+  animation: nos-up .8s .06s ease both;
+}
+.nos-hero-title em {
+  font-style: italic;
+  color: var(--color-orange);
+  display: block;
+  position: relative;
+}
+.nos-hero-title em::after {
+  content: '';
+  position: absolute; left: 0; bottom: -3px;
+  width: 45%; height: 2px;
+  background: linear-gradient(to right, var(--color-orange), transparent);
+}
+
+/* Subtítulo: tamaño intermedio */
+.nos-hero-subtitle {
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);  /* 18px → 24px */
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(255,255,255,.9);
+  max-width: 580px;
+  margin-bottom: 14px;
+  animation: nos-up .8s .12s ease both;
+}
+
+.nos-hero-desc {
+  font-size: clamp(.9rem, 1.5vw, 1.05rem);
+  line-height: 1.8;
+  color: rgba(255,255,255,.68);
+  max-width: 540px;
+  background: rgba(11,26,32,.55);
+  border-left: 3px solid var(--color-teal);
+  padding: 10px 16px;
+  border-radius: 0 6px 6px 0;
+  backdrop-filter: blur(4px);
+  margin-bottom: 24px;
+  animation: nos-up .8s .18s ease both;
+}
+
+.nos-hero-pills {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  animation: nos-up .8s .24s ease both;
+}
+.nos-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-size: clamp(.78rem, 1.3vw, .9rem);
+  font-weight: 500;
+  color: rgba(255,255,255,.78);
+  transition: background .2s, border-color .2s;
+}
+.nos-pill:hover { background: rgba(15,152,138,.12); border-color: rgba(15,152,138,.35); }
+
+/* Scroll indicator */
+.nos-scroll-ind {
+  position: absolute; bottom: clamp(55px,8vh,70px); left: 50%;
+  transform: translateX(-50%); z-index: 4;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  color: rgba(255,255,255,.2); font-size: .65rem;
+  letter-spacing: .12em; text-transform: uppercase;
+  animation: nos-up .8s .5s ease both;
+}
+.nos-scroll-bar {
+  width: 1px; height: 30px;
+  background: linear-gradient(to bottom, var(--color-teal), transparent);
+  animation: nos-sa 2s ease-in-out infinite;
+}
+@keyframes nos-sa {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* Ticker */
+.nos-ticker {
+  position: absolute; bottom: clamp(85px,12vh,105px); left: 0; right: 0; z-index: 5;
+  background: var(--color-green); padding: 11px 0; overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.nos-ticker-track { display: flex; white-space: nowrap; animation: nos-mq 36s linear infinite; }
+.nos-ti {
+  display: inline-flex; align-items: center; gap: 9px; padding: 0 20px;
+  font-size: clamp(.7rem, 1.2vw, .82rem);
+  font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.65);
+}
+.nos-tsep { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.3); }
+@keyframes nos-mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+
+/* ══════════════════════════════════════
+   HISTORIA
+══════════════════════════════════════ */
+.nos-historia {
+  background: var(--bg-deep);
+  padding: clamp(60px,9vh,100px) clamp(20px,5vw,80px);
+}
+.nos-historia-in {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(32px,5vw,72px);
+  align-items: center;
+}
+
+/* Visual */
+.nos-hist-visual { position: relative; }
+.nos-hist-img-wrap {
+  border-radius: 8px; overflow: hidden;
+  aspect-ratio: 4/5; position: relative;
+  box-shadow: 0 24px 64px rgba(0,0,0,.55);
+}
+.nos-hist-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nos-hist-shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(11,26,32,.65) 0%, transparent 55%);
+}
+.nos-hist-float {
+  position: absolute; bottom: -22px; right: -22px;
+  background: var(--color-orange);
+  border-radius: 8px; padding: clamp(12px,2vw,18px) clamp(14px,2.5vw,24px);
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(210,120,23,.38);
+}
+.nos-hist-float-ic { font-size: 1.4rem; margin-bottom: 3px; }
+.nos-hist-float-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 700; line-height: 1; color: var(--white);
+}
+.nos-hist-float-l {
+  font-size: clamp(.65rem, 1vw, .75rem);
+  font-weight: 500; letter-spacing: .08em;
+  color: rgba(255,255,255,.78); margin-top: 3px; line-height: 1.4;
+}
+.nos-hist-vline {
+  position: absolute; top: 36px; left: -16px;
+  width: 3px; height: 55%;
+  background: linear-gradient(to bottom, var(--color-teal), transparent);
+  border-radius: 2px;
+}
+
+/* Contenido historia */
+.nos-hist-content { display: flex; flex-direction: column; }
+.nos-hist-p { margin-bottom: 14px; color: rgba(255,255,255,.62); }
+
+.nos-pilares {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 10px; margin-top: 28px;
+}
+.nos-pilar {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px; padding: 14px 10px;
+  text-align: center;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.nos-pilar:hover { background: rgba(15,152,138,.1); border-color: rgba(15,152,138,.25); transform: translateY(-3px); }
+.nos-pilar-ic { font-size: 1.4rem; margin-bottom: 7px; }
+.nos-pilar-t {
+  font-size: clamp(.7rem, 1.1vw, .8rem);
+  font-weight: 500; color: rgba(255,255,255,.62); line-height: 1.4;
+}
+
+
+/* ══════════════════════════════════════
+   MISIÓN · VISIÓN · VALORES
+══════════════════════════════════════ */
+.nos-mvv {
+  background: linear-gradient(145deg, #1a2e34 0%, var(--color-dark) 50%, #1c2f2a 100%);
+  padding: clamp(60px,9vh,100px) clamp(20px,5vw,80px);
+  position: relative; overflow: hidden;
+}
+.nos-mvv-glow1 {
+  position: absolute; top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(15,152,138,.14), transparent 65%);
+  pointer-events: none;
+}
+.nos-mvv-glow2 {
+  position: absolute; bottom: -80px; left: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(210,120,23,.07), transparent 65%);
+  pointer-events: none;
+}
+.nos-mvv-in { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.nos-mvv-hdr { text-align: center; margin-bottom: clamp(36px,5vh,56px); }
+.nos-mvv-intro {
+  font-size: clamp(.95rem, 1.6vw, 1.12rem);
+  color: rgba(255,255,255,.6); max-width: 480px; margin: 0 auto; line-height: 1.7;
+}
+
+.nos-mvv-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: clamp(14px,2vw,22px);
+}
+.nos-mvv-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: clamp(22px,2.5vw,32px);
+  position: relative; overflow: hidden;
+  transition: transform .3s, border-color .3s, background .3s;
+}
+.nos-mvv-card:hover { transform: translateY(-7px); border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.055); }
+.nos-mvv-featured {
+  border-color: rgba(210,120,23,.22);
+  background: rgba(210,120,23,.04);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(210,120,23,.1);
+}
+.nos-mvv-featured:hover { transform: translateY(-12px); }
+
+.nos-mvv-num {
+  position: absolute; top: 18px; right: 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 700; color: rgba(255,255,255,.05); line-height: 1;
+  user-select: none;
+}
+.nos-num-or { color: rgba(210,120,23,.1); }
+
+.nos-mvv-card-head { display: flex; align-items: center; gap: 11px; margin-bottom: 16px; }
+.nos-mvi {
+  width: 46px; height: 46px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.nos-mvi img { width: 24px; height: 24px; object-fit: contain; }
+.nos-mvi-teal  { background: rgba(15,152,138,.2); }
+.nos-mvi-orange{ background: rgba(210,120,23,.2); }
+.nos-mvi-green { background: rgba(25,125,97,.2); }
+
+.nos-mvv-chip {
+  font-size: clamp(.62rem, 1vw, .72rem);
+  font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 2px;
+}
+.nos-mc-teal   { background: rgba(15,152,138,.15);  color: var(--color-teal);   border: 1px solid rgba(15,152,138,.3);  }
+.nos-mc-orange { background: rgba(210,120,23,.15);  color: var(--color-orange); border: 1px solid rgba(210,120,23,.3);  }
+.nos-mc-green  { background: rgba(25,125,97,.15);   color: #3ecba0;             border: 1px solid rgba(25,125,97,.3);   }
+
+.nos-mvv-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-weight: 700; color: var(--white);
+  margin-bottom: 12px; line-height: 1.2;
+}
+
+.nos-vals {
+  list-style: none; display: flex; flex-direction: column; gap: 9px;
+}
+.nos-vals li {
+  display: flex; align-items: center; gap: 9px;
+  font-size: clamp(.82rem, 1.3vw, .94rem);
+  color: rgba(255,255,255,.62);
+}
+.nos-vd {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+.nos-vd1 { background: var(--color-teal); }
+.nos-vd2 { background: var(--color-orange); }
+.nos-vd3 { background: var(--color-green); }
+.nos-vd4 { background: var(--color-brown); }
+
+.nos-mvv-bar {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 3px;
+}
+.nos-bar-teal   { background: linear-gradient(to right, var(--color-teal), transparent); }
+.nos-bar-orange { background: linear-gradient(to right, var(--color-orange), transparent); }
+.nos-bar-green  { background: linear-gradient(to right, var(--color-green), transparent); }
+
+
+/* ══════════════════════════════════════
+   EQUIPO
+══════════════════════════════════════ */
+.nos-equipo {
+  background: var(--color-cream);
+  padding: clamp(60px,9vh,100px) clamp(20px,5vw,80px);
+  color: var(--color-dark);
+}
+.nos-equipo-in { max-width: 1200px; margin: 0 auto; }
+.nos-equipo-hdr { text-align: center; margin-bottom: clamp(36px,5vh,52px); }
+.nos-equipo-hdr .nos-section-title { color: var(--color-dark); }
+.nos-equipo-hdr .nos-section-title em { color: var(--color-orange); }
+.nos-equipo-hdr .nos-chip { color: var(--color-teal); }
+.nos-equipo-lead {
+  font-size: clamp(.95rem, 1.6vw, 1.1rem);
+  color: rgba(35,55,62,.62); max-width: 540px;
+  margin: 10px auto 0; line-height: 1.75;
+}
+
+.nos-team-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: clamp(14px,2vw,22px);
+}
+
+.nos-tcard {
+  background: var(--white); border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(35,55,62,.08);
+  box-shadow: 0 2px 18px rgba(35,55,62,.07);
+  transition: transform .3s, box-shadow .3s;
+}
+.nos-tcard:hover { transform: translateY(-9px); box-shadow: 0 18px 40px rgba(35,55,62,.15); }
+
+.nos-tcard-top {
+  height: clamp(130px,18vw,190px); position: relative;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 16px;
+}
+.nos-tc1 { background: linear-gradient(145deg, #0F988A 0%, #197D61 55%, #23373E 100%); }
+.nos-tc2 { background: linear-gradient(145deg, #23373E 0%, #0F988A 55%, #197D61 100%); }
+.nos-tc3 { background: linear-gradient(145deg, #D27817 0%, #7A3928 55%, #23373E 100%); }
+.nos-tc4 { background: linear-gradient(145deg, #7A3928 0%, #D27817 50%, #197D61 100%); }
+
+.nos-tcard-aro {
+  width: clamp(62px,9vw,80px); height: clamp(62px,9vw,80px);
+  border-radius: 50%; border: 3px solid rgba(255,255,255,.35);
+  padding: 3px; background: rgba(255,255,255,.12);
+  backdrop-filter: blur(6px);
+}
+.nos-tcard-av {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Ícono persona SVG */
+.nos-tcard-av::after {
+  content: '';
+  width: 55%; height: 55%;
+  background: rgba(255,255,255,.55);
+  border-radius: 50%;
+  display: block;
+}
+
+.nos-tcard-badge {
+  position: absolute; top: 10px; right: 10px;
+  background: var(--color-orange); color: var(--white);
+  font-size: .62rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; padding: 3px 9px; border-radius: 2px;
+}
+
+.nos-tcard-body { padding: clamp(14px,2vw,18px); }
+.nos-tcard-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  font-weight: 700; color: var(--color-dark); margin-bottom: 3px;
+}
+.nos-tcard-rol {
+  font-size: clamp(.62rem, 1vw, .72rem);
+  font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--color-teal); margin-bottom: 10px;
+}
+.nos-tcard-bio {
+  font-size: clamp(.8rem, 1.3vw, .88rem);
+  color: rgba(35,55,62,.62); line-height: 1.62; margin-bottom: 12px;
+}
+.nos-tcard-langs { display: flex; flex-wrap: wrap; gap: 5px; }
+.nos-tcard-langs span {
+  font-size: clamp(.62rem, 1vw, .7rem); font-weight: 500;
+  background: rgba(15,152,138,.08); color: var(--color-teal);
+  border: 1px solid rgba(15,152,138,.22); border-radius: 2px;
+  padding: 2px 7px; letter-spacing: .04em;
+}
+
+
+/* ══════════════════════════════════════
+   POR QUÉ ELEGIRNOS
+══════════════════════════════════════ */
+.nos-porque {
+  background: linear-gradient(145deg, #1a2e34 0%, var(--color-dark) 50%, #1c2f2a 100%);
+  padding: clamp(60px,9vh,100px) clamp(20px,5vw,80px);
+  position: relative; overflow: hidden;
+}
+.nos-porque-glow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(15,152,138,.08), transparent 65%);
+  pointer-events: none;
+}
+.nos-porque-in { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.nos-porque-hdr { text-align: center; margin-bottom: clamp(36px,5vh,52px); }
+.nos-porque-lead {
+  font-size: clamp(.95rem, 1.6vw, 1.12rem);
+  color: rgba(255,255,255,.62); max-width: 500px; margin: 0 auto; line-height: 1.75;
+}
+
+.nos-pq-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(14px,2vw,20px);
+  margin-bottom: clamp(40px,6vh,64px);
+}
+
+.nos-pq-card {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-left: 3px solid var(--color-teal);
+  border-radius: 10px; padding: clamp(18px,2.5vw,26px);
+  position: relative; overflow: hidden;
+  transition: background .25s, border-color .25s, transform .25s;
+}
+.nos-pq-card:nth-child(2) { border-left-color: var(--color-orange); }
+.nos-pq-card:nth-child(3) { border-left-color: var(--color-brown); }
+.nos-pq-card:nth-child(4) { border-left-color: var(--color-green); }
+.nos-pq-card:hover { background: rgba(255,255,255,.055); transform: translateX(4px); }
+
+.nos-pq-ico {
+  width: 44px; height: 44px; border-radius: 9px;
+  background: rgba(15,152,138,.15); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.nos-pq-card:nth-child(2) .nos-pq-ico { background: rgba(210,120,23,.15); }
+.nos-pq-card:nth-child(3) .nos-pq-ico { background: rgba(122,57,40,.18); }
+.nos-pq-card:nth-child(4) .nos-pq-ico { background: rgba(25,125,97,.15); }
+.nos-pq-ico img { width: 22px; height: 22px; object-fit: contain; }
+
+.nos-pq-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 1.9vw, 1.4rem);
+  font-weight: 700; color: var(--white); margin-bottom: 6px;
+}
+.nos-pq-desc { color: rgba(255,255,255,.58); }
+
+.nos-pq-num {
+  position: absolute; bottom: 12px; right: 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700; color: rgba(255,255,255,.04);
+  line-height: 1; user-select: none;
+}
+
+/* Cita destacada */
+.nos-frase {
+  border-left: 4px solid var(--color-teal);
+  padding: clamp(20px,3vw,32px) clamp(22px,3vw,36px);
+  background: rgba(255,255,255,.03);
+  border-radius: 0 10px 10px 0;
+  max-width: 760px; margin: 0 auto;
+}
+.nos-frase-bar { display: none; }
+.nos-frase-q {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-style: italic; color: rgba(255,255,255,.82);
+  line-height: 1.55; margin-bottom: 14px;
+}
+.nos-frase-q em { color: var(--color-orange); }
+.nos-frase-firma {
+  font-size: clamp(.78rem, 1.2vw, .9rem);
+  color: rgba(255,255,255,.35); letter-spacing: .06em;
+}
+
+
+/* ══════════════════════════════════════
+   CTA FINAL
+══════════════════════════════════════ */
+.nos-cta {
+  background: var(--bg-deep);
+  border-top: 3px solid var(--color-teal);
+  padding: clamp(70px,10vh,110px) clamp(20px,5vw,80px);
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.nos-cta-glow {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(15,152,138,.12), transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(210,120,23,.06), transparent 60%);
+  pointer-events: none;
+}
+.nos-cta-in { max-width: 660px; margin: 0 auto; position: relative; }
+
+.nos-cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+  font-weight: 700; color: var(--white);
+  line-height: 1.08; margin-bottom: 18px;
+}
+.nos-cta-title em { font-style: italic; color: var(--color-orange); }
+.nos-cta-desc {
+  font-size: clamp(.93rem, 1.6vw, 1.08rem);
+  color: rgba(255,255,255,.58); line-height: 1.8; margin-bottom: 28px;
+}
+
+.nos-cta-feats {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 10px; margin-bottom: 30px;
+}
+.nos-cf {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 50px; padding: 8px 16px;
+  font-size: clamp(.78rem, 1.2vw, .88rem);
+  font-weight: 500; color: rgba(255,255,255,.72);
+  transition: background .2s, border-color .2s;
+}
+.nos-cf:hover { background: rgba(15,152,138,.1); border-color: rgba(15,152,138,.3); }
+
+.nos-cta-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 18px; }
+.nos-btn-p {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: clamp(11px,1.8vw,14px) clamp(22px,3vw,32px);
+  background: var(--color-orange); color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(.88rem, 1.4vw, 1rem); font-weight: 600;
+  border: none; border-radius: 50px; cursor: pointer; text-decoration: none;
+  transition: background .2s, transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(210,120,23,.3);
+}
+.nos-btn-p:hover { background: var(--color-brown); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(210,120,23,.4); }
+.nos-btn-s {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: clamp(11px,1.8vw,14px) clamp(22px,3vw,32px);
+  background: transparent; color: rgba(255,255,255,.72);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(.88rem, 1.4vw, 1rem); font-weight: 500;
+  border: 1px solid rgba(255,255,255,.22); border-radius: 50px;
+  cursor: pointer; text-decoration: none;
+  transition: border-color .2s, color .2s;
+}
+.nos-btn-s:hover { border-color: rgba(255,255,255,.55); color: var(--white); }
+.nos-cta-note {
+  font-size: clamp(.72rem, 1.1vw, .82rem);
+  color: rgba(255,255,255,.28); letter-spacing: .06em;
+}
+
+
+/* ══════════════════════════════════════
+   REVEAL ANIMATIONS
+══════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1); }
+.reveal.from-left  { transform: translateX(-44px); }
+.reveal.from-right { transform: translateX(44px); }
+.reveal.scale-in   { transform: translateY(20px) scale(.96); }
+.reveal.visible    { opacity: 1; transform: translate(0,0) scale(1); }
+.reveal-delay-1 { transition-delay: .08s; }
+.reveal-delay-2 { transition-delay: .16s; }
+.reveal-delay-3 { transition-delay: .24s; }
+.reveal-delay-4 { transition-delay: .32s; }
+.reveal-delay-5 { transition-delay: .40s; }
+
+@keyframes nos-up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+
+/* ══════════════════════════════════════
+   RESPONSIVE — TABLET (≤ 1024px)
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .nos-historia-in { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .nos-mvv-grid { grid-template-columns: 1fr; gap: 14px; }
+  .nos-mvv-featured { transform: none; }
+  .nos-team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MÓVIL GRANDE (≤ 768px)
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .nos-historia-in { grid-template-columns: 1fr; gap: 40px; }
+  .nos-hist-visual { max-width: 420px; margin: 0 auto; }
+  .nos-hist-float { right: 0; bottom: -14px; }
+  .nos-hist-vline { display: none; }
+
+  .nos-pq-grid { grid-template-columns: 1fr; }
+
+  .nos-hero-title { font-size: clamp(2.6rem, 11vw, 4rem); }
+
+  .nos-seccion-label { top: 14px; }
+  .nos-seccion-txt { font-size: clamp(.85rem, 3.5vw, 1.1rem); }
+
+  .nos-pilares { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MÓVIL (≤ 540px)
+══════════════════════════════════════ */
+@media (max-width: 540px) {
+  .nos-team-grid { grid-template-columns: 1fr; }
+  .nos-mvv-grid { grid-template-columns: 1fr; }
+
+  .nos-hero-title { font-size: clamp(2.2rem, 12vw, 3.2rem); }
+  .nos-hero-subtitle { font-size: clamp(1rem, 4.5vw, 1.2rem); }
+
+  .nos-hero-pills { flex-direction: column; align-items: flex-start; }
+  .nos-pill { width: 100%; }
+
+  .nos-cta-btns { flex-direction: column; }
+  .nos-btn-p, .nos-btn-s { width: 100%; justify-content: center; }
+
+  .nos-cta-feats { gap: 7px; }
+  .nos-cf { font-size: .78rem; padding: 7px 12px; }
+
+  .nos-frase-q { font-size: clamp(1.1rem, 5vw, 1.5rem); }
+
+  .nos-hist-float { right: 6px; bottom: -10px; }
+  .nos-pilares { grid-template-columns: repeat(2, 1fr); }
+
+  .nos-seccion-barra { width: 18px; }
+}
+
+
+/* ══════════════════════════════════════
+   PANTALLAS GRANDES (≥ 1600px)
+══════════════════════════════════════ */
+@media (min-width: 1600px) {
+  .nos-historia-in,
+  .nos-mvv-in,
+  .nos-equipo-in,
+  .nos-porque-in,
+  .nos-cta-in { max-width: 1440px; }
+
+  .nos-hero-inner { max-width: 1400px; }
+
+  .nos-team-grid { grid-template-columns: repeat(4, 1fr); }
+  .nos-mvv-grid  { grid-template-columns: repeat(3, 1fr); }
+  .nos-pq-grid   { grid-template-columns: repeat(2, 1fr); }
+}
+/* ══════════════════════════════════════
+   DISEÑO COMPACTO Y EXTRA-NEGRITA (PC)
+   ══════════════════════════════════════ */
+
+@media (min-width: 1024px) {
+    /* 1. Usar todo el ancho lateral para que no crezca a lo largo */
+    .nos-historia-in, 
+    .nos-mvv-in, 
+    .nos-equipo-in, 
+    .nos-porque-in {
+        max-width: 96% !important; 
+        padding: 0 2%;
+        gap: 30px; /* Espacio entre columnas más corto */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+
+    /* 2. Títulos: Pequeños, Negritas y Juntos */
+    .nos-hero-title {
+        font-size: 3.2rem !important; /* Reducido drásticamente */
+        font-weight: 900 !important; /* Súper negrilla */
+        line-height: 1;
+        margin-bottom: 10px;
+        letter-spacing: -1px;
+    }
+
+    .nos-section-title {
+        font-size: 2.2rem !important; /* Más pequeño para que no empuje */
+        font-weight: 800 !important;
+        line-height: 1.1;
+        margin-bottom: 8px;
+    }
+
+    .nos-section-title em {
+        display: inline; /* Ya no ocupa una línea aparte */
+        margin-left: 10px;
+    }
+
+    /* 3. Reducción de espacios verticales (Padding) */
+    .nos-historia, .nos-mvv, .nos-equipo, .nos-porque, .nos-cta {
+        padding: 30px 0 !important; /* Espacio mínimo arriba y abajo */
+    }
+
+    .nos-hero-inner {
+        padding: 60px 40px !important; /* Hero mucho más bajito */
+    }
+
+    /* 4. Párrafos y descripciones más compactos */
+    .nos-hero-subtitle, .nos-section-lead, .nos-hist-p {
+        margin-bottom: 10px !important;
+        line-height: 1.5; /* Texto más pegado */
+        font-size: 0.95rem;
+    }
+
+    /* 5. Grillas de 4 columnas para ahorrar altura */
+    .nos-team-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 15px;
+        grid-column: 1 / span 2;
+    }
+
+    .nos-mvv-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 15px;
+        grid-column: 1 / span 2;
+    }
+
+    /* 6. Imágenes más bajas para no estirar la sección */
+    .nos-hist-img-wrap {
+        max-height: 350px !important;
+        aspect-ratio: 21/9; /* Muy panorámica para ahorrar espacio vertical */
+    }
+}
+
+/* --- AJUSTE MÓVIL (Compacto y "Justo") --- */
+@media (max-width: 768px) {
+    .nos-hero-title { font-size: 2rem !important; font-weight: 900; }
+    .nos-section-title { font-size: 1.8rem !important; font-weight: 800; }
+    .nos-hero-inner { padding: 40px 15px !important; }
+    .nos-historia, .nos-mvv { padding: 20px 0 !important; }
+}
+/* ══════════════════════════════════════
+   EXTRA: sección de equipo cream
+   usa colores dark para el texto
+══════════════════════════════════════ */
+.nos-equipo .nos-hist-p,
+.nos-equipo .nos-mvv-desc { color: rgba(35,55,62,.62); }
+/* ══════════════════════════════════════
+   FOTOS REALES DEL EQUIPO TECH
+   Reemplaza el icono genérico por imágenes
+   ══════════════════════════════════════ */
+
+/* 1. Configuración base para todos los avatares */
+.nos-tcard-av {
+    background-size: cover;    /* La imagen cubre todo el círculo */
+    background-position: center; /* Centra la foto (importante para rostros) */
+    background-repeat: no-repeat;
+    border: 2px solid rgba(255,255,255,0.5); /* Borde sutil blanco */
+}
+
+/* 2. Eliminamos el icono de usuario genérico que venía por defecto */
+.nos-tcard-av::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* ══════════════════════════════════════
+   ASIGNACIÓN DE FOTOS ESPECÍFICAS
+   (Asegúrate de que las rutas sean correctas)
+   ══════════════════════════════════════ */
+
+/* Foto 1: Jhovanni (Scrum Master) */
+.nos-av1 {
+    background-image: url('/images/IMG-20250407-WA0014.jpg');
+}
+
+/* Foto 2: Kiara (UI/UX) */
+.nos-av2 {
+    background-image: url('/images/IMG-20250407-WA0010.jpg');
+}
+
+/* Foto 3: Nestor (Dev Lead) */
+.nos-av3 {
+    background-image: url('/images/altiplano.jpg');
+}
+
+/* Foto 4: Cristhian (Data) */
+.nos-av4 {
+    background-image: url('/images/IMG-20240425-WA0002.jpg');
+}
+/* ══════════════════════════════════════
+   AVATARES MÁS GRANDES Y LLAMATIVOS
+   ══════════════════════════════════════ */
+
+/* 1. Aumentamos el contenedor del círculo */
+.nos-tcard-top {
+    height: 220px; /* Un poco más alto para dar aire al círculo grande */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0; /* Centrado vertical perfecto */
+    position: relative;
+    overflow: hidden;
+}
+
+/* 2. El Aro exterior (con brillo y más grande) */
+.nos-tcard-aro {
+    width: 130px;  /* Aumentado de 80px a 130px */
+    height: 130px; /* Aumentado de 80px a 130px */
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3), 0 10px 30px rgba(0,0,0,0.3);
+    padding: 5px;
+    z-index: 5;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Efecto al pasar el mouse por la tarjeta */
+.nos-tcard:hover .nos-tcard-aro {
+    transform: scale(1.1) rotate(5deg);
+    border-color: var(--adventure-orange);
+}
+
+/* 3. FONDOS DEGRADADOS MÁS LLAMATIVOS (Colores Tech/Aventura) */
+
+/* Jhovanni - Azul Eléctrico a Deep Dark */
+.nos-tc1 { 
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); 
+}
+
+/* Kiara - Rosa Neón a Violeta Profundo (UI/UX style) */
+.nos-tc2 { 
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
+}
+
+/* Cristhian - Naranja Fuego a Rojo Aventura */
+.nos-tc3 { 
+    background: linear-gradient(135deg, #f09819 0%, #edde5d 100%); 
+}
+
+/* Nestor - Verde Esmeralda a Teal Oscuro (Data style) */
+.nos-tc4 { 
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); 
+}
+
+/* 4. Ajuste final de la foto para que no se corte */
+.nos-tcard-av {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    filter: saturate(1.1); /* Un toque de color extra a las fotos */
+}
+
+/* Eliminamos definitivamente el icono viejo */
+.nos-tcard-av::after {
+    display: none !important;
+}
+
+/* 5. Ajuste del Badge para que no tape el círculo grande */
+.nos-tcard-badge {
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+/* ══════════════════════════════════════
+   HERO EQUILIBRADO: COMPACTO Y NEGRITA
+   ══════════════════════════════════════ */
+
+@media (min-width: 1024px) {
+    /* 1. Subir el contenido: Reducimos el aire superior */
+    .nos-hero {
+        justify-content: flex-start !important; 
+        padding-top: 50px !important; /* Espacio justo para que no choque con el header */
+    }
+
+    .nos-hero-inner {
+        max-width: 90% !important; /* Ensanchado pero con margen elegante */
+        padding-top: 0 !important;
+        margin-left: 5%;
+    }
+
+    /* 2. Títulos: Reducidos pero con NEGRILLA FUERTE (800) */
+    .nos-hero-title {
+        font-size: 3rem !important; /* Tamaño moderado */
+        font-weight: 800 !important; /* Negrilla marcada */
+        line-height: 1.1;
+        letter-spacing: -1px;
+        margin-bottom: 15px;
+        text-transform: none; /* Quitamos mayúsculas para que no se vea tan "tosco" */
+    }
+
+    .nos-hero-title em {
+        font-size: 4rem !important; /* Nombre de marca un poco más grande que "Nosotros" */
+        font-weight: 900 !important; /* Máxima negrilla */
+        font-style: italic;
+        color: var(--color-orange);
+        display: block;
+        margin-top: 5px;
+    }
+
+    /* 3. Subtítulo: Más ancho para que no ocupe muchas líneas hacia abajo */
+    .nos-hero-subtitle {
+        font-size: 1.5rem !important; /* Tamaño legible y fino */
+        font-weight: 600;
+        max-width: 70% !important; /* Se estira a los lados */
+        line-height: 1.3;
+        margin-bottom: 15px !important;
+        color: rgba(255,255,255,0.9);
+    }
+
+    /* 4. Descripción: Compacta y profesional */
+    .nos-hero-desc {
+        font-size: 1rem !important;
+        max-width: 60% !important; 
+        line-height: 1.5;
+        margin-bottom: 20px !important;
+        border-left: 3px solid var(--color-teal) !important;
+        padding: 5px 15px !important;
+        background: rgba(11, 26, 32, 0.3);
+    }
+
+    /* 5. Pills: En una sola fila para ahorrar altura */
+    .nos-hero-pills {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 12px;
+    }
+
+    .nos-pill {
+        padding: 8px 16px !important;
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+    }
+}
+
+/* Ajuste para móvil: Que se mantenga "justo" */
+@media (max-width: 768px) {
+    .nos-hero-title { font-size: 2.2rem !important; font-weight: 800; }
+    .nos-hero-title em { font-size: 2.6rem !important; }
+}
+/* ══════════════════════════════════════
+   TIPOGRAFÍA GLOBAL — TÍTULOS MÁS GRANDES
+   ══════════════════════════════════════ */
+
+.nos-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  /* Aumentado el tamaño base y el máximo */
+  font-size: clamp(2.8rem, 6vw, 5.5rem); 
+  font-weight: 800; /* Más negrilla */
+  line-height: 1.02;
+  color: var(--white);
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.nos-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  /* Ajuste de escala para el Hero principal */
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-weight: 900; /* Máximo peso visual */
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: clamp(16px, 2.5vh, 28px);
+}
+
+/* ══════════════════════════════════════
+   DISEÑO COMPACTO Y EXTRA-NEGRITA (PC)
+   ══════════════════════════════════════ */
+
+@media (min-width: 1024px) {
+    /* 1. Subir el contenido: Reducimos el aire superior */
+    .nos-hero {
+        justify-content: flex-start !important; 
+        padding-top: 45px !important; 
+    }
+
+    .nos-hero-inner {
+        max-width: 92% !important;
+        margin-left: 4%;
+    }
+
+    /* 2. Títulos: Aumentados pero con NEGRILLA FUERTE (900) */
+    .nos-hero-title {
+        font-size: 3.8rem !important; /* Aumentado de 3rem a 3.8rem */
+        font-weight: 900 !important; 
+        line-height: 1.0;
+        letter-spacing: -1.5px;
+        margin-bottom: 12px;
+    }
+
+    .nos-hero-title em {
+        font-size: 4.8rem !important; /* Aumentado de 4rem a 4.8rem */
+        font-weight: 900 !important;
+        line-height: 0.9;
+        margin-top: 8px;
+    }
+
+    /* Títulos de las secciones intermedias (Historia, Misión, Equipo) */
+    .nos-section-title {
+        font-size: 2.8rem !important; /* Aumentado de 2.2rem a 2.8rem */
+        font-weight: 900 !important;
+        line-height: 1.05;
+        letter-spacing: -1px;
+    }
+
+    /* 3. Ajuste de espaciados para compensar el tamaño de letra */
+    .nos-hero-subtitle {
+        font-size: 1.65rem !important; /* Un poco más grande para acompañar al título */
+        max-width: 75% !important;
+        font-weight: 600;
+        margin-bottom: 12px !important;
+    }
+
+    /* Compactamos los márgenes para que los títulos grandes no empujen todo */
+    .nos-historia, .nos-mvv, .nos-equipo, .nos-porque {
+        padding: 25px 0 !important; 
+    }
+    
+    .nos-mvv-title {
+        font-size: 1.9rem !important; /* Títulos de tarjetas más legibles */
+        font-weight: 800 !important;
+    }
+
+    .nos-tcard-name {
+        font-size: 1.6rem !important; /* Nombres del equipo más destacados */
+        font-weight: 800 !important;
+    }
+}
+
+/* Ajuste Móvil: Un toque más de negrilla y tamaño */
+@media (max-width: 768px) {
+    .nos-hero-title { font-size: 2.5rem !important; font-weight: 900; }
+    .nos-hero-title em { font-size: 3rem !important; font-weight: 900; }
+    .nos-section-title { font-size: 2.1rem !important; font-weight: 900; }
+}
+/* ══════════════════════════════════════
+   CTA FINAL: AJUSTE HORIZONTAL (PC)
+   ══════════════════════════════════════ */
+
+@media (min-width: 1024px) {
+    .nos-cta {
+        padding: 40px 0 !important; /* Menos espacio arriba/abajo */
+    }
+
+    .nos-cta-in {
+        max-width: 94% !important;
+        padding: 0 3%;
+    }
+
+    .nos-cta-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Dividimos en dos columnas */
+        gap: 60px;
+        align-items: center;
+        text-align: left; /* Alineación a la izquierda para mejor lectura */
+    }
+
+    /* Estilo de la Frase (Izquierda) */
+    .nos-frase {
+        background: rgba(255, 255, 255, 0.04);
+        border-left: 6px solid var(--color-teal);
+        padding: 40px !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .nos-frase-q {
+        font-size: 2rem !important; /* Título negrilla y mediano */
+        font-weight: 800 !important;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+
+    /* Estilo del CTA (Derecha) */
+    .nos-cta-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nos-cta-title {
+        font-size: 2.8rem !important; /* Título imponente pero no gigante */
+        font-weight: 900 !important;
+        line-height: 1;
+        margin: 10px 0;
+        text-align: left;
+    }
+
+    .nos-cta-desc {
+        font-size: 1.1rem !important;
+        max-width: 100% !important;
+        margin-bottom: 20px !important;
+        text-align: left;
+    }
+
+    .nos-cta-feats {
+        justify-content: flex-start !important; /* Alineado a la izquierda */
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .nos-cta-btns {
+        justify-content: flex-start !important;
+    }
+}
+
+/* --- AJUSTE MÓVIL: Apilado y Justo --- */
+@media (max-width: 768px) {
+    .nos-cta-split {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .nos-frase {
+        padding: 20px !important;
+    }
+    .nos-cta-title {
+        font-size: 2rem !important;
+    }
+}
