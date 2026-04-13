@@ -6,6 +6,8 @@ import Usuarios from "../../components/dashboard/Usuarios.astro";
 import Audios from "../../components/dashboard/Audios.astro";
 import Rutas from "../../components/dashboard/Rutas.astro";
 import RAGContext from "../../components/dashboard/RAGContext.astro";
+import Seguridad from "../../components/dashboard/Seguridad.astro";
+import Itinerarios from "../../components/dashboard/Itinerarios.astro";
 ---
 
 <DashboardLayout title="Tourism Dashboard">
@@ -33,37 +35,9 @@ import RAGContext from "../../components/dashboard/RAGContext.astro";
       <Usuarios />
       <Audios />
       <Rutas />
-
-      <!-- Sección Sitios (antes Mapas) -->
-      <!-- data-section-target debe coincidir con data-section en Sidebar: "sitios" -->
-
-
       <RAGContext />
-
-      <!-- Secciones placeholder para nuevos módulos -->
-      <div data-section-target="seguridad" class="section">
-        <div class="page-header">
-          <h2 class="page-title">Seguridad</h2>
-          <p class="page-subtitle">Control de acceso y gestión de permisos</p>
-        </div>
-        <div class="card">
-          <div class="card-body" style="padding: 40px; text-align: center; color: var(--color-text-light);">
-            Módulo de Seguridad — Próximamente
-          </div>
-        </div>
-      </div>
-
-      <div data-section-target="itinerarios" class="section">
-        <div class="page-header">
-          <h2 class="page-title">Itinerarios</h2>
-          <p class="page-subtitle">Planificación y gestión de recorridos turísticos</p>
-        </div>
-        <div class="card">
-          <div class="card-body" style="padding: 40px; text-align: center; color: var(--color-text-light);">
-            Módulo de Itinerarios — Próximamente
-          </div>
-        </div>
-      </div>
+      <Seguridad />
+      <Itinerarios />
 
       <div data-section-target="configuracion" class="section">
         <div class="page-header">
