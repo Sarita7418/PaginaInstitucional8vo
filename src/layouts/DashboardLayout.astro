@@ -1,19 +1,17 @@
 ---
 import '../styles/dashboard.css';
-
 const { title = "Dashboard" } = Astro.props;
 ---
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    <title>{title} - Tourism Dashboard</title>
+    <title>{title} - Aventuras Paceñas</title>
   </head>
   <body>
-    <div class="dashboard-container">
+    <div id="dashboard-container" class="dashboard-container">
       <button id="hamburger-toggle" class="hamburger-toggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -24,80 +22,83 @@ const { title = "Dashboard" } = Astro.props;
     </div>
 
     <script>
-      // Gestión del menú lateral y secciones
       document.addEventListener('DOMContentLoaded', () => {
         const navLinks = document.querySelectorAll('[data-section]');
         const sections = document.querySelectorAll('[data-section-target]');
         const hamburger = document.getElementById('hamburger-toggle');
         const sidebar = document.querySelector('.dashboard-sidebar');
         const overlay = document.getElementById('sidebar-overlay');
+        const headerTitle = document.getElementById('headerTitle');
+        const headerSubtitle = document.getElementById('headerSubtitle');
+        const headerBreadcrumb = document.getElementById('headerBreadcrumb');
 
-        // Toggle del hamburger menu en mobile
+        const sectionMeta: Record<string, { title: string; subtitle: string }> = {
+          inicio: { title: 'Dashboard', subtitle: 'Vista general del sistema turístico' },
+          usuarios: { title: 'Usuarios', subtitle: 'Gestión de usuarios registrados' },
+          audios: { title: 'Audioguías Inteligentes', subtitle: 'Gestión de contenido de audio' },
+          rutas: { title: 'Rutas', subtitle: 'Administración de rutas turísticas' },
+          sitios: { title: 'Sitios', subtitle: 'Puntos turísticos y ubicaciones' },
+          rag: { title: 'Contexto RAG', subtitle: 'Base de conocimiento inteligente' },
+          seguridad: { title: 'Seguridad', subtitle: 'Control de acceso y permisos' },
+          itinerarios: { title: 'Itinerarios', subtitle: 'Planificación de recorridos' },
+          configuracion: { title: 'Configuración', subtitle: 'Ajustes del sistema' },
+        };
+
         if (hamburger) {
           hamburger.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            if (overlay) overlay.classList.toggle('show');
+            sidebar?.classList.toggle('open');
+            overlay?.classList.toggle('show');
           });
         }
 
-        // Cerrar sidebar cuando se haga click en el overlay
         if (overlay) {
           overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
+            sidebar?.classList.remove('open');
             overlay.classList.remove('show');
           });
         }
 
-        // Cerrar sidebar cuando se hace click en un link de navegación
         navLinks.forEach(link => {
           link.addEventListener('click', (e) => {
             e.preventDefault();
-            const sectionId = link.getAttribute('data-section');
-            
-            // Remover clase active de todos los links
+            const sectionId = link.getAttribute('data-section') ?? '';
+
             navLinks.forEach(l => l.classList.remove('active'));
-            // Agregar clase active al link clickeado
             link.classList.add('active');
 
-            // Ocultar todas las secciones
-            sections.forEach(section => section.classList.remove('active'));
-            // Mostrar la sección seleccionada
-            const targetSection = document.querySelector(`[data-section-target="${sectionId}"]`);
-            if (targetSection) {
-              targetSection.classList.add('active');
+            sections.forEach(s => s.classList.remove('active'));
+            const target = document.querySelector(`[data-section-target="${sectionId}"]`);
+            if (target) target.classList.add('active');
+
+            const meta = sectionMeta[sectionId];
+            if (meta) {
+              if (headerTitle) headerTitle.textContent = meta.title;
+              if (headerSubtitle) headerSubtitle.textContent = meta.subtitle;
+              if (headerBreadcrumb) headerBreadcrumb.textContent = 'DASHBOARD';
             }
 
-            // Cerrar sidebar en mobile después de hacer click
             if (window.innerWidth <= 768) {
-              sidebar.classList.remove('open');
-              if (overlay) overlay.classList.remove('show');
+              sidebar?.classList.remove('open');
+              overlay?.classList.remove('show');
             }
           });
         });
 
-        // Activar la sección de inicio por defecto
         const defaultLink = document.querySelector('[data-section="inicio"]');
-        if (defaultLink) {
-          defaultLink.click();
-        }
+        if (defaultLink) (defaultLink as HTMLElement).click();
       });
 
-      // Funciones para modales
-      window.openModal = (modalId) => {
+      window.openModal = (modalId: string) => {
         const modal = document.getElementById(modalId);
         if (modal) modal.classList.add('show');
       };
-
-      window.closeModal = (modalId) => {
+      window.closeModal = (modalId: string) => {
         const modal = document.getElementById(modalId);
         if (modal) modal.classList.remove('show');
       };
-
-      // Cerrar modal al clickear fuera
       document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('modal')) {
-          e.target.classList.remove('show');
-        }
+        const target = e.target as HTMLElement;
+        if (target.classList.contains('modal')) target.classList.remove('show');
       });
     </script>
   </body>
