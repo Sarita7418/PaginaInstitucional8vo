@@ -1,198 +1,500 @@
 ---
-// Componente Audios - CRUD
+// Audios.astro — Módulo Audioguías Inteligentes
 ---
 
-<section data-section-target="audios" class="section card">
-  <div class="card-header">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <div>
-        <h2 class="card-title"> Gestión de Audioguías</h2>
-        <p class="card-subtitle">Administra todas las audioguías disponibles en la plataforma</p>
-      </div>
-      <button class="button button-primary" onclick="openModal('audiosModal')">
-        ➕ CARGAR
+<link rel="stylesheet" href="/src/components/dashboard/Audios.css" />
+
+<div data-section-target="audios" class="section">
+  <div class="ag-module">
+
+    <!-- TARJETAS DE ACCIONES -->
+    <div class="ag-actions-grid">
+
+      <button class="ag-action-card ag-teal" data-panel="subir">
+        <div class="ag-action-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <div class="ag-action-text">
+          <span class="ag-action-title">Subir Audioguía</span>
+          <span class="ag-action-desc">Carga una nueva audioguía con contenido de IA</span>
+        </div>
       </button>
-    </div>
-  </div>
 
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Título Atractivo</th>
-          <th>Estado Sitio</th>
-          <th>Radio Geocerca (m)</th>
-          <th>Peso Audio (MB)</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>#A001</td>
-          <td>Catedral Metropolitana</td>
-          <td><span style="background-color: #6b6b6b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Abierto</span></td>
-          <td>500</td>
-          <td>32.5</td>
-          <td>
-            <button class="button button-secondary button-small" onclick="openModal('editarAudiosModal')">ACTUALIZAR</button>
-            <button class="button button-danger button-small">DAR DE BAJA</button>
-          </td>
-        </tr>
-        <tr>
-          <td>#A002</td>
-          <td>Museo Nacional</td>
-          <td><span style="background-color: #6b6b6b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Abierto</span></td>
-          <td>750</td>
-          <td>48.3</td>
-          <td>
-            <button class="button button-secondary button-small" onclick="openModal('editarAudiosModal')">ACTUALIZAR</button>
-            <button class="button button-danger button-small">DAR DE BAJA</button>
-          </td>
-        </tr>
-        <tr>
-          <td>#A003</td>
-          <td>Convento de San Francisco</td>
-          <td><span style="background-color: #6b6b6b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Abierto</span></td>
-          <td>600</td>
-          <td>28.7</td>
-          <td>
-            <button class="button button-secondary button-small" onclick="openModal('editarAudiosModal')">ACTUALIZAR</button>
-            <button class="button button-danger button-small">DAR DE BAJA</button>
-          </td>
-        </tr>
-        <tr>
-          <td>#A004</td>
-          <td>Mercado Indígena</td>
-          <td><span style="background-color: #8a8a8a; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Cerrado Temp.</span></td>
-          <td>400</td>
-          <td>21.4</td>
-          <td>
-            <button class="button button-secondary button-small" onclick="openModal('editarAudiosModal')">ACTUALIZAR</button>
-            <button class="button button-danger button-small">DAR DE BAJA</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+      <button class="ag-action-card ag-green" data-panel="editar">
+        <div class="ag-action-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+        </div>
+        <div class="ag-action-text">
+          <span class="ag-action-title">Editar Contenido</span>
+          <span class="ag-action-desc">Modifica el contenido de audioguías existentes</span>
+        </div>
+      </button>
 
-<!-- Modal Cargar Audioguía -->
-<div id="audiosModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 class="modal-title">➕ CARGAR Nueva Audioguía</h3>
-      <button class="modal-close" onclick="closeModal('audiosModal')">✕</button>
+      <button class="ag-action-card ag-amber" data-panel="idiomas">
+        <div class="ag-action-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <div class="ag-action-text">
+          <span class="ag-action-title">Gestionar Idiomas</span>
+          <span class="ag-action-desc">Administra traducciones y versiones multilingües</span>
+        </div>
+      </button>
+
+      <button class="ag-action-card ag-terra" data-panel="eliminar">
+        <div class="ag-action-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+          </svg>
+        </div>
+        <div class="ag-action-text">
+          <span class="ag-action-title">Eliminar Audioguía</span>
+          <span class="ag-action-desc">Elimina audioguías que ya no son necesarias</span>
+        </div>
+      </button>
+
     </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Título Atractivo</label>
-        <input type="text" class="form-control" placeholder="Ej: Catedral Metropolitana" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Descripción Ficha</label>
-        <textarea class="form-control" rows="3" placeholder="Contexto cultural e histórico del lugar..."></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Archivo de Audio (URL)</label>
-        <input type="text" class="form-control" placeholder="Ej: https://storage.com/audio-catedral.mp3" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Imagen Ilustrativa (URL)</label>
-        <input type="text" class="form-control" placeholder="Ej: https://storage.com/image-catedral.jpg" />
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Coordenadas (Lat)</label>
-          <input type="number" class="form-control" placeholder="-16.5" step="0.0001" />
+
+    <!-- ÁREA DINÁMICA -->
+    <div class="ag-dynamic-area">
+
+      <!-- PANEL DEFAULT -->
+      <div class="ag-panel active" id="ag-panel-default">
+        <div class="ag-default-layout">
+          <div class="ag-hero-card">
+            <div class="ag-hero-overlay"></div>
+            <div class="ag-hero-content">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+              </svg>
+              <blockquote class="ag-hero-quote">"El sonido de las montañas cobrando vida."</blockquote>
+              <p class="ag-hero-sub">Audioguías generadas con inteligencia artificial</p>
+              <div class="ag-hero-dots">
+                <span class="ag-dot ag-dot-teal"></span>
+                <span class="ag-dot ag-dot-amber"></span>
+                <span class="ag-dot ag-dot-green"></span>
+                <span class="ag-dot ag-dot-terra"></span>
+              </div>
+            </div>
+          </div>
+          <div class="ag-summary">
+            <h3 class="ag-summary-title">Resumen de Audioguías</h3>
+            <div class="ag-summary-stats">
+              <div class="ag-summary-stat">
+                <span class="ag-sstat-num ag-teal-text">12</span>
+                <span class="ag-sstat-lbl">Total</span>
+              </div>
+              <div class="ag-summary-stat">
+                <span class="ag-sstat-num ag-green-text">9</span>
+                <span class="ag-sstat-lbl">Publicadas</span>
+              </div>
+              <div class="ag-summary-stat">
+                <span class="ag-sstat-num ag-amber-text">4</span>
+                <span class="ag-sstat-lbl">Idiomas</span>
+              </div>
+              <div class="ag-summary-stat">
+                <span class="ag-sstat-num ag-terra-text">3</span>
+                <span class="ag-sstat-lbl">Borradores</span>
+              </div>
+            </div>
+            <div class="ag-recent-label">Últimas audioguías</div>
+            <div class="ag-recent-list">
+              <div class="ag-recent-item">
+                <div class="ag-recent-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                </div>
+                <div class="ag-recent-info">
+                  <span class="ag-recent-name">Historia de Sacsayhuamán</span>
+                  <span class="ag-recent-meta">Sacsayhuamán · 5:32</span>
+                </div>
+                <span class="ag-badge ag-badge-pub">Publicada</span>
+              </div>
+              <div class="ag-recent-item">
+                <div class="ag-recent-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                </div>
+                <div class="ag-recent-info">
+                  <span class="ag-recent-name">Legends of Qenqo</span>
+                  <span class="ag-recent-meta">Qenqo · 4:15</span>
+                </div>
+                <span class="ag-badge ag-badge-pub">Publicada</span>
+              </div>
+              <div class="ag-recent-item">
+                <div class="ag-recent-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                </div>
+                <div class="ag-recent-info">
+                  <span class="ag-recent-name">Mercado de San Pedro Tour</span>
+                  <span class="ag-recent-meta">Mercado de San Pedro · 6:48</span>
+                </div>
+                <span class="ag-badge ag-badge-draft">Borrador</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Coordenadas (Long)</label>
-          <input type="number" class="form-control" placeholder="-68.1" step="0.0001" />
+      </div>
+
+      <!-- PANEL: Subir Audioguía -->
+      <div class="ag-panel" id="ag-panel-subir">
+        <div class="ag-panel-header">
+          <div class="ag-panel-icon ag-teal-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="ag-panel-title">Subir Audioguía</h3>
+            <p class="ag-panel-subtitle">Crea puntos de audio para enriquecer la experiencia del turista</p>
+          </div>
+        </div>
+
+        <div class="ag-form-layout">
+          <div class="ag-form-main">
+            <div class="ag-form-group ag-full">
+              <label class="ag-label">Título de la Audioguía</label>
+              <input type="text" class="ag-input" placeholder="Ej: Los Secretos del Valle del Colca" />
+            </div>
+            <div class="ag-form-group ag-full">
+              <label class="ag-label">Texto Descriptivo (Dataset)</label>
+              <textarea class="ag-textarea ag-textarea-lg" placeholder="Ingresa el contenido narrativo que será utilizado para generar la audioguía con IA..."></textarea>
+            </div>
+            <div class="ag-form-row">
+              <div class="ag-form-group">
+                <label class="ag-label">Idioma</label>
+                <select class="ag-select">
+                  <option>Español</option>
+                  <option>English</option>
+                  <option>Deutsch</option>
+                  <option>Français</option>
+                  <option>Português</option>
+                  <option>Quechua</option>
+                </select>
+              </div>
+              <div class="ag-form-group">
+                <label class="ag-label">Punto Turístico</label>
+                <select class="ag-select">
+                  <option value="">Seleccionar punto</option>
+                  <option>Plaza Murillo</option>
+                  <option>Valle de la Luna</option>
+                  <option>Mercado de las Brujas</option>
+                  <option>Mirador Killi Killi</option>
+                  <option>Tiwanaku</option>
+                </select>
+              </div>
+            </div>
+            <div class="ag-form-group ag-full">
+              <label class="ag-label">Archivo de Audio</label>
+              <div class="ag-upload-zone" id="ag-upload-zone">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8A9BA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+                </svg>
+                <span class="ag-upload-main">Haga clic o arrastre su archivo de audio aquí</span>
+                <span class="ag-upload-hint">Soporta MP3, WAV, OGG (máx. 50MB)</span>
+              </div>
+            </div>
+            <div class="ag-ia-box">
+              <div class="ag-ia-badge">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                IA
+              </div>
+              <span class="ag-ia-label">Generación automática con IA</span>
+              <div class="ag-ia-btns">
+                <button class="ag-ia-btn">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  Convertir texto a voz
+                </button>
+                <button class="ag-ia-btn ag-ia-btn-primary">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                  Generar audio automáticamente
+                </button>
+              </div>
+            </div>
+            <div class="ag-form-actions">
+              <button class="ag-btn ag-btn-primary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Guardar Audioguía
+              </button>
+              <button class="ag-btn ag-btn-secondary">Cancelar</button>
+            </div>
+          </div>
+
+          <div class="ag-side-card">
+            <div class="ag-side-img">
+              <div class="ag-side-img-overlay">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                <p class="ag-side-quote">"El sonido de las montañas cobrando vida."</p>
+                <p class="ag-side-sub">Nuestras audioguías inteligentes utilizan IA para crear experiencias inmersivas, transportando al viajero a una experiencia única en los Andes.</p>
+                <div class="ag-side-dots">
+                  <span class="ag-dot ag-dot-teal"></span>
+                  <span class="ag-dot ag-dot-amber"></span>
+                  <span class="ag-dot ag-dot-green"></span>
+                  <span class="ag-dot ag-dot-terra"></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Radio Geocerca (m)</label>
-          <input type="number" class="form-control" placeholder="Ej: 500" />
+
+      <!-- PANEL: Editar Contenido -->
+      <div class="ag-panel" id="ag-panel-editar">
+        <div class="ag-panel-header">
+          <div class="ag-panel-icon ag-green-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="ag-panel-title">Editar Audioguías</h3>
+            <p class="ag-panel-subtitle">Selecciona una audioguía para modificar su contenido</p>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Peso Descarga (MB)</label>
-          <input type="number" class="form-control" placeholder="Ej: 32.5" step="0.1" />
+        <div class="ag-toolbar">
+          <div class="ag-search-wrap">
+            <svg class="ag-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="ag-search" placeholder="Buscar audioguía..." />
+          </div>
+          <select class="ag-filter">
+            <option>Todos los idiomas</option>
+            <option>Español</option>
+            <option>English</option>
+            <option>Deutsch</option>
+            <option>Quechua</option>
+          </select>
+          <select class="ag-filter">
+            <option>Todos los estados</option>
+            <option>Publicada</option>
+            <option>Borrador</option>
+          </select>
+        </div>
+        <div class="ag-table-wrap">
+          <table class="ag-table">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Idioma</th>
+                <th>Duración</th>
+                <th>Punto</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Historia de Sacsayhuamán</td>
+                <td>Español</td><td>5:32</td><td>Sacsayhuamán</td>
+                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
+                <td><button class="ag-btn-action ag-btn-edit">✏ Editar</button></td>
+              </tr>
+              <tr>
+                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Legends of Qenqo</td>
+                <td>English</td><td>4:15</td><td>Qenqo</td>
+                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
+                <td><button class="ag-btn-action ag-btn-edit">✏ Editar</button></td>
+              </tr>
+              <tr>
+                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Mercado de San Pedro Tour</td>
+                <td>Español</td><td>6:48</td><td>Mercado de San Pedro</td>
+                <td><span class="ag-badge ag-badge-draft">Borrador</span></td>
+                <td><button class="ag-btn-action ag-btn-edit">✏ Editar</button></td>
+              </tr>
+              <tr>
+                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Plaza de Armas Geschichte</td>
+                <td>Deutsch</td><td>5:10</td><td>Plaza de Armas</td>
+                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
+                <td><button class="ag-btn-action ag-btn-edit">✏ Editar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ag-pagination">
+          <span class="ag-page-info">Mostrando 4 de 12 audioguías</span>
+          <div class="ag-page-btns">
+            <button class="ag-page-btn" disabled>‹</button>
+            <button class="ag-page-btn active">1</button>
+            <button class="ag-page-btn">2</button>
+            <button class="ag-page-btn">3</button>
+            <button class="ag-page-btn">›</button>
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Estado del Sitio</label>
-        <select class="form-control">
-          <option>Abierto</option>
-          <option>Cerrado Temporalmente</option>
-          <option>Inactivo</option>
-        </select>
+
+      <!-- PANEL: Gestionar Idiomas -->
+      <div class="ag-panel" id="ag-panel-idiomas">
+        <div class="ag-panel-header">
+          <div class="ag-panel-icon ag-amber-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="ag-panel-title">Gestionar Idiomas</h3>
+            <p class="ag-panel-subtitle">Administra las traducciones y versiones multilingües de las audioguías</p>
+          </div>
+        </div>
+        <div class="ag-lang-grid">
+          <div class="ag-lang-card">
+            <div class="ag-lang-top">
+              <span class="ag-lang-name">Español</span>
+              <span class="ag-lang-count">8 guías</span>
+            </div>
+            <div class="ag-lang-bar-track">
+              <div class="ag-lang-bar-fill ag-bar-teal" style="width:100%"></div>
+            </div>
+            <span class="ag-lang-pct">100% completado</span>
+          </div>
+          <div class="ag-lang-card">
+            <div class="ag-lang-top">
+              <span class="ag-lang-name">English</span>
+              <span class="ag-lang-count">6 guías</span>
+            </div>
+            <div class="ag-lang-bar-track">
+              <div class="ag-lang-bar-fill ag-bar-teal" style="width:75%"></div>
+            </div>
+            <span class="ag-lang-pct">75% completado</span>
+          </div>
+          <div class="ag-lang-card">
+            <div class="ag-lang-top">
+              <span class="ag-lang-name">Português</span>
+              <span class="ag-lang-count">3 guías</span>
+            </div>
+            <div class="ag-lang-bar-track">
+              <div class="ag-lang-bar-fill ag-bar-green" style="width:38%"></div>
+            </div>
+            <span class="ag-lang-pct">38% completado</span>
+          </div>
+          <div class="ag-lang-card">
+            <div class="ag-lang-top">
+              <span class="ag-lang-name">Deutsch</span>
+              <span class="ag-lang-count">2 guías</span>
+            </div>
+            <div class="ag-lang-bar-track">
+              <div class="ag-lang-bar-fill ag-bar-amber" style="width:25%"></div>
+            </div>
+            <span class="ag-lang-pct">25% completado</span>
+          </div>
+          <div class="ag-lang-card">
+            <div class="ag-lang-top">
+              <span class="ag-lang-name">Français</span>
+              <span class="ag-lang-count">1 guías</span>
+            </div>
+            <div class="ag-lang-bar-track">
+              <div class="ag-lang-bar-fill ag-bar-amber" style="width:13%"></div>
+            </div>
+            <span class="ag-lang-pct">13% completado</span>
+          </div>
+          <div class="ag-lang-card">
+            <div class="ag-lang-top">
+              <span class="ag-lang-name">Quechua</span>
+              <span class="ag-lang-count">4 guías</span>
+            </div>
+            <div class="ag-lang-bar-track">
+              <div class="ag-lang-bar-fill ag-bar-teal" style="width:50%"></div>
+            </div>
+            <span class="ag-lang-pct">50% completado</span>
+          </div>
+        </div>
+        <button class="ag-btn ag-btn-amber" style="margin-top:20px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Añadir nuevo idioma
+        </button>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button class="button button-secondary" onclick="closeModal('audiosModal')">Cancelar</button>
-      <button class="button button-primary">Guardar Audioguía</button>
+
+      <!-- PANEL: Eliminar Audioguía -->
+      <div class="ag-panel" id="ag-panel-eliminar">
+        <div class="ag-panel-header">
+          <div class="ag-panel-icon ag-terra-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+              <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="ag-panel-title">Eliminar Audioguías</h3>
+            <p class="ag-panel-subtitle">Selecciona una audioguía para eliminarla del sistema</p>
+          </div>
+        </div>
+        <div class="ag-alert-warn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Esta acción es permanente. Las audioguías eliminadas no se pueden recuperar.
+        </div>
+        <div class="ag-table-wrap">
+          <table class="ag-table">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Idioma</th>
+                <th>Duración</th>
+                <th>Punto</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Historia de Sacsayhuamán</td>
+                <td>Español</td><td>5:32</td><td>Sacsayhuamán</td>
+                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
+                <td><button class="ag-btn-action ag-btn-delete">🗑 Eliminar</button></td>
+              </tr>
+              <tr>
+                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Legends of Qenqo</td>
+                <td>English</td><td>4:15</td><td>Qenqo</td>
+                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
+                <td><button class="ag-btn-action ag-btn-delete">🗑 Eliminar</button></td>
+              </tr>
+              <tr>
+                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Mercado de San Pedro Tour</td>
+                <td>Español</td><td>6:48</td><td>Mercado de San Pedro</td>
+                <td><span class="ag-badge ag-badge-draft">Borrador</span></td>
+                <td><button class="ag-btn-action ag-btn-delete">🗑 Eliminar</button></td>
+              </tr>
+              <tr>
+                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Plaza de Armas Geschichte</td>
+                <td>Deutsch</td><td>5:10</td><td>Plaza de Armas</td>
+                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
+                <td><button class="ag-btn-action ag-btn-delete">🗑 Eliminar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
 
-<!-- Modal Actualizar Audioguía -->
-<div id="editarAudiosModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 class="modal-title">✎ ACTUALIZAR Audioguía</h3>
-      <button class="modal-close" onclick="closeModal('editarAudiosModal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Título Atractivo</label>
-        <input type="text" class="form-control" value="Catedral Metropolitana" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Descripción Ficha</label>
-        <textarea class="form-control" rows="3">La Catedral Metropolitana es un ícono del patrimonio colonial boliviano...</textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Archivo de Audio (URL)</label>
-        <input type="text" class="form-control" value="https://storage.com/audio-catedral.mp3" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Imagen Ilustrativa (URL)</label>
-        <input type="text" class="form-control" value="https://storage.com/image-catedral.jpg" />
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Coordenadas (Lat)</label>
-          <input type="number" class="form-control" value="-16.5001" step="0.0001" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Coordenadas (Long)</label>
-          <input type="number" class="form-control" value="-68.1345" step="0.0001" />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Radio Geocerca (m)</label>
-          <input type="number" class="form-control" value="500" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Peso Descarga (MB)</label>
-          <input type="number" class="form-control" value="32.5" step="0.1" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Estado del Sitio</label>
-        <select class="form-control">
-          <option selected>Abierto</option>
-          <option>Cerrado Temporalmente</option>
-          <option>Inactivo</option>
-        </select>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="button button-secondary" onclick="closeModal('editarAudiosModal')">Cancelar</button>
-      <button class="button button-primary">Actualizar Audioguía</button>
-    </div>
-  </div>
-</div>
+<script>
+  const initAudiosModule = () => {
+    const cards = document.querySelectorAll('.ag-action-card');
+    const panels = document.querySelectorAll('.ag-panel');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const panelId = 'ag-panel-' + card.getAttribute('data-panel');
+        cards.forEach(c => c.classList.remove('ag-card-active'));
+        card.classList.add('ag-card-active');
+        panels.forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(panelId);
+        if (target) target.classList.add('active');
+      });
+    });
+  };
+
+  initAudiosModule();
+  document.addEventListener('astro:page-load', initAudiosModule);
+</script>
