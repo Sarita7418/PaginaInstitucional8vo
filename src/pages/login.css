@@ -1,0 +1,291 @@
+/* VARIABLES DE MARCA AVENTURAS PACEÑAS */
+:root {
+    --adventure-orange: #d27817; 
+    --adventure-dark-orange: #b06514;
+    --teal-accent: #0F988A;
+    --dark-bg: #0b1a20;
+    --text-on-dark: #f7fafc;
+    --text-on-light: #23373E;
+    --text-muted: #718096;
+    --input-border: #e2e8f0;
+    --form-bg: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background-color: var(--dark-bg); overflow: hidden; }
+
+/* CONTENEDOR RAIZ: OCUPA TODA LA PANTALLA */
+.login-root { 
+    height: 100vh; 
+    width: 100vw;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden;
+}
+
+/* CONTENEDOR SPLIT: DIVIDE LA PANTALLA EN DOS (Laptop) */
+.login-split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* === BLOQUE IZQUIERDO: IMAGEN === */
+.login-image-pane {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    color: var(--text-on-dark);
+    overflow: hidden;
+}
+
+.login-image-pane .bg-image {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url('/images/Ciudad_de_La_Paz_de_noche.jpg');
+    background-size: cover;
+    background-position: center center;
+    z-index: 1;
+    transform: scale(1.05);
+}
+
+.login-image-pane .bg-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(11, 26, 32, 0.95) 0%, rgba(11, 26, 32, 0.75) 100%);
+    z-index: 2;
+}
+
+.brand-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 500px;
+    animation: fadeInLeft 0.8s ease-out;
+}
+
+@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+
+.pane-logo {  width: auto; margin-bottom: 20px; border-radius: 15px; }
+
+.brand-content h1 { 
+    font-size: 3rem; 
+    font-weight: 800; 
+    margin: 15px 0 10px;
+    letter-spacing: -0.05em;
+    line-height: 1.1;
+    color: var(--text-on-dark);
+}
+
+.brand-content p { color: #e2e8f0; font-size: 1.1rem; line-height: 1.6; opacity: 0.9; }
+
+.badge-adventure { 
+    background: rgba(255, 250, 240, 0.1); 
+    color: var(--adventure-orange); 
+    padding: 6px 16px; 
+    border-radius: 50px; 
+    font-size: 0.75rem; 
+    font-weight: 800; 
+    display: inline-block;
+    border: 1px solid rgba(251, 211, 141, 0.3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* === BLOQUE DERECHO: FORMULARIO === */
+.login-form-pane {
+    flex: 1;
+    background-color: var(--form-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    overflow-y: auto;
+}
+
+.form-wrapper {
+    width: 100%;
+    max-width: 420px;
+    animation: fadeInRight 0.8s ease-out;
+}
+
+@keyframes fadeInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+/* === ENCABEZADO DEL FORMULARIO (Bienvenida) === */
+.form-header { 
+    text-align: center; 
+    margin-bottom: 30px; 
+}
+.form-header h1 { 
+    font-size: 2rem; 
+    color: var(--text-on-light); 
+    font-weight: 800; 
+    margin-bottom: 10px; 
+}
+.form-header .welcome-text { 
+    font-size: 0.95rem; 
+    color: var(--text-muted); 
+    line-height: 1.5; 
+}
+.form-header .welcome-text strong {
+    color: var(--adventure-orange);
+}
+
+/* Logo oculto en PC, visible en móvil */
+.mobile-logo { 
+    display: none; 
+    margin: 0 auto 15px; 
+    height: 60px; 
+    border-radius: 10px; 
+}
+
+/* FORMULARIO ESTILOS */
+.field { margin-bottom: 24px; text-align: left; }
+
+.field label { 
+    display: block; 
+    margin-bottom: 9px; 
+    font-weight: 700; 
+    color: var(--text-on-light); 
+    font-size: 0.9rem;
+}
+
+.input-wrapper { position: relative; }
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.input-wrapper input { 
+    width: 100%; 
+    padding: 14px 16px 14px 44px; 
+    border: 2px solid var(--input-border); 
+    border-radius: 12px; 
+    font-size: 1rem; 
+    transition: all 0.2s;
+    outline: none;
+    background: #f8fafc;
+}
+
+.input-wrapper input:focus { 
+    border-color: var(--adventure-orange); 
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(210, 120, 23, 0.1);
+}
+
+.input-wrapper input:focus + .input-icon { color: var(--adventure-orange); }
+
+/* BOTONES */
+.btn-primary { 
+    width: 100%; 
+    padding: 16px; 
+    background: var(--adventure-orange); 
+    color: white; 
+    border: none; 
+    border-radius: 12px; 
+    font-weight: 800; 
+    cursor: pointer; 
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.btn-primary:hover { 
+    background: var(--adventure-dark-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(210, 120, 23, 0.3);
+}
+
+.btn-icon { transition: transform 0.3s ease; }
+.btn-primary:hover .btn-icon { transform: translateX(3px); }
+
+/* FOOTER */
+.login-footer {
+    margin-top: 36px;
+    text-align: center;
+    border-top: 1px solid #edf2f7;
+    padding-top: 24px;
+}
+
+.login-footer p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px; }
+
+.btn-secondary {
+    display: inline-block;
+    color: var(--teal-accent);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s;
+    border: 2px solid var(--teal-accent);
+    padding: 10px 24px;
+    border-radius: 50px;
+}
+
+.btn-secondary:hover { background-color: var(--teal-accent); color: white; transform: scale(1.03); }
+
+.footer-copy { margin-top: 24px; font-size: 0.75rem; color: var(--text-muted); opacity: 0.7; }
+
+/* ERRORES Y SPINNER */
+.error-msg { 
+    display: none; margin-top: 20px; color: #c53030; background: #fff5f5;
+    padding: 14px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
+    text-align: center; border: 1px solid #feb2b2;
+}
+
+/* ========================================= */
+/* === MEDIA QUERIES (RESPONSIVIDAD) === */
+/* ========================================= */
+
+/* TABLETS Y PANTALLAS MEDIANAS */
+@media (max-width: 1024px) {
+    .login-image-pane { display: none; } 
+    .login-form-pane { flex: 1; width: 100%; background-color: var(--dark-bg); }
+    
+    .form-wrapper {
+        background-color: var(--form-bg);
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    
+    .mobile-logo { display: block; } /* Mostrar el logo solo si la imagen de la izquierda se oculta */
+}
+
+/* === MÓVILES === */
+@media (max-width: 600px) {
+    body { overflow: auto; } 
+    .login-root { padding: 10px; align-items: flex-start; height: auto; min-height: 100vh; }
+    
+    .login-form-pane { padding: 15px; background-color: transparent; }
+    
+    .form-wrapper {
+        padding: 30px 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        max-width: 100%; 
+    }
+
+    .form-header h1 { font-size: 1.75rem; }
+    .form-header .welcome-text { font-size: 0.85rem; }
+    .mobile-logo { height: 50px; }
+    
+    .field { margin-bottom: 18px; }
+    .input-wrapper input { padding: 12px 14px 12px 40px; font-size: 0.95rem; } 
+    .btn-primary { padding: 14px; font-size: 1rem; } 
+    
+    .login-footer { margin-top: 25px; padding-top: 18px; }
+    .btn-secondary { padding: 8px 20px; font-size: 0.9rem; }
+}

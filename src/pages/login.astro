@@ -1,5 +1,6 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import './login.css'; // Importamos el CSS separado
 ---
 
 <MainLayout title="Acceso | Aventuras Paceñas">
@@ -22,9 +23,13 @@ import MainLayout from "../layouts/MainLayout.astro";
             <div class="login-form-pane">
                 <div class="form-wrapper">
                     
-                    <div class="mobile-header">
+                    <div class="form-header">
                         <img src="/images/logo.png" alt="Logo Aventuras Paceñas" class="mobile-logo" />
-                        <h1>Inicia Sesión</h1>
+                        <h1>Iniciar Sesión</h1>
+                        <p class="welcome-text">
+                            Bienvenido al portal principal de <strong>Aventuras Paceñas</strong>. 
+                            Ingresa para gestionar tus itinerarios, explorar mapas y planificar tu próxima experiencia en La Paz.
+                        </p>
                     </div>
 
                     <form id="login-form" class="login-form">
@@ -74,8 +79,8 @@ import MainLayout from "../layouts/MainLayout.astro";
         </div>
     </div>
 </MainLayout>
+
 <script>
-  // IMPORTANTE: Importamos el cliente centralizado
   import { supabase } from '../lib/supabase';
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -94,7 +99,6 @@ import MainLayout from "../layouts/MainLayout.astro";
         const email = (document.getElementById('email') as HTMLInputElement).value;
         const password = (document.getElementById('password') as HTMLInputElement).value;
 
-        // Iniciar sesión usando el cliente compartido
         const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password,
@@ -106,288 +110,9 @@ import MainLayout from "../layouts/MainLayout.astro";
           errorDiv.textContent = "Error: " + error.message;
           errorDiv.style.display = 'block';
         } else {
-          // Al usar el mismo cliente, el Header detectará el cambio automáticamente
           window.location.href = '/';
         }
       });
     }
   });
 </script>
-
-<style>
-    /* VARIABLES DE MARCA AVENTURAS PACEÑAS */
-    :root {
-        --adventure-orange: #d27817; 
-        --adventure-dark-orange: #b06514;
-        --teal-accent: #15988a;
-        --dark-bg: #0b1a20;
-        --text-on-dark: #f7fafc;
-        --text-on-light: #1a202c;
-        --text-muted: #718096;
-        --input-border: #e2e8f0;
-        --form-bg: #ffffff;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Open Sans', sans-serif; background-color: var(--dark-bg); overflow: hidden; }
-
-    /* CONTENEDOR RAIZ: OCUPA TODA LA PANTALLA */
-    .login-root { 
-        height: 100vh; 
-        width: 100vw;
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        overflow: hidden;
-    }
-
-    /* CONTENEDOR SPLIT: DIVIDE LA PANTALLA EN DOS (Laptop) */
-    .login-split-container {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-
-    /* === BLOQUE IZQUIERDO: IMAGEN (A lo ancho en Laptop) === */
-    .login-image-pane {
-        flex: 1; /* Ocupa el 50% en Laptop */
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 60px;
-        color: var(--text-on-dark);
-        overflow: hidden;
-    }
-
-    /* Imagen de La Paz de Noche, Centrada */
-    .login-image-pane .bg-image {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        /* URL de imagen panorámica de La Paz de Noche */
-        background-image: url('/images/Ciudad_de_La_Paz_de_noche.jpg');
-        background-size: cover;
-        background-position: center center; /* Centrado perfecto de la imagen */
-        z-index: 1;
-        transform: scale(1.05); /* Sutil zoom para evitar bordes */
-    }
-
-    /* Overlay oscuro e intenso para opacar la imagen y mejorar contraste */
-    .login-image-pane .bg-overlay {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        /* Gradiente oscuro más denso (0.9 a 0.7 de opacidad) */
-        background: linear-gradient(135deg, rgba(11, 26, 32, 0.95) 0%, rgba(11, 26, 32, 0.75) 100%);
-        z-index: 2;
-    }
-
-    .brand-content {
-        position: relative;
-        z-index: 10;
-        text-align: center;
-        max-width: 500px;
-        animation: fadeInLeft 0.8s ease-out;
-    }
-
-    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-
-    .pane-logo {  width: auto; margin-bottom: 20px; border-radius: 15px; }
-
-    .brand-content h1 { 
-        font-size: 3rem; 
-        font-weight: 800; 
-        margin: 15px 0 10px;
-        letter-spacing: -0.05em;
-        line-height: 1.1;
-        color: var(--text-on-dark); /* Texto blanco sobre fondo oscuro */
-    }
-
-    .brand-content p { color: #e2e8f0; font-size: 1.1rem; line-height: 1.6; opacity: 0.9; }
-
-    .badge-adventure { 
-        background: rgba(255, 250, 240, 0.1); 
-        color: var(--adventure-orange); 
-        padding: 6px 16px; 
-        border-radius: 50px; 
-        font-size: 0.75rem; 
-        font-weight: 800; 
-        display: inline-block;
-        border: 1px solid rgba(251, 211, 141, 0.3);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-
-    /* === BLOQUE DERECHO: FORMULARIO === */
-    .login-form-pane {
-        flex: 1; /* Ocupa el otro 50% en Laptop */
-        background-color: var(--form-bg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 60px; /* Padding generoso en Laptop */
-        overflow-y: auto; /* Permite scroll si el form es largo */
-    }
-
-    .form-wrapper {
-        width: 100%;
-        max-width: 420px; /* Ancho máximo del form para que no se vea gigante */
-        animation: fadeInRight 0.8s ease-out;
-    }
-
-    @keyframes fadeInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-
-    /* Oculto en Laptop, visible en Móvil */
-    .mobile-header { display: none; text-align: center; margin-bottom: 30px; }
-
-    /* FORMULARIO ESTILOS */
-    .field { margin-bottom: 24px; text-align: left; }
-    
-    .field label { 
-        display: block; 
-        margin-bottom: 9px; 
-        font-weight: 700; 
-        color: var(--text-on-light); 
-        font-size: 0.9rem;
-    }
-
-    .input-wrapper { position: relative; }
-
-    .input-icon {
-        position: absolute;
-        left: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--text-muted);
-        transition: color 0.3s ease;
-    }
-
-    .input-wrapper input { 
-        width: 100%; 
-        padding: 14px 16px 14px 44px; 
-        border: 2px solid var(--input-border); 
-        border-radius: 12px; 
-        font-size: 1rem; 
-        transition: all 0.2s;
-        outline: none;
-        background: #f8fafc;
-    }
-
-    .input-wrapper input:focus { 
-        border-color: var(--adventure-orange); 
-        background-color: white;
-        box-shadow: 0 0 0 4px rgba(210, 120, 23, 0.1);
-    }
-
-    .input-wrapper input:focus + .input-icon { color: var(--adventure-orange); }
-
-    /* BOTONES */
-    .btn-primary { 
-        width: 100%; 
-        padding: 16px; 
-        background: var(--adventure-orange); 
-        color: white; 
-        border: none; 
-        border-radius: 12px; 
-        font-weight: 800; 
-        cursor: pointer; 
-        font-size: 1.1rem;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-    }
-
-    .btn-primary:hover { 
-        background: var(--adventure-dark-orange);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(210, 120, 23, 0.3);
-    }
-
-    .btn-icon { transition: transform 0.3s ease; }
-    .btn-primary:hover .btn-icon { transform: translateX(3px); }
-
-    /* FOOTER */
-    .login-footer {
-        margin-top: 36px;
-        text-align: center;
-        border-top: 1px solid #edf2f7;
-        padding-top: 24px;
-    }
-
-    .login-footer p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px; }
-
-    .btn-secondary {
-        display: inline-block;
-        color: var(--teal-accent);
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1rem;
-        transition: all 0.3s;
-        border: 2px solid var(--teal-accent);
-        padding: 10px 24px;
-        border-radius: 50px;
-    }
-
-    .btn-secondary:hover { background-color: var(--teal-accent); color: white; transform: scale(1.03); }
-
-    .footer-copy { margin-top: 24px; font-size: 0.75rem; color: var(--text-muted); opacity: 0.7; }
-
-    /* ERRORES Y SPINNER */
-    .error-msg { 
-        display: none; margin-top: 20px; color: #c53030; background: #fff5f5;
-        padding: 14px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
-        text-align: center; border: 1px solid #feb2b2;
-    }
-    .spinner {
-        width: 18px; height: 18px; border: 3px solid rgba(255,255,255,0.3);
-        border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ========================================= */
-    /* === MEDIA QUERIES (RESPONSIVIDAD) === */
-    /* ========================================= */
-
-    /* TABLETS Y PANTALLAS MEDIANAS (Ocultamos panel imagen) */
-    @media (max-width: 1024px) {
-        .login-image-pane { display: none; } /* Ocultamos la imagen */
-        .login-form-pane { flex: 1; width: 100%; background-color: var(--dark-bg); } /* Form pane ocupa todo y cambia fondo a oscuro */
-        .form-wrapper {
-            background-color: var(--form-bg);
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        .mobile-header { display: block; } /* Mostramos header móvil */
-        .mobile-logo { height: 60px; width: auto; margin-bottom: 10px; border-radius: 10px; }
-        .mobile-header h1 { font-size: 2rem; color: var(--text-on-light); margin-bottom: 5px; font-weight: 800; }
-    }
-
-    /* === MÓVILES (Compacto e Justo) === */
-    @media (max-width: 600px) {
-        body { overflow: auto; } /* Permitimos scroll body en móvil */
-        .login-root { padding: 10px; align-items: flex-start; height: auto; min-height: 100vh; } /* Menos padding root, alineación arriba */
-        
-        .login-form-pane { padding: 15px; background-color: transparent; } /* Padding mínimo en el pane */
-        
-        .form-wrapper {
-            padding: 25px 20px; /* Reducimos padding interno al mínimo necesario */
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            max-width: 100%; /* Ocupa todo el ancho disponible */
-        }
-
-        .mobile-header h1 { font-size: 1.75rem; }
-        .mobile-logo { height: 50px; }
-        
-        .field { margin-bottom: 18px; } /* Compactamos campos */
-        .input-wrapper input { padding: 12px 14px 12px 40px; font-size: 0.95rem; } /* Inputs más compactos */
-        .btn-primary { padding: 14px; font-size: 1rem; } /* Botón más compacto */
-        
-        .login-footer { margin-top: 25px; padding-top: 18px; }
-        .btn-secondary { padding: 8px 20px; font-size: 0.9rem; }
-    }
-    
-</style>

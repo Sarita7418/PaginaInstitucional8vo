@@ -1,42 +1,42 @@
 ---
 import './Features.css';
 
-// Ahora TODAS las secciones tienen una imagen de fondo (bg)
+// Las secciones mantienen su data, pero el diseño será unificado al estilo claro.
 const features = [
   {
     id: 'audioguia', tag: 'Contexto Histórico', title: 'Audioguías Narrativas',
     desc: 'Wali te enviará una notificación al acercarte a un sitio turístico, activando audioguías inmersivas que te explicarán toda la historia y el contexto del lugar.',
-    img: '/images/CRaudioguia.png', theme: 'dark', bg: '/images/calle_jaen.jpg'
+    img: '/images/CRaudioguia.png', bg: '/images/calle_jaen.jpg'
   },
   {
     id: 'mapas', tag: 'Cartografía Avanzada', title: 'Mapas y Geolocalización',
     desc: 'Observa tu entorno con precisión. Encuentra sitios de interés, descubre rutas turísticas recomendadas y visualiza el mapa interactivo offline.',
-    img: '/images/CRmapas.png', theme: 'cream', bg: '/images/altiplano.jpg'
+    img: '/images/CRmapas.png', bg: '/images/altiplano.jpg'
   },
   {
     id: 'itinerarios', tag: 'Planificación a Medida', title: 'Itinerarios Inteligentes',
     desc: 'Dinos qué te gusta y nosotros armamos el plan. Escoge tus actividades y Wali generará un itinerario recomendado, completamente editable.',
-    img: '/images/CRitinerario.png', theme: 'dark', bg: '/images/valle_luna.jpg'
+    img: '/images/CRitinerario.png', bg: '/images/valle_luna.jpg'
   },
   {
     id: 'asistente', tag: 'Atención 24/7', title: 'Asistente Inteligente',
     desc: 'Tu guía paceño de bolsillo. Nuestro chatbot de IA está listo para hacerte recomendaciones de rutas y resolver dudas turísticas en tiempo real.',
-    img: '/images/CRIA.png', theme: 'cream', bg: '/images/mirador_killi.jpg'
+    img: '/images/CRIA.png', bg: '/images/mirador_killi.jpg'
   },
   {
     id: 'gastronomia', tag: 'Sabores sin Riesgos', title: 'Decodificador Gastronómico',
     desc: 'Apunta tu cámara al menú. Wali identificará el plato, mostrará sus ingredientes y preparación para prevenir reacciones alérgicas y sorpresas.',
-    img: '/images/CRcomida.png', theme: 'dark', bg: '/images/mercado_ancestral.jpg'
+    img: '/images/CRcomida.png', bg: '/images/mercado_ancestral.jpg'
   },
   {
     id: 'seguridad', tag: 'Exploración Segura', title: 'Seguridad y Tranquilidad',
     desc: 'Muévete con confianza. El mapa marca zonas de precaución y cuentas con un botón de pánico integrado para llamar a la policía en emergencias.',
-    img: '/images/CRseguridad.png', theme: 'cream', bg: '/images/twanaku.jpg'
+    img: '/images/CRseguridad.png', bg: '/images/twanaku.jpg'
   },
   {
     id: 'tarifas', tag: 'Economía Justa', title: 'Recomendador de Tarifas',
     desc: 'Evita cobros excesivos. En una ciudad sin taxímetros, nuestra herramienta te calcula la tarifa recomendada para tu ruta de transporte.',
-    img: '/images/CRtarifa.png', theme: 'dark', bg: '/images/Ciudad_de_La_Paz_de_noche.jpg'
+    img: '/images/CRtarifa.png', bg: '/images/Ciudad_de_La_Paz_de_noche.jpg'
   }
 ];
 ---
@@ -71,22 +71,21 @@ const features = [
   </section>
 
   {features.map((feat, index) => (
-    <section class={`w-section feat-section`}>
+    <section class="w-section feat-section">
       
       <div class="feat-bg-img" style={`background-image: url('${feat.bg}')`}></div>
-      <div class={`feat-bg-overlay overlay-${feat.theme}`}></div>
+      <div class="feat-bg-overlay overlay-cream"></div>
+
+      <div class="feat-header reveal from-bottom">
+        <div class="stag-main">{feat.tag}</div>
+        <h2 class="stit-main">{feat.title}</h2>
+      </div>
 
       <div class={`feat-container ${index % 2 !== 0 ? 'row-reverse' : ''}`}>
         
         <div class="feat-text-content">
-          <div class={`feat-text-card card-${feat.theme} reveal from-left`}>
-            <div class={`stag ${feat.theme === 'cream' ? 'stag-dk' : ''}`}>
-              {feat.tag}
-            </div>
-            <h2 class={`stit ${feat.theme === 'cream' ? 'stit-dk' : ''}`}>
-              {feat.title}
-            </h2>
-            <p class={`feat-desc ${feat.theme === 'cream' ? 'desc-dk' : ''}`}>
+          <div class="feat-text-card card-white reveal from-left">
+            <p class="feat-desc">
               {feat.desc}
             </p>
           </div>
@@ -107,11 +106,11 @@ const features = [
     <div class="s-cta::before"></div>
     <div class="cta-tag reveal">📱 DISPONIBLE AHORA</div>
 
-    <h2 class="stit reveal reveal-delay-1" style="text-align: center;">
-      ¿Listo para llevar<br />a <em>La Paz</em> en tu bolsillo?
+    <h2 class="stit-main reveal reveal-delay-1" style="text-align: center; margin-bottom: 15px;">
+      ¿Listo para llevar<br />a <em style="color: var(--color-orange); font-style: italic;">La Paz</em> en tu bolsillo?
     </h2>
 
-    <p class="reveal reveal-delay-2" style="text-align: center; margin: 0 auto 32px;">
+    <p class="reveal reveal-delay-2" style="text-align: center; margin: 0 auto 32px; color: var(--color-dark); font-size: 1.15rem;">
       Únete a los viajeros que ya están redefiniendo el turismo local con la tecnología desarrollada por Aventuras Paceñas.
     </p>
 
@@ -121,7 +120,6 @@ const features = [
         Descargar Wali Ahora
       </a>
     </div>
-
   </section>
 
 </div>
@@ -163,7 +161,7 @@ const features = [
     isScrolling = true;
     currentSection = idx;
     const el = sections[idx];
-    const headerH = document.querySelector('header')?.offsetHeight || 0; // Compensa el header si existe
+    const headerH = document.querySelector('header')?.offsetHeight || 0; 
     const top = el.getBoundingClientRect().top + window.scrollY - headerH;
     window.scrollTo({ top, behavior: 'smooth' });
     setTimeout(() => { isScrolling = false; }, 900);
