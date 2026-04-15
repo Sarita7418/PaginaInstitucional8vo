@@ -544,31 +544,37 @@
   background: rgba(122,57,40,0.08);
   color: #7A3928;
   font-size: 13px;
-  font-weight: 500;
 }
 
 .sg-delete-tabs {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
+  gap: 4px;
+  border-bottom: 1.5px solid #E2D9CE;
+  margin-bottom: 18px;
 }
 
 .sg-del-tab {
-  border: 1px solid #E2D9CE;
-  background: #F2EBE0;
-  color: #4A5C60;
-  border-radius: 8px;
-  padding: 9px 14px;
-  font-size: 12px;
+  padding: 9px 20px;
+  font-size: 13px;
   font-weight: 500;
+  color: #4A5C60;
   cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px;
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.sg-del-tab:hover {
+  color: #7A3928;
 }
 
 .sg-del-tab.active {
-  border-color: #7A3928;
-  background: rgba(122,57,40,0.1);
   color: #7A3928;
+  border-bottom-color: #7A3928;
+  font-weight: 600;
 }
 
 .sg-del-panel { display: block; }
@@ -616,17 +622,6 @@
 .sg-toast-success { background: #197D61; color: white; }
 .sg-toast-error { background: #7A3928; color: white; }
 .sg-toast-hidden { opacity: 0; pointer-events: none; transform: translateY(10px); }
-
-.sg-alert-warn {
-  margin-bottom: 16px;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(122,57,40,0.25);
-  background: rgba(122,57,40,0.08);
-  color: #7A3928;
-  font-size: 13px;
-  font-weight: 500;
-}
 
 .sg-delete-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 

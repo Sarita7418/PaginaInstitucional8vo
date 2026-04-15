@@ -286,6 +286,59 @@
 	</div>
 </div>
 
+<!-- MODAL EDITAR CONTACTO -->
+<div id="sg-modal-editar-contacto" class="sg-modal" style="display:none;">
+	<div class="sg-modal-box">
+		<div class="sg-modal-header">
+			<h3 class="sg-modal-title">Editar Contacto de Emergencia</h3>
+			<button class="sg-modal-close" id="close-modal-contacto">✕</button>
+		</div>
+		<form id="form-editar-contacto" autocomplete="off">
+			<input type="hidden" id="edit-ce-id" />
+			<div class="sg-form-row">
+				<div class="sg-form-group">
+					<label class="sg-label">Nombre del contacto *</label>
+					<input type="text" class="sg-input" id="edit-ce-nombre-contacto" required />
+				</div>
+				<div class="sg-form-group">
+					<label class="sg-label">Teléfono de contacto *</label>
+					<input type="tel" class="sg-input" id="edit-ce-telefono" required />
+				</div>
+			</div>
+			<div class="sg-form-row">
+				<div class="sg-form-group sg-full">
+					<label class="sg-label">Parentesco / relación</label>
+					<input type="text" class="sg-input" id="edit-ce-parentesco" />
+				</div>
+			</div>
+			<div class="sg-form-row">
+				<div class="sg-form-group sg-full">
+					<label class="sg-label">Persona asociada (id_persona) *</label>
+					<input type="search" class="sg-search" id="edit-ce-buscar-persona" placeholder="Buscar turista registrado por nombre o teléfono..." />
+					<input type="hidden" id="edit-ce-id-persona" />
+					<div class="sg-person-selected" id="edit-ce-persona-seleccionada">Ninguna persona seleccionada</div>
+					<div class="sg-person-results" id="edit-ce-persona-resultados">
+						<div class="sg-loading-inline">Escribe para buscar turistas registrados...</div>
+					</div>
+				</div>
+			</div>
+			<div class="sg-form-row">
+				<div class="sg-form-group sg-full">
+					<label class="sg-label">Estado</label>
+					<div class="sg-toggle-group">
+						<label class="sg-toggle-opt sg-toggle-active"><input type="radio" name="edit-ce-estado" value="true" checked /> Activo</label>
+						<label class="sg-toggle-opt"><input type="radio" name="edit-ce-estado" value="false" /> Inactivo</label>
+					</div>
+				</div>
+			</div>
+			<div class="sg-modal-footer">
+				<button type="submit" class="sg-btn sg-btn-primary" id="btn-guardar-contacto-editar">Guardar Cambios</button>
+				<button type="button" class="sg-btn sg-btn-secondary" id="close-modal-contacto2">Cancelar</button>
+			</div>
+		</form>
+	</div>
+</div>
+
 <script>
 	// @ts-nocheck
 	import { supabase } from '../../lib/supabase';
@@ -303,6 +356,7 @@
 	let filtrosBusqContactos = '';
 	let filtrosEstadoContactos = '';
 	let selectedPersonaContacto: { id: number; nombres: string; apellido_paterno: string | null; apellido_materno: string | null; telefono: string | null } | null = null;
+	let selectedPersonaContactoEdit: { id: number; nombres: string; apellido_paterno: string | null; apellido_materno: string | null; telefono: string | null } | null = null;
 
 	let zoneMap: any = null;
 	let zoneMarker: any = null;
@@ -388,6 +442,24 @@
 		setTimeout(() => { t.className = 'sg-toast sg-toast-hidden'; }, 3500);
 	}
 
+	function resetPersonaSelection(mode: 'create' | 'edit') {
+		const hiddenId = mode === 'edit' ? 'edit-ce-id-persona' : 'ce-id-persona';
+		const selectedId = mode === 'edit' ? 'edit-ce-persona-seleccionada' : 'ce-persona-seleccionada';
+		const hidden = document.getElementById(hiddenId) as HTMLInputElement | null;
+		const selected = document.getElementById(selectedId);
+		if (hidden) hidden.value = '';
+		if (selected) selected.textContent = 'Ninguna persona seleccionada';
+	}
+
+	function setPersonaSelection(mode: 'create' | 'edit', persona: { id: number; nombre: string; telefono: string | null }) {
+		const hiddenId = mode === 'edit' ? 'edit-ce-id-persona' : 'ce-id-persona';
+		const selectedId = mode === 'edit' ? 'edit-ce-persona-seleccionada' : 'ce-persona-seleccionada';
+		const hidden = document.getElementById(hiddenId) as HTMLInputElement | null;
+		const selected = document.getElementById(selectedId);
+		if (hidden) hidden.value = String(persona.id);
+		if (selected) selected.textContent = `Seleccionado: ${persona.nombre}${persona.telefono ? ` - ${persona.telefono}` : ''}`;
+	}
+
 	function renderPaginator(containerId: string, total: number, currentPage: number, onPageFn: (page: number) => void) {
 		const container = document.getElementById(containerId);
 		if (!container) return;
@@ -418,8 +490,8 @@
 		return [persona.nombres, persona.apellido_paterno, persona.apellido_materno].filter(Boolean).join(' ');
 	}
 
-	async function loadPersonasTuristas(queryText = '') {
-		const resultados = document.getElementById('ce-persona-resultados');
+	async function loadPersonasTuristas(queryText = '', mode: 'create' | 'edit' = 'create') {
+		const resultados = document.getElementById(mode === 'edit' ? 'edit-ce-persona-resultados' : 'ce-persona-resultados');
 		if (!resultados) return;
 
 		resultados.innerHTML = '<div class="sg-loading-inline">Buscando turistas...</div>';
@@ -460,18 +532,31 @@
 
 		resultados.querySelectorAll('.sg-person-item').forEach((btn) => {
 			btn.addEventListener('click', () => {
-				selectedPersonaContacto = {
+				const persona = {
 					id: parseInt(btn.getAttribute('data-id') || '0', 10),
-					nombres: btn.getAttribute('data-nombre') || '',
-					apellido_paterno: null,
-					apellido_materno: null,
+					nombre: btn.getAttribute('data-nombre') || '',
 					telefono: btn.getAttribute('data-telefono') || null,
 				};
 
-				const hidden = document.getElementById('ce-id-persona') as HTMLInputElement | null;
-				const selected = document.getElementById('ce-persona-seleccionada');
-				if (hidden) hidden.value = String(selectedPersonaContacto.id);
-				if (selected) selected.textContent = `Seleccionado: ${btn.getAttribute('data-nombre') || ''}`;
+				if (mode === 'edit') {
+					selectedPersonaContactoEdit = {
+						id: persona.id,
+						nombres: persona.nombre,
+						apellido_paterno: null,
+						apellido_materno: null,
+						telefono: persona.telefono,
+					};
+				} else {
+					selectedPersonaContacto = {
+						id: persona.id,
+						nombres: persona.nombre,
+						apellido_paterno: null,
+						apellido_materno: null,
+						telefono: persona.telefono,
+					};
+				}
+
+				setPersonaSelection(mode, persona);
 			});
 		});
 	}
@@ -610,7 +695,7 @@
 					<td>${contacto.telefono || '—'}</td>
 					<td>${contacto.parentesco || '—'}</td>
 					<td><span class="sg-badge ${contacto.estado ? 'sg-badge-active' : 'sg-badge-inactive'}">${contacto.estado ? 'Activo' : 'Inactivo'}</span></td>
-					<td class="sg-td-actions"><button class="sg-btn-action" data-action="edit-contacto" data-id="${contacto.id}">Editar contacto</button></td>
+					<td class="sg-td-actions"><button class="sg-btn-action sg-btn-edit" data-action="edit-contacto" data-id="${contacto.id}" data-nombre="${contacto.nombre_contacto}">✏ Editar</button></td>
 				</tr>
 			`).join('');
 		}
@@ -619,6 +704,55 @@
 		if (info) info.textContent = `Mostrando ${rows.length} de ${count || 0} contactos`;
 		renderPaginator('btns-contactos', count || 0, paginaContactos, (p) => { paginaContactos = p; loadContactos(); });
 		loadDeleteContactos(rows);
+		tbody.querySelectorAll('[data-action="edit-contacto"]').forEach((btn) => {
+			btn.addEventListener('click', () => editarContacto(parseInt(btn.getAttribute('data-id') || '0', 10)));
+		});
+	}
+
+	async function editarContacto(id: number) {
+		const { data, error } = await supabase.from('contactos_emergencia').select('*').eq('id', id).single();
+		if (error || !data) {
+			showToast('No se pudo cargar el contacto', 'error');
+			return;
+		}
+
+		(document.getElementById('edit-ce-id') as HTMLInputElement).value = String(data.id);
+		(document.getElementById('edit-ce-nombre-contacto') as HTMLInputElement).value = data.nombre_contacto || '';
+		(document.getElementById('edit-ce-telefono') as HTMLInputElement).value = data.telefono || '';
+		(document.getElementById('edit-ce-parentesco') as HTMLInputElement).value = data.parentesco || '';
+
+		const estadoRadio = document.querySelector(`input[name="edit-ce-estado"][value="${data.estado ? 'true' : 'false'}"]`) as HTMLInputElement | null;
+		if (estadoRadio) {
+			document.querySelectorAll('input[name="edit-ce-estado"]').forEach((radio) => {
+				const parent = (radio as HTMLInputElement).parentElement;
+				if (parent) parent.classList.remove('sg-toggle-active');
+			});
+			estadoRadio.checked = true;
+			estadoRadio.parentElement?.classList.add('sg-toggle-active');
+		}
+
+		selectedPersonaContactoEdit = null;
+		resetPersonaSelection('edit');
+		const editSearch = document.getElementById('edit-ce-buscar-persona') as HTMLInputElement | null;
+		if (editSearch) editSearch.value = '';
+
+		if (data.id_persona) {
+			const { data: persona } = await supabase.from('personas').select('id, nombres, apellido_paterno, apellido_materno, telefono').eq('id', data.id_persona).single();
+			if (persona) {
+				selectedPersonaContactoEdit = persona;
+				setPersonaSelection('edit', {
+					id: persona.id,
+					nombre: getPersonaNombre(persona),
+					telefono: persona.telefono,
+				});
+			}
+		}
+
+		if (editSearch) {
+			loadPersonasTuristas('', 'edit');
+		}
+
+		openModal('sg-modal-editar-contacto');
 	}
 
 	function loadDeleteZonas(rows: Array<any>) {
@@ -667,20 +801,26 @@
 
 	async function eliminarZona(id: number, nombre: string) {
 		if (!id) return;
-		if (!confirm(`¿Eliminar la zona "${nombre}"? Esta acción no se puede deshacer.`)) return;
-		const { error } = await supabase.from('zonas_riesgo').delete().eq('id', id);
+		if (!confirm(`¿Desactivar la zona "${nombre}"? Pasará a estado inactivo.`)) return;
+		const { error } = await supabase.from('zonas_riesgo').update({
+			estado: false,
+			updated_at: new Date().toISOString(),
+		}).eq('id', id);
 		if (error) { showToast('Error: ' + error.message, 'error'); return; }
-		showToast('Zona eliminada');
+		showToast('Zona desactivada');
 		loadZonas();
 		loadStats();
 	}
 
 	async function eliminarContacto(id: number, nombre: string) {
 		if (!id) return;
-		if (!confirm(`¿Eliminar el contacto "${nombre}"? Esta acción no se puede deshacer.`)) return;
-		const { error } = await supabase.from('contactos_emergencia').delete().eq('id', id);
+		if (!confirm(`¿Desactivar el contacto "${nombre}"? Pasará a estado inactivo.`)) return;
+		const { error } = await supabase.from('contactos_emergencia').update({
+			estado: false,
+			updated_at: new Date().toISOString(),
+		}).eq('id', id);
 		if (error) { showToast('Error: ' + error.message, 'error'); return; }
-		showToast('Contacto eliminado');
+		showToast('Contacto desactivado');
 		loadContactos();
 	}
 
@@ -692,6 +832,7 @@
 		const panels = root.querySelectorAll('.sg-panel');
 		const formCrearZona = document.getElementById('form-crear-zona');
 		const formCrearContacto = document.getElementById('form-crear-contacto');
+		const formEditarContacto = document.getElementById('form-editar-contacto');
 		const formEditarZona = document.getElementById('form-editar-zona');
 		const btnNuevaZona = document.getElementById('btn-nueva-zona');
 		const btnCancelarZona = document.getElementById('btn-cancelar-zona');
@@ -815,6 +956,43 @@
 			loadDeleteContactos([]);
 		});
 
+		formEditarContacto?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const btn = document.getElementById('btn-guardar-contacto-editar') as HTMLButtonElement | null;
+			const idPersona = document.getElementById('edit-ce-id-persona') as HTMLInputElement | null;
+			if (!btn || !idPersona || !idPersona.value) {
+				showToast('Selecciona un turista registrado', 'error');
+				return;
+			}
+
+			const id = parseInt((document.getElementById('edit-ce-id') as HTMLInputElement).value, 10);
+			btn.disabled = true;
+			btn.textContent = 'Guardando...';
+
+			const estadoRadio = document.querySelector('input[name="edit-ce-estado"]:checked') as HTMLInputElement | null;
+			const { error } = await supabase.from('contactos_emergencia').update({
+				nombre_contacto: (document.getElementById('edit-ce-nombre-contacto') as HTMLInputElement).value.trim(),
+				telefono: (document.getElementById('edit-ce-telefono') as HTMLInputElement).value.trim(),
+				parentesco: (document.getElementById('edit-ce-parentesco') as HTMLInputElement).value.trim() || null,
+				id_persona: parseInt(idPersona.value, 10),
+				estado: estadoRadio?.value === 'true',
+				updated_at: new Date().toISOString(),
+			}).eq('id', id);
+
+			btn.disabled = false;
+			btn.textContent = 'Guardar Cambios';
+
+			if (error) {
+				showToast('Error: ' + error.message, 'error');
+				return;
+			}
+
+			showToast('Contacto actualizado');
+			closeModal('sg-modal-editar-contacto');
+			loadContactos();
+			loadDeleteContactos([]);
+		});
+
 		btnNuevaZona?.addEventListener('click', () => {
 			(document.querySelector('[data-panel="crear-zonas"]') as HTMLElement)?.click();
 		});
@@ -826,11 +1004,21 @@
 		document.getElementById('btn-cancelar-contacto')?.addEventListener('click', () => {
 			(formCrearContacto as HTMLFormElement)?.reset();
 			selectedPersonaContacto = null;
-			const hidden = document.getElementById('ce-id-persona') as HTMLInputElement | null;
-			const selected = document.getElementById('ce-persona-seleccionada');
-			if (hidden) hidden.value = '';
-			if (selected) selected.textContent = 'Ninguna persona seleccionada';
+			resetPersonaSelection('create');
 			(document.getElementById('ce-buscar-persona') as HTMLInputElement | null)?.focus();
+		});
+
+		document.getElementById('close-modal-contacto')?.addEventListener('click', () => closeModal('sg-modal-editar-contacto'));
+		document.getElementById('close-modal-contacto2')?.addEventListener('click', () => closeModal('sg-modal-editar-contacto'));
+		document.getElementById('sg-modal-editar-contacto')?.addEventListener('click', (e) => {
+			if (e.target === e.currentTarget) closeModal('sg-modal-editar-contacto');
+		});
+
+		let personaEditSearchTimeout: number | undefined;
+		document.getElementById('edit-ce-buscar-persona')?.addEventListener('input', (e) => {
+			window.clearTimeout(personaEditSearchTimeout);
+			const value = (e.target as HTMLInputElement).value;
+			personaEditSearchTimeout = window.setTimeout(() => loadPersonasTuristas(value, 'edit'), 250);
 		});
 
 		let personaSearchTimeout: number | undefined;
@@ -866,6 +1054,10 @@
 
 		document.getElementById('btn-nuevo-contacto')?.addEventListener('click', () => {
 			(document.querySelector('[data-panel="crear-contactos"]') as HTMLElement)?.click();
+		});
+
+		(document.querySelector('[data-panel="crear-contactos"]') as HTMLElement | null)?.addEventListener('click', () => {
+			loadPersonasTuristas('', 'create');
 		});
 
 		document.getElementById('search-contactos')?.addEventListener('input', (e) => {
@@ -932,6 +1124,10 @@
 
 					if (panelId === 'sg-panel-ver-contactos') {
 						loadContactos();
+					}
+
+					if (panelId === 'sg-panel-crear-contactos') {
+						loadPersonasTuristas('', 'create');
 					}
 
 					if (panelId === 'sg-panel-eliminar') {
