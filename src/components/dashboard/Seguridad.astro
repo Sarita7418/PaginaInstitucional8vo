@@ -67,11 +67,11 @@
 					</div>
 				</div>
 				<div class="sg-stats-row">
-					<div class="sg-stat"><span class="sg-stat-num sg-teal-text">24</span><span class="sg-stat-lbl">Zonas Registradas</span></div>
+					<div class="sg-stat"><span class="sg-stat-num sg-teal-text" id="stat-zonas">—</span><span class="sg-stat-lbl">Zonas Registradas</span></div>
 					<div class="sg-stat-div"></div>
-					<div class="sg-stat"><span class="sg-stat-num sg-amber-text">8</span><span class="sg-stat-lbl">Riesgo Alto/Critico</span></div>
+					<div class="sg-stat"><span class="sg-stat-num sg-amber-text" id="stat-zonas-activas">—</span><span class="sg-stat-lbl">Zonas Activas</span></div>
 					<div class="sg-stat-div"></div>
-					<div class="sg-stat"><span class="sg-stat-num sg-dark-text">37</span><span class="sg-stat-lbl">Contactos Activos</span></div>
+					<div class="sg-stat"><span class="sg-stat-num sg-dark-text" id="stat-niveles">—</span><span class="sg-stat-lbl">Niveles de Riesgo</span></div>
 				</div>
 			</div>
 
@@ -85,24 +85,42 @@
 						<p class="sg-panel-subtitle">Formulario para registrar zonas_riesgo</p>
 					</div>
 				</div>
-				<form class="sg-form-layout" autocomplete="off">
-					<div class="sg-form-row">
-						<div class="sg-form-group sg-full"><label class="sg-label">Nombre de Zona *</label><input type="text" class="sg-input" placeholder="Ej: Ladera Norte - Mirador" /></div>
+				<form id="form-crear-zona" class="sg-form-layout" autocomplete="off">
+					<div class="sg-form-main">
+						<div class="sg-form-row">
+							<div class="sg-form-group sg-full"><label class="sg-label">Nombre de zona *</label><input type="text" class="sg-input" id="zr-nombre" placeholder="Ej: Ladera Norte - Mirador" required /></div>
+						</div>
+						<div class="sg-form-row">
+							<div class="sg-form-group sg-full"><label class="sg-label">Descripcion</label><textarea class="sg-textarea" id="zr-descripcion" placeholder="Detalle del riesgo, recomendaciones y observaciones..."></textarea></div>
+						</div>
+						<div class="sg-form-row">
+							<div class="sg-form-group"><label class="sg-label">Latitud</label><input type="number" step="any" class="sg-input" id="zr-latitud" placeholder="-16.4956" /></div>
+							<div class="sg-form-group"><label class="sg-label">Longitud</label><input type="number" step="any" class="sg-input" id="zr-longitud" placeholder="-68.1335" /></div>
+						</div>
+						<div class="sg-form-row">
+							<div class="sg-form-group"><label class="sg-label">Radio de activacion (m)</label><input type="number" class="sg-input" id="zr-radio-metros" value="50" min="0" /></div>
+							<div class="sg-form-group"><label class="sg-label">Estado</label>
+								<div class="sg-toggle-group">
+									<label class="sg-toggle-opt sg-toggle-active"><input type="radio" name="zr-estado" value="true" checked /> Activa</label>
+									<label class="sg-toggle-opt"><input type="radio" name="zr-estado" value="false" /> Inactiva</label>
+								</div>
+							</div>
+						</div>
+						<div class="sg-form-row">
+							<div class="sg-form-group sg-full"><label class="sg-label">Nivel de riesgo</label><select class="sg-select" id="zr-nivel-riesgo"><option value="">Cargando niveles...</option></select></div>
+						</div>
+						<div class="sg-form-actions">
+							<button type="submit" class="sg-btn sg-btn-primary" id="btn-guardar-zona">Guardar Zona</button>
+							<button type="button" class="sg-btn sg-btn-secondary" id="btn-cancelar-zona">Cancelar</button>
+						</div>
 					</div>
-					<div class="sg-form-row">
-						<div class="sg-form-group"><label class="sg-label">Latitud</label><input type="number" step="any" class="sg-input" placeholder="-16.4956" /></div>
-						<div class="sg-form-group"><label class="sg-label">Longitud</label><input type="number" step="any" class="sg-input" placeholder="-68.1335" /></div>
-					</div>
-					<div class="sg-form-row">
-						<div class="sg-form-group"><label class="sg-label">Nivel de Riesgo</label><select class="sg-select"><option>Bajo</option><option>Medio</option><option>Alto</option><option>Critico</option></select></div>
-						<div class="sg-form-group"><label class="sg-label">Estado</label><select class="sg-select"><option>Activa</option><option>Inactiva</option></select></div>
-					</div>
-					<div class="sg-form-row">
-						<div class="sg-form-group sg-full"><label class="sg-label">Descripcion</label><textarea class="sg-textarea" placeholder="Detalle del riesgo, recomendaciones y observaciones..."></textarea></div>
-					</div>
-					<div class="sg-form-actions">
-						<button type="button" class="sg-btn sg-btn-primary">Guardar Zona</button>
-						<button type="button" class="sg-btn sg-btn-secondary">Cancelar</button>
+
+					<div class="sg-map-preview">
+						<div class="sg-map-hint">
+							<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M12 2L3 7v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V7l-9-5z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+							<span>Haz clic en el mapa o escribe coordenadas</span>
+						</div>
+						<div id="sg-leaflet-map"></div>
 					</div>
 				</form>
 			</div>
@@ -116,21 +134,22 @@
 						<h3 class="sg-panel-title">Ver Zonas de Riesgo</h3>
 						<p class="sg-panel-subtitle">Listado de registros en zonas_riesgo</p>
 					</div>
+					<button class="sg-btn sg-btn-primary sg-ml-auto" id="btn-nueva-zona">+ Nueva</button>
 				</div>
 				<div class="sg-toolbar">
-					<input type="text" class="sg-search" placeholder="Buscar zona..." />
-					<select class="sg-filter"><option>Todos los niveles</option><option>Bajo</option><option>Medio</option><option>Alto</option><option>Critico</option></select>
-					<select class="sg-filter"><option>Todos</option><option>Activa</option><option>Inactiva</option></select>
+					<input type="text" class="sg-search" id="search-zonas" placeholder="Buscar zona..." />
+					<select class="sg-filter" id="filter-nivel-zonas"><option value="">Todos los niveles</option></select>
+					<select class="sg-filter" id="filter-estado-zonas"><option value="">Todos</option><option value="true">Activa</option><option value="false">Inactiva</option></select>
 				</div>
 				<div class="sg-table-wrap">
 					<table class="sg-table">
 						<thead><tr><th>Zona</th><th>Nivel</th><th>Coordenadas</th><th>Estado</th><th>Acciones</th></tr></thead>
-						<tbody>
-							<tr><td>Ladera Norte - Mirador</td><td><span class="sg-badge sg-badge-amber">Medio</span></td><td>-16.4956, -68.1335</td><td><span class="sg-badge sg-badge-active">Activa</span></td><td><button class="sg-btn-action">Editar</button></td></tr>
-							<tr><td>Sendero Quebrada Sur</td><td><span class="sg-badge sg-badge-terra">Alto</span></td><td>-16.5082, -68.1460</td><td><span class="sg-badge sg-badge-active">Activa</span></td><td><button class="sg-btn-action">Editar</button></td></tr>
+						<tbody id="tbody-zonas">
+							<tr><td colspan="5" class="sg-loading-row">Cargando datos...</td></tr>
 						</tbody>
 					</table>
 				</div>
+				<div class="sg-pagination"><span class="sg-page-info" id="info-zonas">—</span><div class="sg-page-btns" id="btns-zonas"></div></div>
 			</div>
 
 			<div class="sg-panel" id="sg-panel-crear-contactos" role="tabpanel" hidden>
@@ -217,12 +236,278 @@
 </div>
 
 <script>
+	// @ts-nocheck
+	import { supabase } from '../../lib/supabase';
+
+	const PAGE_SIZE = 8;
+	const DOMINIO_NIVEL_RIESGO = 8;
+
+	let nivelesRiesgo: Array<{ id: number; descripcion: string }> = [];
+	let paginaZonas = 1;
+	let filtrosBusqZonas = '';
+	let filtrosNivelZonas = '';
+	let filtrosEstadoZonas = '';
+
+	let zoneMap: any = null;
+	let zoneMarker: any = null;
+	let leafletLoaded = false;
+
+	function loadLeaflet() {
+		return new Promise((resolve) => {
+			if (leafletLoaded || (window as any).L) {
+				leafletLoaded = true;
+				resolve(true);
+				return;
+			}
+
+			const script = document.createElement('script');
+			script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+			script.onload = () => { leafletLoaded = true; resolve(true); };
+			document.head.appendChild(script);
+		});
+	}
+
+	async function initLeafletMap() {
+		await loadLeaflet();
+		const L = (window as any).L;
+		const mapEl = document.getElementById('sg-leaflet-map');
+		if (!mapEl || zoneMap) return;
+
+		const defaultLat = -16.5;
+		const defaultLng = -68.15;
+
+		zoneMap = L.map('sg-leaflet-map', { zoomControl: true, attributionControl: false }).setView([defaultLat, defaultLng], 13);
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(zoneMap);
+
+		const customIcon = L.divIcon({
+			html: `<svg width="28" height="36" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M12 0C5.373 0 0 5.373 0 12c0 8 12 20 12 20S24 20 24 12C24 5.373 18.627 0 12 0z" fill="#0F988A"/>
+				<circle cx="12" cy="12" r="5" fill="white"/>
+			</svg>`,
+			className: '',
+			iconSize: [28, 36],
+			iconAnchor: [14, 36],
+		});
+
+		zoneMarker = L.marker([defaultLat, defaultLng], { icon: customIcon, opacity: 0 }).addTo(zoneMap);
+
+		zoneMap.on('click', (e: any) => {
+			const { lat, lng } = e.latlng;
+			const latInput = document.getElementById('zr-latitud') as HTMLInputElement | null;
+			const lngInput = document.getElementById('zr-longitud') as HTMLInputElement | null;
+			if (latInput) latInput.value = lat.toFixed(6);
+			if (lngInput) lngInput.value = lng.toFixed(6);
+			updateZoneMapFromInputs();
+		});
+	}
+
+	function updateZoneMapFromInputs() {
+		const latInput = document.getElementById('zr-latitud') as HTMLInputElement | null;
+		const lngInput = document.getElementById('zr-longitud') as HTMLInputElement | null;
+		if (!latInput || !lngInput || !zoneMap || !zoneMarker) return;
+		const lat = parseFloat(latInput.value);
+		const lng = parseFloat(lngInput.value);
+		if (Number.isNaN(lat) || Number.isNaN(lng)) return;
+		zoneMarker.setLatLng([lat, lng]);
+		zoneMarker.setOpacity(1);
+		zoneMap.setView([lat, lng], 16, { animate: true });
+	}
+
+	function resetZoneMap() {
+		if (zoneMap) zoneMap.setView([-16.5, -68.15], 13);
+		if (zoneMarker) zoneMarker.setOpacity(0);
+	}
+
+	function showToast(msg: string, type = 'success') {
+		const existing = document.getElementById('sg-toast');
+		if (!existing) {
+			const toast = document.createElement('div');
+			toast.id = 'sg-toast';
+			document.body.appendChild(toast);
+		}
+		const t = document.getElementById('sg-toast');
+		if (!t) return;
+		t.textContent = msg;
+		t.className = `sg-toast sg-toast-${type}`;
+		setTimeout(() => { t.className = 'sg-toast sg-toast-hidden'; }, 3500);
+	}
+
+	function renderPaginator(containerId: string, total: number, currentPage: number, onPageFn: (page: number) => void) {
+		const container = document.getElementById(containerId);
+		if (!container) return;
+		const totalPages = Math.ceil(total / PAGE_SIZE);
+		if (totalPages <= 1) { container.innerHTML = ''; return; }
+		let html = `<button class="sg-page-btn" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
+		for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+			html += `<button class="sg-page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+		}
+		html += `<button class="sg-page-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${totalPages + 1}">›</button>`;
+		container.innerHTML = html;
+		container.querySelectorAll('[data-page]').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const p = parseInt(btn.getAttribute('data-page') || '0', 10);
+				if (Number.isNaN(p) || p < 1 || p > totalPages) return;
+				onPageFn(p);
+			});
+		});
+		const prev = container.querySelector('button:first-child') as HTMLButtonElement | null;
+		if (prev && !prev.disabled) prev.addEventListener('click', () => onPageFn(Math.max(1, currentPage - 1)));
+	}
+
+	function getNivelNombre(id: number | null) {
+		return nivelesRiesgo.find((n) => n.id === id)?.descripcion || '—';
+	}
+
+	async function loadNivelesRiesgo() {
+		const { data, error } = await supabase
+			.from('subdominios')
+			.select('id, descripcion')
+			.eq('id_dominio', DOMINIO_NIVEL_RIESGO)
+			.order('descripcion');
+		if (error) {
+			showToast('Error cargando niveles de riesgo', 'error');
+			return;
+		}
+
+		nivelesRiesgo = data || [];
+		const opts = '<option value="">Sin nivel</option>' + nivelesRiesgo.map((n) => `<option value="${n.id}">${n.descripcion}</option>`).join('');
+		const select = document.getElementById('zr-nivel-riesgo');
+		if (select) select.innerHTML = opts;
+
+		const filterNivel = document.getElementById('filter-nivel-zonas');
+		if (filterNivel) {
+			filterNivel.innerHTML = '<option value="">Todos los niveles</option>' + nivelesRiesgo.map((n) => `<option value="${n.id}">${n.descripcion}</option>`).join('');
+		}
+
+		const statNiveles = document.getElementById('stat-niveles');
+		if (statNiveles) statNiveles.textContent = String(nivelesRiesgo.length);
+	}
+
+	async function loadStats() {
+		const [{ count: totalZonas }, { count: zonasActivas }] = await Promise.all([
+			supabase.from('zonas_riesgo').select('*', { count: 'exact', head: true }),
+			supabase.from('zonas_riesgo').select('*', { count: 'exact', head: true }).eq('estado', true),
+		]);
+
+		const statZonas = document.getElementById('stat-zonas');
+		const statZonasActivas = document.getElementById('stat-zonas-activas');
+		const statNiveles = document.getElementById('stat-niveles');
+		if (statZonas) statZonas.textContent = String(totalZonas ?? 0);
+		if (statZonasActivas) statZonasActivas.textContent = String(zonasActivas ?? 0);
+		if (statNiveles) statNiveles.textContent = String(nivelesRiesgo.length);
+	}
+
+	async function loadZonas() {
+		let query = supabase.from('zonas_riesgo').select('*', { count: 'exact' }).order('id', { ascending: false });
+		if (filtrosBusqZonas) query = query.ilike('nombre', `%${filtrosBusqZonas}%`);
+		if (filtrosNivelZonas) query = query.eq('id_nivel_riesgo', filtrosNivelZonas);
+		if (filtrosEstadoZonas !== '') query = query.eq('estado', filtrosEstadoZonas === 'true');
+		const from = (paginaZonas - 1) * PAGE_SIZE;
+		query = query.range(from, from + PAGE_SIZE - 1);
+
+		const { data, count } = await query;
+		const rows = data || [];
+		const tbody = document.getElementById('tbody-zonas');
+		if (!tbody) return;
+
+		if (!rows.length) {
+			tbody.innerHTML = '<tr><td colspan="5" class="sg-loading-row">No se encontraron zonas</td></tr>';
+		} else {
+			tbody.innerHTML = rows.map((zona) => `
+				<tr>
+					<td class="sg-td-name">${zona.nombre}</td>
+					<td>${getNivelNombre(zona.id_nivel_riesgo)}</td>
+					<td class="sg-td-coords">${zona.latitud != null ? (+zona.latitud).toFixed(4) : '—'}, ${zona.longitud != null ? (+zona.longitud).toFixed(4) : '—'}</td>
+					<td><span class="sg-badge ${zona.estado ? 'sg-badge-active' : 'sg-badge-inactive'}">${zona.estado ? 'Activa' : 'Inactiva'}</span></td>
+					<td class="sg-td-actions"><button class="sg-btn-action" data-action="edit-zona" data-id="${zona.id}">Editar</button></td>
+				</tr>
+			`).join('');
+		}
+
+		const info = document.getElementById('info-zonas');
+		if (info) info.textContent = `Mostrando ${rows.length} de ${count || 0} zonas`;
+		renderPaginator('btns-zonas', count || 0, paginaZonas, (p) => { paginaZonas = p; loadZonas(); });
+	}
+
 	const initSeguridadModule = () => {
 		const root = document.querySelector('[data-section-target="seguridad"]');
 		if (!root || root.getAttribute('data-sg-init') === '1') return;
 
 		const cards = root.querySelectorAll('.sg-action-card');
 		const panels = root.querySelectorAll('.sg-panel');
+		const formCrearZona = document.getElementById('form-crear-zona');
+		const btnNuevaZona = document.getElementById('btn-nueva-zona');
+		const btnCancelarZona = document.getElementById('btn-cancelar-zona');
+
+		loadNivelesRiesgo().then(() => {
+			loadStats();
+			loadZonas();
+		});
+
+		formCrearZona?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const btn = document.getElementById('btn-guardar-zona');
+			const estadoRadio = document.querySelector('input[name="zr-estado"]:checked');
+			const nivelVal = document.getElementById('zr-nivel-riesgo') as HTMLSelectElement | null;
+			if (!btn || !nivelVal) return;
+
+			btn.setAttribute('disabled', 'disabled');
+			btn.textContent = 'Guardando...';
+
+			const { error } = await supabase.from('zonas_riesgo').insert([{
+				nombre: (document.getElementById('zr-nombre') as HTMLInputElement).value.trim(),
+				descripcion: (document.getElementById('zr-descripcion') as HTMLTextAreaElement).value.trim() || null,
+				latitud: parseFloat((document.getElementById('zr-latitud') as HTMLInputElement).value) || null,
+				longitud: parseFloat((document.getElementById('zr-longitud') as HTMLInputElement).value) || null,
+				radio_metros: parseInt((document.getElementById('zr-radio-metros') as HTMLInputElement).value) || 50,
+				estado: (estadoRadio as HTMLInputElement)?.value === 'true',
+				id_nivel_riesgo: nivelVal.value ? parseInt(nivelVal.value, 10) : null,
+			}]);
+
+			btn.removeAttribute('disabled');
+			btn.textContent = 'Guardar Zona';
+
+			if (error) {
+				showToast('Error: ' + error.message, 'error');
+				return;
+			}
+
+			showToast('Zona de riesgo creada correctamente');
+			(formCrearZona as HTMLFormElement).reset();
+			const activeToggle = document.querySelector('.sg-toggle-opt') as HTMLElement | null;
+			if (activeToggle) activeToggle.classList.add('sg-toggle-active');
+			resetZoneMap();
+			paginaZonas = 1;
+			loadZonas();
+			loadStats();
+			(document.querySelector('[data-panel="ver-zonas"]') as HTMLElement)?.click();
+		});
+
+		btnNuevaZona?.addEventListener('click', () => {
+			(document.querySelector('[data-panel="crear-zonas"]') as HTMLElement)?.click();
+		});
+
+		btnCancelarZona?.addEventListener('click', () => {
+			(document.querySelector('[data-panel="ver-zonas"]') as HTMLElement)?.click();
+		});
+
+		document.getElementById('search-zonas')?.addEventListener('input', (e) => {
+			filtrosBusqZonas = (e.target as HTMLInputElement).value;
+			paginaZonas = 1;
+			loadZonas();
+		});
+
+		document.getElementById('filter-nivel-zonas')?.addEventListener('change', (e) => {
+			filtrosNivelZonas = (e.target as HTMLSelectElement).value;
+			paginaZonas = 1;
+			loadZonas();
+		});
+
+		document.getElementById('filter-estado-zonas')?.addEventListener('change', (e) => {
+			filtrosEstadoZonas = (e.target as HTMLSelectElement).value;
+			paginaZonas = 1;
+			loadZonas();
+		});
 
 		cards.forEach((card) => {
 			card.addEventListener('click', () => {
@@ -246,9 +531,29 @@
 				if (targetPanel) {
 					targetPanel.classList.add('active');
 					targetPanel.removeAttribute('hidden');
+					if (panelId === 'sg-panel-crear-zonas') {
+						setTimeout(() => {
+							if (!zoneMap) {
+								initLeafletMap().then(() => {
+										(document.getElementById('zr-latitud') as HTMLInputElement | null)?.addEventListener('input', updateZoneMapFromInputs);
+										(document.getElementById('zr-longitud') as HTMLInputElement | null)?.addEventListener('input', updateZoneMapFromInputs);
+								});
+							} else {
+								zoneMap.invalidateSize();
+							}
+						}, 150);
+					}
+
+					if (panelId === 'sg-panel-ver-zonas') {
+						loadZonas();
+						loadStats();
+					}
 				}
 			});
 		});
+
+		(document.getElementById('zr-latitud') as HTMLInputElement | null)?.addEventListener('input', updateZoneMapFromInputs);
+		(document.getElementById('zr-longitud') as HTMLInputElement | null)?.addEventListener('input', updateZoneMapFromInputs);
 
 		root.setAttribute('data-sg-init', '1');
 	};
