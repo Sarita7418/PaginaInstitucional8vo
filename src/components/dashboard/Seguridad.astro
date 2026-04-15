@@ -88,18 +88,18 @@
 				<form id="form-crear-zona" class="sg-form-layout" autocomplete="off">
 					<div class="sg-form-main">
 						<div class="sg-form-row">
-							<div class="sg-form-group sg-full"><label class="sg-label">Nombre de zona *</label><input type="text" class="sg-input" id="zr-nombre" placeholder="Ej: Ladera Norte - Mirador" required /></div>
+							<div class="sg-form-group sg-full"><label class="sg-label">Nombre de la zona *</label><input type="text" class="sg-input" id="zr-nombre" placeholder="Ej: Ladera Norte - Mirador" required /></div>
 						</div>
 						<div class="sg-form-row">
 							<div class="sg-form-group sg-full"><label class="sg-label">Descripcion</label><textarea class="sg-textarea" id="zr-descripcion" placeholder="Detalle del riesgo, recomendaciones y observaciones..."></textarea></div>
 						</div>
 						<div class="sg-form-row">
-							<div class="sg-form-group"><label class="sg-label">Latitud</label><input type="number" step="any" class="sg-input" id="zr-latitud" placeholder="-16.4956" /></div>
-							<div class="sg-form-group"><label class="sg-label">Longitud</label><input type="number" step="any" class="sg-input" id="zr-longitud" placeholder="-68.1335" /></div>
+							<div class="sg-form-group"><label class="sg-label">Latitud geográfica</label><input type="number" step="any" class="sg-input" id="zr-latitud" placeholder="-16.4956" /></div>
+							<div class="sg-form-group"><label class="sg-label">Longitud geográfica</label><input type="number" step="any" class="sg-input" id="zr-longitud" placeholder="-68.1335" /></div>
 						</div>
 						<div class="sg-form-row">
-							<div class="sg-form-group"><label class="sg-label">Radio de activacion (m)</label><input type="number" class="sg-input" id="zr-radio-metros" value="50" min="0" /></div>
-							<div class="sg-form-group"><label class="sg-label">Estado</label>
+							<div class="sg-form-group"><label class="sg-label">Radio de cobertura (m)</label><input type="number" class="sg-input" id="zr-radio-metros" value="50" min="0" /></div>
+							<div class="sg-form-group"><label class="sg-label">Estado de la zona</label>
 								<div class="sg-toggle-group">
 									<label class="sg-toggle-opt sg-toggle-active"><input type="radio" name="zr-estado" value="true" checked /> Activa</label>
 									<label class="sg-toggle-opt"><input type="radio" name="zr-estado" value="false" /> Inactiva</label>
@@ -107,7 +107,7 @@
 							</div>
 						</div>
 						<div class="sg-form-row">
-							<div class="sg-form-group sg-full"><label class="sg-label">Nivel de riesgo</label><select class="sg-select" id="zr-nivel-riesgo"><option value="">Cargando niveles...</option></select></div>
+							<div class="sg-form-group sg-full"><label class="sg-label">Nivel de riesgo asociado</label><select class="sg-select" id="zr-nivel-riesgo"><option value="">Cargando niveles...</option></select></div>
 						</div>
 						<div class="sg-form-actions">
 							<button type="submit" class="sg-btn sg-btn-primary" id="btn-guardar-zona">Guardar Zona</button>
@@ -162,21 +162,28 @@
 						<p class="sg-panel-subtitle">Formulario para registrar contactos_emergencia</p>
 					</div>
 				</div>
-				<form class="sg-form-layout" autocomplete="off">
+				<form id="form-crear-contacto" class="sg-form-layout" autocomplete="off">
 					<div class="sg-form-row">
-						<div class="sg-form-group"><label class="sg-label">Nombre Completo *</label><input type="text" class="sg-input" placeholder="Ej: Juan Perez" /></div>
-						<div class="sg-form-group"><label class="sg-label">Telefono *</label><input type="tel" class="sg-input" placeholder="+591 7XXXXXXX" /></div>
+							<div class="sg-form-group"><label class="sg-label">Nombre del contacto *</label><input type="text" class="sg-input" id="ce-nombre-contacto" placeholder="Ej: Juan Perez" required /></div>
+							<div class="sg-form-group"><label class="sg-label">Teléfono de contacto *</label><input type="tel" class="sg-input" id="ce-telefono" placeholder="+591 7XXXXXXX" required /></div>
 					</div>
 					<div class="sg-form-row">
-						<div class="sg-form-group"><label class="sg-label">Relacion / Cargo</label><input type="text" class="sg-input" placeholder="Policia Turistica / Familiar" /></div>
-						<div class="sg-form-group"><label class="sg-label">Prioridad</label><select class="sg-select"><option>Alta</option><option>Media</option><option>Baja</option></select></div>
+						<div class="sg-form-group sg-full"><label class="sg-label">Parentesco / relación</label><input type="text" class="sg-input" id="ce-parentesco" placeholder="Ej: Hermano, Pareja, Amigo" /></div>
 					</div>
 					<div class="sg-form-row">
-						<div class="sg-form-group sg-full"><label class="sg-label">Zona Asociada</label><select class="sg-select"><option>Seleccionar zona de riesgo</option><option>Ladera Norte - Mirador</option><option>Sendero Quebrada Sur</option></select></div>
+						<div class="sg-form-group sg-full">
+							<label class="sg-label">Persona asociada (id_persona) *</label>
+							<input type="search" class="sg-search" id="ce-buscar-persona" placeholder="Buscar turista registrado por nombre o teléfono..." />
+							<input type="hidden" id="ce-id-persona" />
+							<div class="sg-person-selected" id="ce-persona-seleccionada">Ninguna persona seleccionada</div>
+							<div class="sg-person-results" id="ce-persona-resultados">
+								<div class="sg-loading-inline">Escribe para buscar turistas registrados...</div>
+							</div>
+						</div>
 					</div>
 					<div class="sg-form-actions">
-						<button type="button" class="sg-btn sg-btn-primary">Guardar Contacto</button>
-						<button type="button" class="sg-btn sg-btn-secondary">Cancelar</button>
+						<button type="submit" class="sg-btn sg-btn-primary" id="btn-guardar-contacto">Guardar Contacto</button>
+						<button type="button" class="sg-btn sg-btn-secondary" id="btn-cancelar-contacto">Cancelar</button>
 					</div>
 				</form>
 			</div>
@@ -287,6 +294,7 @@
 	const DOMINIO_NIVEL_RIESGO = 8;
 
 	let nivelesRiesgo: Array<{ id: number; descripcion: string }> = [];
+	let personasTuristas: Array<{ id: number; nombres: string; apellido_paterno: string | null; apellido_materno: string | null; telefono: string | null }> = [];
 	let paginaZonas = 1;
 	let paginaContactos = 1;
 	let filtrosBusqZonas = '';
@@ -294,6 +302,7 @@
 	let filtrosEstadoZonas = '';
 	let filtrosBusqContactos = '';
 	let filtrosEstadoContactos = '';
+	let selectedPersonaContacto: { id: number; nombres: string; apellido_paterno: string | null; apellido_materno: string | null; telefono: string | null } | null = null;
 
 	let zoneMap: any = null;
 	let zoneMarker: any = null;
@@ -403,6 +412,68 @@
 
 	function getNivelNombre(id: number | null) {
 		return nivelesRiesgo.find((n) => n.id === id)?.descripcion || '—';
+	}
+
+	function getPersonaNombre(persona: { nombres: string; apellido_paterno: string | null; apellido_materno: string | null }) {
+		return [persona.nombres, persona.apellido_paterno, persona.apellido_materno].filter(Boolean).join(' ');
+	}
+
+	async function loadPersonasTuristas(queryText = '') {
+		const resultados = document.getElementById('ce-persona-resultados');
+		if (!resultados) return;
+
+		resultados.innerHTML = '<div class="sg-loading-inline">Buscando turistas...</div>';
+
+		let query = supabase
+			.from('personas')
+			.select('id, nombres, apellido_paterno, apellido_materno, telefono')
+			.eq('id_rol', 1)
+			.eq('estado', true)
+			.order('nombres');
+
+		if (queryText.trim()) {
+			const term = queryText.trim();
+			query = query.or(`nombres.ilike.%${term}%,apellido_paterno.ilike.%${term}%,apellido_materno.ilike.%${term}%,telefono.ilike.%${term}%`);
+		}
+
+		const { data, error } = await query;
+		if (error) {
+			resultados.innerHTML = '<div class="sg-loading-inline">Error al buscar turistas</div>';
+			return;
+		}
+
+		personasTuristas = data || [];
+		if (!personasTuristas.length) {
+			resultados.innerHTML = '<div class="sg-loading-inline">No se encontraron turistas registrados</div>';
+			return;
+		}
+
+		resultados.innerHTML = personasTuristas.map((persona) => `
+			<button type="button" class="sg-person-item" data-id="${persona.id}" data-nombre="${getPersonaNombre(persona)}" data-telefono="${persona.telefono || ''}">
+				<div class="sg-person-item-main">
+					<span class="sg-person-item-name">${getPersonaNombre(persona)}</span>
+					<span class="sg-person-item-meta">${persona.telefono || 'Sin telefono registrado'}</span>
+				</div>
+				<span class="sg-person-item-badge">Seleccionar</span>
+			</button>
+		`).join('');
+
+		resultados.querySelectorAll('.sg-person-item').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				selectedPersonaContacto = {
+					id: parseInt(btn.getAttribute('data-id') || '0', 10),
+					nombres: btn.getAttribute('data-nombre') || '',
+					apellido_paterno: null,
+					apellido_materno: null,
+					telefono: btn.getAttribute('data-telefono') || null,
+				};
+
+				const hidden = document.getElementById('ce-id-persona') as HTMLInputElement | null;
+				const selected = document.getElementById('ce-persona-seleccionada');
+				if (hidden) hidden.value = String(selectedPersonaContacto.id);
+				if (selected) selected.textContent = `Seleccionado: ${btn.getAttribute('data-nombre') || ''}`;
+			});
+		});
 	}
 
 	async function loadNivelesRiesgo() {
@@ -620,6 +691,7 @@
 		const cards = root.querySelectorAll('.sg-action-card');
 		const panels = root.querySelectorAll('.sg-panel');
 		const formCrearZona = document.getElementById('form-crear-zona');
+		const formCrearContacto = document.getElementById('form-crear-contacto');
 		const formEditarZona = document.getElementById('form-editar-zona');
 		const btnNuevaZona = document.getElementById('btn-nueva-zona');
 		const btnCancelarZona = document.getElementById('btn-cancelar-zona');
@@ -628,6 +700,7 @@
 			loadStats();
 			loadZonas();
 			loadContactos();
+			loadPersonasTuristas();
 		});
 
 		formCrearZona?.addEventListener('submit', async (e) => {
@@ -705,12 +778,66 @@
 			loadStats();
 		});
 
+		formCrearContacto?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const btn = document.getElementById('btn-guardar-contacto') as HTMLButtonElement | null;
+			const idPersona = document.getElementById('ce-id-persona') as HTMLInputElement | null;
+			if (!btn || !idPersona || !idPersona.value) {
+				showToast('Selecciona un turista registrado', 'error');
+				return;
+			}
+
+			btn.disabled = true;
+			btn.textContent = 'Guardando...';
+
+			const { error } = await supabase.from('contactos_emergencia').insert([{
+				nombre_contacto: (document.getElementById('ce-nombre-contacto') as HTMLInputElement).value.trim(),
+				telefono: (document.getElementById('ce-telefono') as HTMLInputElement).value.trim(),
+				parentesco: (document.getElementById('ce-parentesco') as HTMLInputElement).value.trim() || null,
+				id_persona: parseInt(idPersona.value, 10),
+				estado: true,
+			}]);
+
+			btn.disabled = false;
+			btn.textContent = 'Guardar Contacto';
+
+			if (error) {
+				showToast('Error: ' + error.message, 'error');
+				return;
+			}
+
+			showToast('Contacto de emergencia creado');
+			(formCrearContacto as HTMLFormElement).reset();
+			selectedPersonaContacto = null;
+			const selected = document.getElementById('ce-persona-seleccionada');
+			if (selected) selected.textContent = 'Ninguna persona seleccionada';
+			loadContactos();
+			loadDeleteContactos([]);
+		});
+
 		btnNuevaZona?.addEventListener('click', () => {
 			(document.querySelector('[data-panel="crear-zonas"]') as HTMLElement)?.click();
 		});
 
 		btnCancelarZona?.addEventListener('click', () => {
 			(document.querySelector('[data-panel="ver-zonas"]') as HTMLElement)?.click();
+		});
+
+		document.getElementById('btn-cancelar-contacto')?.addEventListener('click', () => {
+			(formCrearContacto as HTMLFormElement)?.reset();
+			selectedPersonaContacto = null;
+			const hidden = document.getElementById('ce-id-persona') as HTMLInputElement | null;
+			const selected = document.getElementById('ce-persona-seleccionada');
+			if (hidden) hidden.value = '';
+			if (selected) selected.textContent = 'Ninguna persona seleccionada';
+			(document.getElementById('ce-buscar-persona') as HTMLInputElement | null)?.focus();
+		});
+
+		let personaSearchTimeout: number | undefined;
+		document.getElementById('ce-buscar-persona')?.addEventListener('input', (e) => {
+			window.clearTimeout(personaSearchTimeout);
+			const value = (e.target as HTMLInputElement).value;
+			personaSearchTimeout = window.setTimeout(() => loadPersonasTuristas(value), 250);
 		});
 
 		document.getElementById('close-modal-zona')?.addEventListener('click', () => closeModal('sg-modal-editar-zona'));
