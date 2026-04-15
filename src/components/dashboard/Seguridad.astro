@@ -1,0 +1,1149 @@
+---
+// Seguridad.astro - Modulo de Zonas de Riesgo y Contactos de Emergencia
+---
+
+<link rel="stylesheet" href="/src/components/dashboard/Seguridad.css" />
+
+<div data-section-target="seguridad" class="section">
+	<div class="sg-module">
+		<div class="sg-actions-grid" role="tablist" aria-label="Acciones de seguridad">
+			<button class="sg-action-card sg-teal" data-panel="crear-zonas" role="tab" aria-selected="false" aria-controls="sg-panel-crear-zonas">
+				<div class="sg-action-icon">
+					<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V7l-9-5z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+				</div>
+				<div class="sg-action-text">
+					<span class="sg-action-title">Nueva Zona de Riesgo</span>
+					<span class="sg-action-desc">Registra una zona con nivel y descripcion</span>
+				</div>
+			</button>
+
+			<button class="sg-action-card sg-green2" data-panel="ver-zonas" role="tab" aria-selected="false" aria-controls="sg-panel-ver-zonas">
+				<div class="sg-action-icon">
+					<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+				</div>
+				<div class="sg-action-text">
+					<span class="sg-action-title">Listado de Zonas</span>
+					<span class="sg-action-desc">Consulta y filtra zonas de riesgo</span>
+				</div>
+			</button>
+
+			<button class="sg-action-card sg-amber" data-panel="crear-contactos" role="tab" aria-selected="false" aria-controls="sg-panel-crear-contactos">
+				<div class="sg-action-icon">
+					<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.35 1.78.68 2.62a2 2 0 0 1-.45 2.11L8 9.76a16 16 0 0 0 6.24 6.24l1.31-1.34a2 2 0 0 1 2.11-.45c.84.33 1.72.56 2.62.68A2 2 0 0 1 22 16.92z"/></svg>
+				</div>
+				<div class="sg-action-text">
+					<span class="sg-action-title">Nuevo Contacto de Emergencia</span>
+					<span class="sg-action-desc">Asocia telefono y prioridad</span>
+				</div>
+			</button>
+
+			<button class="sg-action-card sg-teal2" data-panel="ver-contactos" role="tab" aria-selected="false" aria-controls="sg-panel-ver-contactos">
+				<div class="sg-action-icon">
+					<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+				</div>
+				<div class="sg-action-text">
+					<span class="sg-action-title">Listado de Contactos</span>
+					<span class="sg-action-desc">Visualiza y valida contactos activos</span>
+				</div>
+			</button>
+
+			<button class="sg-action-card sg-terra" data-panel="eliminar" role="tab" aria-selected="false" aria-controls="sg-panel-eliminar">
+				<div class="sg-action-icon">
+					<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+				</div>
+				<div class="sg-action-text">
+					<span class="sg-action-title">Eliminar Registros</span>
+					<span class="sg-action-desc">Elimina zonas y contactos</span>
+				</div>
+			</button>
+		</div>
+
+		<div class="sg-dynamic-area">
+			<div class="sg-panel active" id="sg-panel-default" role="tabpanel">
+				<div class="sg-panel-hero">
+					<div class="sg-panel-hero-text">
+						<h3 class="sg-panel-hero-title">Centro de Seguridad y Prevencion - WALI</h3>
+						<p class="sg-panel-hero-sub">Gestiona zonas_riesgo y contactos_emergencia desde un solo lugar. Selecciona una tarjeta para comenzar con el flujo operativo.</p>
+					</div>
+				</div>
+				<div class="sg-stats-row">
+					<div class="sg-stat"><span class="sg-stat-num sg-teal-text" id="stat-zonas">—</span><span class="sg-stat-lbl">Zonas Registradas</span></div>
+					<div class="sg-stat-div"></div>
+					<div class="sg-stat"><span class="sg-stat-num sg-amber-text" id="stat-zonas-activas">—</span><span class="sg-stat-lbl">Zonas Activas</span></div>
+					<div class="sg-stat-div"></div>
+					<div class="sg-stat"><span class="sg-stat-num sg-dark-text" id="stat-niveles">—</span><span class="sg-stat-lbl">Niveles de Riesgo</span></div>
+				</div>
+			</div>
+
+			<div class="sg-panel" id="sg-panel-crear-zonas" role="tabpanel" hidden>
+				<div class="sg-panel-header">
+					<div class="sg-panel-icon sg-teal-bg">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L3 7v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V7l-9-5z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+					</div>
+					<div>
+						<h3 class="sg-panel-title">Crear Zona de Riesgo</h3>
+						<p class="sg-panel-subtitle">Formulario para registrar zonas_riesgo</p>
+					</div>
+				</div>
+				<form id="form-crear-zona" class="sg-form-layout" autocomplete="off">
+					<div class="sg-form-main">
+						<div class="sg-form-row">
+							<div class="sg-form-group sg-full"><label class="sg-label">Nombre de la zona *</label><input type="text" class="sg-input" id="zr-nombre" placeholder="Ej: Ladera Norte - Mirador" required /></div>
+						</div>
+						<div class="sg-form-row">
+							<div class="sg-form-group sg-full"><label class="sg-label">Descripcion</label><textarea class="sg-textarea" id="zr-descripcion" placeholder="Detalle del riesgo, recomendaciones y observaciones..."></textarea></div>
+						</div>
+						<div class="sg-form-row">
+							<div class="sg-form-group"><label class="sg-label">Latitud geográfica</label><input type="number" step="any" class="sg-input" id="zr-latitud" placeholder="-16.4956" /></div>
+							<div class="sg-form-group"><label class="sg-label">Longitud geográfica</label><input type="number" step="any" class="sg-input" id="zr-longitud" placeholder="-68.1335" /></div>
+						</div>
+						<div class="sg-form-row">
+							<div class="sg-form-group"><label class="sg-label">Radio de cobertura (m)</label><input type="number" class="sg-input" id="zr-radio-metros" value="50" min="0" /></div>
+							<div class="sg-form-group"><label class="sg-label">Estado de la zona</label>
+								<div class="sg-toggle-group">
+									<label class="sg-toggle-opt sg-toggle-active"><input type="radio" name="zr-estado" value="true" checked /> Activa</label>
+									<label class="sg-toggle-opt"><input type="radio" name="zr-estado" value="false" /> Inactiva</label>
+								</div>
+							</div>
+						</div>
+						<div class="sg-form-row">
+							<div class="sg-form-group sg-full"><label class="sg-label">Nivel de riesgo asociado</label><select class="sg-select" id="zr-nivel-riesgo"><option value="">Cargando niveles...</option></select></div>
+						</div>
+						<div class="sg-form-actions">
+							<button type="submit" class="sg-btn sg-btn-primary" id="btn-guardar-zona">Guardar Zona</button>
+							<button type="button" class="sg-btn sg-btn-secondary" id="btn-cancelar-zona">Cancelar</button>
+						</div>
+					</div>
+
+					<div class="sg-map-preview">
+						<div class="sg-map-hint">
+							<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M12 2L3 7v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V7l-9-5z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+							<span>Haz clic en el mapa o escribe coordenadas</span>
+						</div>
+						<div id="sg-leaflet-map"></div>
+					</div>
+				</form>
+			</div>
+
+			<div class="sg-panel" id="sg-panel-ver-zonas" role="tabpanel" hidden>
+				<div class="sg-panel-header">
+					<div class="sg-panel-icon sg-green2-bg">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+					</div>
+					<div>
+						<h3 class="sg-panel-title">Ver Zonas de Riesgo</h3>
+						<p class="sg-panel-subtitle">Listado de registros en zonas_riesgo</p>
+					</div>
+					<button class="sg-btn sg-btn-primary sg-ml-auto" id="btn-nueva-zona">+ Nueva</button>
+				</div>
+				<div class="sg-toolbar">
+					<input type="text" class="sg-search" id="search-zonas" placeholder="Buscar zona..." />
+					<select class="sg-filter" id="filter-nivel-zonas"><option value="">Todos los niveles</option></select>
+					<select class="sg-filter" id="filter-estado-zonas"><option value="">Todos</option><option value="true">Activa</option><option value="false">Inactiva</option></select>
+				</div>
+				<div class="sg-table-wrap">
+					<table class="sg-table">
+						<thead><tr><th>Zona</th><th>Nivel</th><th>Coordenadas</th><th>Estado</th><th>Acciones</th></tr></thead>
+						<tbody id="tbody-zonas">
+							<tr><td colspan="5" class="sg-loading-row">Cargando datos...</td></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="sg-pagination"><span class="sg-page-info" id="info-zonas">—</span><div class="sg-page-btns" id="btns-zonas"></div></div>
+			</div>
+
+			<div class="sg-panel" id="sg-panel-crear-contactos" role="tabpanel" hidden>
+				<div class="sg-panel-header">
+					<div class="sg-panel-icon sg-amber-bg">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.35 1.78.68 2.62a2 2 0 0 1-.45 2.11L8 9.76a16 16 0 0 0 6.24 6.24l1.31-1.34a2 2 0 0 1 2.11-.45c.84.33 1.72.56 2.62.68A2 2 0 0 1 22 16.92z"/></svg>
+					</div>
+					<div>
+						<h3 class="sg-panel-title">Nuevo Contacto de Emergencia</h3>
+						<p class="sg-panel-subtitle">Formulario para registrar contactos_emergencia</p>
+					</div>
+				</div>
+				<form id="form-crear-contacto" class="sg-form-layout" autocomplete="off">
+					<div class="sg-form-row">
+							<div class="sg-form-group"><label class="sg-label">Nombre del contacto *</label><input type="text" class="sg-input" id="ce-nombre-contacto" placeholder="Ej: Juan Perez" required /></div>
+							<div class="sg-form-group"><label class="sg-label">Teléfono de contacto *</label><input type="tel" class="sg-input" id="ce-telefono" placeholder="+591 7XXXXXXX" required /></div>
+					</div>
+					<div class="sg-form-row">
+						<div class="sg-form-group sg-full"><label class="sg-label">Parentesco / relación</label><input type="text" class="sg-input" id="ce-parentesco" placeholder="Ej: Hermano, Pareja, Amigo" /></div>
+					</div>
+					<div class="sg-form-row">
+						<div class="sg-form-group sg-full">
+							<label class="sg-label">Persona asociada (id_persona) *</label>
+							<input type="search" class="sg-search" id="ce-buscar-persona" placeholder="Buscar turista registrado por nombre o teléfono..." />
+							<input type="hidden" id="ce-id-persona" />
+							<div class="sg-person-selected" id="ce-persona-seleccionada">Ninguna persona seleccionada</div>
+							<div class="sg-person-results" id="ce-persona-resultados">
+								<div class="sg-loading-inline">Escribe para buscar turistas registrados...</div>
+							</div>
+						</div>
+					</div>
+					<div class="sg-form-actions">
+						<button type="submit" class="sg-btn sg-btn-primary" id="btn-guardar-contacto">Guardar Contacto</button>
+						<button type="button" class="sg-btn sg-btn-secondary" id="btn-cancelar-contacto">Cancelar</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="sg-panel" id="sg-panel-ver-contactos" role="tabpanel" hidden>
+				<div class="sg-panel-header">
+					<div class="sg-panel-icon sg-teal2-bg">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+					</div>
+					<div>
+						<h3 class="sg-panel-title">Listado de Contactos</h3>
+						<p class="sg-panel-subtitle">Listado de registros en contactos_emergencia</p>
+					</div>
+					<button class="sg-btn sg-btn-primary sg-ml-auto" id="btn-nuevo-contacto">+ Nuevo</button>
+				</div>
+				<div class="sg-toolbar">
+					<input type="text" class="sg-search" id="search-contactos" placeholder="Buscar contacto..." />
+					<select class="sg-filter" id="filter-estado-contactos"><option value="">Todos los estados</option><option value="true">Activo</option><option value="false">Inactivo</option></select>
+				</div>
+				<div class="sg-table-wrap">
+					<table class="sg-table">
+						<thead><tr><th>Nombre</th><th>Telefono</th><th>Parentesco</th><th>Estado</th><th>Acciones</th></tr></thead>
+						<tbody id="tbody-contactos">
+							<tr><td colspan="5" class="sg-loading-row">Cargando datos...</td></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="sg-pagination"><span class="sg-page-info" id="info-contactos">—</span><div class="sg-page-btns" id="btns-contactos"></div></div>
+			</div>
+
+			<div class="sg-panel" id="sg-panel-eliminar" role="tabpanel" hidden>
+				<div class="sg-panel-header">
+					<div class="sg-panel-icon sg-terra-bg">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+					</div>
+					<div>
+						<h3 class="sg-panel-title">Eliminar Registros</h3>
+						<p class="sg-panel-subtitle">Elimina zonas de riesgo o contactos de emergencia</p>
+					</div>
+				</div>
+				<div class="sg-alert-warn">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+					Esta acción es permanente y no se puede deshacer.
+				</div>
+				<div class="sg-delete-tabs">
+					<button class="sg-del-tab active" data-target="del-zonas">Zonas de Riesgo</button>
+					<button class="sg-del-tab" data-target="del-contactos">Contactos</button>
+				</div>
+				<div id="del-zonas" class="sg-del-panel">
+					<div class="sg-table-wrap">
+						<table class="sg-table">
+							<thead><tr><th>Nombre</th><th>Nivel</th><th>Estado</th><th>Acciones</th></tr></thead>
+							<tbody id="tbody-del-zonas"><tr><td colspan="4" class="sg-loading-row">Cargando...</td></tr></tbody>
+						</table>
+					</div>
+				</div>
+				<div id="del-contactos" class="sg-del-panel" style="display:none;">
+					<div class="sg-table-wrap">
+						<table class="sg-table">
+							<thead><tr><th>Nombre</th><th>Telefono</th><th>Estado</th><th>Acciones</th></tr></thead>
+							<tbody id="tbody-del-contactos"><tr><td colspan="4" class="sg-loading-row">Cargando...</td></tr></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- MODAL EDITAR ZONA -->
+<div id="sg-modal-editar-zona" class="sg-modal" style="display:none;">
+	<div class="sg-modal-box">
+		<div class="sg-modal-header">
+			<h3 class="sg-modal-title">Editar Zona de Riesgo</h3>
+			<button class="sg-modal-close" id="close-modal-zona">✕</button>
+		</div>
+		<form id="form-editar-zona" autocomplete="off">
+			<input type="hidden" id="edit-zr-id" />
+			<div class="sg-form-group"><label class="sg-label">Nombre *</label><input type="text" class="sg-input" id="edit-zr-nombre" required /></div>
+			<div class="sg-form-group"><label class="sg-label">Descripcion</label><textarea class="sg-textarea" id="edit-zr-descripcion"></textarea></div>
+			<div class="sg-form-row">
+				<div class="sg-form-group"><label class="sg-label">Latitud</label><input type="number" step="any" class="sg-input" id="edit-zr-latitud" /></div>
+				<div class="sg-form-group"><label class="sg-label">Longitud</label><input type="number" step="any" class="sg-input" id="edit-zr-longitud" /></div>
+			</div>
+			<div class="sg-form-row">
+				<div class="sg-form-group"><label class="sg-label">Radio de activacion (m)</label><input type="number" class="sg-input" id="edit-zr-radio-metros" min="0" /></div>
+				<div class="sg-form-group"><label class="sg-label">Estado</label>
+					<div class="sg-toggle-group">
+						<label class="sg-toggle-opt sg-toggle-active"><input type="radio" name="edit-zr-estado" value="true" checked /> Activa</label>
+						<label class="sg-toggle-opt"><input type="radio" name="edit-zr-estado" value="false" /> Inactiva</label>
+					</div>
+				</div>
+			</div>
+			<div class="sg-form-group"><label class="sg-label">Nivel de riesgo</label><select class="sg-select" id="edit-zr-nivel"></select></div>
+			<div class="sg-modal-footer">
+				<button type="submit" class="sg-btn sg-btn-primary">Guardar Cambios</button>
+				<button type="button" class="sg-btn sg-btn-secondary" id="close-modal-zona2">Cancelar</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- MODAL EDITAR CONTACTO -->
+<div id="sg-modal-editar-contacto" class="sg-modal" style="display:none;">
+	<div class="sg-modal-box">
+		<div class="sg-modal-header">
+			<h3 class="sg-modal-title">Editar Contacto de Emergencia</h3>
+			<button class="sg-modal-close" id="close-modal-contacto">✕</button>
+		</div>
+		<form id="form-editar-contacto" autocomplete="off">
+			<input type="hidden" id="edit-ce-id" />
+			<div class="sg-form-row">
+				<div class="sg-form-group">
+					<label class="sg-label">Nombre del contacto *</label>
+					<input type="text" class="sg-input" id="edit-ce-nombre-contacto" required />
+				</div>
+				<div class="sg-form-group">
+					<label class="sg-label">Teléfono de contacto *</label>
+					<input type="tel" class="sg-input" id="edit-ce-telefono" required />
+				</div>
+			</div>
+			<div class="sg-form-row">
+				<div class="sg-form-group sg-full">
+					<label class="sg-label">Parentesco / relación</label>
+					<input type="text" class="sg-input" id="edit-ce-parentesco" />
+				</div>
+			</div>
+			<div class="sg-form-row">
+				<div class="sg-form-group sg-full">
+					<label class="sg-label">Persona asociada (id_persona) *</label>
+					<input type="search" class="sg-search" id="edit-ce-buscar-persona" placeholder="Buscar turista registrado por nombre o teléfono..." />
+					<input type="hidden" id="edit-ce-id-persona" />
+					<div class="sg-person-selected" id="edit-ce-persona-seleccionada">Ninguna persona seleccionada</div>
+					<div class="sg-person-results" id="edit-ce-persona-resultados">
+						<div class="sg-loading-inline">Escribe para buscar turistas registrados...</div>
+					</div>
+				</div>
+			</div>
+			<div class="sg-form-row">
+				<div class="sg-form-group sg-full">
+					<label class="sg-label">Estado</label>
+					<div class="sg-toggle-group">
+						<label class="sg-toggle-opt sg-toggle-active"><input type="radio" name="edit-ce-estado" value="true" checked /> Activo</label>
+						<label class="sg-toggle-opt"><input type="radio" name="edit-ce-estado" value="false" /> Inactivo</label>
+					</div>
+				</div>
+			</div>
+			<div class="sg-modal-footer">
+				<button type="submit" class="sg-btn sg-btn-primary" id="btn-guardar-contacto-editar">Guardar Cambios</button>
+				<button type="button" class="sg-btn sg-btn-secondary" id="close-modal-contacto2">Cancelar</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script>
+	// @ts-nocheck
+	import { supabase } from '../../lib/supabase';
+
+	const PAGE_SIZE = 8;
+	const DOMINIO_NIVEL_RIESGO = 8;
+
+	let nivelesRiesgo: Array<{ id: number; descripcion: string }> = [];
+	let personasTuristas: Array<{ id: number; nombres: string; apellido_paterno: string | null; apellido_materno: string | null; telefono: string | null }> = [];
+	let paginaZonas = 1;
+	let paginaContactos = 1;
+	let filtrosBusqZonas = '';
+	let filtrosNivelZonas = '';
+	let filtrosEstadoZonas = '';
+	let filtrosBusqContactos = '';
+	let filtrosEstadoContactos = '';
+	let selectedPersonaContacto: { id: number; nombres: string; apellido_paterno: string | null; apellido_materno: string | null; telefono: string | null } | null = null;
+	let selectedPersonaContactoEdit: { id: number; nombres: string; apellido_paterno: string | null; apellido_materno: string | null; telefono: string | null } | null = null;
+
+	let zoneMap: any = null;
+	let zoneMarker: any = null;
+	let leafletLoaded = false;
+
+	function loadLeaflet() {
+		return new Promise((resolve) => {
+			if (leafletLoaded || (window as any).L) {
+				leafletLoaded = true;
+				resolve(true);
+				return;
+			}
+
+			const script = document.createElement('script');
+			script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+			script.onload = () => { leafletLoaded = true; resolve(true); };
+			document.head.appendChild(script);
+		});
+	}
+
+	async function initLeafletMap() {
+		await loadLeaflet();
+		const L = (window as any).L;
+		const mapEl = document.getElementById('sg-leaflet-map');
+		if (!mapEl || zoneMap) return;
+
+		const defaultLat = -16.5;
+		const defaultLng = -68.15;
+
+		zoneMap = L.map('sg-leaflet-map', { zoomControl: true, attributionControl: false }).setView([defaultLat, defaultLng], 13);
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(zoneMap);
+
+		const customIcon = L.divIcon({
+			html: `<svg width="28" height="36" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M12 0C5.373 0 0 5.373 0 12c0 8 12 20 12 20S24 20 24 12C24 5.373 18.627 0 12 0z" fill="#0F988A"/>
+				<circle cx="12" cy="12" r="5" fill="white"/>
+			</svg>`,
+			className: '',
+			iconSize: [28, 36],
+			iconAnchor: [14, 36],
+		});
+
+		zoneMarker = L.marker([defaultLat, defaultLng], { icon: customIcon, opacity: 0 }).addTo(zoneMap);
+
+		zoneMap.on('click', (e: any) => {
+			const { lat, lng } = e.latlng;
+			const latInput = document.getElementById('zr-latitud') as HTMLInputElement | null;
+			const lngInput = document.getElementById('zr-longitud') as HTMLInputElement | null;
+			if (latInput) latInput.value = lat.toFixed(6);
+			if (lngInput) lngInput.value = lng.toFixed(6);
+			updateZoneMapFromInputs();
+		});
+	}
+
+	function updateZoneMapFromInputs() {
+		const latInput = document.getElementById('zr-latitud') as HTMLInputElement | null;
+		const lngInput = document.getElementById('zr-longitud') as HTMLInputElement | null;
+		if (!latInput || !lngInput || !zoneMap || !zoneMarker) return;
+		const lat = parseFloat(latInput.value);
+		const lng = parseFloat(lngInput.value);
+		if (Number.isNaN(lat) || Number.isNaN(lng)) return;
+		zoneMarker.setLatLng([lat, lng]);
+		zoneMarker.setOpacity(1);
+		zoneMap.setView([lat, lng], 16, { animate: true });
+	}
+
+	function resetZoneMap() {
+		if (zoneMap) zoneMap.setView([-16.5, -68.15], 13);
+		if (zoneMarker) zoneMarker.setOpacity(0);
+	}
+
+	function showToast(msg: string, type = 'success') {
+		const existing = document.getElementById('sg-toast');
+		if (!existing) {
+			const toast = document.createElement('div');
+			toast.id = 'sg-toast';
+			document.body.appendChild(toast);
+		}
+		const t = document.getElementById('sg-toast');
+		if (!t) return;
+		t.textContent = msg;
+		t.className = `sg-toast sg-toast-${type}`;
+		setTimeout(() => { t.className = 'sg-toast sg-toast-hidden'; }, 3500);
+	}
+
+	function resetPersonaSelection(mode: 'create' | 'edit') {
+		const hiddenId = mode === 'edit' ? 'edit-ce-id-persona' : 'ce-id-persona';
+		const selectedId = mode === 'edit' ? 'edit-ce-persona-seleccionada' : 'ce-persona-seleccionada';
+		const hidden = document.getElementById(hiddenId) as HTMLInputElement | null;
+		const selected = document.getElementById(selectedId);
+		if (hidden) hidden.value = '';
+		if (selected) selected.textContent = 'Ninguna persona seleccionada';
+	}
+
+	function setPersonaSelection(mode: 'create' | 'edit', persona: { id: number; nombre: string; telefono: string | null }) {
+		const hiddenId = mode === 'edit' ? 'edit-ce-id-persona' : 'ce-id-persona';
+		const selectedId = mode === 'edit' ? 'edit-ce-persona-seleccionada' : 'ce-persona-seleccionada';
+		const hidden = document.getElementById(hiddenId) as HTMLInputElement | null;
+		const selected = document.getElementById(selectedId);
+		if (hidden) hidden.value = String(persona.id);
+		if (selected) selected.textContent = `Seleccionado: ${persona.nombre}${persona.telefono ? ` - ${persona.telefono}` : ''}`;
+	}
+
+	function renderPaginator(containerId: string, total: number, currentPage: number, onPageFn: (page: number) => void) {
+		const container = document.getElementById(containerId);
+		if (!container) return;
+		const totalPages = Math.ceil(total / PAGE_SIZE);
+		if (totalPages <= 1) { container.innerHTML = ''; return; }
+		let html = `<button class="sg-page-btn" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
+		for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+			html += `<button class="sg-page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+		}
+		html += `<button class="sg-page-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${totalPages + 1}">›</button>`;
+		container.innerHTML = html;
+		container.querySelectorAll('[data-page]').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const p = parseInt(btn.getAttribute('data-page') || '0', 10);
+				if (Number.isNaN(p) || p < 1 || p > totalPages) return;
+				onPageFn(p);
+			});
+		});
+		const prev = container.querySelector('button:first-child') as HTMLButtonElement | null;
+		if (prev && !prev.disabled) prev.addEventListener('click', () => onPageFn(Math.max(1, currentPage - 1)));
+	}
+
+	function getNivelNombre(id: number | null) {
+		return nivelesRiesgo.find((n) => n.id === id)?.descripcion || '—';
+	}
+
+	function getPersonaNombre(persona: { nombres: string; apellido_paterno: string | null; apellido_materno: string | null }) {
+		return [persona.nombres, persona.apellido_paterno, persona.apellido_materno].filter(Boolean).join(' ');
+	}
+
+	async function loadPersonasTuristas(queryText = '', mode: 'create' | 'edit' = 'create') {
+		const resultados = document.getElementById(mode === 'edit' ? 'edit-ce-persona-resultados' : 'ce-persona-resultados');
+		if (!resultados) return;
+
+		resultados.innerHTML = '<div class="sg-loading-inline">Buscando turistas...</div>';
+
+		let query = supabase
+			.from('personas')
+			.select('id, nombres, apellido_paterno, apellido_materno, telefono')
+			.eq('id_rol', 1)
+			.eq('estado', true)
+			.order('nombres');
+
+		if (queryText.trim()) {
+			const term = queryText.trim();
+			query = query.or(`nombres.ilike.%${term}%,apellido_paterno.ilike.%${term}%,apellido_materno.ilike.%${term}%,telefono.ilike.%${term}%`);
+		}
+
+		const { data, error } = await query;
+		if (error) {
+			resultados.innerHTML = '<div class="sg-loading-inline">Error al buscar turistas</div>';
+			return;
+		}
+
+		personasTuristas = data || [];
+		if (!personasTuristas.length) {
+			resultados.innerHTML = '<div class="sg-loading-inline">No se encontraron turistas registrados</div>';
+			return;
+		}
+
+		resultados.innerHTML = personasTuristas.map((persona) => `
+			<button type="button" class="sg-person-item" data-id="${persona.id}" data-nombre="${getPersonaNombre(persona)}" data-telefono="${persona.telefono || ''}">
+				<div class="sg-person-item-main">
+					<span class="sg-person-item-name">${getPersonaNombre(persona)}</span>
+					<span class="sg-person-item-meta">${persona.telefono || 'Sin telefono registrado'}</span>
+				</div>
+				<span class="sg-person-item-badge">Seleccionar</span>
+			</button>
+		`).join('');
+
+		resultados.querySelectorAll('.sg-person-item').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const persona = {
+					id: parseInt(btn.getAttribute('data-id') || '0', 10),
+					nombre: btn.getAttribute('data-nombre') || '',
+					telefono: btn.getAttribute('data-telefono') || null,
+				};
+
+				if (mode === 'edit') {
+					selectedPersonaContactoEdit = {
+						id: persona.id,
+						nombres: persona.nombre,
+						apellido_paterno: null,
+						apellido_materno: null,
+						telefono: persona.telefono,
+					};
+				} else {
+					selectedPersonaContacto = {
+						id: persona.id,
+						nombres: persona.nombre,
+						apellido_paterno: null,
+						apellido_materno: null,
+						telefono: persona.telefono,
+					};
+				}
+
+				setPersonaSelection(mode, persona);
+			});
+		});
+	}
+
+	async function loadNivelesRiesgo() {
+		const { data, error } = await supabase
+			.from('subdominios')
+			.select('id, descripcion')
+			.eq('id_dominio', DOMINIO_NIVEL_RIESGO)
+			.order('descripcion');
+		if (error) {
+			showToast('Error cargando niveles de riesgo', 'error');
+			return;
+		}
+
+		nivelesRiesgo = data || [];
+		const opts = '<option value="">Sin nivel</option>' + nivelesRiesgo.map((n) => `<option value="${n.id}">${n.descripcion}</option>`).join('');
+		const select = document.getElementById('zr-nivel-riesgo');
+		if (select) select.innerHTML = opts;
+
+		const filterNivel = document.getElementById('filter-nivel-zonas');
+		if (filterNivel) {
+			filterNivel.innerHTML = '<option value="">Todos los niveles</option>' + nivelesRiesgo.map((n) => `<option value="${n.id}">${n.descripcion}</option>`).join('');
+		}
+
+		const statNiveles = document.getElementById('stat-niveles');
+		if (statNiveles) statNiveles.textContent = String(nivelesRiesgo.length);
+	}
+
+	async function loadStats() {
+		const [{ count: totalZonas }, { count: zonasActivas }] = await Promise.all([
+			supabase.from('zonas_riesgo').select('*', { count: 'exact', head: true }),
+			supabase.from('zonas_riesgo').select('*', { count: 'exact', head: true }).eq('estado', true),
+		]);
+
+		const statZonas = document.getElementById('stat-zonas');
+		const statZonasActivas = document.getElementById('stat-zonas-activas');
+		const statNiveles = document.getElementById('stat-niveles');
+		if (statZonas) statZonas.textContent = String(totalZonas ?? 0);
+		if (statZonasActivas) statZonasActivas.textContent = String(zonasActivas ?? 0);
+		if (statNiveles) statNiveles.textContent = String(nivelesRiesgo.length);
+	}
+
+	async function loadZonas() {
+		let query = supabase.from('zonas_riesgo').select('*', { count: 'exact' }).order('id', { ascending: false });
+		if (filtrosBusqZonas) query = query.ilike('nombre', `%${filtrosBusqZonas}%`);
+		if (filtrosNivelZonas) query = query.eq('id_nivel_riesgo', filtrosNivelZonas);
+		if (filtrosEstadoZonas !== '') query = query.eq('estado', filtrosEstadoZonas === 'true');
+		const from = (paginaZonas - 1) * PAGE_SIZE;
+		query = query.range(from, from + PAGE_SIZE - 1);
+
+		const { data, count } = await query;
+		const rows = data || [];
+		const tbody = document.getElementById('tbody-zonas');
+		if (!tbody) return;
+
+		if (!rows.length) {
+			tbody.innerHTML = '<tr><td colspan="5" class="sg-loading-row">No se encontraron zonas</td></tr>';
+		} else {
+			tbody.innerHTML = rows.map((zona) => `
+				<tr>
+					<td class="sg-td-name">${zona.nombre}</td>
+					<td>${getNivelNombre(zona.id_nivel_riesgo)}</td>
+					<td class="sg-td-coords">${zona.latitud != null ? (+zona.latitud).toFixed(4) : '—'}, ${zona.longitud != null ? (+zona.longitud).toFixed(4) : '—'}</td>
+					<td><span class="sg-badge ${zona.estado ? 'sg-badge-active' : 'sg-badge-inactive'}">${zona.estado ? 'Activa' : 'Inactiva'}</span></td>
+					<td class="sg-td-actions"><button class="sg-btn-action sg-btn-edit" data-action="edit-zona" data-id="${zona.id}" data-nombre="${zona.nombre}">✏ Editar</button></td>
+				</tr>
+			`).join('');
+		}
+
+		const info = document.getElementById('info-zonas');
+		if (info) info.textContent = `Mostrando ${rows.length} de ${count || 0} zonas`;
+		renderPaginator('btns-zonas', count || 0, paginaZonas, (p) => { paginaZonas = p; loadZonas(); });
+		loadDeleteZonas(rows);
+		tbody.querySelectorAll('[data-action="edit-zona"]').forEach((btn) => {
+			btn.addEventListener('click', () => editarZona(parseInt(btn.getAttribute('data-id') || '0', 10)));
+		});
+	}
+
+	async function editarZona(id: number) {
+		const { data } = await supabase.from('zonas_riesgo').select('*').eq('id', id).single();
+		if (!data) return;
+
+		(document.getElementById('edit-zr-id') as HTMLInputElement).value = id.toString();
+		(document.getElementById('edit-zr-nombre') as HTMLInputElement).value = data.nombre || '';
+		(document.getElementById('edit-zr-descripcion') as HTMLTextAreaElement).value = data.descripcion || '';
+		(document.getElementById('edit-zr-latitud') as HTMLInputElement).value = data.latitud ?? '';
+		(document.getElementById('edit-zr-longitud') as HTMLInputElement).value = data.longitud ?? '';
+		(document.getElementById('edit-zr-radio-metros') as HTMLInputElement).value = data.radio_metros ?? 50;
+
+		const nivelSelect = document.getElementById('edit-zr-nivel') as HTMLSelectElement;
+		nivelSelect.innerHTML = '<option value="">Sin nivel</option>' + nivelesRiesgo.map((n) => `<option value="${n.id}">${n.descripcion}</option>`).join('');
+		if (data.id_nivel_riesgo) nivelSelect.value = String(data.id_nivel_riesgo);
+
+		const estadoRadio = document.querySelector(`input[name="edit-zr-estado"][value="${data.estado ? 'true' : 'false'}"]`) as HTMLInputElement | null;
+		if (estadoRadio) {
+			document.querySelectorAll('input[name="edit-zr-estado"]').forEach((radio) => {
+				const parent = (radio as HTMLInputElement).parentElement;
+				if (parent) parent.classList.remove('sg-toggle-active');
+			});
+			estadoRadio.checked = true;
+			estadoRadio.parentElement?.classList.add('sg-toggle-active');
+		}
+
+		openModal('sg-modal-editar-zona');
+	}
+
+	function openModal(id: string) {
+		const modal = document.getElementById(id);
+		if (modal) modal.style.display = 'flex';
+	}
+
+	function closeModal(id: string) {
+		const modal = document.getElementById(id);
+		if (modal) modal.style.display = 'none';
+	}
+
+	async function loadContactos() {
+		let query = supabase.from('contactos_emergencia').select('*', { count: 'exact' }).order('id', { ascending: false });
+		if (filtrosBusqContactos) query = query.ilike('nombre_contacto', `%${filtrosBusqContactos}%`);
+		if (filtrosEstadoContactos !== '') query = query.eq('estado', filtrosEstadoContactos === 'true');
+		const from = (paginaContactos - 1) * PAGE_SIZE;
+		query = query.range(from, from + PAGE_SIZE - 1);
+
+		const { data, count } = await query;
+		const rows = data || [];
+		const tbody = document.getElementById('tbody-contactos');
+		if (!tbody) return;
+
+		if (!rows.length) {
+			tbody.innerHTML = '<tr><td colspan="5" class="sg-loading-row">No se encontraron contactos</td></tr>';
+		} else {
+			tbody.innerHTML = rows.map((contacto) => `
+				<tr>
+					<td class="sg-td-name">${contacto.nombre_contacto}</td>
+					<td>${contacto.telefono || '—'}</td>
+					<td>${contacto.parentesco || '—'}</td>
+					<td><span class="sg-badge ${contacto.estado ? 'sg-badge-active' : 'sg-badge-inactive'}">${contacto.estado ? 'Activo' : 'Inactivo'}</span></td>
+					<td class="sg-td-actions"><button class="sg-btn-action sg-btn-edit" data-action="edit-contacto" data-id="${contacto.id}" data-nombre="${contacto.nombre_contacto}">✏ Editar</button></td>
+				</tr>
+			`).join('');
+		}
+
+		const info = document.getElementById('info-contactos');
+		if (info) info.textContent = `Mostrando ${rows.length} de ${count || 0} contactos`;
+		renderPaginator('btns-contactos', count || 0, paginaContactos, (p) => { paginaContactos = p; loadContactos(); });
+		loadDeleteContactos(rows);
+		tbody.querySelectorAll('[data-action="edit-contacto"]').forEach((btn) => {
+			btn.addEventListener('click', () => editarContacto(parseInt(btn.getAttribute('data-id') || '0', 10)));
+		});
+	}
+
+	async function editarContacto(id: number) {
+		const { data, error } = await supabase.from('contactos_emergencia').select('*').eq('id', id).single();
+		if (error || !data) {
+			showToast('No se pudo cargar el contacto', 'error');
+			return;
+		}
+
+		(document.getElementById('edit-ce-id') as HTMLInputElement).value = String(data.id);
+		(document.getElementById('edit-ce-nombre-contacto') as HTMLInputElement).value = data.nombre_contacto || '';
+		(document.getElementById('edit-ce-telefono') as HTMLInputElement).value = data.telefono || '';
+		(document.getElementById('edit-ce-parentesco') as HTMLInputElement).value = data.parentesco || '';
+
+		const estadoRadio = document.querySelector(`input[name="edit-ce-estado"][value="${data.estado ? 'true' : 'false'}"]`) as HTMLInputElement | null;
+		if (estadoRadio) {
+			document.querySelectorAll('input[name="edit-ce-estado"]').forEach((radio) => {
+				const parent = (radio as HTMLInputElement).parentElement;
+				if (parent) parent.classList.remove('sg-toggle-active');
+			});
+			estadoRadio.checked = true;
+			estadoRadio.parentElement?.classList.add('sg-toggle-active');
+		}
+
+		selectedPersonaContactoEdit = null;
+		resetPersonaSelection('edit');
+		const editSearch = document.getElementById('edit-ce-buscar-persona') as HTMLInputElement | null;
+		if (editSearch) editSearch.value = '';
+
+		if (data.id_persona) {
+			const { data: persona } = await supabase.from('personas').select('id, nombres, apellido_paterno, apellido_materno, telefono').eq('id', data.id_persona).single();
+			if (persona) {
+				selectedPersonaContactoEdit = persona;
+				setPersonaSelection('edit', {
+					id: persona.id,
+					nombre: getPersonaNombre(persona),
+					telefono: persona.telefono,
+				});
+			}
+		}
+
+		if (editSearch) {
+			loadPersonasTuristas('', 'edit');
+		}
+
+		openModal('sg-modal-editar-contacto');
+	}
+
+	function loadDeleteZonas(rows: Array<any>) {
+		const tbody = document.getElementById('tbody-del-zonas');
+		if (!tbody) return;
+		if (!rows.length) {
+			tbody.innerHTML = '<tr><td colspan="4" class="sg-loading-row">No hay zonas</td></tr>';
+			return;
+		}
+
+		tbody.innerHTML = rows.map((zona) => `
+			<tr>
+				<td class="sg-td-name">${zona.nombre}</td>
+				<td>${getNivelNombre(zona.id_nivel_riesgo)}</td>
+				<td><span class="sg-badge ${zona.estado ? 'sg-badge-active' : 'sg-badge-inactive'}">${zona.estado ? 'Activa' : 'Inactiva'}</span></td>
+				<td class="sg-td-actions"><button class="sg-btn-action sg-btn-delete" data-action="del-zona" data-id="${zona.id}" data-nombre="${zona.nombre}">🗑 Eliminar</button></td>
+			</tr>
+		`).join('');
+
+		tbody.querySelectorAll('[data-action="del-zona"]').forEach((btn) => {
+			btn.addEventListener('click', () => eliminarZona(parseInt(btn.getAttribute('data-id') || '0', 10), btn.getAttribute('data-nombre') || ''));
+		});
+	}
+
+	function loadDeleteContactos(rows: Array<any>) {
+		const tbody = document.getElementById('tbody-del-contactos');
+		if (!tbody) return;
+		if (!rows.length) {
+			tbody.innerHTML = '<tr><td colspan="4" class="sg-loading-row">No hay contactos</td></tr>';
+			return;
+		}
+
+		tbody.innerHTML = rows.map((contacto) => `
+			<tr>
+				<td class="sg-td-name">${contacto.nombre_contacto}</td>
+				<td>${contacto.telefono || '—'}</td>
+				<td><span class="sg-badge ${contacto.estado ? 'sg-badge-active' : 'sg-badge-inactive'}">${contacto.estado ? 'Activo' : 'Inactivo'}</span></td>
+				<td class="sg-td-actions"><button class="sg-btn-action sg-btn-delete" data-action="del-contacto" data-id="${contacto.id}" data-nombre="${contacto.nombre_contacto}">🗑 Eliminar</button></td>
+			</tr>
+		`).join('');
+
+		tbody.querySelectorAll('[data-action="del-contacto"]').forEach((btn) => {
+			btn.addEventListener('click', () => eliminarContacto(parseInt(btn.getAttribute('data-id') || '0', 10), btn.getAttribute('data-nombre') || ''));
+		});
+	}
+
+	async function eliminarZona(id: number, nombre: string) {
+		if (!id) return;
+		if (!confirm(`¿Desactivar la zona "${nombre}"? Pasará a estado inactivo.`)) return;
+		const { error } = await supabase.from('zonas_riesgo').update({
+			estado: false,
+			updated_at: new Date().toISOString(),
+		}).eq('id', id);
+		if (error) { showToast('Error: ' + error.message, 'error'); return; }
+		showToast('Zona desactivada');
+		loadZonas();
+		loadStats();
+	}
+
+	async function eliminarContacto(id: number, nombre: string) {
+		if (!id) return;
+		if (!confirm(`¿Desactivar el contacto "${nombre}"? Pasará a estado inactivo.`)) return;
+		const { error } = await supabase.from('contactos_emergencia').update({
+			estado: false,
+			updated_at: new Date().toISOString(),
+		}).eq('id', id);
+		if (error) { showToast('Error: ' + error.message, 'error'); return; }
+		showToast('Contacto desactivado');
+		loadContactos();
+	}
+
+	const initSeguridadModule = () => {
+		const root = document.querySelector('[data-section-target="seguridad"]');
+		if (!root || root.getAttribute('data-sg-init') === '1') return;
+
+		const cards = root.querySelectorAll('.sg-action-card');
+		const panels = root.querySelectorAll('.sg-panel');
+		const formCrearZona = document.getElementById('form-crear-zona');
+		const formCrearContacto = document.getElementById('form-crear-contacto');
+		const formEditarContacto = document.getElementById('form-editar-contacto');
+		const formEditarZona = document.getElementById('form-editar-zona');
+		const btnNuevaZona = document.getElementById('btn-nueva-zona');
+		const btnCancelarZona = document.getElementById('btn-cancelar-zona');
+
+		loadNivelesRiesgo().then(() => {
+			loadStats();
+			loadZonas();
+			loadContactos();
+			loadPersonasTuristas();
+		});
+
+		formCrearZona?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const btn = document.getElementById('btn-guardar-zona');
+			const estadoRadio = document.querySelector('input[name="zr-estado"]:checked');
+			const nivelVal = document.getElementById('zr-nivel-riesgo') as HTMLSelectElement | null;
+			if (!btn || !nivelVal) return;
+
+			btn.setAttribute('disabled', 'disabled');
+			btn.textContent = 'Guardando...';
+
+			const { error } = await supabase.from('zonas_riesgo').insert([{
+				nombre: (document.getElementById('zr-nombre') as HTMLInputElement).value.trim(),
+				descripcion: (document.getElementById('zr-descripcion') as HTMLTextAreaElement).value.trim() || null,
+				latitud: parseFloat((document.getElementById('zr-latitud') as HTMLInputElement).value) || null,
+				longitud: parseFloat((document.getElementById('zr-longitud') as HTMLInputElement).value) || null,
+				radio_metros: parseInt((document.getElementById('zr-radio-metros') as HTMLInputElement).value) || 50,
+				estado: (estadoRadio as HTMLInputElement)?.value === 'true',
+				id_nivel_riesgo: nivelVal.value ? parseInt(nivelVal.value, 10) : null,
+			}]);
+
+			btn.removeAttribute('disabled');
+			btn.textContent = 'Guardar Zona';
+
+			if (error) {
+				showToast('Error: ' + error.message, 'error');
+				return;
+			}
+
+			showToast('Zona de riesgo creada correctamente');
+			(formCrearZona as HTMLFormElement).reset();
+			const activeToggle = document.querySelector('.sg-toggle-opt') as HTMLElement | null;
+			if (activeToggle) activeToggle.classList.add('sg-toggle-active');
+			resetZoneMap();
+			paginaZonas = 1;
+			loadZonas();
+			loadStats();
+			(document.querySelector('[data-panel="ver-zonas"]') as HTMLElement)?.click();
+		});
+
+		formEditarZona?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const btn = formEditarZona.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+			const nivelVal = document.getElementById('edit-zr-nivel') as HTMLSelectElement | null;
+			if (!btn || !nivelVal) return;
+
+			btn.disabled = true;
+			btn.textContent = 'Guardando...';
+
+			const id = parseInt((document.getElementById('edit-zr-id') as HTMLInputElement).value, 10);
+			const estadoRadio = document.querySelector('input[name="edit-zr-estado"]:checked') as HTMLInputElement | null;
+			const { error } = await supabase.from('zonas_riesgo').update({
+				nombre: (document.getElementById('edit-zr-nombre') as HTMLInputElement).value.trim(),
+				descripcion: (document.getElementById('edit-zr-descripcion') as HTMLTextAreaElement).value.trim() || null,
+				latitud: parseFloat((document.getElementById('edit-zr-latitud') as HTMLInputElement).value) || null,
+				longitud: parseFloat((document.getElementById('edit-zr-longitud') as HTMLInputElement).value) || null,
+				radio_metros: parseInt((document.getElementById('edit-zr-radio-metros') as HTMLInputElement).value, 10) || null,
+				estado: estadoRadio?.value === 'true',
+				id_nivel_riesgo: nivelVal.value ? parseInt(nivelVal.value, 10) : null,
+				updated_at: new Date().toISOString(),
+			}).eq('id', id);
+
+			btn.disabled = false;
+			btn.textContent = 'Guardar Cambios';
+
+			if (error) {
+				showToast('Error: ' + error.message, 'error');
+				return;
+			}
+
+			showToast('Zona actualizada');
+			closeModal('sg-modal-editar-zona');
+			loadZonas();
+			loadStats();
+		});
+
+		formCrearContacto?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const btn = document.getElementById('btn-guardar-contacto') as HTMLButtonElement | null;
+			const idPersona = document.getElementById('ce-id-persona') as HTMLInputElement | null;
+			if (!btn || !idPersona || !idPersona.value) {
+				showToast('Selecciona un turista registrado', 'error');
+				return;
+			}
+
+			btn.disabled = true;
+			btn.textContent = 'Guardando...';
+
+			const { error } = await supabase.from('contactos_emergencia').insert([{
+				nombre_contacto: (document.getElementById('ce-nombre-contacto') as HTMLInputElement).value.trim(),
+				telefono: (document.getElementById('ce-telefono') as HTMLInputElement).value.trim(),
+				parentesco: (document.getElementById('ce-parentesco') as HTMLInputElement).value.trim() || null,
+				id_persona: parseInt(idPersona.value, 10),
+				estado: true,
+			}]);
+
+			btn.disabled = false;
+			btn.textContent = 'Guardar Contacto';
+
+			if (error) {
+				showToast('Error: ' + error.message, 'error');
+				return;
+			}
+
+			showToast('Contacto de emergencia creado');
+			(formCrearContacto as HTMLFormElement).reset();
+			selectedPersonaContacto = null;
+			const selected = document.getElementById('ce-persona-seleccionada');
+			if (selected) selected.textContent = 'Ninguna persona seleccionada';
+			loadContactos();
+			loadDeleteContactos([]);
+		});
+
+		formEditarContacto?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const btn = document.getElementById('btn-guardar-contacto-editar') as HTMLButtonElement | null;
+			const idPersona = document.getElementById('edit-ce-id-persona') as HTMLInputElement | null;
+			if (!btn || !idPersona || !idPersona.value) {
+				showToast('Selecciona un turista registrado', 'error');
+				return;
+			}
+
+			const id = parseInt((document.getElementById('edit-ce-id') as HTMLInputElement).value, 10);
+			btn.disabled = true;
+			btn.textContent = 'Guardando...';
+
+			const estadoRadio = document.querySelector('input[name="edit-ce-estado"]:checked') as HTMLInputElement | null;
+			const { error } = await supabase.from('contactos_emergencia').update({
+				nombre_contacto: (document.getElementById('edit-ce-nombre-contacto') as HTMLInputElement).value.trim(),
+				telefono: (document.getElementById('edit-ce-telefono') as HTMLInputElement).value.trim(),
+				parentesco: (document.getElementById('edit-ce-parentesco') as HTMLInputElement).value.trim() || null,
+				id_persona: parseInt(idPersona.value, 10),
+				estado: estadoRadio?.value === 'true',
+				updated_at: new Date().toISOString(),
+			}).eq('id', id);
+
+			btn.disabled = false;
+			btn.textContent = 'Guardar Cambios';
+
+			if (error) {
+				showToast('Error: ' + error.message, 'error');
+				return;
+			}
+
+			showToast('Contacto actualizado');
+			closeModal('sg-modal-editar-contacto');
+			loadContactos();
+			loadDeleteContactos([]);
+		});
+
+		btnNuevaZona?.addEventListener('click', () => {
+			(document.querySelector('[data-panel="crear-zonas"]') as HTMLElement)?.click();
+		});
+
+		btnCancelarZona?.addEventListener('click', () => {
+			(document.querySelector('[data-panel="ver-zonas"]') as HTMLElement)?.click();
+		});
+
+		document.getElementById('btn-cancelar-contacto')?.addEventListener('click', () => {
+			(formCrearContacto as HTMLFormElement)?.reset();
+			selectedPersonaContacto = null;
+			resetPersonaSelection('create');
+			(document.getElementById('ce-buscar-persona') as HTMLInputElement | null)?.focus();
+		});
+
+		document.getElementById('close-modal-contacto')?.addEventListener('click', () => closeModal('sg-modal-editar-contacto'));
+		document.getElementById('close-modal-contacto2')?.addEventListener('click', () => closeModal('sg-modal-editar-contacto'));
+		document.getElementById('sg-modal-editar-contacto')?.addEventListener('click', (e) => {
+			if (e.target === e.currentTarget) closeModal('sg-modal-editar-contacto');
+		});
+
+		let personaEditSearchTimeout: number | undefined;
+		document.getElementById('edit-ce-buscar-persona')?.addEventListener('input', (e) => {
+			window.clearTimeout(personaEditSearchTimeout);
+			const value = (e.target as HTMLInputElement).value;
+			personaEditSearchTimeout = window.setTimeout(() => loadPersonasTuristas(value, 'edit'), 250);
+		});
+
+		let personaSearchTimeout: number | undefined;
+		document.getElementById('ce-buscar-persona')?.addEventListener('input', (e) => {
+			window.clearTimeout(personaSearchTimeout);
+			const value = (e.target as HTMLInputElement).value;
+			personaSearchTimeout = window.setTimeout(() => loadPersonasTuristas(value), 250);
+		});
+
+		document.getElementById('close-modal-zona')?.addEventListener('click', () => closeModal('sg-modal-editar-zona'));
+		document.getElementById('close-modal-zona2')?.addEventListener('click', () => closeModal('sg-modal-editar-zona'));
+		document.getElementById('sg-modal-editar-zona')?.addEventListener('click', (e) => {
+			if (e.target === e.currentTarget) closeModal('sg-modal-editar-zona');
+		});
+
+		document.getElementById('search-zonas')?.addEventListener('input', (e) => {
+			filtrosBusqZonas = (e.target as HTMLInputElement).value;
+			paginaZonas = 1;
+			loadZonas();
+		});
+
+		document.getElementById('filter-nivel-zonas')?.addEventListener('change', (e) => {
+			filtrosNivelZonas = (e.target as HTMLSelectElement).value;
+			paginaZonas = 1;
+			loadZonas();
+		});
+
+		document.getElementById('filter-estado-zonas')?.addEventListener('change', (e) => {
+			filtrosEstadoZonas = (e.target as HTMLSelectElement).value;
+			paginaZonas = 1;
+			loadZonas();
+		});
+
+		document.getElementById('btn-nuevo-contacto')?.addEventListener('click', () => {
+			(document.querySelector('[data-panel="crear-contactos"]') as HTMLElement)?.click();
+		});
+
+		(document.querySelector('[data-panel="crear-contactos"]') as HTMLElement | null)?.addEventListener('click', () => {
+			loadPersonasTuristas('', 'create');
+		});
+
+		document.getElementById('search-contactos')?.addEventListener('input', (e) => {
+			filtrosBusqContactos = (e.target as HTMLInputElement).value;
+			paginaContactos = 1;
+			loadContactos();
+		});
+
+		document.getElementById('filter-estado-contactos')?.addEventListener('change', (e) => {
+			filtrosEstadoContactos = (e.target as HTMLSelectElement).value;
+			paginaContactos = 1;
+			loadContactos();
+		});
+
+		document.querySelectorAll('.sg-del-tab').forEach((tab) => {
+			tab.addEventListener('click', () => {
+				document.querySelectorAll('.sg-del-tab').forEach((t) => t.classList.remove('active'));
+				tab.classList.add('active');
+				document.querySelectorAll('.sg-del-panel').forEach((p) => (p as HTMLElement).style.display = 'none');
+				const panel = document.getElementById(tab.getAttribute('data-target') || '');
+				if (panel) panel.style.display = 'block';
+			});
+		});
+
+		cards.forEach((card) => {
+			card.addEventListener('click', () => {
+				const panelName = card.getAttribute('data-panel');
+				const panelId = `sg-panel-${panelName}`;
+
+				cards.forEach((c) => {
+					c.classList.remove('sg-card-active');
+					c.setAttribute('aria-selected', 'false');
+				});
+
+				panels.forEach((p) => {
+					p.classList.remove('active');
+					p.setAttribute('hidden', 'true');
+				});
+
+				card.classList.add('sg-card-active');
+				card.setAttribute('aria-selected', 'true');
+
+				const targetPanel = root.querySelector(`#${panelId}`);
+				if (targetPanel) {
+					targetPanel.classList.add('active');
+					targetPanel.removeAttribute('hidden');
+					if (panelId === 'sg-panel-crear-zonas') {
+						setTimeout(() => {
+							if (!zoneMap) {
+								initLeafletMap().then(() => {
+										(document.getElementById('zr-latitud') as HTMLInputElement | null)?.addEventListener('input', updateZoneMapFromInputs);
+										(document.getElementById('zr-longitud') as HTMLInputElement | null)?.addEventListener('input', updateZoneMapFromInputs);
+								});
+							} else {
+								zoneMap.invalidateSize();
+							}
+						}, 150);
+					}
+
+					if (panelId === 'sg-panel-ver-zonas') {
+						loadZonas();
+						loadStats();
+					}
+
+					if (panelId === 'sg-panel-ver-contactos') {
+						loadContactos();
+					}
+
+					if (panelId === 'sg-panel-crear-contactos') {
+						loadPersonasTuristas('', 'create');
+					}
+
+					if (panelId === 'sg-panel-eliminar') {
+						loadZonas();
+						loadContactos();
+					}
+				}
+			});
+		});
+
+		(document.getElementById('zr-latitud') as HTMLInputElement | null)?.addEventListener('input', updateZoneMapFromInputs);
+		(document.getElementById('zr-longitud') as HTMLInputElement | null)?.addEventListener('input', updateZoneMapFromInputs);
+
+		root.setAttribute('data-sg-init', '1');
+	};
+
+	initSeguridadModule();
+	document.addEventListener('astro:page-load', initSeguridadModule);
+</script>
