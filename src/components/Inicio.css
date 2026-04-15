@@ -229,7 +229,7 @@
 .logo-card-alt { font-size: .8rem; color: rgba(35,55,62,.6); letter-spacing: .05em; font-weight: 500; }
 
 .ticker {
-  position: absolute; bottom: 100px; left: 0; right: 0; z-index: 5;
+  position: absolute; bottom: 10px; left: 0; right: 0; z-index: 15;
   background: var(--color-green); padding: 11px 0; overflow: hidden;
   border-top: 1px solid rgba(255,255,255,.2);
 }
