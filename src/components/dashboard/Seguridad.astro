@@ -158,7 +158,7 @@
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.35 1.78.68 2.62a2 2 0 0 1-.45 2.11L8 9.76a16 16 0 0 0 6.24 6.24l1.31-1.34a2 2 0 0 1 2.11-.45c.84.33 1.72.56 2.62.68A2 2 0 0 1 22 16.92z"/></svg>
 					</div>
 					<div>
-						<h3 class="sg-panel-title">Crear Contacto de Emergencia</h3>
+						<h3 class="sg-panel-title">Nuevo Contacto de Emergencia</h3>
 						<p class="sg-panel-subtitle">Formulario para registrar contactos_emergencia</p>
 					</div>
 				</div>
@@ -187,24 +187,24 @@
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
 					</div>
 					<div>
-						<h3 class="sg-panel-title">Ver Contactos de Emergencia</h3>
+						<h3 class="sg-panel-title">Listado de Contactos</h3>
 						<p class="sg-panel-subtitle">Listado de registros en contactos_emergencia</p>
 					</div>
+					<button class="sg-btn sg-btn-primary sg-ml-auto" id="btn-nuevo-contacto">+ Nuevo</button>
 				</div>
 				<div class="sg-toolbar">
-					<input type="text" class="sg-search" placeholder="Buscar contacto..." />
-					<select class="sg-filter"><option>Todas las prioridades</option><option>Alta</option><option>Media</option><option>Baja</option></select>
-					<select class="sg-filter"><option>Todos los estados</option><option>Activo</option><option>Inactivo</option></select>
+					<input type="text" class="sg-search" id="search-contactos" placeholder="Buscar contacto..." />
+					<select class="sg-filter" id="filter-estado-contactos"><option value="">Todos los estados</option><option value="true">Activo</option><option value="false">Inactivo</option></select>
 				</div>
 				<div class="sg-table-wrap">
 					<table class="sg-table">
-						<thead><tr><th>Nombre</th><th>Telefono</th><th>Zona</th><th>Prioridad</th><th>Acciones</th></tr></thead>
-						<tbody>
-							<tr><td>Juan Perez</td><td>+591 76543210</td><td>Ladera Norte - Mirador</td><td><span class="sg-badge sg-badge-terra">Alta</span></td><td><button class="sg-btn-action">Editar</button></td></tr>
-							<tr><td>Central Bomberos</td><td>119</td><td>Sendero Quebrada Sur</td><td><span class="sg-badge sg-badge-amber">Media</span></td><td><button class="sg-btn-action">Editar</button></td></tr>
+						<thead><tr><th>Nombre</th><th>Telefono</th><th>Parentesco</th><th>Estado</th><th>Acciones</th></tr></thead>
+						<tbody id="tbody-contactos">
+							<tr><td colspan="5" class="sg-loading-row">Cargando datos...</td></tr>
 						</tbody>
 					</table>
 				</div>
+				<div class="sg-pagination"><span class="sg-page-info" id="info-contactos">—</span><div class="sg-page-btns" id="btns-contactos"></div></div>
 			</div>
 
 			<div class="sg-panel" id="sg-panel-eliminar" role="tabpanel" hidden>
@@ -214,24 +214,68 @@
 					</div>
 					<div>
 						<h3 class="sg-panel-title">Eliminar Registros</h3>
-						<p class="sg-panel-subtitle">Gestiona eliminacion de zonas y contactos</p>
+						<p class="sg-panel-subtitle">Elimina zonas de riesgo o contactos de emergencia</p>
 					</div>
 				</div>
-				<div class="sg-alert-warn">Esta accion es permanente. Confirma antes de eliminar registros del modulo de seguridad.</div>
-				<div class="sg-delete-grid">
-					<div class="sg-delete-card">
-						<h4>Zonas de Riesgo</h4>
-						<p>Eliminar zonas que ya no aplican al contexto operativo actual.</p>
-						<button type="button" class="sg-btn sg-btn-danger">Eliminar Zona</button>
+				<div class="sg-alert-warn">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+					Esta acción es permanente y no se puede deshacer.
+				</div>
+				<div class="sg-delete-tabs">
+					<button class="sg-del-tab active" data-target="del-zonas">Zonas de Riesgo</button>
+					<button class="sg-del-tab" data-target="del-contactos">Contactos</button>
+				</div>
+				<div id="del-zonas" class="sg-del-panel">
+					<div class="sg-table-wrap">
+						<table class="sg-table">
+							<thead><tr><th>Nombre</th><th>Nivel</th><th>Estado</th><th>Acciones</th></tr></thead>
+							<tbody id="tbody-del-zonas"><tr><td colspan="4" class="sg-loading-row">Cargando...</td></tr></tbody>
+						</table>
 					</div>
-					<div class="sg-delete-card">
-						<h4>Contactos de Emergencia</h4>
-						<p>Eliminar contactos duplicados o inactivos del sistema.</p>
-						<button type="button" class="sg-btn sg-btn-danger">Eliminar Contacto</button>
+				</div>
+				<div id="del-contactos" class="sg-del-panel" style="display:none;">
+					<div class="sg-table-wrap">
+						<table class="sg-table">
+							<thead><tr><th>Nombre</th><th>Telefono</th><th>Estado</th><th>Acciones</th></tr></thead>
+							<tbody id="tbody-del-contactos"><tr><td colspan="4" class="sg-loading-row">Cargando...</td></tr></tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+
+<!-- MODAL EDITAR ZONA -->
+<div id="sg-modal-editar-zona" class="sg-modal" style="display:none;">
+	<div class="sg-modal-box">
+		<div class="sg-modal-header">
+			<h3 class="sg-modal-title">Editar Zona de Riesgo</h3>
+			<button class="sg-modal-close" id="close-modal-zona">✕</button>
+		</div>
+		<form id="form-editar-zona" autocomplete="off">
+			<input type="hidden" id="edit-zr-id" />
+			<div class="sg-form-group"><label class="sg-label">Nombre *</label><input type="text" class="sg-input" id="edit-zr-nombre" required /></div>
+			<div class="sg-form-group"><label class="sg-label">Descripcion</label><textarea class="sg-textarea" id="edit-zr-descripcion"></textarea></div>
+			<div class="sg-form-row">
+				<div class="sg-form-group"><label class="sg-label">Latitud</label><input type="number" step="any" class="sg-input" id="edit-zr-latitud" /></div>
+				<div class="sg-form-group"><label class="sg-label">Longitud</label><input type="number" step="any" class="sg-input" id="edit-zr-longitud" /></div>
+			</div>
+			<div class="sg-form-row">
+				<div class="sg-form-group"><label class="sg-label">Radio de activacion (m)</label><input type="number" class="sg-input" id="edit-zr-radio-metros" min="0" /></div>
+				<div class="sg-form-group"><label class="sg-label">Estado</label>
+					<div class="sg-toggle-group">
+						<label class="sg-toggle-opt sg-toggle-active"><input type="radio" name="edit-zr-estado" value="true" checked /> Activa</label>
+						<label class="sg-toggle-opt"><input type="radio" name="edit-zr-estado" value="false" /> Inactiva</label>
+					</div>
+				</div>
+			</div>
+			<div class="sg-form-group"><label class="sg-label">Nivel de riesgo</label><select class="sg-select" id="edit-zr-nivel"></select></div>
+			<div class="sg-modal-footer">
+				<button type="submit" class="sg-btn sg-btn-primary">Guardar Cambios</button>
+				<button type="button" class="sg-btn sg-btn-secondary" id="close-modal-zona2">Cancelar</button>
+			</div>
+		</form>
 	</div>
 </div>
 
@@ -244,9 +288,12 @@
 
 	let nivelesRiesgo: Array<{ id: number; descripcion: string }> = [];
 	let paginaZonas = 1;
+	let paginaContactos = 1;
 	let filtrosBusqZonas = '';
 	let filtrosNivelZonas = '';
 	let filtrosEstadoZonas = '';
+	let filtrosBusqContactos = '';
+	let filtrosEstadoContactos = '';
 
 	let zoneMap: any = null;
 	let zoneMarker: any = null;
@@ -419,7 +466,7 @@
 					<td>${getNivelNombre(zona.id_nivel_riesgo)}</td>
 					<td class="sg-td-coords">${zona.latitud != null ? (+zona.latitud).toFixed(4) : '—'}, ${zona.longitud != null ? (+zona.longitud).toFixed(4) : '—'}</td>
 					<td><span class="sg-badge ${zona.estado ? 'sg-badge-active' : 'sg-badge-inactive'}">${zona.estado ? 'Activa' : 'Inactiva'}</span></td>
-					<td class="sg-td-actions"><button class="sg-btn-action" data-action="edit-zona" data-id="${zona.id}">Editar</button></td>
+					<td class="sg-td-actions"><button class="sg-btn-action sg-btn-edit" data-action="edit-zona" data-id="${zona.id}" data-nombre="${zona.nombre}">✏ Editar</button></td>
 				</tr>
 			`).join('');
 		}
@@ -427,6 +474,143 @@
 		const info = document.getElementById('info-zonas');
 		if (info) info.textContent = `Mostrando ${rows.length} de ${count || 0} zonas`;
 		renderPaginator('btns-zonas', count || 0, paginaZonas, (p) => { paginaZonas = p; loadZonas(); });
+		loadDeleteZonas(rows);
+		tbody.querySelectorAll('[data-action="edit-zona"]').forEach((btn) => {
+			btn.addEventListener('click', () => editarZona(parseInt(btn.getAttribute('data-id') || '0', 10)));
+		});
+	}
+
+	async function editarZona(id: number) {
+		const { data } = await supabase.from('zonas_riesgo').select('*').eq('id', id).single();
+		if (!data) return;
+
+		(document.getElementById('edit-zr-id') as HTMLInputElement).value = id.toString();
+		(document.getElementById('edit-zr-nombre') as HTMLInputElement).value = data.nombre || '';
+		(document.getElementById('edit-zr-descripcion') as HTMLTextAreaElement).value = data.descripcion || '';
+		(document.getElementById('edit-zr-latitud') as HTMLInputElement).value = data.latitud ?? '';
+		(document.getElementById('edit-zr-longitud') as HTMLInputElement).value = data.longitud ?? '';
+		(document.getElementById('edit-zr-radio-metros') as HTMLInputElement).value = data.radio_metros ?? 50;
+
+		const nivelSelect = document.getElementById('edit-zr-nivel') as HTMLSelectElement;
+		nivelSelect.innerHTML = '<option value="">Sin nivel</option>' + nivelesRiesgo.map((n) => `<option value="${n.id}">${n.descripcion}</option>`).join('');
+		if (data.id_nivel_riesgo) nivelSelect.value = String(data.id_nivel_riesgo);
+
+		const estadoRadio = document.querySelector(`input[name="edit-zr-estado"][value="${data.estado ? 'true' : 'false'}"]`) as HTMLInputElement | null;
+		if (estadoRadio) {
+			document.querySelectorAll('input[name="edit-zr-estado"]').forEach((radio) => {
+				const parent = (radio as HTMLInputElement).parentElement;
+				if (parent) parent.classList.remove('sg-toggle-active');
+			});
+			estadoRadio.checked = true;
+			estadoRadio.parentElement?.classList.add('sg-toggle-active');
+		}
+
+		openModal('sg-modal-editar-zona');
+	}
+
+	function openModal(id: string) {
+		const modal = document.getElementById(id);
+		if (modal) modal.style.display = 'flex';
+	}
+
+	function closeModal(id: string) {
+		const modal = document.getElementById(id);
+		if (modal) modal.style.display = 'none';
+	}
+
+	async function loadContactos() {
+		let query = supabase.from('contactos_emergencia').select('*', { count: 'exact' }).order('id', { ascending: false });
+		if (filtrosBusqContactos) query = query.ilike('nombre_contacto', `%${filtrosBusqContactos}%`);
+		if (filtrosEstadoContactos !== '') query = query.eq('estado', filtrosEstadoContactos === 'true');
+		const from = (paginaContactos - 1) * PAGE_SIZE;
+		query = query.range(from, from + PAGE_SIZE - 1);
+
+		const { data, count } = await query;
+		const rows = data || [];
+		const tbody = document.getElementById('tbody-contactos');
+		if (!tbody) return;
+
+		if (!rows.length) {
+			tbody.innerHTML = '<tr><td colspan="5" class="sg-loading-row">No se encontraron contactos</td></tr>';
+		} else {
+			tbody.innerHTML = rows.map((contacto) => `
+				<tr>
+					<td class="sg-td-name">${contacto.nombre_contacto}</td>
+					<td>${contacto.telefono || '—'}</td>
+					<td>${contacto.parentesco || '—'}</td>
+					<td><span class="sg-badge ${contacto.estado ? 'sg-badge-active' : 'sg-badge-inactive'}">${contacto.estado ? 'Activo' : 'Inactivo'}</span></td>
+					<td class="sg-td-actions"><button class="sg-btn-action" data-action="edit-contacto" data-id="${contacto.id}">Editar contacto</button></td>
+				</tr>
+			`).join('');
+		}
+
+		const info = document.getElementById('info-contactos');
+		if (info) info.textContent = `Mostrando ${rows.length} de ${count || 0} contactos`;
+		renderPaginator('btns-contactos', count || 0, paginaContactos, (p) => { paginaContactos = p; loadContactos(); });
+		loadDeleteContactos(rows);
+	}
+
+	function loadDeleteZonas(rows: Array<any>) {
+		const tbody = document.getElementById('tbody-del-zonas');
+		if (!tbody) return;
+		if (!rows.length) {
+			tbody.innerHTML = '<tr><td colspan="4" class="sg-loading-row">No hay zonas</td></tr>';
+			return;
+		}
+
+		tbody.innerHTML = rows.map((zona) => `
+			<tr>
+				<td class="sg-td-name">${zona.nombre}</td>
+				<td>${getNivelNombre(zona.id_nivel_riesgo)}</td>
+				<td><span class="sg-badge ${zona.estado ? 'sg-badge-active' : 'sg-badge-inactive'}">${zona.estado ? 'Activa' : 'Inactiva'}</span></td>
+				<td class="sg-td-actions"><button class="sg-btn-action sg-btn-delete" data-action="del-zona" data-id="${zona.id}" data-nombre="${zona.nombre}">🗑 Eliminar</button></td>
+			</tr>
+		`).join('');
+
+		tbody.querySelectorAll('[data-action="del-zona"]').forEach((btn) => {
+			btn.addEventListener('click', () => eliminarZona(parseInt(btn.getAttribute('data-id') || '0', 10), btn.getAttribute('data-nombre') || ''));
+		});
+	}
+
+	function loadDeleteContactos(rows: Array<any>) {
+		const tbody = document.getElementById('tbody-del-contactos');
+		if (!tbody) return;
+		if (!rows.length) {
+			tbody.innerHTML = '<tr><td colspan="4" class="sg-loading-row">No hay contactos</td></tr>';
+			return;
+		}
+
+		tbody.innerHTML = rows.map((contacto) => `
+			<tr>
+				<td class="sg-td-name">${contacto.nombre_contacto}</td>
+				<td>${contacto.telefono || '—'}</td>
+				<td><span class="sg-badge ${contacto.estado ? 'sg-badge-active' : 'sg-badge-inactive'}">${contacto.estado ? 'Activo' : 'Inactivo'}</span></td>
+				<td class="sg-td-actions"><button class="sg-btn-action sg-btn-delete" data-action="del-contacto" data-id="${contacto.id}" data-nombre="${contacto.nombre_contacto}">🗑 Eliminar</button></td>
+			</tr>
+		`).join('');
+
+		tbody.querySelectorAll('[data-action="del-contacto"]').forEach((btn) => {
+			btn.addEventListener('click', () => eliminarContacto(parseInt(btn.getAttribute('data-id') || '0', 10), btn.getAttribute('data-nombre') || ''));
+		});
+	}
+
+	async function eliminarZona(id: number, nombre: string) {
+		if (!id) return;
+		if (!confirm(`¿Eliminar la zona "${nombre}"? Esta acción no se puede deshacer.`)) return;
+		const { error } = await supabase.from('zonas_riesgo').delete().eq('id', id);
+		if (error) { showToast('Error: ' + error.message, 'error'); return; }
+		showToast('Zona eliminada');
+		loadZonas();
+		loadStats();
+	}
+
+	async function eliminarContacto(id: number, nombre: string) {
+		if (!id) return;
+		if (!confirm(`¿Eliminar el contacto "${nombre}"? Esta acción no se puede deshacer.`)) return;
+		const { error } = await supabase.from('contactos_emergencia').delete().eq('id', id);
+		if (error) { showToast('Error: ' + error.message, 'error'); return; }
+		showToast('Contacto eliminado');
+		loadContactos();
 	}
 
 	const initSeguridadModule = () => {
@@ -436,12 +620,14 @@
 		const cards = root.querySelectorAll('.sg-action-card');
 		const panels = root.querySelectorAll('.sg-panel');
 		const formCrearZona = document.getElementById('form-crear-zona');
+		const formEditarZona = document.getElementById('form-editar-zona');
 		const btnNuevaZona = document.getElementById('btn-nueva-zona');
 		const btnCancelarZona = document.getElementById('btn-cancelar-zona');
 
 		loadNivelesRiesgo().then(() => {
 			loadStats();
 			loadZonas();
+			loadContactos();
 		});
 
 		formCrearZona?.addEventListener('submit', async (e) => {
@@ -483,12 +669,54 @@
 			(document.querySelector('[data-panel="ver-zonas"]') as HTMLElement)?.click();
 		});
 
+		formEditarZona?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const btn = formEditarZona.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+			const nivelVal = document.getElementById('edit-zr-nivel') as HTMLSelectElement | null;
+			if (!btn || !nivelVal) return;
+
+			btn.disabled = true;
+			btn.textContent = 'Guardando...';
+
+			const id = parseInt((document.getElementById('edit-zr-id') as HTMLInputElement).value, 10);
+			const estadoRadio = document.querySelector('input[name="edit-zr-estado"]:checked') as HTMLInputElement | null;
+			const { error } = await supabase.from('zonas_riesgo').update({
+				nombre: (document.getElementById('edit-zr-nombre') as HTMLInputElement).value.trim(),
+				descripcion: (document.getElementById('edit-zr-descripcion') as HTMLTextAreaElement).value.trim() || null,
+				latitud: parseFloat((document.getElementById('edit-zr-latitud') as HTMLInputElement).value) || null,
+				longitud: parseFloat((document.getElementById('edit-zr-longitud') as HTMLInputElement).value) || null,
+				radio_metros: parseInt((document.getElementById('edit-zr-radio-metros') as HTMLInputElement).value, 10) || null,
+				estado: estadoRadio?.value === 'true',
+				id_nivel_riesgo: nivelVal.value ? parseInt(nivelVal.value, 10) : null,
+				updated_at: new Date().toISOString(),
+			}).eq('id', id);
+
+			btn.disabled = false;
+			btn.textContent = 'Guardar Cambios';
+
+			if (error) {
+				showToast('Error: ' + error.message, 'error');
+				return;
+			}
+
+			showToast('Zona actualizada');
+			closeModal('sg-modal-editar-zona');
+			loadZonas();
+			loadStats();
+		});
+
 		btnNuevaZona?.addEventListener('click', () => {
 			(document.querySelector('[data-panel="crear-zonas"]') as HTMLElement)?.click();
 		});
 
 		btnCancelarZona?.addEventListener('click', () => {
 			(document.querySelector('[data-panel="ver-zonas"]') as HTMLElement)?.click();
+		});
+
+		document.getElementById('close-modal-zona')?.addEventListener('click', () => closeModal('sg-modal-editar-zona'));
+		document.getElementById('close-modal-zona2')?.addEventListener('click', () => closeModal('sg-modal-editar-zona'));
+		document.getElementById('sg-modal-editar-zona')?.addEventListener('click', (e) => {
+			if (e.target === e.currentTarget) closeModal('sg-modal-editar-zona');
 		});
 
 		document.getElementById('search-zonas')?.addEventListener('input', (e) => {
@@ -507,6 +735,32 @@
 			filtrosEstadoZonas = (e.target as HTMLSelectElement).value;
 			paginaZonas = 1;
 			loadZonas();
+		});
+
+		document.getElementById('btn-nuevo-contacto')?.addEventListener('click', () => {
+			(document.querySelector('[data-panel="crear-contactos"]') as HTMLElement)?.click();
+		});
+
+		document.getElementById('search-contactos')?.addEventListener('input', (e) => {
+			filtrosBusqContactos = (e.target as HTMLInputElement).value;
+			paginaContactos = 1;
+			loadContactos();
+		});
+
+		document.getElementById('filter-estado-contactos')?.addEventListener('change', (e) => {
+			filtrosEstadoContactos = (e.target as HTMLSelectElement).value;
+			paginaContactos = 1;
+			loadContactos();
+		});
+
+		document.querySelectorAll('.sg-del-tab').forEach((tab) => {
+			tab.addEventListener('click', () => {
+				document.querySelectorAll('.sg-del-tab').forEach((t) => t.classList.remove('active'));
+				tab.classList.add('active');
+				document.querySelectorAll('.sg-del-panel').forEach((p) => (p as HTMLElement).style.display = 'none');
+				const panel = document.getElementById(tab.getAttribute('data-target') || '');
+				if (panel) panel.style.display = 'block';
+			});
 		});
 
 		cards.forEach((card) => {
@@ -547,6 +801,15 @@
 					if (panelId === 'sg-panel-ver-zonas') {
 						loadZonas();
 						loadStats();
+					}
+
+					if (panelId === 'sg-panel-ver-contactos') {
+						loadContactos();
+					}
+
+					if (panelId === 'sg-panel-eliminar') {
+						loadZonas();
+						loadContactos();
 					}
 				}
 			});
