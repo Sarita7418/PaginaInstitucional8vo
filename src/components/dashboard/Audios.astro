@@ -1,5 +1,5 @@
 ---
-// Audios.astro — Módulo Audioguías Inteligentes
+// Audios.astro — Módulo Audioguías Inteligentes (Funcional con Supabase)
 ---
 
 <link rel="stylesheet" href="/src/components/dashboard/Audios.css" />
@@ -9,7 +9,6 @@
 
     <!-- TARJETAS DE ACCIONES -->
     <div class="ag-actions-grid">
-
       <button class="ag-action-card ag-teal" data-panel="subir">
         <div class="ag-action-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -18,8 +17,8 @@
           </svg>
         </div>
         <div class="ag-action-text">
-          <span class="ag-action-title">Subir Audioguía</span>
-          <span class="ag-action-desc">Carga una nueva audioguía con contenido de IA</span>
+          <span class="ag-action-title">Crear Audioguía</span>
+          <span class="ag-action-desc">Registra una nueva audioguía con IA</span>
         </div>
       </button>
 
@@ -31,8 +30,8 @@
           </svg>
         </div>
         <div class="ag-action-text">
-          <span class="ag-action-title">Editar Contenido</span>
-          <span class="ag-action-desc">Modifica el contenido de audioguías existentes</span>
+          <span class="ag-action-title">Ver / Editar</span>
+          <span class="ag-action-desc">Lista y modifica audioguías existentes</span>
         </div>
       </button>
 
@@ -46,7 +45,7 @@
         </div>
         <div class="ag-action-text">
           <span class="ag-action-title">Gestionar Idiomas</span>
-          <span class="ag-action-desc">Administra traducciones y versiones multilingües</span>
+          <span class="ag-action-desc">Cobertura por idioma en la BD</span>
         </div>
       </button>
 
@@ -59,11 +58,13 @@
         </div>
         <div class="ag-action-text">
           <span class="ag-action-title">Eliminar Audioguía</span>
-          <span class="ag-action-desc">Elimina audioguías que ya no son necesarias</span>
+          <span class="ag-action-desc">Elimina audioguías del sistema</span>
         </div>
       </button>
-
     </div>
+
+    <!-- TOAST -->
+    <div id="ag-toast" class="ag-toast ag-toast-hidden"></div>
 
     <!-- ÁREA DINÁMICA -->
     <div class="ag-dynamic-area">
@@ -74,9 +75,7 @@
           <div class="ag-hero-card">
             <div class="ag-hero-overlay"></div>
             <div class="ag-hero-content">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
-              </svg>
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
               <blockquote class="ag-hero-quote">"El sonido de las montañas cobrando vida."</blockquote>
               <p class="ag-hero-sub">Audioguías generadas con inteligencia artificial</p>
               <div class="ag-hero-dots">
@@ -90,342 +89,208 @@
           <div class="ag-summary">
             <h3 class="ag-summary-title">Resumen de Audioguías</h3>
             <div class="ag-summary-stats">
-              <div class="ag-summary-stat">
-                <span class="ag-sstat-num ag-teal-text">12</span>
-                <span class="ag-sstat-lbl">Total</span>
-              </div>
-              <div class="ag-summary-stat">
-                <span class="ag-sstat-num ag-green-text">9</span>
-                <span class="ag-sstat-lbl">Publicadas</span>
-              </div>
-              <div class="ag-summary-stat">
-                <span class="ag-sstat-num ag-amber-text">4</span>
-                <span class="ag-sstat-lbl">Idiomas</span>
-              </div>
-              <div class="ag-summary-stat">
-                <span class="ag-sstat-num ag-terra-text">3</span>
-                <span class="ag-sstat-lbl">Borradores</span>
-              </div>
+              <div class="ag-summary-stat"><span class="ag-sstat-num ag-teal-text" id="stat-total">—</span><span class="ag-sstat-lbl">Total</span></div>
+              <div class="ag-summary-stat"><span class="ag-sstat-num ag-green-text" id="stat-activas">—</span><span class="ag-sstat-lbl">Activas</span></div>
+              <div class="ag-summary-stat"><span class="ag-sstat-num ag-amber-text" id="stat-idiomas">—</span><span class="ag-sstat-lbl">Idiomas</span></div>
+              <div class="ag-summary-stat"><span class="ag-sstat-num ag-terra-text" id="stat-inactivas">—</span><span class="ag-sstat-lbl">Inactivas</span></div>
             </div>
             <div class="ag-recent-label">Últimas audioguías</div>
-            <div class="ag-recent-list">
-              <div class="ag-recent-item">
-                <div class="ag-recent-icon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-                </div>
-                <div class="ag-recent-info">
-                  <span class="ag-recent-name">Historia de Sacsayhuamán</span>
-                  <span class="ag-recent-meta">Sacsayhuamán · 5:32</span>
-                </div>
-                <span class="ag-badge ag-badge-pub">Publicada</span>
-              </div>
-              <div class="ag-recent-item">
-                <div class="ag-recent-icon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-                </div>
-                <div class="ag-recent-info">
-                  <span class="ag-recent-name">Legends of Qenqo</span>
-                  <span class="ag-recent-meta">Qenqo · 4:15</span>
-                </div>
-                <span class="ag-badge ag-badge-pub">Publicada</span>
-              </div>
-              <div class="ag-recent-item">
-                <div class="ag-recent-icon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-                </div>
-                <div class="ag-recent-info">
-                  <span class="ag-recent-name">Mercado de San Pedro Tour</span>
-                  <span class="ag-recent-meta">Mercado de San Pedro · 6:48</span>
-                </div>
-                <span class="ag-badge ag-badge-draft">Borrador</span>
-              </div>
+            <div class="ag-recent-list" id="ag-recent-list">
+              <div style="padding:16px; color:#8A9BA0; font-size:13px;">Cargando...</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- PANEL: Subir Audioguía -->
+      <!-- PANEL: Crear Audioguía -->
       <div class="ag-panel" id="ag-panel-subir">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-teal-bg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           </div>
           <div>
-            <h3 class="ag-panel-title">Subir Audioguía</h3>
-            <p class="ag-panel-subtitle">Crea puntos de audio para enriquecer la experiencia del turista</p>
+            <h3 class="ag-panel-title">Crear Audioguía</h3>
+            <p class="ag-panel-subtitle">Registra en tabla audioguias conectada a punto_turistico y subdominios</p>
           </div>
         </div>
+        <form id="form-crear-audio" autocomplete="off">
+          <div class="ag-form-layout">
+            <div class="ag-form-main">
+              <div class="ag-form-group ag-full">
+                <label class="ag-label">Título de la Audioguía *</label>
+                <input type="text" class="ag-input" id="au-titulo" placeholder="Ej: Historia del Valle de la Luna" required />
+              </div>
+              <div class="ag-form-group ag-full">
+                <label class="ag-label">Descripción Corta</label>
+                <input type="text" class="ag-input" id="au-desc-corta" placeholder="Breve descripción para listados..." />
+              </div>
+              <div class="ag-form-group ag-full">
+                <label class="ag-label">Texto / Transcripción (Dataset para IA)</label>
+                <textarea class="ag-textarea ag-textarea-lg" id="au-texto" placeholder="Ingresa el contenido narrativo completo que será utilizado para generar la audioguía con IA..."></textarea>
+              </div>
 
-        <div class="ag-form-layout">
-          <div class="ag-form-main">
-            <div class="ag-form-group ag-full">
-              <label class="ag-label">Título de la Audioguía</label>
-              <input type="text" class="ag-input" placeholder="Ej: Los Secretos del Valle del Colca" />
-            </div>
-            <div class="ag-form-group ag-full">
-              <label class="ag-label">Texto Descriptivo (Dataset)</label>
-              <textarea class="ag-textarea ag-textarea-lg" placeholder="Ingresa el contenido narrativo que será utilizado para generar la audioguía con IA..."></textarea>
-            </div>
-            <div class="ag-form-row">
-              <div class="ag-form-group">
-                <label class="ag-label">Idioma</label>
-                <select class="ag-select">
-                  <option>Español</option>
-                  <option>English</option>
-                  <option>Deutsch</option>
-                  <option>Français</option>
-                  <option>Português</option>
-                  <option>Quechua</option>
-                </select>
+              <!-- Vista previa del texto -->
+              <div id="ag-preview-box" class="ag-preview-box" style="display:none;">
+                <div class="ag-preview-label">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Vista previa del texto
+                </div>
+                <div id="ag-preview-text" class="ag-preview-text"></div>
+              </div>
+
+              <div class="ag-form-row">
+                <div class="ag-form-group">
+                  <label class="ag-label">Idioma <span class="ag-label-sub">(subdominios id_dominio=2)</span></label>
+                  <select class="ag-select" id="au-idioma">
+                    <option value="">Cargando idiomas...</option>
+                  </select>
+                </div>
+                <div class="ag-form-group">
+                  <label class="ag-label">Punto Turístico</label>
+                  <select class="ag-select" id="au-punto">
+                    <option value="">Cargando puntos...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="ag-form-row">
+                <div class="ag-form-group">
+                  <label class="ag-label">Duración (segundos)</label>
+                  <input type="number" class="ag-input" id="au-duracion" placeholder="Ej: 312" min="0" />
+                </div>
+                <div class="ag-form-group">
+                  <label class="ag-label">URL de Audio (opcional)</label>
+                  <input type="url" class="ag-input" id="au-audio-url" placeholder="https://..." />
+                </div>
               </div>
               <div class="ag-form-group">
-                <label class="ag-label">Punto Turístico</label>
-                <select class="ag-select">
-                  <option value="">Seleccionar punto</option>
-                  <option>Plaza Murillo</option>
-                  <option>Valle de la Luna</option>
-                  <option>Mercado de las Brujas</option>
-                  <option>Mirador Killi Killi</option>
-                  <option>Tiwanaku</option>
-                </select>
+                <label class="ag-label">Estado</label>
+                <div class="ag-toggle-group">
+                  <label class="ag-toggle-opt ag-toggle-active"><input type="radio" name="au-estado" value="true" checked /> Activa</label>
+                  <label class="ag-toggle-opt"><input type="radio" name="au-estado" value="false" /> Inactiva</label>
+                </div>
               </div>
-            </div>
-            <div class="ag-form-group ag-full">
-              <label class="ag-label">Archivo de Audio</label>
-              <div class="ag-upload-zone" id="ag-upload-zone">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8A9BA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
-                </svg>
-                <span class="ag-upload-main">Haga clic o arrastre su archivo de audio aquí</span>
-                <span class="ag-upload-hint">Soporta MP3, WAV, OGG (máx. 50MB)</span>
-              </div>
-            </div>
-            <div class="ag-ia-box">
-              <div class="ag-ia-badge">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-                IA
-              </div>
-              <span class="ag-ia-label">Generación automática con IA</span>
-              <div class="ag-ia-btns">
-                <button class="ag-ia-btn">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-                  Convertir texto a voz
-                </button>
-                <button class="ag-ia-btn ag-ia-btn-primary">
+
+              <!-- Caja IA + Escuchar -->
+              <div class="ag-ia-box">
+                <div class="ag-ia-badge">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-                  Generar audio automáticamente
+                  IA
+                </div>
+                <span class="ag-ia-label">Simulación con SpeechSynthesis del navegador</span>
+                <div class="ag-ia-btns">
+                  <button type="button" class="ag-ia-btn" id="btn-escuchar">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    Escuchar audioguía
+                  </button>
+                  <button type="button" class="ag-ia-btn" id="btn-detener" style="display:none;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                    Detener
+                  </button>
+                  <button type="button" class="ag-ia-btn ag-ia-btn-primary" id="btn-generar-ia">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                    Generar audio automáticamente
+                  </button>
+                </div>
+              </div>
+
+              <div class="ag-form-actions">
+                <button type="submit" class="ag-btn ag-btn-primary" id="btn-guardar-audio">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Guardar Audioguía
                 </button>
+                <button type="button" class="ag-btn ag-btn-secondary" id="btn-cancelar-audio">Cancelar</button>
               </div>
             </div>
-            <div class="ag-form-actions">
-              <button class="ag-btn ag-btn-primary">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                Guardar Audioguía
-              </button>
-              <button class="ag-btn ag-btn-secondary">Cancelar</button>
-            </div>
-          </div>
 
-          <div class="ag-side-card">
-            <div class="ag-side-img">
-              <div class="ag-side-img-overlay">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-                <p class="ag-side-quote">"El sonido de las montañas cobrando vida."</p>
-                <p class="ag-side-sub">Nuestras audioguías inteligentes utilizan IA para crear experiencias inmersivas, transportando al viajero a una experiencia única en los Andes.</p>
-                <div class="ag-side-dots">
-                  <span class="ag-dot ag-dot-teal"></span>
-                  <span class="ag-dot ag-dot-amber"></span>
-                  <span class="ag-dot ag-dot-green"></span>
-                  <span class="ag-dot ag-dot-terra"></span>
+            <div class="ag-side-card">
+              <div class="ag-side-img">
+                <div class="ag-side-img-overlay">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                  <p class="ag-side-quote">"El sonido de las montañas cobrando vida."</p>
+                  <p class="ag-side-sub">Audioguías inteligentes con IA para experiencias inmersivas en los Andes.</p>
+                  <div class="ag-side-dots">
+                    <span class="ag-dot ag-dot-teal"></span>
+                    <span class="ag-dot ag-dot-amber"></span>
+                    <span class="ag-dot ag-dot-green"></span>
+                    <span class="ag-dot ag-dot-terra"></span>
+                  </div>
+                  <!-- Indicador duración -->
+                  <div id="ag-duracion-preview" class="ag-duracion-badge" style="display:none;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span id="ag-duracion-text">0:00</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
 
-      <!-- PANEL: Editar Contenido -->
+      <!-- PANEL: Ver / Editar -->
       <div class="ag-panel" id="ag-panel-editar">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-green-bg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </div>
           <div>
-            <h3 class="ag-panel-title">Editar Audioguías</h3>
-            <p class="ag-panel-subtitle">Selecciona una audioguía para modificar su contenido</p>
+            <h3 class="ag-panel-title">Audioguías</h3>
+            <p class="ag-panel-subtitle">Datos en tiempo real desde Supabase</p>
           </div>
+          <button class="ag-btn ag-btn-primary ag-ml-auto" style="padding:7px 14px;font-size:12px;" id="btn-nueva-audio">+ Nueva</button>
         </div>
         <div class="ag-toolbar">
           <div class="ag-search-wrap">
             <svg class="ag-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" class="ag-search" placeholder="Buscar audioguía..." />
+            <input type="text" class="ag-search" id="search-audios" placeholder="Buscar por título..." />
           </div>
-          <select class="ag-filter">
-            <option>Todos los idiomas</option>
-            <option>Español</option>
-            <option>English</option>
-            <option>Deutsch</option>
-            <option>Quechua</option>
-          </select>
-          <select class="ag-filter">
-            <option>Todos los estados</option>
-            <option>Publicada</option>
-            <option>Borrador</option>
+          <select class="ag-filter" id="filter-idioma-audios"><option value="">Todos los idiomas</option></select>
+          <select class="ag-filter" id="filter-estado-audios">
+            <option value="">Todos los estados</option>
+            <option value="true">Activa</option>
+            <option value="false">Inactiva</option>
           </select>
         </div>
         <div class="ag-table-wrap">
           <table class="ag-table">
             <thead>
-              <tr>
-                <th>Título</th>
-                <th>Idioma</th>
-                <th>Duración</th>
-                <th>Punto</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
+              <tr><th>Título</th><th>Idioma</th><th>Duración</th><th>Punto Turístico</th><th>Estado</th><th>Acciones</th></tr>
             </thead>
-            <tbody>
-              <tr>
-                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Historia de Sacsayhuamán</td>
-                <td>Español</td><td>5:32</td><td>Sacsayhuamán</td>
-                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
-                <td><button class="ag-btn-action ag-btn-edit">✏ Editar</button></td>
-              </tr>
-              <tr>
-                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Legends of Qenqo</td>
-                <td>English</td><td>4:15</td><td>Qenqo</td>
-                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
-                <td><button class="ag-btn-action ag-btn-edit">✏ Editar</button></td>
-              </tr>
-              <tr>
-                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Mercado de San Pedro Tour</td>
-                <td>Español</td><td>6:48</td><td>Mercado de San Pedro</td>
-                <td><span class="ag-badge ag-badge-draft">Borrador</span></td>
-                <td><button class="ag-btn-action ag-btn-edit">✏ Editar</button></td>
-              </tr>
-              <tr>
-                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Plaza de Armas Geschichte</td>
-                <td>Deutsch</td><td>5:10</td><td>Plaza de Armas</td>
-                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
-                <td><button class="ag-btn-action ag-btn-edit">✏ Editar</button></td>
-              </tr>
+            <tbody id="tbody-audios">
+              <tr><td colspan="6" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando datos...</td></tr>
             </tbody>
           </table>
         </div>
         <div class="ag-pagination">
-          <span class="ag-page-info">Mostrando 4 de 12 audioguías</span>
-          <div class="ag-page-btns">
-            <button class="ag-page-btn" disabled>‹</button>
-            <button class="ag-page-btn active">1</button>
-            <button class="ag-page-btn">2</button>
-            <button class="ag-page-btn">3</button>
-            <button class="ag-page-btn">›</button>
-          </div>
+          <span class="ag-page-info" id="info-audios">—</span>
+          <div class="ag-page-btns" id="btns-audios"></div>
         </div>
       </div>
 
-      <!-- PANEL: Gestionar Idiomas -->
+      <!-- PANEL: Idiomas -->
       <div class="ag-panel" id="ag-panel-idiomas">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-amber-bg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="2" y1="12" x2="22" y2="12"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div>
             <h3 class="ag-panel-title">Gestionar Idiomas</h3>
-            <p class="ag-panel-subtitle">Administra las traducciones y versiones multilingües de las audioguías</p>
+            <p class="ag-panel-subtitle">Cobertura real de audioguías por idioma en la base de datos</p>
           </div>
         </div>
-        <div class="ag-lang-grid">
-          <div class="ag-lang-card">
-            <div class="ag-lang-top">
-              <span class="ag-lang-name">Español</span>
-              <span class="ag-lang-count">8 guías</span>
-            </div>
-            <div class="ag-lang-bar-track">
-              <div class="ag-lang-bar-fill ag-bar-teal" style="width:100%"></div>
-            </div>
-            <span class="ag-lang-pct">100% completado</span>
-          </div>
-          <div class="ag-lang-card">
-            <div class="ag-lang-top">
-              <span class="ag-lang-name">English</span>
-              <span class="ag-lang-count">6 guías</span>
-            </div>
-            <div class="ag-lang-bar-track">
-              <div class="ag-lang-bar-fill ag-bar-teal" style="width:75%"></div>
-            </div>
-            <span class="ag-lang-pct">75% completado</span>
-          </div>
-          <div class="ag-lang-card">
-            <div class="ag-lang-top">
-              <span class="ag-lang-name">Português</span>
-              <span class="ag-lang-count">3 guías</span>
-            </div>
-            <div class="ag-lang-bar-track">
-              <div class="ag-lang-bar-fill ag-bar-green" style="width:38%"></div>
-            </div>
-            <span class="ag-lang-pct">38% completado</span>
-          </div>
-          <div class="ag-lang-card">
-            <div class="ag-lang-top">
-              <span class="ag-lang-name">Deutsch</span>
-              <span class="ag-lang-count">2 guías</span>
-            </div>
-            <div class="ag-lang-bar-track">
-              <div class="ag-lang-bar-fill ag-bar-amber" style="width:25%"></div>
-            </div>
-            <span class="ag-lang-pct">25% completado</span>
-          </div>
-          <div class="ag-lang-card">
-            <div class="ag-lang-top">
-              <span class="ag-lang-name">Français</span>
-              <span class="ag-lang-count">1 guías</span>
-            </div>
-            <div class="ag-lang-bar-track">
-              <div class="ag-lang-bar-fill ag-bar-amber" style="width:13%"></div>
-            </div>
-            <span class="ag-lang-pct">13% completado</span>
-          </div>
-          <div class="ag-lang-card">
-            <div class="ag-lang-top">
-              <span class="ag-lang-name">Quechua</span>
-              <span class="ag-lang-count">4 guías</span>
-            </div>
-            <div class="ag-lang-bar-track">
-              <div class="ag-lang-bar-fill ag-bar-teal" style="width:50%"></div>
-            </div>
-            <span class="ag-lang-pct">50% completado</span>
-          </div>
+        <div class="ag-lang-grid" id="ag-lang-grid">
+          <div style="grid-column:1/-1;padding:20px;color:#8A9BA0;text-align:center;font-size:13px;">Cargando idiomas...</div>
         </div>
-        <button class="ag-btn ag-btn-amber" style="margin-top:20px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Añadir nuevo idioma
-        </button>
       </div>
 
-      <!-- PANEL: Eliminar Audioguía -->
+      <!-- PANEL: Eliminar -->
       <div class="ag-panel" id="ag-panel-eliminar">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-terra-bg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-              <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
           </div>
           <div>
             <h3 class="ag-panel-title">Eliminar Audioguías</h3>
-            <p class="ag-panel-subtitle">Selecciona una audioguía para eliminarla del sistema</p>
+            <p class="ag-panel-subtitle">Selecciona una audioguía para eliminarla permanentemente</p>
           </div>
         </div>
         <div class="ag-alert-warn">
@@ -435,40 +300,10 @@
         <div class="ag-table-wrap">
           <table class="ag-table">
             <thead>
-              <tr>
-                <th>Título</th>
-                <th>Idioma</th>
-                <th>Duración</th>
-                <th>Punto</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
+              <tr><th>Título</th><th>Idioma</th><th>Duración</th><th>Punto Turístico</th><th>Estado</th><th>Acciones</th></tr>
             </thead>
-            <tbody>
-              <tr>
-                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Historia de Sacsayhuamán</td>
-                <td>Español</td><td>5:32</td><td>Sacsayhuamán</td>
-                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
-                <td><button class="ag-btn-action ag-btn-delete">🗑 Eliminar</button></td>
-              </tr>
-              <tr>
-                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Legends of Qenqo</td>
-                <td>English</td><td>4:15</td><td>Qenqo</td>
-                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
-                <td><button class="ag-btn-action ag-btn-delete">🗑 Eliminar</button></td>
-              </tr>
-              <tr>
-                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Mercado de San Pedro Tour</td>
-                <td>Español</td><td>6:48</td><td>Mercado de San Pedro</td>
-                <td><span class="ag-badge ag-badge-draft">Borrador</span></td>
-                <td><button class="ag-btn-action ag-btn-delete">🗑 Eliminar</button></td>
-              </tr>
-              <tr>
-                <td class="ag-td-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Plaza de Armas Geschichte</td>
-                <td>Deutsch</td><td>5:10</td><td>Plaza de Armas</td>
-                <td><span class="ag-badge ag-badge-pub">Publicada</span></td>
-                <td><button class="ag-btn-action ag-btn-delete">🗑 Eliminar</button></td>
-              </tr>
+            <tbody id="tbody-del-audios">
+              <tr><td colspan="6" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando...</td></tr>
             </tbody>
           </table>
         </div>
@@ -477,8 +312,486 @@
     </div>
   </div>
 </div>
+<!-- MODAL CONFIRMAR ELIMINACIÓN -->
+<div id="modal-confirm-delete" class="ag-modal" style="display:none;">
+  <div class="ag-modal-box ag-modal-sm">
+    
+    <div class="ag-modal-header">
+      <h3 class="ag-modal-title">Confirmar eliminación</h3>
+      <button class="ag-modal-close" id="close-delete-modal">✕</button>
+    </div>
+
+    <div class="ag-modal-body">
+      <p id="delete-message">
+        ¿Estás seguro de eliminar este elemento?
+      </p>
+    </div>
+
+    <div class="ag-modal-footer">
+      <button class="ag-btn ag-btn-danger" id="confirm-delete-btn">
+        🗑 Sí, eliminar
+      </button>
+      <button class="ag-btn ag-btn-secondary" id="cancel-delete-btn">
+        Cancelar
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- MODAL EDITAR AUDIOGUÍA -->
+<div id="modal-editar-audio" class="ag-modal" style="display:none;">
+  <div class="ag-modal-box">
+    <div class="ag-modal-header">
+      <h3 class="ag-modal-title">Editar Audioguía</h3>
+      <button class="ag-modal-close" id="close-modal-audio">✕</button>
+    </div>
+    <form id="form-editar-audio" autocomplete="off">
+      <input type="hidden" id="edit-au-id" />
+      <div class="ag-form-group"><label class="ag-label">Título *</label><input type="text" class="ag-input" id="edit-au-titulo" required /></div>
+      <div class="ag-form-group"><label class="ag-label">Descripción Corta</label><input type="text" class="ag-input" id="edit-au-desc" /></div>
+      <div class="ag-form-group"><label class="ag-label">Texto / Transcripción</label><textarea class="ag-textarea ag-textarea-lg" id="edit-au-texto"></textarea></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="ag-form-group"><label class="ag-label">Idioma</label><select class="ag-select" id="edit-au-idioma"></select></div>
+        <div class="ag-form-group"><label class="ag-label">Punto Turístico</label><select class="ag-select" id="edit-au-punto"></select></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="ag-form-group"><label class="ag-label">Duración (seg.)</label><input type="number" class="ag-input" id="edit-au-duracion" /></div>
+        <div class="ag-form-group"><label class="ag-label">URL Audio</label><input type="url" class="ag-input" id="edit-au-url" /></div>
+      </div>
+      <!-- Escuchar en modal -->
+      <div class="ag-ia-box" style="margin-bottom:16px;">
+        <div class="ag-ia-badge">IA</div>
+        <span class="ag-ia-label">Simulación con SpeechSynthesis</span>
+        <div class="ag-ia-btns">
+          <button type="button" class="ag-ia-btn" id="btn-escuchar-edit">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            Escuchar
+          </button>
+          <button type="button" class="ag-ia-btn" id="btn-detener-edit" style="display:none;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            Detener
+          </button>
+        </div>
+      </div>
+      <div class="ag-modal-footer">
+        <button type="submit" class="ag-btn ag-btn-primary">Guardar Cambios</button>
+        <button type="button" class="ag-btn ag-btn-secondary" id="close-modal-audio2">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <script>
+  import { supabase } from '../../lib/supabase';
+
+  const DOMINIO_IDIOMA = 2;
+  const PAGE_SIZE = 8;
+
+  let idiomas = [];
+  let puntos = [];
+  let paginaAudios = 1;
+  let filtrosBusq = '';
+  let filtrosIdioma = '';
+  let filtrosEstado = '';
+
+  // ---- TOAST ----
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('ag-toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.className = 'ag-toast ag-toast-' + type;
+    setTimeout(() => { t.className = 'ag-toast ag-toast-hidden'; }, 3500);
+  }
+
+  // ---- SPEECH SYNTHESIS ----
+  function getIdiomaBCP47(idIdioma) {
+    const idioma = idiomas.find(i => i.id == idIdioma);
+    if (!idioma) return 'es-ES';
+    const desc = (idioma.descripcion || '').toLowerCase();
+    if (desc.includes('english') || desc.includes('inglés')) return 'en-US';
+    if (desc.includes('deutsch') || desc.includes('alemán')) return 'de-DE';
+    if (desc.includes('français') || desc.includes('francés')) return 'fr-FR';
+    if (desc.includes('português') || desc.includes('portugués')) return 'pt-BR';
+    if (desc.includes('quechua') || desc.includes('aymara')) return 'es-PE';
+    return 'es-ES';
+  }
+
+  let speechUtterance = null;
+
+  function reproducirTexto(texto, idIdioma, btnPlay, btnStop) {
+    if (!texto || !texto.trim()) { showToast('No hay texto para reproducir', 'error'); return; }
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(texto.trim());
+    utter.lang = getIdiomaBCP47(idIdioma);
+    utter.rate = 0.9;
+    utter.pitch = 1;
+    utter.onstart = () => {
+      if (btnPlay) btnPlay.style.display = 'none';
+      if (btnStop) btnStop.style.display = 'inline-flex';
+    };
+    utter.onend = utter.onerror = () => {
+      if (btnPlay) btnPlay.style.display = 'inline-flex';
+      if (btnStop) btnStop.style.display = 'none';
+    };
+    speechUtterance = utter;
+    window.speechSynthesis.speak(utter);
+  }
+
+  function detenerAudio(btnPlay, btnStop) {
+    window.speechSynthesis.cancel();
+    if (btnPlay) btnPlay.style.display = 'inline-flex';
+    if (btnStop) btnStop.style.display = 'none';
+  }
+
+  // ---- CARGAR SELECTS ----
+  async function loadIdiomas() {
+    const { data } = await supabase.from('subdominios').select('id, descripcion').eq('id_dominio', DOMINIO_IDIOMA).order('descripcion');
+    idiomas = data || [];
+    const opts = '<option value="">Sin idioma</option>' + idiomas.map(i => `<option value="${i.id}">${i.descripcion}</option>`).join('');
+    ['au-idioma','edit-au-idioma'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = opts; });
+    const filt = document.getElementById('filter-idioma-audios');
+    if (filt) filt.innerHTML = '<option value="">Todos los idiomas</option>' + idiomas.map(i => `<option value="${i.id}">${i.descripcion}</option>`).join('');
+  }
+
+  async function loadPuntos() {
+    const { data } = await supabase.from('punto_turistico').select('id, nombre').eq('estado', true).order('nombre');
+    puntos = data || [];
+    const opts = '<option value="">Sin punto turístico</option>' + puntos.map(p => `<option value="${p.id}">${p.nombre}</option>`).join('');
+    ['au-punto','edit-au-punto'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = opts; });
+  }
+
+  // ---- HELPERS ----
+  function getIdiomaNombre(id) { return idiomas.find(i => i.id == id)?.descripcion || '—'; }
+  function getPuntoNombre(id) { return puntos.find(p => p.id == id)?.nombre || '—'; }
+  function formatDuracion(seg) {
+    if (!seg) return '—';
+    const m = Math.floor(seg / 60), s = seg % 60;
+    return `${m}:${String(s).padStart(2,'0')}`;
+  }
+
+  // ---- STATS Y RECIENTES ----
+  async function loadStats() {
+    const [{ count: total }, { count: activas }, { count: inactivas }] = await Promise.all([
+      supabase.from('audioguias').select('*', { count: 'exact', head: true }),
+      supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('estado', true),
+      supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('estado', false),
+    ]);
+    document.getElementById('stat-total').textContent = String(total ?? 0);
+    document.getElementById('stat-activas').textContent = String(activas ?? 0);
+    document.getElementById('stat-inactivas').textContent = String(inactivas ?? 0);
+    document.getElementById('stat-idiomas').textContent = String(idiomas.length);
+    await loadRecientes();
+  }
+
+  async function loadRecientes() {
+    const { data } = await supabase.from('audioguias').select('*, punto_turistico(nombre)').eq('estado', true).order('created_at', { ascending: false }).limit(4);
+    const list = document.getElementById('ag-recent-list');
+    if (!list) return;
+    if (!data || !data.length) { list.innerHTML = '<div style="padding:16px;color:#B0BEC0;font-size:13px;text-align:center;">No hay audioguías registradas aún</div>'; return; }
+    list.innerHTML = data.map(a => `
+      <div class="ag-recent-item">
+        <div class="ag-recent-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+        <div class="ag-recent-info">
+          <span class="ag-recent-name">${a.titulo}</span>
+          <span class="ag-recent-meta">${a.punto_turistico?.nombre || '—'} · ${formatDuracion(a.duracion_segundos)}</span>
+        </div>
+        <span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">${a.estado ? 'Activa' : 'Inactiva'}</span>
+      </div>`).join('');
+  }
+
+  // ---- CARGAR TABLA AUDIOS ----
+  async function loadAudios() {
+    let query = supabase
+      .from('audioguias')
+      .select('*, punto_turistico(nombre), subdominios(descripcion)', { count: 'exact' })
+      .order('id', { ascending: false });
+    if (filtrosBusq) query = query.ilike('titulo', `%${filtrosBusq}%`);
+    if (filtrosIdioma) query = query.eq('id_idioma', filtrosIdioma);
+    if (filtrosEstado !== '') query = query.eq('estado', filtrosEstado === 'true');
+    const from = (paginaAudios - 1) * PAGE_SIZE;
+    query = query.range(from, from + PAGE_SIZE - 1);
+    const { data, count } = await query;
+    const rows = data || [];
+    renderTablaAudios(rows, count || 0);
+    renderTablaAudiosDel(rows);
+  }
+
+  const iconAudio = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>`;
+
+  function renderTablaAudios(rows, total) {
+    const tbody = document.getElementById('tbody-audios');
+    if (!tbody) return;
+    tbody.innerHTML = !rows.length
+      ? '<tr><td colspan="6" style="text-align:center;padding:32px;color:#B0BEC0;font-style:italic;font-size:13px;">No se encontraron audioguías</td></tr>'
+      : rows.map(a => `<tr>
+          <td class="ag-td-title">${iconAudio} ${a.titulo}</td>
+          <td>${a.subdominios?.descripcion || getIdiomaNombre(a.id_idioma)}</td>
+          <td>${formatDuracion(a.duracion_segundos)}</td>
+          <td>${a.punto_turistico?.nombre || getPuntoNombre(a.id_punto_turistico)}</td>
+          <td><span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">${a.estado ? 'Activa' : 'Inactiva'}</span></td>
+          <td><button class="ag-btn-action ag-btn-edit" data-id="${a.id}" data-action="edit-audio">✏ Editar</button></td>
+        </tr>`).join('');
+    const info = document.getElementById('info-audios');
+    if (info) info.textContent = `Mostrando ${rows.length} de ${total} audioguías`;
+    renderPaginator('btns-audios', total, paginaAudios, p => { paginaAudios = p; loadAudios(); });
+    tbody.querySelectorAll('[data-action="edit-audio"]').forEach(btn => {
+      btn.addEventListener('click', () => editarAudio(parseInt(btn.getAttribute('data-id'))));
+    });
+  }
+
+  function renderTablaAudiosDel(rows) {
+    const tbody = document.getElementById('tbody-del-audios');
+    if (!tbody) return;
+    tbody.innerHTML = !rows.length
+      ? '<tr><td colspan="6" style="text-align:center;padding:32px;color:#B0BEC0;font-style:italic;">No hay audioguías</td></tr>'
+      : rows.map(a => `<tr>
+          <td class="ag-td-title">${iconAudio} ${a.titulo}</td>
+          <td>${a.subdominios?.descripcion || getIdiomaNombre(a.id_idioma)}</td>
+          <td>${formatDuracion(a.duracion_segundos)}</td>
+          <td>${a.punto_turistico?.nombre || getPuntoNombre(a.id_punto_turistico)}</td>
+          <td><span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">${a.estado ? 'Activa' : 'Inactiva'}</span></td>
+          <td><button class="ag-btn-action ag-btn-delete" data-id="${a.id}" data-titulo="${a.titulo}" data-action="del-audio">🗑 Eliminar</button></td>
+        </tr>`).join('');
+    tbody.querySelectorAll('[data-action="del-audio"]').forEach(btn => {
+      btn.addEventListener('click', () => eliminarAudio(parseInt(btn.getAttribute('data-id')), btn.getAttribute('data-titulo')));
+    });
+  }
+
+  // ---- PAGINADOR ----
+  function renderPaginator(containerId, total, currentPage, onPageFn) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const totalPages = Math.ceil(total / PAGE_SIZE);
+    if (totalPages <= 1) { container.innerHTML = ''; return; }
+    let html = `<button class="ag-page-btn" ${currentPage === 1 ? 'disabled' : ''} data-p="${currentPage - 1}">‹</button>`;
+    for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+      html += `<button class="ag-page-btn ${i === currentPage ? 'active' : ''}" data-p="${i}">${i}</button>`;
+    }
+    html += `<button class="ag-page-btn" ${currentPage === totalPages ? 'disabled' : ''} data-p="${currentPage + 1}">›</button>`;
+    container.innerHTML = html;
+    container.querySelectorAll('[data-p]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const p = parseInt(btn.getAttribute('data-p'));
+        if (p < 1 || p > totalPages || btn.disabled) return;
+        onPageFn(p);
+      });
+    });
+  }
+
+  // ---- CREAR AUDIO ----
+  document.getElementById('form-crear-audio')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const estadoRadio = document.querySelector('input[name="au-estado"]:checked');
+    const idiomaVal = document.getElementById('au-idioma').value;
+    const puntoVal = document.getElementById('au-punto').value;
+    const durVal = document.getElementById('au-duracion').value;
+    const btn = document.getElementById('btn-guardar-audio');
+    btn.disabled = true; btn.textContent = 'Guardando...';
+    const { error } = await supabase.from('audioguias').insert([{
+      titulo: document.getElementById('au-titulo').value.trim(),
+      descripcion_corta: document.getElementById('au-desc-corta').value.trim() || null,
+      texto_transcripcion: document.getElementById('au-texto').value.trim() || null,
+      audio_url: document.getElementById('au-audio-url').value.trim() || null,
+      duracion_segundos: durVal ? parseInt(durVal) : null,
+      id_idioma: idiomaVal ? parseInt(idiomaVal) : null,
+      id_punto_turistico: puntoVal ? parseInt(puntoVal) : null,
+      estado: estadoRadio?.value === 'true',
+    }]);
+    btn.disabled = false; btn.textContent = 'Guardar Audioguía';
+    if (error) { showToast('Error: ' + error.message, 'error'); return; }
+    showToast('¡Audioguía creada correctamente!');
+    document.getElementById('form-crear-audio').reset();
+    document.getElementById('ag-preview-box').style.display = 'none';
+    document.getElementById('ag-duracion-preview').style.display = 'none';
+    loadStats(); loadAudios();
+  });
+
+  // ---- EDITAR AUDIO ----
+  async function editarAudio(id) {
+    const { data } = await supabase.from('audioguias').select('*').eq('id', id).single();
+    if (!data) return;
+    document.getElementById('edit-au-id').value = id;
+    document.getElementById('edit-au-titulo').value = data.titulo;
+    document.getElementById('edit-au-desc').value = data.descripcion_corta || '';
+    document.getElementById('edit-au-texto').value = data.texto_transcripcion || '';
+    document.getElementById('edit-au-duracion').value = data.duracion_segundos || '';
+    document.getElementById('edit-au-url').value = data.audio_url || '';
+    const selIdioma = document.getElementById('edit-au-idioma');
+    const selPunto = document.getElementById('edit-au-punto');
+    if (data.id_idioma) selIdioma.value = data.id_idioma;
+    if (data.id_punto_turistico) selPunto.value = data.id_punto_turistico;
+    openModal('modal-editar-audio');
+  }
+
+  document.getElementById('form-editar-audio')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const id = parseInt(document.getElementById('edit-au-id').value);
+    const idiomaVal = document.getElementById('edit-au-idioma').value;
+    const puntoVal = document.getElementById('edit-au-punto').value;
+    const durVal = document.getElementById('edit-au-duracion').value;
+    const { error } = await supabase.from('audioguias').update({
+      titulo: document.getElementById('edit-au-titulo').value.trim(),
+      descripcion_corta: document.getElementById('edit-au-desc').value.trim() || null,
+      texto_transcripcion: document.getElementById('edit-au-texto').value.trim() || null,
+      audio_url: document.getElementById('edit-au-url').value.trim() || null,
+      duracion_segundos: durVal ? parseInt(durVal) : null,
+      id_idioma: idiomaVal ? parseInt(idiomaVal) : null,
+      id_punto_turistico: puntoVal ? parseInt(puntoVal) : null,
+      updated_at: new Date().toISOString(),
+    }).eq('id', id);
+    if (error) { showToast('Error: ' + error.message, 'error'); return; }
+    showToast('Audioguía actualizada');
+    closeModal('modal-editar-audio');
+    loadAudios(); loadStats();
+  });
+
+  // ---- ELIMINAR AUDIO ----
+let deleteId = null;
+
+function eliminarAudio(id, titulo) {
+  deleteId = id;
+
+  const modal = document.getElementById('modal-confirm-delete');
+  const msg = document.getElementById('delete-message');
+
+  msg.textContent = `¿Eliminar la audioguía "${titulo}"? Esta acción no se puede deshacer.`;
+
+  modal.style.display = 'flex';
+}
+
+  // ---- IDIOMAS PANEL (datos reales) ----
+  async function loadIdiomasPanel() {
+    const grid = document.getElementById('ag-lang-grid');
+    if (!grid) return;
+    const { count: totalAudios } = await supabase.from('audioguias').select('*', { count: 'exact', head: true });
+    const total = totalAudios || 1;
+    const htmlCards = await Promise.all(idiomas.map(async idioma => {
+      const { count } = await supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('id_idioma', idioma.id);
+      const n = count || 0;
+      const pct = Math.round((n / total) * 100);
+      const barColor = pct >= 75 ? 'ag-bar-teal' : pct >= 40 ? 'ag-bar-green' : 'ag-bar-amber';
+      return `<div class="ag-lang-card">
+        <div class="ag-lang-top">
+          <span class="ag-lang-name">${idioma.descripcion}</span>
+          <span class="ag-lang-count">${n} guías</span>
+        </div>
+        <div class="ag-lang-bar-track"><div class="ag-lang-bar-fill ${barColor}" style="width:${pct}%"></div></div>
+        <span class="ag-lang-pct">${pct}% del total</span>
+      </div>`;
+    }));
+    grid.innerHTML = htmlCards.join('') || '<div style="grid-column:1/-1;color:#B0BEC0;text-align:center;padding:20px;">Sin idiomas registrados</div>';
+  }
+
+  // ---- MODALES ----
+  function openModal(id) { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
+  function closeModal(id) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
+  ['close-modal-audio','close-modal-audio2'].forEach(id => document.getElementById(id)?.addEventListener('click', () => closeModal('modal-editar-audio')));
+  document.getElementById('modal-editar-audio')?.addEventListener('click', e => { if (e.target.id === 'modal-editar-audio') closeModal('modal-editar-audio'); });
+// ---- MODAL ELIMINAR ----
+document.getElementById('confirm-delete-btn')?.addEventListener('click', async () => {
+  if (!deleteId) return;
+
+  const { error } = await supabase
+    .from('audioguias')
+    .delete()
+    .eq('id', deleteId);
+
+  if (error) {
+    showToast('Error: ' + error.message, 'error');
+    return;
+  }
+
+  showToast('Audioguía eliminada');
+  closeModal('modal-confirm-delete');
+  deleteId = null;
+
+  loadAudios();
+  loadStats();
+});
+
+document.getElementById('cancel-delete-btn')?.addEventListener('click', () => {
+  closeModal('modal-confirm-delete');
+});
+
+document.getElementById('close-delete-modal')?.addEventListener('click', () => {
+  closeModal('modal-confirm-delete');
+});
+
+document.getElementById('modal-confirm-delete')?.addEventListener('click', e => {
+  if (e.target.id === 'modal-confirm-delete') {
+    closeModal('modal-confirm-delete');
+  }
+});
+  // ---- SPEECH BUTTONS ----
+  document.getElementById('btn-escuchar')?.addEventListener('click', () => {
+    const texto = document.getElementById('au-texto').value;
+    const idIdioma = document.getElementById('au-idioma').value;
+    reproducirTexto(texto, idIdioma, document.getElementById('btn-escuchar'), document.getElementById('btn-detener'));
+  });
+  document.getElementById('btn-detener')?.addEventListener('click', () => {
+    detenerAudio(document.getElementById('btn-escuchar'), document.getElementById('btn-detener'));
+  });
+  document.getElementById('btn-escuchar-edit')?.addEventListener('click', () => {
+    const texto = document.getElementById('edit-au-texto').value;
+    const idIdioma = document.getElementById('edit-au-idioma').value;
+    reproducirTexto(texto, idIdioma, document.getElementById('btn-escuchar-edit'), document.getElementById('btn-detener-edit'));
+  });
+  document.getElementById('btn-detener-edit')?.addEventListener('click', () => {
+    detenerAudio(document.getElementById('btn-escuchar-edit'), document.getElementById('btn-detener-edit'));
+  });
+
+  // ---- IA SIMULACIÓN ----
+  document.getElementById('btn-generar-ia')?.addEventListener('click', () => {
+    const titulo = document.getElementById('au-titulo').value;
+    const punto = document.getElementById('au-punto');
+    const puntoNombre = punto.options[punto.selectedIndex]?.text || 'este sitio';
+    if (!titulo) { showToast('Completa el título primero', 'error'); return; }
+    const texto = `Bienvenidos a ${puntoNombre}. ${titulo}. Este fascinante lugar en La Paz, Bolivia, es un testimonio vivo de la cultura andina. A lo largo de su historia, ha sido testigo de importantes eventos que forjaron la identidad de la ciudad. Te invitamos a explorar cada rincón y descubrir los secretos que guarda.`;
+    document.getElementById('au-texto').value = texto;
+    document.getElementById('ag-preview-box').style.display = 'block';
+    document.getElementById('ag-preview-text').textContent = texto;
+    showToast('Texto generado con IA — revísalo antes de guardar');
+  });
+
+  // ---- PREVIEW EN TIEMPO REAL ----
+  document.getElementById('au-texto')?.addEventListener('input', e => {
+    const val = e.target.value.trim();
+    const box = document.getElementById('ag-preview-box');
+    const prev = document.getElementById('ag-preview-text');
+    if (val.length > 10) { box.style.display = 'block'; prev.textContent = val; }
+    else { box.style.display = 'none'; }
+  });
+
+  document.getElementById('au-duracion')?.addEventListener('input', e => {
+    const seg = parseInt(e.target.value);
+    const badge = document.getElementById('ag-duracion-preview');
+    const txt = document.getElementById('ag-duracion-text');
+    if (seg > 0) {
+      badge.style.display = 'flex';
+      txt.textContent = formatDuracion(seg);
+    } else {
+      badge.style.display = 'none';
+    }
+  });
+
+  // ---- FILTROS TABLA ----
+  document.getElementById('search-audios')?.addEventListener('input', e => { filtrosBusq = e.target.value; paginaAudios = 1; loadAudios(); });
+  document.getElementById('filter-idioma-audios')?.addEventListener('change', e => { filtrosIdioma = e.target.value; paginaAudios = 1; loadAudios(); });
+  document.getElementById('filter-estado-audios')?.addEventListener('change', e => { filtrosEstado = e.target.value; paginaAudios = 1; loadAudios(); });
+
+  // ---- TOGGLE RADIOS ----
+  document.querySelectorAll('.ag-toggle-group').forEach(group => {
+    group.querySelectorAll('input[type=radio]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        group.querySelectorAll('.ag-toggle-opt').forEach(opt => opt.classList.remove('ag-toggle-active'));
+        radio.parentElement.classList.add('ag-toggle-active');
+      });
+    });
+  });
+
+  // ---- NAVEGACIÓN ----
   const initAudiosModule = () => {
     const cards = document.querySelectorAll('.ag-action-card');
     const panels = document.querySelectorAll('.ag-panel');
@@ -491,8 +804,21 @@
         panels.forEach(p => p.classList.remove('active'));
         const target = document.getElementById(panelId);
         if (target) target.classList.add('active');
+        if (panelId === 'ag-panel-editar') loadAudios();
+        if (panelId === 'ag-panel-eliminar') loadAudios();
+        if (panelId === 'ag-panel-idiomas') loadIdiomasPanel();
       });
     });
+
+    document.getElementById('btn-nueva-audio')?.addEventListener('click', () => {
+      document.querySelector('[data-panel="subir"]')?.click();
+    });
+    document.getElementById('btn-cancelar-audio')?.addEventListener('click', () => {
+      document.querySelector('[data-panel="editar"]')?.click();
+    });
+
+    // Inicializar datos
+    loadIdiomas().then(() => { loadPuntos(); loadStats(); });
   };
 
   initAudiosModule();
