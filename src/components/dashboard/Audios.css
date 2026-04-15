@@ -879,3 +879,139 @@
   .ag-ia-btns       { width: 100%; }
   .ag-ia-btn        { flex: 1; justify-content: center; }
 }
+
+/* ===== ADICIONES FUNCIONALES ===== */
+
+/* Toast */
+.ag-toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  z-index: 9999;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  transition: all 0.3s ease;
+  max-width: 340px;
+}
+.ag-toast-success { background: #197D61; color: white; }
+.ag-toast-error   { background: #7A3928; color: white; }
+.ag-toast-hidden  { opacity: 0; pointer-events: none; transform: translateY(10px); }
+
+/* Modal */
+.ag-modal { display: none; position: fixed; inset: 0; background: rgba(35,55,62,0.55); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
+.ag-modal-box { background: white; border-radius: 14px; max-width: 560px; width: 92%; max-height: 88vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(35,55,62,0.25); }
+.ag-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 22px 24px 18px; border-bottom: 1px solid #E2D9CE; }
+.ag-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: #1C2B30; }
+.ag-modal-close { background: none; border: none; font-size: 20px; cursor: pointer; color: #8A9BA0; transition: color 0.2s; line-height: 1; }
+.ag-modal-close:hover { color: #1C2B30; }
+.ag-modal-box > form { padding: 20px 24px; }
+.ag-modal-footer { display: flex; gap: 10px; justify-content: flex-end; padding-top: 16px; border-top: 1px solid #E2D9CE; margin-top: 8px; }
+
+/* Preview texto */
+.ag-preview-box { background: #F7F4EF; border: 1px solid #E2D9CE; border-radius: 10px; padding: 14px 16px; margin-bottom: 16px; }
+.ag-preview-label { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #4A5C60; margin-bottom: 8px; }
+.ag-preview-text { font-size: 13px; color: #4A5C60; line-height: 1.6; max-height: 100px; overflow-y: auto; }
+
+/* Duración badge */
+.ag-duracion-badge { display: flex; align-items: center; gap: 6px; background: rgba(15,152,138,0.2); color: white; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; margin-top: 12px; width: fit-content; }
+
+/* Toggle */
+.ag-toggle-group { display: flex; gap: 8px; }
+.ag-toggle-opt { flex: 1; padding: 9px 14px; border: 1px solid #E2D9CE; border-radius: 8px; font-size: 13px; cursor: pointer; text-align: center; transition: all 0.2s ease; color: #4A5C60; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.ag-toggle-opt input { display: none; }
+.ag-toggle-active { border-color: #0F988A; background: rgba(15,152,138,0.08); color: #0F988A; font-weight: 500; }
+
+.ag-ml-auto { margin-left: auto; }
+.ag-label-sub { font-size: 10.5px; font-weight: 400; color: #8A9BA0; }
+/* ===== MODAL ELIMINAR ===== */
+/* ===== CONTENEDOR GENERAL CENTRADO ===== */
+.ag-module {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ===== ÁREA DINÁMICA ===== */
+.ag-dynamic-area {
+  margin: 0 auto;
+}
+
+/* ===== GRID PRINCIPAL ===== */
+.ag-default-layout {
+  grid-template-columns: 320px 1fr;
+  justify-content: center;
+}
+
+/* ===== PANEL ===== */
+.ag-panel {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* ===== FORMULARIO ===== */
+.ag-form-layout {
+  grid-template-columns: 1fr 280px;
+  justify-content: center;
+}
+
+.ag-form-main {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===== TOOLBAR ===== */
+.ag-toolbar {
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== TABLA ===== */
+.ag-table-wrap {
+  margin: 0 auto;
+}
+
+/* ===== BOTONES FORM ===== */
+.ag-form-actions {
+  justify-content: flex-end;
+}
+
+/* ===== HEADER PANEL ===== */
+.ag-panel-header {
+  align-items: center;
+}
+
+/* ===== SUMMARY ===== */
+.ag-summary {
+  max-width: 100%;
+}
+
+/* ===== CENTRAR CONTENIDO INTERNO ===== */
+.ag-summary-stats {
+  justify-content: center;
+}
+
+/* ===== RESPONSIVE MEJORADO ===== */
+@media (max-width: 1100px) {
+  .ag-module {
+    max-width: 100%;
+  }
+
+  .ag-default-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ag-form-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ag-form-main {
+    max-width: 100%;
+  }
+}
+
+
