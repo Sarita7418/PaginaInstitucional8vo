@@ -1,5 +1,5 @@
 ---
-// Audios.astro — Módulo Audioguías Inteligentes (Funcional con Supabase)
+// Audios.astro — Módulo Audioguías Inteligentes
 ---
 
 <link rel="stylesheet" href="/src/components/dashboard/Audios.css" />
@@ -7,7 +7,6 @@
 <div data-section-target="audios" class="section">
   <div class="ag-module">
 
-    <!-- TARJETAS DE ACCIONES -->
     <div class="ag-actions-grid">
       <button class="ag-action-card ag-teal" data-panel="subir">
         <div class="ag-action-icon">
@@ -45,7 +44,7 @@
         </div>
         <div class="ag-action-text">
           <span class="ag-action-title">Gestionar Idiomas</span>
-          <span class="ag-action-desc">Cobertura por idioma en la BD</span>
+          <span class="ag-action-desc">Cobertura de idiomas en el sistema</span>
         </div>
       </button>
 
@@ -63,13 +62,10 @@
       </button>
     </div>
 
-    <!-- TOAST -->
     <div id="ag-toast" class="ag-toast ag-toast-hidden"></div>
 
-    <!-- ÁREA DINÁMICA -->
     <div class="ag-dynamic-area">
 
-      <!-- PANEL DEFAULT -->
       <div class="ag-panel active" id="ag-panel-default">
         <div class="ag-default-layout">
           <div class="ag-hero-card">
@@ -102,7 +98,6 @@
         </div>
       </div>
 
-      <!-- PANEL: Crear Audioguía -->
       <div class="ag-panel" id="ag-panel-subir">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-teal-bg">
@@ -110,7 +105,7 @@
           </div>
           <div>
             <h3 class="ag-panel-title">Crear Audioguía</h3>
-            <p class="ag-panel-subtitle">Registra en tabla audioguias conectada a punto_turistico y subdominios</p>
+            <p class="ag-panel-subtitle">Registra una nueva pista de audio y asígnala a un sitio</p>
           </div>
         </div>
         <form id="form-crear-audio" autocomplete="off">
@@ -122,14 +117,13 @@
               </div>
               <div class="ag-form-group ag-full">
                 <label class="ag-label">Descripción Corta</label>
-                <input type="text" class="ag-input" id="au-desc-corta" placeholder="Breve descripción para listados..." />
+                <input type="text" class="ag-input" id="au-desc-corta" placeholder="Breve descripción para el listado..." />
               </div>
               <div class="ag-form-group ag-full">
-                <label class="ag-label">Texto / Transcripción (Dataset para IA)</label>
-                <textarea class="ag-textarea ag-textarea-lg" id="au-texto" placeholder="Ingresa el contenido narrativo completo que será utilizado para generar la audioguía con IA..."></textarea>
+                <label class="ag-label">Texto / Transcripción (Contenido para IA)</label>
+                <textarea class="ag-textarea ag-textarea-lg" id="au-texto" placeholder="Ingresa el contenido narrativo completo que será locutado por la Inteligencia Artificial..."></textarea>
               </div>
 
-              <!-- Vista previa del texto -->
               <div id="ag-preview-box" class="ag-preview-box" style="display:none;">
                 <div class="ag-preview-label">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -140,7 +134,7 @@
 
               <div class="ag-form-row">
                 <div class="ag-form-group">
-                  <label class="ag-label">Idioma <span class="ag-label-sub">(subdominios id_dominio=2)</span></label>
+                  <label class="ag-label">Idioma</label>
                   <select class="ag-select" id="au-idioma">
                     <option value="">Cargando idiomas...</option>
                   </select>
@@ -148,7 +142,7 @@
                 <div class="ag-form-group">
                   <label class="ag-label">Punto Turístico</label>
                   <select class="ag-select" id="au-punto">
-                    <option value="">Cargando puntos...</option>
+                    <option value="">Cargando puntos turísticos...</option>
                   </select>
                 </div>
               </div>
@@ -170,13 +164,12 @@
                 </div>
               </div>
 
-              <!-- Caja IA + Escuchar -->
               <div class="ag-ia-box">
                 <div class="ag-ia-badge">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
                   IA
                 </div>
-                <span class="ag-ia-label">Simulación con SpeechSynthesis del navegador</span>
+                <span class="ag-ia-label">Simulador de Locución Integrado</span>
                 <div class="ag-ia-btns">
                   <button type="button" class="ag-ia-btn" id="btn-escuchar">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
@@ -188,7 +181,7 @@
                   </button>
                   <button type="button" class="ag-ia-btn ag-ia-btn-primary" id="btn-generar-ia">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-                    Generar audio automáticamente
+                    Generar relato automáticamente
                   </button>
                 </div>
               </div>
@@ -214,7 +207,6 @@
                     <span class="ag-dot ag-dot-green"></span>
                     <span class="ag-dot ag-dot-terra"></span>
                   </div>
-                  <!-- Indicador duración -->
                   <div id="ag-duracion-preview" class="ag-duracion-badge" style="display:none;">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                     <span id="ag-duracion-text">0:00</span>
@@ -226,15 +218,14 @@
         </form>
       </div>
 
-      <!-- PANEL: Ver / Editar -->
       <div class="ag-panel" id="ag-panel-editar">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-green-bg">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </div>
           <div>
-            <h3 class="ag-panel-title">Audioguías</h3>
-            <p class="ag-panel-subtitle">Datos en tiempo real desde Supabase</p>
+            <h3 class="ag-panel-title">Audioguías Registradas</h3>
+            <p class="ag-panel-subtitle">Catálogo general de contenido sonoro</p>
           </div>
           <button class="ag-btn ag-btn-primary ag-ml-auto" style="padding:7px 14px;font-size:12px;" id="btn-nueva-audio">+ Nueva</button>
         </div>
@@ -266,15 +257,14 @@
         </div>
       </div>
 
-      <!-- PANEL: Idiomas -->
       <div class="ag-panel" id="ag-panel-idiomas">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-amber-bg">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div>
-            <h3 class="ag-panel-title">Gestionar Idiomas</h3>
-            <p class="ag-panel-subtitle">Cobertura real de audioguías por idioma en la base de datos</p>
+            <h3 class="ag-panel-title">Distribución por Idiomas</h3>
+            <p class="ag-panel-subtitle">Cobertura actual de las audioguías según el idioma</p>
           </div>
         </div>
         <div class="ag-lang-grid" id="ag-lang-grid">
@@ -282,7 +272,6 @@
         </div>
       </div>
 
-      <!-- PANEL: Eliminar -->
       <div class="ag-panel" id="ag-panel-eliminar">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-terra-bg">
@@ -290,7 +279,7 @@
           </div>
           <div>
             <h3 class="ag-panel-title">Eliminar Audioguías</h3>
-            <p class="ag-panel-subtitle">Selecciona una audioguía para eliminarla permanentemente</p>
+            <p class="ag-panel-subtitle">Selecciona una audioguía para eliminarla del sistema</p>
           </div>
         </div>
         <div class="ag-alert-warn">
@@ -312,21 +301,18 @@
     </div>
   </div>
 </div>
-<!-- MODAL CONFIRMAR ELIMINACIÓN -->
+
 <div id="modal-confirm-delete" class="ag-modal" style="display:none;">
   <div class="ag-modal-box ag-modal-sm">
-    
     <div class="ag-modal-header">
       <h3 class="ag-modal-title">Confirmar eliminación</h3>
       <button class="ag-modal-close" id="close-delete-modal">✕</button>
     </div>
-
     <div class="ag-modal-body">
       <p id="delete-message">
         ¿Estás seguro de eliminar este elemento?
       </p>
     </div>
-
     <div class="ag-modal-footer">
       <button class="ag-btn ag-btn-danger" id="confirm-delete-btn">
         🗑 Sí, eliminar
@@ -335,12 +321,9 @@
         Cancelar
       </button>
     </div>
-
   </div>
 </div>
 
-
-<!-- MODAL EDITAR AUDIOGUÍA -->
 <div id="modal-editar-audio" class="ag-modal" style="display:none;">
   <div class="ag-modal-box">
     <div class="ag-modal-header">
@@ -360,10 +343,9 @@
         <div class="ag-form-group"><label class="ag-label">Duración (seg.)</label><input type="number" class="ag-input" id="edit-au-duracion" /></div>
         <div class="ag-form-group"><label class="ag-label">URL Audio</label><input type="url" class="ag-input" id="edit-au-url" /></div>
       </div>
-      <!-- Escuchar en modal -->
       <div class="ag-ia-box" style="margin-bottom:16px;">
         <div class="ag-ia-badge">IA</div>
-        <span class="ag-ia-label">Simulación con SpeechSynthesis</span>
+        <span class="ag-ia-label">Simulador de Locución Integrado</span>
         <div class="ag-ia-btns">
           <button type="button" class="ag-ia-btn" id="btn-escuchar-edit">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>

@@ -1,0 +1,777 @@
+---
+// Platos.astro — Módulo Gastronomía y OCR (Con Búsqueda, Detalles y Filtros)
+---
+
+<link rel="stylesheet" href="/src/components/dashboard/Platos.css" />
+
+<div data-section-target="platos" class="section">
+  <div class="pl-module">
+
+    <div class="pl-actions-grid">
+      <button class="pl-action-card pl-teal" data-panel="subir">
+        <div class="pl-action-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+          </svg>
+        </div>
+        <div class="pl-action-text">
+          <span class="pl-action-title">Crear Plato</span>
+          <span class="pl-action-desc">Registra un nuevo plato típico</span>
+        </div>
+      </button>
+
+      <button class="pl-action-card pl-green" data-panel="editar">
+        <div class="pl-action-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+            <path d="M9 14h6"></path><path d="M9 18h6"></path><path d="M9 10h6"></path>
+          </svg>
+        </div>
+        <div class="pl-action-text">
+          <span class="pl-action-title">Ver / Editar Platos</span>
+          <span class="pl-action-desc">Lista y modifica platos y sus recetas</span>
+        </div>
+      </button>
+
+      <button class="pl-action-card pl-amber" data-panel="ingredientes">
+        <div class="pl-action-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2.27 21.73a2.5 2.5 0 0 0 3.54 0l12.46-12.45a5 5 0 0 0-7.07-7.07L2.27 18.19a2.5 2.5 0 0 0 0 3.54z"/>
+            <path d="M8.5 4.5l3 3"/><path d="M10.5 6.5l3 3"/>
+            <path d="M22 2l-3 3"/><path d="M22 6l-3-1"/><path d="M18 2l1 3"/>
+          </svg>
+        </div>
+        <div class="pl-action-text">
+          <span class="pl-action-title">Ingredientes</span>
+          <span class="pl-action-desc">Gestiona ingredientes y alérgenos</span>
+        </div>
+      </button>
+
+      <button class="pl-action-card pl-terra" data-panel="eliminar">
+        <div class="pl-action-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+          </svg>
+        </div>
+        <div class="pl-action-text">
+          <span class="pl-action-title">Eliminar Plato</span>
+          <span class="pl-action-desc">Quita un plato del menú</span>
+        </div>
+      </button>
+    </div>
+
+    <div id="pl-toast" class="pl-toast pl-toast-hidden"></div>
+
+    <div class="pl-dynamic-area">
+
+      <div class="pl-panel active" id="pl-panel-default">
+        <div class="pl-default-layout">
+          <div class="pl-hero-card">
+            <div class="pl-hero-overlay"></div>
+            <div class="pl-hero-content">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+              <blockquote class="pl-hero-quote">"El sabor de nuestra tierra documentado."</blockquote>
+              <p class="pl-hero-sub">Gestión de Platos, Ingredientes y Alérgenos</p>
+              <div class="pl-hero-dots">
+                <span class="pl-dot pl-dot-teal"></span><span class="pl-dot pl-dot-amber"></span>
+                <span class="pl-dot pl-dot-green"></span><span class="pl-dot pl-dot-terra"></span>
+              </div>
+            </div>
+          </div>
+          <div class="pl-summary">
+            <h3 class="pl-summary-title">Resumen Gastronómico</h3>
+            <div class="pl-summary-stats">
+              <div class="pl-summary-stat"><span class="pl-sstat-num pl-teal-text" id="stat-platos">—</span><span class="pl-sstat-lbl">Platos</span></div>
+              <div class="pl-summary-stat"><span class="pl-sstat-num pl-green-text" id="stat-activos">—</span><span class="pl-sstat-lbl">Activos</span></div>
+              <div class="pl-summary-stat"><span class="pl-sstat-num pl-amber-text" id="stat-ingredientes">—</span><span class="pl-sstat-lbl">Ingredientes</span></div>
+              <div class="pl-summary-stat"><span class="pl-sstat-num pl-terra-text" id="stat-alergenos">—</span><span class="pl-sstat-lbl">Alérgenos</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pl-panel" id="pl-panel-subir">
+        <div class="pl-panel-header">
+          <div class="pl-panel-icon pl-teal-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+          </div>
+          <div>
+            <h3 class="pl-panel-title">Crear Plato</h3>
+            <p class="pl-panel-subtitle">Agrega un plato y sus ingredientes</p>
+          </div>
+        </div>
+        <form id="form-crear-plato" autocomplete="off">
+          <div class="pl-form-layout">
+            <div class="pl-form-main">
+              <div class="pl-form-group pl-full">
+                <label class="pl-label">Nombre del Plato *</label>
+                <input type="text" class="pl-input" id="pl-nombre" placeholder="Ej: Fricasé Paceño" required />
+              </div>
+              <div class="pl-form-group pl-full">
+                <label class="pl-label">Historia / Origen</label>
+                <textarea class="pl-textarea pl-textarea-lg" id="pl-historia" placeholder="Describe el origen histórico de este plato..."></textarea>
+              </div>
+
+              <div class="pl-ia-box">
+                <div class="pl-ia-badge" style="background:#f59e0b;">Receta</div>
+                <span class="pl-ia-label">Agrega ingredientes a este plato</span>
+                <div style="display:flex; gap:10px; margin-top:10px;">
+                  <select class="pl-select" id="pl-select-ingrediente" style="flex:1;">
+                    <option value="">Selecciona un ingrediente...</option>
+                  </select>
+                  <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:#1C2B30; font-weight:500;">
+                    <input type="checkbox" id="pl-chk-base" /> Ingrediente indispensable
+                  </label>
+                  <button type="button" class="pl-btn pl-btn-secondary" id="btn-add-ingrediente">Añadir</button>
+                </div>
+                <div id="lista-ingredientes-crear" style="margin-top:15px; display:flex; flex-direction:column; gap:8px;">
+                </div>
+              </div>
+
+              <div class="pl-form-group" style="margin-top:15px;">
+                <label class="pl-label">Estado</label>
+                <div class="pl-toggle-group">
+                  <label class="pl-toggle-opt pl-toggle-active"><input type="radio" name="pl-estado" value="true" checked /> Activo</label>
+                  <label class="pl-toggle-opt"><input type="radio" name="pl-estado" value="false" /> Inactivo</label>
+                </div>
+              </div>
+
+              <div class="pl-form-actions">
+                <button type="submit" class="pl-btn pl-btn-primary" id="btn-guardar-plato">Guardar Plato y Receta</button>
+                <button type="button" class="pl-btn pl-btn-secondary" id="btn-cancelar-plato">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="pl-panel" id="pl-panel-editar">
+        <div class="pl-panel-header">
+          <div class="pl-panel-icon pl-green-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M9 14h6"></path><path d="M9 18h6"></path><path d="M9 10h6"></path></svg>
+          </div>
+          <div>
+            <h3 class="pl-panel-title">Lista de Platos</h3>
+            <p class="pl-panel-subtitle">Listado actualizado</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+          <div style="flex: 1; position: relative;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 10px; top: 10px; color: #8A9BA0;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="pl-input" id="search-platos" placeholder="Buscar plato por nombre..." style="padding-left: 32px; width: 100%; box-sizing: border-box;" />
+          </div>
+        </div>
+
+        <div class="pl-table-wrap">
+          <table class="pl-table">
+            <thead>
+              <tr><th>Plato</th><th>Historia (extracto)</th><th>Nº Ingredientes</th><th>Estado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody id="tbody-platos">
+              <tr><td colspan="5" style="text-align:center;padding:32px;">Cargando datos...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pl-panel" id="pl-panel-ingredientes">
+        <div class="pl-panel-header">
+          <div class="pl-panel-icon pl-amber-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.27 21.73a2.5 2.5 0 0 0 3.54 0l12.46-12.45a5 5 0 0 0-7.07-7.07L2.27 18.19a2.5 2.5 0 0 0 0 3.54z"/><path d="M8.5 4.5l3 3"/><path d="M10.5 6.5l3 3"/><path d="M22 2l-3 3"/><path d="M22 6l-3-1"/><path d="M18 2l1 3"/></svg>
+          </div>
+          <div>
+            <h3 class="pl-panel-title">Gestión de Ingredientes</h3>
+            <p class="pl-panel-subtitle">Catálogo de ingredientes y alérgenos</p>
+          </div>
+          <button class="pl-btn pl-btn-primary pl-ml-auto" style="padding:7px 14px;font-size:12px;" id="btn-nuevo-ingrediente">+ Nuevo Ingrediente</button>
+        </div>
+
+        <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+          <div style="flex: 1; position: relative;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 10px; top: 10px; color: #8A9BA0;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="pl-input" id="search-ing" placeholder="Buscar ingrediente..." style="padding-left: 32px; width: 100%; box-sizing: border-box;" />
+          </div>
+          <select class="pl-select" id="filter-alergeno-ing" style="width: 220px;">
+            <option value="">Todos los ingredientes</option>
+            <option value="none">Seguros (Sin alérgeno)</option>
+          </select>
+        </div>
+
+        <div class="pl-table-wrap">
+          <table class="pl-table">
+            <thead>
+              <tr><th>ID</th><th>Nombre</th><th>¿Es Alérgeno?</th><th>Tipo de Alérgeno</th><th>Acciones</th></tr>
+            </thead>
+            <tbody id="tbody-ingredientes">
+              <tr><td colspan="5" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pl-panel" id="pl-panel-eliminar">
+        <div class="pl-panel-header">
+          <div class="pl-panel-icon pl-terra-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          </div>
+          <div>
+            <h3 class="pl-panel-title">Eliminar Platos</h3>
+            <p class="pl-panel-subtitle">Quita un plato del menú</p>
+          </div>
+        </div>
+        <div class="pl-alert-warn">
+          Esta acción eliminará el plato y sus ingredientes asociados permanentemente.
+        </div>
+        <div class="pl-table-wrap">
+          <table class="pl-table">
+            <thead>
+              <tr><th>Plato</th><th>Estado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody id="tbody-del-platos">
+              <tr><td colspan="3" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="modal-detalles-plato" class="pl-modal" style="display:none;">
+  <div class="pl-modal-box pl-modal-sm">
+    <div class="pl-modal-header">
+      <h3 class="pl-modal-title" id="detalles-plato-title">Detalles del Plato</h3>
+      <button class="pl-modal-close" id="close-detalles-plato">✕</button>
+    </div>
+    <div class="pl-modal-body">
+      <h4 class="pl-detalles-subtitle">Ingredientes registrados:</h4>
+      <ul id="detalles-plato-lista" class="pl-detalles-list">
+        </ul>
+    </div>
+    <div class="pl-modal-footer">
+      <button class="pl-btn pl-btn-secondary" id="btn-cerrar-detalles">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-confirm-delete-plato" class="pl-modal" style="display:none;">
+  <div class="pl-modal-box pl-modal-sm">
+    <div class="pl-modal-header">
+      <h3 class="pl-modal-title">Confirmar eliminación</h3>
+      <button class="pl-modal-close" id="close-del-plato-modal">✕</button>
+    </div>
+    <div class="pl-modal-body">
+      <p id="delete-plato-message">¿Estás seguro de eliminar este plato?</p>
+    </div>
+    <div class="pl-modal-footer">
+      <button class="pl-btn pl-btn-danger" id="confirm-delete-plato-btn">🗑 Sí, eliminar</button>
+      <button class="pl-btn pl-btn-secondary" id="cancel-delete-plato-btn">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-confirm-delete-ing" class="pl-modal" style="display:none;">
+  <div class="pl-modal-box pl-modal-sm">
+    <div class="pl-modal-header">
+      <h3 class="pl-modal-title">Eliminar Ingrediente</h3>
+      <button class="pl-modal-close" id="close-del-ing-modal">✕</button>
+    </div>
+    <div class="pl-modal-body">
+      <p id="delete-ing-message">¿Estás seguro de eliminar este ingrediente?</p>
+    </div>
+    <div class="pl-modal-footer">
+      <button class="pl-btn pl-btn-danger" id="confirm-delete-ing-btn">🗑 Sí, eliminar</button>
+      <button class="pl-btn pl-btn-secondary" id="cancel-delete-ing-btn">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-form-ingrediente" class="pl-modal" style="display:none;">
+  <div class="pl-modal-box pl-modal-sm">
+    <div class="pl-modal-header">
+      <h3 class="pl-modal-title" id="title-modal-ing">Nuevo Ingrediente</h3>
+      <button class="pl-modal-close" id="close-modal-ing">✕</button>
+    </div>
+    <form id="form-ingrediente" autocomplete="off">
+      <input type="hidden" id="ing-id" />
+      <div class="pl-modal-body">
+        <div class="pl-form-group">
+          <label class="pl-label">Nombre *</label>
+          <input type="text" class="pl-input" id="ing-nombre" required />
+        </div>
+        <div class="pl-form-group">
+          <label class="pl-label">¿Es Alérgeno?</label>
+          <select class="pl-select" id="ing-alergeno">
+            <option value="false">No</option>
+            <option value="true">Sí</option>
+          </select>
+        </div>
+        <div class="pl-form-group" id="box-tipo-alergeno" style="display:none;">
+          <label class="pl-label">Tipo de Alérgeno</label>
+          <select class="pl-select" id="ing-tipo-alergeno">
+            <option value="">Selecciona...</option>
+          </select>
+        </div>
+      </div>
+      <div class="pl-modal-footer">
+        <button type="submit" class="pl-btn pl-btn-primary">Guardar</button>
+        <button type="button" class="pl-btn pl-btn-secondary" id="cancel-modal-ing">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="modal-editar-plato" class="pl-modal" style="display:none;">
+  <div class="pl-modal-box">
+    <div class="pl-modal-header">
+      <h3 class="pl-modal-title">Editar Plato</h3>
+      <button class="pl-modal-close" id="close-modal-edit-plato">✕</button>
+    </div>
+    <form id="form-editar-plato-submit" autocomplete="off">
+      <input type="hidden" id="edit-pl-id" />
+      <div class="pl-form-group"><label class="pl-label">Nombre *</label><input type="text" class="pl-input" id="edit-pl-nombre" required /></div>
+      <div class="pl-form-group"><label class="pl-label">Historia / Origen</label><textarea class="pl-textarea" id="edit-pl-historia"></textarea></div>
+      <div class="pl-modal-footer">
+        <button type="submit" class="pl-btn pl-btn-primary">Guardar Cambios</button>
+        <button type="button" class="pl-btn pl-btn-secondary" id="cancel-modal-edit-plato">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  import { supabase } from '../../lib/supabase';
+
+  const DOMINIO_ALERGENO = 6;
+  
+  let dbPlatos = [];
+  let dbIngredientes = [];
+  let dbAlergenos = [];
+  let recetaActual = []; 
+
+  // Variables para filtros
+  let filtroPlatosTexto = '';
+  let filtroIngTexto = '';
+  let filtroIngAlergeno = '';
+
+  // ---- TOAST ----
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('pl-toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.className = 'pl-toast pl-toast-' + type;
+    setTimeout(() => { t.className = 'pl-toast pl-toast-hidden'; }, 3500);
+  }
+
+  // ---- FUNCIÓN DE NAVEGACIÓN PRINCIPAL ----
+  function switchPanel(panelName) {
+    const cards = document.querySelectorAll('.pl-action-card');
+    const panels = document.querySelectorAll('.pl-panel');
+
+    cards.forEach(c => c.classList.remove('pl-card-active'));
+    const targetCard = document.querySelector(`[data-panel="${panelName}"]`);
+    if(targetCard) targetCard.classList.add('pl-card-active');
+
+    panels.forEach(p => p.classList.remove('active'));
+    const targetPanel = document.getElementById('pl-panel-' + panelName);
+    if(targetPanel) targetPanel.classList.add('active');
+
+    if (panelName === 'editar' || panelName === 'eliminar') {
+        filtroPlatosTexto = ''; 
+        if(document.getElementById('search-platos')) document.getElementById('search-platos').value = '';
+        loadPlatos();
+    }
+    if (panelName === 'ingredientes') {
+        filtroIngTexto = ''; filtroIngAlergeno = '';
+        if(document.getElementById('search-ing')) document.getElementById('search-ing').value = '';
+        if(document.getElementById('filter-alergeno-ing')) document.getElementById('filter-alergeno-ing').value = '';
+        loadIngredientes();
+    }
+  }
+
+  // ---- LOAD DATOS MAESTROS ----
+  async function loadDominios() {
+    const { data } = await supabase.from('subdominios').select('id, descripcion').eq('id_dominio', DOMINIO_ALERGENO);
+    dbAlergenos = data || [];
+    
+    const optsForm = '<option value="">Selecciona alérgeno...</option>' + dbAlergenos.map(a => `<option value="${a.id}">${a.descripcion}</option>`).join('');
+    document.getElementById('ing-tipo-alergeno').innerHTML = optsForm;
+
+    const optsFilter = '<option value="">Todos los ingredientes</option><option value="none">Seguros (Sin alérgeno)</option>' + dbAlergenos.map(a => `<option value="${a.id}">Alerta: ${a.descripcion}</option>`).join('');
+    document.getElementById('filter-alergeno-ing').innerHTML = optsFilter;
+  }
+
+  async function loadIngredientes() {
+    const { data } = await supabase.from('ingredientes').select('*, subdominios(descripcion)').order('nombre');
+    dbIngredientes = data || [];
+    
+    const opts = '<option value="">Selecciona ingrediente...</option>' + dbIngredientes.map(i => `<option value="${i.id}">${i.nombre}</option>`).join('');
+    document.getElementById('pl-select-ingrediente').innerHTML = opts;
+
+    renderIngredientes();
+  }
+
+  function renderIngredientes() {
+    const tbody = document.getElementById('tbody-ingredientes');
+    if(!tbody) return;
+
+    const filtrados = dbIngredientes.filter(i => {
+        const matchTexto = i.nombre.toLowerCase().includes(filtroIngTexto.toLowerCase());
+        const matchAlergeno = filtroIngAlergeno === '' 
+            || (filtroIngAlergeno === 'none' && !i.es_alergeno) 
+            || (i.id_tipo_alergeno == filtroIngAlergeno);
+        return matchTexto && matchAlergeno;
+    });
+
+    if (filtrados.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:32px;color:#8A9BA0;">No se encontraron ingredientes que coincidan con la búsqueda.</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = filtrados.map(i => `<tr>
+        <td>${i.id}</td>
+        <td style="font-weight: 500; color: #1C2B30;">${i.nombre}</td>
+        <td><span class="pl-badge ${i.es_alergeno ? 'pl-badge-draft' : 'pl-badge-pub'}">${i.es_alergeno ? 'Sí' : 'No'}</span></td>
+        <td>${i.subdominios?.descripcion || '—'}</td>
+        <td style="display:flex;gap:5px;">
+          <button class="pl-btn-action pl-btn-edit" onclick="window.editarIngrediente(${i.id})">✏ Editar</button>
+          <button class="pl-btn-action pl-btn-delete" onclick="window.eliminarIngrediente(${i.id}, '${i.nombre}')">🗑</button>
+        </td>
+    </tr>`).join('');
+  }
+
+  async function loadPlatos() {
+    // Ampliamos el select para obtener los nombres de los ingredientes y poder verlos en Detalles
+    const { data, count } = await supabase.from('platos').select(`
+      *, 
+      plato_ingredientes(id, es_base, ingredientes(nombre, es_alergeno))
+    `, { count: 'exact' }).order('id', { ascending: false });
+    dbPlatos = data || [];
+    
+    document.getElementById('stat-platos').textContent = count || 0;
+    document.getElementById('stat-activos').textContent = dbPlatos.filter(r => r.estado).length;
+    document.getElementById('stat-ingredientes').textContent = dbIngredientes.length;
+    document.getElementById('stat-alergenos').textContent = dbIngredientes.filter(i => i.es_alergeno).length;
+
+    renderPlatos();
+  }
+
+  function renderPlatos() {
+    const tbodyEdit = document.getElementById('tbody-platos');
+    const tbodyDel = document.getElementById('tbody-del-platos');
+    
+    const filtrados = dbPlatos.filter(p => p.nombre.toLowerCase().includes(filtroPlatosTexto.toLowerCase()));
+
+    if(tbodyEdit) {
+      if(filtrados.length === 0) {
+          tbodyEdit.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:32px;color:#8A9BA0;">No se encontraron platos.</td></tr>`;
+      } else {
+          // CORRECCIÓN COLOR TEXTO BLANCO -> #1C2B30
+          // AÑADIDO BOTÓN DE DETALLES
+          tbodyEdit.innerHTML = filtrados.map(p => `<tr>
+            <td style="font-weight:700; color:#1C2B30;">${p.nombre}</td>
+            <td>${(p.historia_origen || 'Sin historia').substring(0,30)}...</td>
+            <td>${p.plato_ingredientes ? p.plato_ingredientes.length : 0} items</td>
+            <td><span class="pl-badge ${p.estado ? 'pl-badge-pub' : 'pl-badge-draft'}">${p.estado ? 'Activo' : 'Inactivo'}</span></td>
+            <td>
+              <div style="display:flex; gap:5px;">
+                <button class="pl-btn-action" style="border-color: rgba(15,152,138,0.25); background: rgba(15,152,138,0.06); color: #0F988A;" onclick="window.verDetallesPlato(${p.id})">👁 Detalles</button>
+                <button class="pl-btn-action pl-btn-edit" onclick="window.editarPlato(${p.id})">✏ Editar</button>
+              </div>
+            </td>
+          </tr>`).join('');
+      }
+    }
+
+    if(tbodyDel) {
+      if(filtrados.length === 0) {
+          tbodyDel.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:32px;color:#8A9BA0;">No se encontraron platos.</td></tr>`;
+      } else {
+          // CORRECCIÓN COLOR TEXTO BLANCO -> #1C2B30
+          tbodyDel.innerHTML = filtrados.map(p => `<tr>
+            <td style="font-weight:700; color:#1C2B30;">${p.nombre}</td>
+            <td><span class="pl-badge ${p.estado ? 'pl-badge-pub' : 'pl-badge-draft'}">${p.estado ? 'Activo' : 'Inactivo'}</span></td>
+            <td><button class="pl-btn-action pl-btn-delete" onclick="window.eliminarPlato(${p.id}, '${p.nombre}')">🗑 Eliminar</button></td>
+          </tr>`).join('');
+      }
+    }
+  }
+
+  // ---- LISTENERS DE FILTROS ----
+  document.getElementById('search-platos')?.addEventListener('input', (e) => {
+      filtroPlatosTexto = e.target.value;
+      renderPlatos();
+  });
+
+  document.getElementById('search-ing')?.addEventListener('input', (e) => {
+      filtroIngTexto = e.target.value;
+      renderIngredientes();
+  });
+
+  document.getElementById('filter-alergeno-ing')?.addEventListener('change', (e) => {
+      filtroIngAlergeno = e.target.value;
+      renderIngredientes();
+  });
+
+  // ---- DETALLES DEL PLATO ----
+  // ---- DETALLES DEL PLATO ----
+  window.verDetallesPlato = (id) => {
+      const plato = dbPlatos.find(p => p.id === id);
+      if(!plato) return;
+      
+      document.getElementById('detalles-plato-title').textContent = plato.nombre;
+      const lista = document.getElementById('detalles-plato-lista');
+      
+      if (plato.plato_ingredientes && plato.plato_ingredientes.length > 0) {
+          lista.innerHTML = plato.plato_ingredientes.map(pi => {
+              let nombreIng = 'Desconocido';
+              if (pi.ingredientes) {
+                  nombreIng = Array.isArray(pi.ingredientes) ? pi.ingredientes[0]?.nombre : pi.ingredientes.nombre;
+              }
+              // USAMOS EL NUEVO BADGE Y EL ITEM
+              const isBase = pi.es_base ? '<span class="pl-detalles-badge">Indispensable</span>' : '';
+              
+              return `<li class="pl-detalles-item">
+                  <span style="font-weight: 500;">${nombreIng}</span>
+                  ${isBase}
+              </li>`;
+          }).join('');
+      } else {
+          // USAMOS LA NUEVA CLASE VACÍA
+          lista.innerHTML = '<li class="pl-detalles-empty">No hay ingredientes registrados para este plato.</li>';
+      }
+      
+      document.getElementById('modal-detalles-plato').style.display = 'flex';
+  };
+
+  // ---- CREAR PLATO Y RECETA ----
+  function renderRecetaTemp() {
+    const list = document.getElementById('lista-ingredientes-crear');
+    // CORRECCIÓN DE COLORES: Fondo gris claro y bordes suaves
+    list.innerHTML = recetaActual.map((r, index) => `
+      <div style="display:flex; justify-content:space-between; align-items:center; background:#FAFAF8; padding:10px 14px; border:1px solid #E2D9CE; border-radius:8px; font-size:13.5px; color:#1C2B30; transition:all 0.2s ease;">
+        <span>${r.nombre} ${r.es_base ? '<span style="color:#0F988A; font-size:11px; font-weight:600; margin-left:6px; background:rgba(15,152,138,0.1); padding:2px 6px; border-radius:4px;">Indispensable</span>' : ''}</span>
+        <button type="button" style="background:none; border:none; color:#E24D4D; cursor:pointer; font-weight:bold; font-size:14px;" onclick="window.removerIngredienteTemp(${index})">✕</button>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('btn-add-ingrediente')?.addEventListener('click', () => {
+    const sel = document.getElementById('pl-select-ingrediente');
+    const chk = document.getElementById('pl-chk-base');
+    if(!sel.value) return;
+    
+    if(recetaActual.find(r => r.id == sel.value)) {
+        showToast('El ingrediente ya está en la lista', 'error');
+        return;
+    }
+
+    recetaActual.push({
+        id: parseInt(sel.value),
+        nombre: sel.options[sel.selectedIndex].text,
+        es_base: chk.checked
+    });
+    renderRecetaTemp();
+    sel.value = ''; chk.checked = false;
+  });
+
+  window.removerIngredienteTemp = (index) => {
+      recetaActual.splice(index, 1);
+      renderRecetaTemp();
+  };
+
+  document.getElementById('form-crear-plato')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = document.getElementById('btn-guardar-plato');
+    btn.disabled = true; btn.textContent = 'Guardando...';
+
+    const estadoVal = document.querySelector('input[name="pl-estado"]:checked')?.value === 'true';
+    
+    const { data: nuevoPlato, error: errPlato } = await supabase.from('platos').insert([{
+      nombre: document.getElementById('pl-nombre').value.trim(),
+      historia_origen: document.getElementById('pl-historia').value.trim() || null,
+      estado: estadoVal
+    }]).select().single();
+
+    if (errPlato) { showToast('Error: ' + errPlato.message, 'error'); btn.disabled = false; return; }
+
+    if(recetaActual.length > 0) {
+        const relaciones = recetaActual.map(ing => ({
+            id_plato: nuevoPlato.id,
+            id_ingrediente: ing.id,
+            es_base: ing.es_base
+        }));
+        await supabase.from('plato_ingredientes').insert(relaciones);
+    }
+
+    btn.disabled = false; btn.textContent = 'Guardar Plato y Receta';
+    showToast('¡Plato guardado exitosamente!');
+    
+    document.getElementById('form-crear-plato').reset();
+    recetaActual = []; renderRecetaTemp();
+    switchPanel('editar');
+  });
+
+  document.getElementById('btn-cancelar-plato')?.addEventListener('click', () => {
+      document.getElementById('form-crear-plato').reset();
+      recetaActual = []; renderRecetaTemp();
+      switchPanel('editar');
+  });
+
+  // ---- GESTIÓN DE INGREDIENTES ----
+  document.getElementById('ing-alergeno')?.addEventListener('change', (e) => {
+      document.getElementById('box-tipo-alergeno').style.display = e.target.value === 'true' ? 'block' : 'none';
+  });
+
+  document.getElementById('btn-nuevo-ingrediente')?.addEventListener('click', () => {
+      document.getElementById('form-ingrediente').reset();
+      document.getElementById('ing-id').value = '';
+      document.getElementById('box-tipo-alergeno').style.display = 'none';
+      document.getElementById('title-modal-ing').textContent = 'Nuevo Ingrediente';
+      document.getElementById('modal-form-ingrediente').style.display = 'flex';
+  });
+
+  window.editarIngrediente = (id) => {
+      const ing = dbIngredientes.find(i => i.id === id);
+      if(!ing) return;
+      document.getElementById('ing-id').value = ing.id;
+      document.getElementById('ing-nombre').value = ing.nombre;
+      document.getElementById('ing-alergeno').value = ing.es_alergeno ? 'true' : 'false';
+      document.getElementById('box-tipo-alergeno').style.display = ing.es_alergeno ? 'block' : 'none';
+      document.getElementById('ing-tipo-alergeno').value = ing.id_tipo_alergeno || '';
+      document.getElementById('title-modal-ing').textContent = 'Editar Ingrediente';
+      document.getElementById('modal-form-ingrediente').style.display = 'flex';
+  };
+
+  document.getElementById('form-ingrediente')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('ing-id').value;
+      const esAlergeno = document.getElementById('ing-alergeno').value === 'true';
+      const payload = {
+          nombre: document.getElementById('ing-nombre').value.trim(),
+          es_alergeno: esAlergeno,
+          id_tipo_alergeno: esAlergeno ? parseInt(document.getElementById('ing-tipo-alergeno').value) : null
+      };
+
+      if(id) {
+          await supabase.from('ingredientes').update(payload).eq('id', id);
+          showToast('Ingrediente actualizado');
+      } else {
+          await supabase.from('ingredientes').insert([payload]);
+          showToast('Ingrediente creado');
+      }
+      document.getElementById('modal-form-ingrediente').style.display = 'none';
+      loadIngredientes();
+  });
+
+  let deleteIngId = null;
+  window.eliminarIngrediente = (id, nombre) => {
+      deleteIngId = id;
+      document.getElementById('delete-ing-message').textContent = `¿Eliminar el ingrediente "${nombre}"? Asegúrate de que no esté en uso.`;
+      document.getElementById('modal-confirm-delete-ing').style.display = 'flex';
+  };
+
+  document.getElementById('confirm-delete-ing-btn')?.addEventListener('click', async () => {
+      if(!deleteIngId) return;
+      const { error } = await supabase.from('ingredientes').delete().eq('id', deleteIngId);
+      
+      if (error) {
+          showToast('Error: El ingrediente está en uso.', 'error');
+      } else {
+          showToast('Ingrediente eliminado');
+          loadIngredientes();
+      }
+      document.getElementById('modal-confirm-delete-ing').style.display = 'none';
+      deleteIngId = null;
+  });
+
+  // ---- EDITAR PLATO ----
+  window.editarPlato = async (id) => {
+      const plato = dbPlatos.find(p => p.id === id);
+      if(!plato) return;
+      document.getElementById('edit-pl-id').value = plato.id;
+      document.getElementById('edit-pl-nombre').value = plato.nombre;
+      document.getElementById('edit-pl-historia').value = plato.historia_origen || '';
+      document.getElementById('modal-editar-plato').style.display = 'flex';
+  };
+
+  document.getElementById('form-editar-plato-submit')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('edit-pl-id').value;
+      await supabase.from('platos').update({
+          nombre: document.getElementById('edit-pl-nombre').value.trim(),
+          historia_origen: document.getElementById('edit-pl-historia').value.trim() || null
+      }).eq('id', id);
+      showToast('Plato actualizado');
+      document.getElementById('modal-editar-plato').style.display = 'none';
+      loadPlatos();
+  });
+
+  // ---- ELIMINAR PLATO ----
+  let deletePlatoId = null;
+  window.eliminarPlato = (id, nombre) => {
+      deletePlatoId = id;
+      document.getElementById('delete-plato-message').textContent = `¿Eliminar el plato "${nombre}"?`;
+      document.getElementById('modal-confirm-delete-plato').style.display = 'flex';
+  };
+
+  document.getElementById('confirm-delete-plato-btn')?.addEventListener('click', async () => {
+      if(!deletePlatoId) return;
+      
+      await supabase.from('plato_ingredientes').delete().eq('id_plato', deletePlatoId);
+      await supabase.from('platos').delete().eq('id', deletePlatoId);
+
+      showToast('Plato eliminado');
+      document.getElementById('modal-confirm-delete-plato').style.display = 'none';
+      deletePlatoId = null;
+      loadPlatos();
+  });
+
+  // ---- INICIALIZACIÓN ----
+  const initPlatosModule = () => {
+    const cards = document.querySelectorAll('.pl-action-card');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const panelName = card.getAttribute('data-panel');
+        switchPanel(panelName);
+      });
+    });
+
+    document.querySelectorAll('.pl-toggle-group label').forEach(label => {
+        label.addEventListener('click', () => {
+            const group = label.closest('.pl-toggle-group');
+            group.querySelectorAll('.pl-toggle-opt').forEach(opt => opt.classList.remove('pl-toggle-active'));
+            label.classList.add('pl-toggle-active');
+            const radio = label.querySelector('input[type="radio"]');
+            if(radio) radio.checked = true;
+        });
+    });
+
+    // Cierre de Modales
+    ['close-detalles-plato', 'btn-cerrar-detalles'].forEach(id => document.getElementById(id)?.addEventListener('click', () => {
+        document.getElementById('modal-detalles-plato').style.display = 'none';
+    }));
+    ['close-modal-ing', 'cancel-modal-ing'].forEach(id => document.getElementById(id)?.addEventListener('click', () => {
+        document.getElementById('modal-form-ingrediente').style.display = 'none';
+    }));
+    ['close-del-ing-modal', 'cancel-delete-ing-btn'].forEach(id => document.getElementById(id)?.addEventListener('click', () => {
+        document.getElementById('modal-confirm-delete-ing').style.display = 'none';
+    }));
+    ['close-del-plato-modal', 'cancel-delete-plato-btn'].forEach(id => document.getElementById(id)?.addEventListener('click', () => {
+        document.getElementById('modal-confirm-delete-plato').style.display = 'none';
+    }));
+    ['close-modal-edit-plato', 'cancel-modal-edit-plato'].forEach(id => document.getElementById(id)?.addEventListener('click', () => {
+        document.getElementById('modal-editar-plato').style.display = 'none';
+    }));
+
+    loadDominios().then(() => loadIngredientes()).then(() => loadPlatos());
+  };
+
+  initPlatosModule();
+  document.addEventListener('astro:page-load', initPlatosModule);
+</script>

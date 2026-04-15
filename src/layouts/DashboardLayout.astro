@@ -32,6 +32,7 @@ const { title = "Dashboard" } = Astro.props;
         const headerSubtitle = document.getElementById('headerSubtitle');
         const headerBreadcrumb = document.getElementById('headerBreadcrumb');
 
+        // AQUÍ ESTABA EL DETALLE: Agregamos "platos" a la lista
         const sectionMeta: Record<string, { title: string; subtitle: string }> = {
           inicio: { title: 'Dashboard', subtitle: 'Vista general del sistema turístico' },
           usuarios: { title: 'Usuarios', subtitle: 'Gestión de usuarios registrados' },
@@ -42,6 +43,7 @@ const { title = "Dashboard" } = Astro.props;
           seguridad: { title: 'Seguridad', subtitle: 'Control de acceso y permisos' },
           itinerarios: { title: 'Itinerarios', subtitle: 'Planificación de recorridos' },
           configuracion: { title: 'Configuración', subtitle: 'Ajustes del sistema' },
+          platos: { title: 'Platos Típicos', subtitle: 'Gestión de gastronomía local, ingredientes y alérgenos' },
         };
 
         if (hamburger) {
@@ -74,7 +76,7 @@ const { title = "Dashboard" } = Astro.props;
             if (meta) {
               if (headerTitle) headerTitle.textContent = meta.title;
               if (headerSubtitle) headerSubtitle.textContent = meta.subtitle;
-              if (headerBreadcrumb) headerBreadcrumb.textContent = 'DASHBOARD';
+              if (headerBreadcrumb) headerBreadcrumb.textContent = 'MÓDULO'; // Cambiado para que tenga más sentido
             }
 
             if (window.innerWidth <= 768) {
