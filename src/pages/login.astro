@@ -75,7 +75,6 @@ import MainLayout from "../layouts/MainLayout.astro";
     </div>
 </MainLayout>
 <script>
-  // IMPORTANTE: Importamos el cliente centralizado
   import { supabase } from '../lib/supabase';
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -87,29 +86,66 @@ import MainLayout from "../layouts/MainLayout.astro";
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Estado de carga
-        btnText.innerHTML = '<span>Verificando...</span>';
-        btnText.style.opacity = '0.8';
+        // 1. Estado de carga
+        if (btnText) {
+          btnText.innerHTML = '<span>Verificando...</span>';
+          btnText.style.opacity = '0.8';
+        }
+        if (errorDiv) errorDiv.style.display = 'none';
         
         const email = (document.getElementById('email') as HTMLInputElement).value;
         const password = (document.getElementById('password') as HTMLInputElement).value;
 
-        // Iniciar sesión usando el cliente compartido
-        const { data, error } = await supabase.auth.signInWithPassword({
+        // 2. Intento de inicio de sesión
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
 
-        if (error) {
-          btnText.innerHTML = '<span>Iniciar Sesión</span>';
-          btnText.style.opacity = '1';
-          errorDiv.textContent = "Error: " + error.message;
-          errorDiv.style.display = 'block';
-        } else {
-          // Al usar el mismo cliente, el Header detectará el cambio automáticamente
-          window.location.href = '/';
+        if (authError) {
+          resetButton();
+          showError("Error: " + authError.message);
+          return;
+        }
+
+        // 3. Verificación de Rol (Lógica de Admin)
+        if (authData.user) {
+          const { data: persona, error: dbError } = await supabase
+            .from("personas")
+            .select("id_rol")
+            .eq("id_usuario", authData.user.id)
+            .maybeSingle();
+
+          if (dbError) {
+            console.error("Error al consultar rol:", dbError);
+            window.location.href = '/'; // Fallback a inicio si falla la DB
+            return;
+          }
+
+          // 4. Redirección condicional
+          // id_rol === 2 es Administrador según tu lógica
+          if (persona && Number(persona.id_rol) === 2) {
+            window.location.href = '/dashboard';
+          } else {
+            window.location.href = '/';
+          }
         }
       });
+    }
+
+    // Funciones auxiliares para limpiar el código
+    function resetButton() {
+      if (btnText) {
+        btnText.innerHTML = '<span>Iniciar Sesión</span>';
+        btnText.style.opacity = '1';
+      }
+    }
+
+    function showError(message: string) {
+      if (errorDiv) {
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+      }
     }
   });
 </script>
