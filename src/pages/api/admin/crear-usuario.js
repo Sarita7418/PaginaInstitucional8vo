@@ -1,4 +1,4 @@
-export const prerender = false; // <--- ESTO ES LA CLAVE
+export const prerender = true;// <--- ESTO ES LA CLAVE
 
 import { createClient } from '@supabase/supabase-js';
 

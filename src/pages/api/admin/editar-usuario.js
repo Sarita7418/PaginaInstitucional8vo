@@ -1,4 +1,4 @@
-export const prerender = false; // <--- AÑADIR ESTA LÍNEA AQUÍ TAMBIÉN
+export const prerender = true; // <--- AÑADIR ESTA LÍNEA AQUÍ TAMBIÉN
 
 import { createClient } from '@supabase/supabase-js';
 
