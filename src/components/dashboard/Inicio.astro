@@ -1,29 +1,375 @@
 ---
-// Componente Inicio - Dashboard
+// Inicio.astro — Panel de inicio del Dashboard WALI
 ---
 
-<section data-section-target="inicio" class="section card">
-  <div class="card-header">
-    <h2 class="card-title">Inicio</h2>
-    <p class="card-subtitle">Resumen general de la plataforma</p>
-  </div>
+<link rel="stylesheet" href="/src/components/dashboard/Inicio.css" />
 
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-value">1,247</div>
-      <div class="stat-label">Usuarios Registrados</div>
+<section data-section-target="inicio" class="section">
+  <div class="in-module">
+
+    <!-- BANNER BIENVENIDA -->
+    <div class="in-banner">
+      <div class="in-banner-content">
+        <span class="in-banner-label">DASHBOARD</span>
+        <h2 class="in-banner-title">Bienvenido al Panel de Administración</h2>
+        <p class="in-banner-sub">Gestiona la plataforma turística WALI — puntos, rutas, audioguías y usuarios en tiempo real.</p>
+      </div>
+      <div class="in-banner-deco">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="55" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+          <circle cx="60" cy="60" r="38" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <path d="M60 20C60 20 80 45 80 60C80 71 71 80 60 80C49 80 40 71 40 60C40 45 60 20 60 20Z" fill="rgba(15,152,138,0.25)"/>
+          <circle cx="60" cy="60" r="8" fill="rgba(15,152,138,0.5)"/>
+          <circle cx="60" cy="25" r="4" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="85" cy="48" r="3" fill="rgba(210,120,23,0.6)"/>
+          <circle cx="42" cy="78" r="3" fill="rgba(25,125,97,0.6)"/>
+        </svg>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-value">324</div>
-      <div class="stat-label">Audioguías Disponibles</div>
+
+    <!-- MÉTRICAS PRINCIPALES -->
+    <div class="in-stats-grid">
+      <div class="in-stat-card in-stat-teal">
+        <div class="in-stat-header">
+          <div class="in-stat-icon in-icon-teal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span class="in-stat-trend in-trend-up" id="trend-usuarios">+12%</span>
+        </div>
+        <div class="in-stat-value" id="stat-usuarios">—</div>
+        <div class="in-stat-label">Usuarios Registrados</div>
+        <div class="in-stat-bar"><div class="in-bar-fill in-fill-teal" style="width:72%"></div></div>
+      </div>
+
+      <div class="in-stat-card in-stat-amber">
+        <div class="in-stat-header">
+          <div class="in-stat-icon in-icon-amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+          </div>
+          <span class="in-stat-trend in-trend-up" id="trend-audios">+8%</span>
+        </div>
+        <div class="in-stat-value" id="stat-audios">—</div>
+        <div class="in-stat-label">Audioguías Activas</div>
+        <div class="in-stat-bar"><div class="in-bar-fill in-fill-amber" style="width:55%"></div></div>
+      </div>
+
+      <div class="in-stat-card in-stat-green">
+        <div class="in-stat-header">
+          <div class="in-stat-icon in-icon-green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <span class="in-stat-trend in-trend-up">+3</span>
+        </div>
+        <div class="in-stat-value" id="stat-puntos">—</div>
+        <div class="in-stat-label">Sitios Turísticos</div>
+        <div class="in-stat-bar"><div class="in-bar-fill in-fill-green" style="width:40%"></div></div>
+      </div>
+
+      <div class="in-stat-card in-stat-terra">
+        <div class="in-stat-header">
+          <div class="in-stat-icon in-icon-terra">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg>
+          </div>
+          <span class="in-stat-trend in-trend-up">+2</span>
+        </div>
+        <div class="in-stat-value" id="stat-rutas">—</div>
+        <div class="in-stat-label">Rutas Creadas</div>
+        <div class="in-stat-bar"><div class="in-bar-fill in-fill-terra" style="width:30%"></div></div>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-value">89</div>
-      <div class="stat-label">Mapas Interactivos</div>
+
+    <!-- FILA SECUNDARIA -->
+    <div class="in-grid-2">
+
+      <!-- ACTIVIDAD RECIENTE -->
+      <div class="in-card">
+        <div class="in-card-header">
+          <h3 class="in-card-title">Actividad Reciente</h3>
+          <span class="in-card-badge">En vivo</span>
+        </div>
+        <div class="in-activity-list" id="in-activity-list">
+          <div class="in-loading">Cargando actividad...</div>
+        </div>
+      </div>
+
+      <!-- MÉTRICAS DEL SISTEMA -->
+      <div class="in-card">
+        <div class="in-card-header">
+          <h3 class="in-card-title">Estado del Sistema</h3>
+        </div>
+        <div class="in-metrics-list">
+          <div class="in-metric-item">
+            <div class="in-metric-label">
+              <span class="in-metric-dot in-dot-teal"></span>
+              Sitios activos
+            </div>
+            <div class="in-metric-right">
+              <div class="in-metric-bar-track"><div class="in-metric-bar-fill in-fill-teal" id="bar-sitios-activos" style="width:0%"></div></div>
+              <span class="in-metric-pct" id="pct-sitios-activos">—</span>
+            </div>
+          </div>
+          <div class="in-metric-item">
+            <div class="in-metric-label">
+              <span class="in-metric-dot in-dot-amber"></span>
+              Audioguías publicadas
+            </div>
+            <div class="in-metric-right">
+              <div class="in-metric-bar-track"><div class="in-metric-bar-fill in-fill-amber" id="bar-audios-pub" style="width:0%"></div></div>
+              <span class="in-metric-pct" id="pct-audios-pub">—</span>
+            </div>
+          </div>
+          <div class="in-metric-item">
+            <div class="in-metric-label">
+              <span class="in-metric-dot in-dot-green"></span>
+              Rutas activas
+            </div>
+            <div class="in-metric-right">
+              <div class="in-metric-bar-track"><div class="in-metric-bar-fill in-fill-green" id="bar-rutas-act" style="width:0%"></div></div>
+              <span class="in-metric-pct" id="pct-rutas-act">—</span>
+            </div>
+          </div>
+          <div class="in-metric-item">
+            <div class="in-metric-label">
+              <span class="in-metric-dot in-dot-terra"></span>
+              Usuarios activos
+            </div>
+            <div class="in-metric-right">
+              <div class="in-metric-bar-track"><div class="in-metric-bar-fill in-fill-terra" id="bar-usuarios-act" style="width:0%"></div></div>
+              <span class="in-metric-pct" id="pct-usuarios-act">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DISTRIBUCIÓN IDIOMAS -->
+        <div class="in-card-divider"></div>
+        <div class="in-card-subtitle-row">Audioguías por idioma</div>
+        <div class="in-lang-bars" id="in-lang-bars">
+          <div class="in-loading">Cargando...</div>
+        </div>
+      </div>
+
     </div>
-    <div class="stat-card">
-      <div class="stat-value">156</div>
-      <div class="stat-label">Sitios Turísticos</div>
+
+    <!-- FILA CATEGORÍAS + ACCESOS RÁPIDOS -->
+    <div class="in-grid-3">
+
+      <!-- CATEGORÍAS DE SITIOS -->
+      <div class="in-card">
+        <div class="in-card-header">
+          <h3 class="in-card-title">Sitios por Categoría</h3>
+        </div>
+        <div id="in-cat-list" class="in-cat-list">
+          <div class="in-loading">Cargando...</div>
+        </div>
+      </div>
+
+      <!-- ACCESOS RÁPIDOS -->
+      <div class="in-card in-card-accesos">
+        <div class="in-card-header">
+          <h3 class="in-card-title">Accesos Rápidos</h3>
+        </div>
+        <div class="in-accesos-grid">
+          <button class="in-acceso-btn" data-goto="usuarios">
+            <div class="in-acceso-icon in-icon-teal">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <span>Usuarios</span>
+          </button>
+          <button class="in-acceso-btn" data-goto="audios">
+            <div class="in-acceso-icon in-icon-amber">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/></svg>
+            </div>
+            <span>Audioguías</span>
+          </button>
+          <button class="in-acceso-btn" data-goto="rutas">
+            <div class="in-acceso-icon in-icon-green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <span>Sitios y Rutas</span>
+          </button>
+          <button class="in-acceso-btn" data-goto="itinerarios">
+            <div class="in-acceso-icon in-icon-terra">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <span>Itinerarios</span>
+          </button>
+          <button class="in-acceso-btn" data-goto="seguridad">
+            <div class="in-acceso-icon" style="background:rgba(35,55,62,0.1);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#23373E" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <span>Seguridad</span>
+          </button>
+          <button class="in-acceso-btn" data-goto="rag">
+            <div class="in-acceso-icon" style="background:rgba(15,152,138,0.1);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </div>
+            <span>Contexto RAG</span>
+          </button>
+        </div>
+      </div>
+
     </div>
+
   </div>
 </section>
+
+<script>
+  import { supabase } from '../../lib/supabase';
+
+  const DOMINIO_IDIOMA = 2;
+  const DOMINIO_CATEGORIA_POI = 4;
+
+  async function loadInicio() {
+
+    // ---- STATS PRINCIPALES ----
+    const [
+      { count: totalUsuarios },
+      { count: usuariosActivos },
+      { count: totalAudios },
+      { count: audiosActivos },
+      { count: totalPuntos },
+      { count: puntosActivos },
+      { count: totalRutas },
+      { count: rutasActivas },
+    ] = await Promise.all([
+      supabase.from('personas').select('*', { count: 'exact', head: true }),
+      supabase.from('personas').select('*', { count: 'exact', head: true }).eq('estado', true),
+      supabase.from('audioguias').select('*', { count: 'exact', head: true }),
+      supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('estado', true),
+      supabase.from('punto_turistico').select('*', { count: 'exact', head: true }),
+      supabase.from('punto_turistico').select('*', { count: 'exact', head: true }).eq('estado', true),
+      supabase.from('rutas').select('*', { count: 'exact', head: true }),
+      supabase.from('rutas').select('*', { count: 'exact', head: true }).eq('estado', true),
+    ]);
+
+    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+
+    set('stat-usuarios', (totalUsuarios ?? 0).toLocaleString());
+    set('stat-audios', audiosActivos ?? 0);
+    set('stat-puntos', puntosActivos ?? 0);
+    set('stat-rutas', rutasActivas ?? 0);
+
+    // Barras de estado
+    function setPct(barId, pctId, val, total) {
+      const pct = total > 0 ? Math.round((val / total) * 100) : 0;
+      const bar = document.getElementById(barId);
+      const pctEl = document.getElementById(pctId);
+      if (bar) bar.style.width = pct + '%';
+      if (pctEl) pctEl.textContent = pct + '%';
+    }
+    setPct('bar-sitios-activos', 'pct-sitios-activos', puntosActivos ?? 0, totalPuntos ?? 1);
+    setPct('bar-audios-pub', 'pct-audios-pub', audiosActivos ?? 0, totalAudios ?? 1);
+    setPct('bar-rutas-act', 'pct-rutas-act', rutasActivas ?? 0, totalRutas ?? 1);
+    setPct('bar-usuarios-act', 'pct-usuarios-act', usuariosActivos ?? 0, totalUsuarios ?? 1);
+
+    // ---- ACTIVIDAD RECIENTE (últimas audioguías + puntos creados) ----
+    const [{ data: recentAudios }, { data: recentPuntos }, { data: recentRutas }] = await Promise.all([
+      supabase.from('audioguias').select('id, titulo, created_at').order('created_at', { ascending: false }).limit(2),
+      supabase.from('punto_turistico').select('id, nombre, created_at').order('created_at', { ascending: false }).limit(2),
+      supabase.from('rutas').select('id, nombre, created_at').order('created_at', { ascending: false }).limit(2),
+    ]);
+
+    const allActivity = [
+      ...(recentAudios || []).map(a => ({ tipo: 'audio', texto: `Audioguía "${a.titulo}" registrada`, ts: a.created_at })),
+      ...(recentPuntos || []).map(p => ({ tipo: 'punto', texto: `Sitio "${p.nombre}" añadido`, ts: p.created_at })),
+      ...(recentRutas || []).map(r => ({ tipo: 'ruta', texto: `Ruta "${r.nombre}" creada`, ts: r.created_at })),
+    ].sort((a, b) => new Date(b.ts) - new Date(a.ts)).slice(0, 6);
+
+    const iconMap = {
+      audio: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D27817" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/></svg>`,
+      punto: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+      ruta:  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#197D61" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg>`,
+    };
+
+    const colorMap = { audio: 'in-act-amber', punto: 'in-act-teal', ruta: 'in-act-green' };
+
+    function timeAgo(ts) {
+      if (!ts) return '';
+      const diff = Math.floor((Date.now() - new Date(ts)) / 1000);
+      if (diff < 60) return 'Hace un momento';
+      if (diff < 3600) return `Hace ${Math.floor(diff/60)} min`;
+      if (diff < 86400) return `Hace ${Math.floor(diff/3600)} h`;
+      return `Hace ${Math.floor(diff/86400)} días`;
+    }
+
+    const list = document.getElementById('in-activity-list');
+    if (list) {
+      if (!allActivity.length) {
+        list.innerHTML = '<div class="in-empty">No hay actividad registrada aún</div>';
+      } else {
+        list.innerHTML = allActivity.map(a => `
+          <div class="in-activity-item">
+            <div class="in-activity-dot ${colorMap[a.tipo]}">${iconMap[a.tipo]}</div>
+            <div class="in-activity-text">${a.texto}</div>
+            <div class="in-activity-time">${timeAgo(a.ts)}</div>
+          </div>`).join('');
+      }
+    }
+
+    // ---- IDIOMAS ----
+    const { data: idiomasData } = await supabase.from('subdominios').select('id, descripcion').eq('id_dominio', DOMINIO_IDIOMA).order('descripcion');
+    const idiomas = idiomasData || [];
+    const langBars = document.getElementById('in-lang-bars');
+    if (langBars && idiomas.length) {
+      const counts = await Promise.all(idiomas.map(async i => {
+        const { count } = await supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('id_idioma', i.id);
+        return { ...i, count: count || 0 };
+      }));
+      const maxCount = Math.max(...counts.map(c => c.count), 1);
+      langBars.innerHTML = counts.filter(c => c.count > 0).map(c => {
+        const pct = Math.round((c.count / maxCount) * 100);
+        return `<div class="in-lang-item">
+          <span class="in-lang-name">${c.descripcion}</span>
+          <div class="in-lang-track"><div class="in-lang-fill" style="width:${pct}%"></div></div>
+          <span class="in-lang-count">${c.count}</span>
+        </div>`;
+      }).join('') || '<div class="in-empty">Sin audioguías registradas</div>';
+    } else if (langBars) {
+      langBars.innerHTML = '<div class="in-empty">Sin datos de idiomas</div>';
+    }
+
+    // ---- CATEGORÍAS ----
+    const { data: catsData } = await supabase.from('subdominios').select('id, descripcion').eq('id_dominio', DOMINIO_CATEGORIA_POI).order('descripcion');
+    const cats = catsData || [];
+    const catList = document.getElementById('in-cat-list');
+    if (catList && cats.length) {
+      const catCounts = await Promise.all(cats.map(async c => {
+        const { count } = await supabase.from('punto_turistico').select('*', { count: 'exact', head: true }).eq('id_categoria', c.id);
+        return { ...c, count: count || 0 };
+      }));
+      const maxCat = Math.max(...catCounts.map(c => c.count), 1);
+      catList.innerHTML = catCounts.map((c, i) => {
+        const pct = Math.round((c.count / maxCat) * 100);
+        const colors = ['in-fill-teal','in-fill-amber','in-fill-green','in-fill-terra','in-fill-teal','in-fill-amber','in-fill-green'];
+        return `<div class="in-cat-item">
+          <div class="in-cat-info">
+            <span class="in-cat-name">${c.descripcion}</span>
+            <span class="in-cat-count">${c.count} sitios</span>
+          </div>
+          <div class="in-cat-track"><div class="in-cat-fill ${colors[i % colors.length]}" style="width:${pct}%"></div></div>
+        </div>`;
+      }).join('');
+    } else if (catList) {
+      catList.innerHTML = '<div class="in-empty">Sin categorías registradas</div>';
+    }
+  }
+
+  // ---- ACCESOS RÁPIDOS ----
+  function initAccesos() {
+    document.querySelectorAll('.in-acceso-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const goto = btn.getAttribute('data-goto');
+        const link = document.querySelector(`[data-section="${goto}"]`);
+        if (link) link.click();
+      });
+    });
+  }
+
+  const init = () => {
+    loadInicio();
+    initAccesos();
+  };
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>
