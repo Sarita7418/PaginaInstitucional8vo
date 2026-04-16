@@ -1,5 +1,4 @@
 ---
-import './Rutas.css';
 // Rutas.astro — Módulo Sitios y Rutas
 ---
 
@@ -11,63 +10,28 @@ import './Rutas.css';
 
     <div class="sr-actions-grid">
       <button class="sr-action-card sr-teal" data-panel="crear-punto">
-        <div class="sr-action-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div class="sr-action-text">
-          <span class="sr-action-title">Crear Sitio Turístico</span>
-          <span class="sr-action-desc">Añade un nuevo punto de interés</span>
-        </div>
+        <div class="sr-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="sr-action-text"><span class="sr-action-title">Crear Sitio Turístico</span><span class="sr-action-desc">Añade un nuevo punto de interés</span></div>
       </button>
-
       <button class="sr-action-card sr-green2" data-panel="ver-puntos">
-        <div class="sr-action-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-        </div>
-        <div class="sr-action-text">
-          <span class="sr-action-title">Ver Sitios</span>
-          <span class="sr-action-desc">Lista de sitios turísticos</span>
-        </div>
+        <div class="sr-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <div class="sr-action-text"><span class="sr-action-title">Ver Sitios</span><span class="sr-action-desc">Lista de sitios turísticos</span></div>
       </button>
-
       <button class="sr-action-card sr-amber" data-panel="crear-ruta">
-        <div class="sr-action-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg>
-        </div>
-        <div class="sr-action-text">
-          <span class="sr-action-title">Crear Ruta</span>
-          <span class="sr-action-desc">Diseña una nueva ruta turística</span>
-        </div>
+        <div class="sr-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg></div>
+        <div class="sr-action-text"><span class="sr-action-title">Crear Ruta</span><span class="sr-action-desc">Diseña una nueva ruta turística</span></div>
       </button>
-
       <button class="sr-action-card sr-green" data-panel="ver-rutas">
-        <div class="sr-action-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        </div>
-        <div class="sr-action-text">
-          <span class="sr-action-title">Ver Rutas</span>
-          <span class="sr-action-desc">Gestiona rutas existentes</span>
-        </div>
+        <div class="sr-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+        <div class="sr-action-text"><span class="sr-action-title">Ver Rutas</span><span class="sr-action-desc">Gestiona rutas existentes</span></div>
       </button>
-
       <button class="sr-action-card sr-teal2" data-panel="asignar-puntos">
-        <div class="sr-action-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-        </div>
-        <div class="sr-action-text">
-          <span class="sr-action-title">Asignar Puntos</span>
-          <span class="sr-action-desc">Conecta sitios a una ruta</span>
-        </div>
+        <div class="sr-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+        <div class="sr-action-text"><span class="sr-action-title">Asignar Puntos</span><span class="sr-action-desc">Conecta sitios a una ruta</span></div>
       </button>
-
-      <button class="sr-action-card sr-terra" data-panel="eliminar">
-        <div class="sr-action-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-        </div>
-        <div class="sr-action-text">
-          <span class="sr-action-title">Eliminar</span>
-          <span class="sr-action-desc">Elimina sitios o rutas</span>
-        </div>
+      <button class="sr-action-card sr-terra" data-panel="gestionar-estado">
+        <div class="sr-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></div>
+        <div class="sr-action-text"><span class="sr-action-title">Gestionar Estado</span><span class="sr-action-desc">Activa o desactiva sitios y rutas</span></div>
       </button>
     </div>
 
@@ -75,15 +39,16 @@ import './Rutas.css';
 
     <div class="sr-dynamic-area">
 
+      <!-- DEFAULT -->
       <div class="sr-panel active" id="panel-default">
         <div class="sr-panel-hero">
           <div class="sr-panel-hero-text">
             <h3 class="sr-panel-hero-title">Gestión de Sitios y Rutas — WALI</h3>
-            <p class="sr-panel-hero-sub">Administra los puntos turísticos y rutas del sistema. Todos los cambios se guardan y actualizan en tiempo real en la plataforma.</p>
+            <p class="sr-panel-hero-sub">Administra los puntos turísticos y rutas del sistema. Ningún registro se elimina: solo se activa o desactiva.</p>
           </div>
         </div>
         <div class="sr-stats-row">
-          <div class="sr-stat"><span class="sr-stat-num sr-teal-text" id="stat-puntos">—</span><span class="sr-stat-lbl">Sitios Turísticos</span></div>
+          <div class="sr-stat"><span class="sr-stat-num sr-teal-text" id="stat-puntos">—</span><span class="sr-stat-lbl">Sitios Activos</span></div>
           <div class="sr-stat-div"></div>
           <div class="sr-stat"><span class="sr-stat-num sr-amber-text" id="stat-rutas">—</span><span class="sr-stat-lbl">Rutas Activas</span></div>
           <div class="sr-stat-div"></div>
@@ -91,45 +56,32 @@ import './Rutas.css';
         </div>
       </div>
 
+      <!-- CREAR PUNTO -->
       <div class="sr-panel" id="panel-crear-punto">
         <div class="sr-panel-header">
-          <div class="sr-panel-icon sr-teal-bg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
+          <div class="sr-panel-icon sr-teal-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div><h3 class="sr-panel-title">Crear Sitio Turístico</h3><p class="sr-panel-subtitle">Registra la información de un nuevo punto de interés</p></div>
         </div>
         <form id="form-crear-punto" class="sr-form-layout" autocomplete="off">
           <div class="sr-form-main">
-            <div class="sr-form-row">
-              <div class="sr-form-group sr-full">
-                <label class="sr-label">Nombre del Sitio *</label>
-                <input type="text" class="sr-input" id="pt-nombre" placeholder="Ej: Museo Nacional de Arte" required />
-              </div>
-            </div>
+            <div class="sr-form-row"><div class="sr-form-group sr-full"><label class="sr-label">Nombre del Sitio *</label><input type="text" class="sr-input" id="pt-nombre" placeholder="Ej: Museo Nacional de Arte" required /></div></div>
             <div class="sr-form-row">
               <div class="sr-form-group"><label class="sr-label">Latitud</label><input type="number" step="any" class="sr-input" id="pt-latitud" placeholder="-16.4956" /></div>
               <div class="sr-form-group"><label class="sr-label">Longitud</label><input type="number" step="any" class="sr-input" id="pt-longitud" placeholder="-68.1335" /></div>
             </div>
             <div class="sr-form-row">
-              <div class="sr-form-group">
-                <label class="sr-label">Categoría</label>
-                <select class="sr-select" id="pt-categoria"><option value="">Cargando...</option></select>
-              </div>
+              <div class="sr-form-group"><label class="sr-label">Categoría</label><select class="sr-select" id="pt-categoria"><option value="">Cargando...</option></select></div>
               <div class="sr-form-group"><label class="sr-label">Radio Activación (m)</label><input type="number" class="sr-input" id="pt-radio" value="50" /></div>
             </div>
             <div class="sr-form-row">
               <div class="sr-form-group"><label class="sr-label">Precio Nacional (Bs.)</label><input type="number" step="0.01" class="sr-input" id="pt-precio-nac" placeholder="0.00" /></div>
               <div class="sr-form-group"><label class="sr-label">Precio Extranjero (USD)</label><input type="number" step="0.01" class="sr-input" id="pt-precio-ext" placeholder="0.00" /></div>
             </div>
-            <div class="sr-form-row">
-              <div class="sr-form-group sr-full"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="pt-descripcion" placeholder="Describe el sitio turístico..."></textarea></div>
-            </div>
-            <div class="sr-form-row">
-              <div class="sr-form-group sr-full"><label class="sr-label">URL de Imagen</label><input type="url" class="sr-input" id="pt-imagen" placeholder="https://ejemplo.com/imagen.jpg" /></div>
-            </div>
+            <div class="sr-form-row"><div class="sr-form-group sr-full"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="pt-descripcion" placeholder="Describe el sitio turístico..."></textarea></div></div>
+            <div class="sr-form-row"><div class="sr-form-group sr-full"><label class="sr-label">URL de Imagen</label><input type="url" class="sr-input" id="pt-imagen" placeholder="https://ejemplo.com/imagen.jpg" /></div></div>
             <div class="sr-form-row">
               <div class="sr-form-group">
-                <label class="sr-label">Estado</label>
+                <label class="sr-label">Estado inicial</label>
                 <div class="sr-toggle-group">
                   <label class="sr-toggle-opt sr-toggle-active"><input type="radio" name="pt-estado" value="true" checked /> Activo</label>
                   <label class="sr-toggle-opt"><input type="radio" name="pt-estado" value="false" /> Inactivo</label>
@@ -144,28 +96,22 @@ import './Rutas.css';
               <button type="button" class="sr-btn sr-btn-secondary" id="btn-cancelar-punto">Cancelar</button>
             </div>
           </div>
-
           <div class="sr-map-preview">
-            <div class="sr-map-hint">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Escribe lat/lng o haz clic en el mapa</span>
-            </div>
+            <div class="sr-map-hint"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Escribe lat/lng o haz clic en el mapa</span></div>
             <div id="sr-leaflet-map"></div>
           </div>
         </form>
       </div>
 
+      <!-- VER PUNTOS -->
       <div class="sr-panel" id="panel-ver-puntos">
         <div class="sr-panel-header">
           <div class="sr-panel-icon sr-green2-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
-          <div><h3 class="sr-panel-title">Sitios Turísticos</h3><p class="sr-panel-subtitle">Catálogo de puntos de interés registrados</p></div>
+          <div><h3 class="sr-panel-title">Sitios Turísticos</h3><p class="sr-panel-subtitle">Catálogo completo de puntos de interés registrados</p></div>
           <button class="sr-btn sr-btn-primary sr-btn-small sr-ml-auto" id="btn-nuevo-punto">+ Nuevo</button>
         </div>
         <div class="sr-toolbar">
-          <div class="sr-search-wrap">
-            <svg class="sr-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" class="sr-search" id="search-puntos" placeholder="Buscar sitio..." />
-          </div>
+          <div class="sr-search-wrap"><svg class="sr-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="sr-search" id="search-puntos" placeholder="Buscar sitio..." /></div>
           <select class="sr-filter" id="filter-categoria-puntos"><option value="">Todas las categorías</option></select>
           <select class="sr-filter" id="filter-estado-puntos"><option value="">Todos</option><option value="true">Activo</option><option value="false">Inactivo</option></select>
         </div>
@@ -178,31 +124,19 @@ import './Rutas.css';
         <div class="sr-pagination"><span class="sr-page-info" id="info-puntos">—</span><div class="sr-page-btns" id="btns-puntos"></div></div>
       </div>
 
+      <!-- CREAR RUTA -->
       <div class="sr-panel" id="panel-crear-ruta">
         <div class="sr-panel-header">
           <div class="sr-panel-icon sr-amber-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg></div>
           <div><h3 class="sr-panel-title">Crear Ruta</h3><p class="sr-panel-subtitle">Diseña y configura una nueva ruta turística</p></div>
         </div>
         <form id="form-crear-ruta" autocomplete="off">
+          <div class="sr-form-row"><div class="sr-form-group sr-full"><label class="sr-label">Nombre de la Ruta *</label><input type="text" class="sr-input" id="rt-nombre" placeholder="Ej: Ruta Histórica del Centro" required /></div></div>
           <div class="sr-form-row">
-            <div class="sr-form-group sr-full"><label class="sr-label">Nombre de la Ruta *</label><input type="text" class="sr-input" id="rt-nombre" placeholder="Ej: Ruta Histórica del Centro" required /></div>
+            <div class="sr-form-group"><label class="sr-label">Tipo de Ruta</label><select class="sr-select" id="rt-tipo"><option value="">Cargando...</option></select></div>
+            <div class="sr-form-group"><label class="sr-label">Estado inicial</label><div class="sr-toggle-group"><label class="sr-toggle-opt sr-toggle-active"><input type="radio" name="rt-estado" value="true" checked /> Activa</label><label class="sr-toggle-opt"><input type="radio" name="rt-estado" value="false" /> Inactiva</label></div></div>
           </div>
-          <div class="sr-form-row">
-            <div class="sr-form-group">
-              <label class="sr-label">Tipo de Ruta</label>
-              <select class="sr-select" id="rt-tipo"><option value="">Cargando...</option></select>
-            </div>
-            <div class="sr-form-group">
-              <label class="sr-label">Estado</label>
-              <div class="sr-toggle-group">
-                <label class="sr-toggle-opt sr-toggle-active"><input type="radio" name="rt-estado" value="true" checked /> Activa</label>
-                <label class="sr-toggle-opt"><input type="radio" name="rt-estado" value="false" /> Inactiva</label>
-              </div>
-            </div>
-          </div>
-          <div class="sr-form-row">
-            <div class="sr-form-group sr-full"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="rt-descripcion" placeholder="Describe el recorrido..."></textarea></div>
-          </div>
+          <div class="sr-form-row"><div class="sr-form-group sr-full"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="rt-descripcion" placeholder="Describe el recorrido..."></textarea></div></div>
           <div class="sr-form-actions">
             <button type="submit" class="sr-btn sr-btn-amber" id="btn-guardar-ruta">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
@@ -213,6 +147,7 @@ import './Rutas.css';
         </form>
       </div>
 
+      <!-- VER RUTAS -->
       <div class="sr-panel" id="panel-ver-rutas">
         <div class="sr-panel-header">
           <div class="sr-panel-icon sr-green-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
@@ -220,10 +155,7 @@ import './Rutas.css';
           <button class="sr-btn sr-btn-amber sr-btn-small sr-ml-auto" id="btn-nueva-ruta">+ Nueva</button>
         </div>
         <div class="sr-toolbar">
-          <div class="sr-search-wrap">
-            <svg class="sr-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" class="sr-search" id="search-rutas" placeholder="Buscar ruta..." />
-          </div>
+          <div class="sr-search-wrap"><svg class="sr-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="sr-search" id="search-rutas" placeholder="Buscar ruta..." /></div>
           <select class="sr-filter" id="filter-tipo-rutas"><option value="">Todos los tipos</option></select>
           <select class="sr-filter" id="filter-estado-rutas"><option value="">Todos</option><option value="true">Activa</option><option value="false">Inactiva</option></select>
         </div>
@@ -236,105 +168,78 @@ import './Rutas.css';
         <div class="sr-pagination"><span class="sr-page-info" id="info-rutas">—</span><div class="sr-page-btns" id="btns-rutas"></div></div>
       </div>
 
+      <!-- ASIGNAR PUNTOS -->
       <div class="sr-panel" id="panel-asignar-puntos">
         <div class="sr-panel-header">
-          <div class="sr-panel-icon sr-teal2-bg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-          </div>
-          <div><h3 class="sr-panel-title">Asignar Puntos a Ruta</h3><p class="sr-panel-subtitle">Vincula sitios turísticos específicos a las rutas creadas</p></div>
+          <div class="sr-panel-icon sr-teal2-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+          <div><h3 class="sr-panel-title">Asignar Puntos a Ruta</h3><p class="sr-panel-subtitle">Vincula sitios turísticos activos a las rutas creadas</p></div>
         </div>
-
         <form id="form-asignar" autocomplete="off">
           <div class="sr-asignar-layout">
-
             <div class="sr-asignar-left">
-              <div class="sr-form-row">
-                <div class="sr-form-group sr-full">
-                  <label class="sr-label">Seleccionar Ruta *</label>
-                  <select class="sr-select" id="asig-ruta" required>
-                    <option value="">Cargando rutas...</option>
-                  </select>
-                </div>
-              </div>
-
+              <div class="sr-form-row"><div class="sr-form-group sr-full"><label class="sr-label">Seleccionar Ruta *</label><select class="sr-select" id="asig-ruta" required><option value="">Cargando rutas...</option></select></div></div>
               <div class="sr-form-group sr-full" style="margin-bottom:16px;">
-                <label class="sr-label">Sitios Turísticos</label>
+                <label class="sr-label">Sitios Turísticos activos</label>
                 <p class="sr-label-hint">Selecciona los sitios — el orden se asigna automáticamente según selección</p>
-                <div id="sr-puntos-checklist" class="sr-points-grid">
-                  <div class="sr-loading-inline">Cargando sitios...</div>
-                </div>
+                <div id="sr-puntos-checklist" class="sr-points-grid"><div class="sr-loading-inline">Cargando sitios...</div></div>
               </div>
-
               <div id="sr-orden-preview" class="sr-orden-preview" style="display:none;">
                 <div class="sr-orden-title">Orden de recorrido:</div>
                 <div id="sr-orden-list" class="sr-orden-list"></div>
               </div>
-
               <div class="sr-form-actions">
-                <button type="submit" class="sr-btn sr-btn-primary">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  Guardar Asignación
-                </button>
+                <button type="submit" class="sr-btn sr-btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Guardar Asignación</button>
                 <button type="button" class="sr-btn sr-btn-secondary" id="btn-cancelar-asignar">Cancelar</button>
               </div>
             </div>
-
             <div class="sr-asignar-right">
-              <div class="sr-map-hint" id="sr-route-hint">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg>
-                <span>Selecciona 2 o más sitios para ver la ruta</span>
-              </div>
-
+              <div class="sr-map-hint" id="sr-route-hint"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg><span>Selecciona 2 o más sitios para ver la ruta</span></div>
               <div id="sr-route-stats" class="sr-route-stats" style="display:none;">
-                <div class="sr-route-stat">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18"/><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/></svg>
-                  <span id="sr-route-distance">—</span>
-                </div>
+                <div class="sr-route-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18"/><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/></svg><span id="sr-route-distance">—</span></div>
                 <div class="sr-route-stat-div"></div>
-                <div class="sr-route-stat">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  <span id="sr-route-duration">—</span>
-                </div>
+                <div class="sr-route-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="sr-route-duration">—</span></div>
               </div>
-
-              <div id="sr-route-loading" class="sr-route-loading" style="display:none;">
-                <div class="sr-route-spinner"></div>
-                <span>Calculando ruta...</span>
-              </div>
-
+              <div id="sr-route-loading" class="sr-route-loading" style="display:none;"><div class="sr-route-spinner"></div><span>Calculando ruta...</span></div>
               <div id="sr-route-map"></div>
             </div>
-
           </div>
         </form>
       </div>
 
-      <div class="sr-panel" id="panel-eliminar">
+      <!-- GESTIONAR ESTADO (antes "Eliminar") -->
+      <div class="sr-panel" id="panel-gestionar-estado">
         <div class="sr-panel-header">
-          <div class="sr-panel-icon sr-terra-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></div>
-          <div><h3 class="sr-panel-title">Eliminar</h3><p class="sr-panel-subtitle">Elimina sitios turísticos o rutas del sistema</p></div>
+          <div class="sr-panel-icon sr-terra-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></div>
+          <div><h3 class="sr-panel-title">Gestionar Estado</h3><p class="sr-panel-subtitle">Activa o desactiva sitios y rutas — ningún registro se elimina de la base de datos</p></div>
         </div>
-        <div class="sr-alert-warn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          Esta acción es permanente y no se puede deshacer.
+
+        <!-- Banner informativo -->
+        <div class="sr-info-banner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Los registros desactivados dejan de mostrarse en la app pero permanecen en la base de datos. Puedes reactivarlos en cualquier momento.
         </div>
+
         <div class="sr-delete-tabs">
-          <button class="sr-del-tab active" data-target="del-puntos">Sitios Turísticos</button>
-          <button class="sr-del-tab" data-target="del-rutas">Rutas</button>
+          <button class="sr-del-tab active" data-target="est-puntos">Sitios Turísticos</button>
+          <button class="sr-del-tab" data-target="est-rutas">Rutas</button>
         </div>
-        <div id="del-puntos" class="sr-del-panel">
+
+        <!-- TABLA SITIOS -->
+        <div id="est-puntos" class="sr-del-panel">
           <div class="sr-table-wrap">
             <table class="sr-table">
-              <thead><tr><th>Nombre</th><th>Categoría</th><th>Estado</th><th>Acciones</th></tr></thead>
-              <tbody id="tbody-del-puntos"><tr><td colspan="4" class="sr-loading-row">Cargando...</td></tr></tbody>
+              <thead><tr><th>Nombre</th><th>Categoría</th><th>Estado actual</th><th>Acción</th></tr></thead>
+              <tbody id="tbody-est-puntos"><tr><td colspan="4" class="sr-loading-row">Cargando...</td></tr></tbody>
             </table>
           </div>
         </div>
-        <div id="del-rutas" class="sr-del-panel" style="display:none;">
+
+        <!-- TABLA RUTAS -->
+        <div id="est-rutas" class="sr-del-panel" style="display:none;">
           <div class="sr-table-wrap">
             <table class="sr-table">
-              <thead><tr><th>Nombre</th><th>Tipo</th><th>Estado</th><th>Acciones</th></tr></thead>
-              <tbody id="tbody-del-rutas"><tr><td colspan="4" class="sr-loading-row">Cargando...</td></tr></tbody>
+              <thead><tr><th>Nombre</th><th>Tipo</th><th>Estado actual</th><th>Acción</th></tr></thead>
+              <tbody id="tbody-est-rutas"><tr><td colspan="4" class="sr-loading-row">Cargando...</td></tr></tbody>
             </table>
           </div>
         </div>
@@ -344,27 +249,23 @@ import './Rutas.css';
   </div>
 </div>
 
+<!-- MODAL EDITAR PUNTO -->
 <div id="modal-editar-punto" class="sr-modal" style="display:none;">
   <div class="sr-modal-box">
     <div class="sr-modal-header"><h3 class="sr-modal-title">Editar Sitio Turístico</h3><button class="sr-modal-close" id="close-modal-punto">✕</button></div>
     <form id="form-editar-punto" autocomplete="off">
       <input type="hidden" id="edit-pt-id" />
       <div class="sr-form-group"><label class="sr-label">Nombre *</label><input type="text" class="sr-input" id="edit-pt-nombre" required /></div>
-      <div class="sr-form-row">
-        <div class="sr-form-group"><label class="sr-label">Latitud</label><input type="number" step="any" class="sr-input" id="edit-pt-latitud" /></div>
-        <div class="sr-form-group"><label class="sr-label">Longitud</label><input type="number" step="any" class="sr-input" id="edit-pt-longitud" /></div>
-      </div>
+      <div class="sr-form-row"><div class="sr-form-group"><label class="sr-label">Latitud</label><input type="number" step="any" class="sr-input" id="edit-pt-latitud" /></div><div class="sr-form-group"><label class="sr-label">Longitud</label><input type="number" step="any" class="sr-input" id="edit-pt-longitud" /></div></div>
       <div class="sr-form-group"><label class="sr-label">Categoría</label><select class="sr-select" id="edit-pt-categoria"></select></div>
       <div class="sr-form-group"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="edit-pt-descripcion"></textarea></div>
       <div class="sr-form-group"><label class="sr-label">URL Imagen</label><input type="url" class="sr-input" id="edit-pt-imagen" /></div>
-      <div class="sr-modal-footer">
-        <button type="submit" class="sr-btn sr-btn-primary">Guardar Cambios</button>
-        <button type="button" class="sr-btn sr-btn-secondary" id="close-modal-punto2">Cancelar</button>
-      </div>
+      <div class="sr-modal-footer"><button type="submit" class="sr-btn sr-btn-primary">Guardar Cambios</button><button type="button" class="sr-btn sr-btn-secondary" id="close-modal-punto2">Cancelar</button></div>
     </form>
   </div>
 </div>
 
+<!-- MODAL EDITAR RUTA -->
 <div id="modal-editar-ruta" class="sr-modal" style="display:none;">
   <div class="sr-modal-box">
     <div class="sr-modal-header"><h3 class="sr-modal-title">Editar Ruta</h3><button class="sr-modal-close" id="close-modal-ruta">✕</button></div>
@@ -373,14 +274,12 @@ import './Rutas.css';
       <div class="sr-form-group"><label class="sr-label">Nombre *</label><input type="text" class="sr-input" id="edit-rt-nombre" required /></div>
       <div class="sr-form-group"><label class="sr-label">Tipo de Ruta</label><select class="sr-select" id="edit-rt-tipo"></select></div>
       <div class="sr-form-group"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="edit-rt-descripcion"></textarea></div>
-      <div class="sr-modal-footer">
-        <button type="submit" class="sr-btn sr-btn-primary">Guardar Cambios</button>
-        <button type="button" class="sr-btn sr-btn-secondary" id="close-modal-ruta2">Cancelar</button>
-      </div>
+      <div class="sr-modal-footer"><button type="submit" class="sr-btn sr-btn-primary">Guardar Cambios</button><button type="button" class="sr-btn sr-btn-secondary" id="close-modal-ruta2">Cancelar</button></div>
     </form>
   </div>
 </div>
 
+<!-- MODAL VER PUNTOS DE RUTA -->
 <div id="modal-ver-puntos-ruta" class="sr-modal" style="display:none;">
   <div class="sr-modal-box sr-modal-box-lg">
     <div class="sr-modal-header"><h3 class="sr-modal-title" id="modal-ruta-titulo">Puntos de la Ruta</h3><button class="sr-modal-close" id="close-modal-puntos-ruta">✕</button></div>
@@ -388,117 +287,148 @@ import './Rutas.css';
   </div>
 </div>
 
+<!-- MODAL CONFIRM PERSONALIZADO -->
+<div id="sr-confirm-modal" class="sr-modal" style="display:none;">
+  <div class="sr-confirm-box">
+    <div class="sr-confirm-icon-wrap" id="sr-confirm-icon-wrap">
+      <!-- El ícono se inyecta dinámicamente -->
+    </div>
+    <h3 class="sr-confirm-title" id="sr-confirm-title">¿Confirmar acción?</h3>
+    <p class="sr-confirm-msg" id="sr-confirm-msg"></p>
+    <div class="sr-confirm-detail" id="sr-confirm-detail" style="display:none;"></div>
+    <div class="sr-confirm-actions">
+      <button class="sr-btn" id="sr-confirm-ok">Confirmar</button>
+      <button class="sr-btn sr-btn-secondary" id="sr-confirm-cancel">Cancelar</button>
+    </div>
+  </div>
+</div>
+
 <script>
   import { supabase } from '../../lib/supabase';
 
   const DOMINIO_CATEGORIA_POI = 4;
-  const DOMINIO_TIPO_RUTA = 7;
-  const PAGE_SIZE = 8;
+  const DOMINIO_TIPO_RUTA     = 7;
+  const PAGE_SIZE             = 8;
 
-  let categorias = [];
-  let tiposRuta = [];
-  let paginaPuntos = 1;
-  let paginaRutas = 1;
-  let filtrosBusqPuntos = '';
-  let filtrosCategoriaPuntos = '';
-  let filtrosEstadoPuntos = '';
-  let filtrosBusqRutas = '';
-  let filtrosTipoRutas = '';
-  let filtrosEstadoRutas = '';
-  let selectedPuntosOrden = [];
+  let categorias: any[]   = [];
+  let tiposRuta: any[]    = [];
+  let paginaPuntos = 1, paginaRutas = 1;
+  let filtrosBusqPuntos = '', filtrosCategoriaPuntos = '', filtrosEstadoPuntos = '';
+  let filtrosBusqRutas  = '', filtrosTipoRutas = '', filtrosEstadoRutas = '';
+  let selectedPuntosOrden: any[] = [];
 
-  // =============================================
-  // ---- LEAFLET (mapa crear sitio) ----
-  // =============================================
-  let leafletMap = null;
-  let leafletMarker = null;
-  let leafletLoaded = false;
+  // ════════════════════════════════════════════════
+  // MODAL CONFIRM PERSONALIZADO
+  // Soporta distintos íconos y colores según la acción
+  // ════════════════════════════════════════════════
+  type ConfirmType = 'deactivate' | 'activate';
 
-  function loadLeaflet() {
-    return new Promise((resolve) => {
-      if (leafletLoaded || (window as any).L) {
-        leafletLoaded = true;
-        resolve(true);
-        return;
-      }
-      const script = document.createElement('script');
-      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-      script.onload = () => { leafletLoaded = true; resolve(true); };
-      document.head.appendChild(script);
+  function showConfirm(opts: {
+    type: ConfirmType;
+    title: string;
+    msg: string;
+    detail?: string;
+    confirmLabel: string;
+    onConfirm: () => void;
+  }) {
+    const modal   = document.getElementById('sr-confirm-modal')!;
+    const iconWrap = document.getElementById('sr-confirm-icon-wrap')!;
+    const elT     = document.getElementById('sr-confirm-title')!;
+    const elM     = document.getElementById('sr-confirm-msg')!;
+    const elD     = document.getElementById('sr-confirm-detail')!;
+
+    // Ícono y color según tipo
+    if (opts.type === 'deactivate') {
+      iconWrap.className = 'sr-confirm-icon-wrap sr-confirm-icon-terra';
+      iconWrap.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2">
+        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
+      </svg>`;
+    } else {
+      iconWrap.className = 'sr-confirm-icon-wrap sr-confirm-icon-green';
+      iconWrap.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2">
+        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
+      </svg>`;
+    }
+
+    elT.textContent = opts.title;
+    elM.textContent = opts.msg;
+    if (opts.detail) { elD.textContent = opts.detail; elD.style.display = 'block'; }
+    else { elD.style.display = 'none'; }
+
+    modal.style.display = 'flex';
+
+    // Reclonar botones para limpiar listeners anteriores
+    const oldOk  = document.getElementById('sr-confirm-ok')!;
+    const oldCan = document.getElementById('sr-confirm-cancel')!;
+    const newOk  = oldOk.cloneNode(true) as HTMLElement;
+    const newCan = oldCan.cloneNode(true) as HTMLElement;
+    oldOk.replaceWith(newOk);
+    oldCan.replaceWith(newCan);
+
+    // Clases del botón de confirmar según tipo
+    newOk.className = opts.type === 'deactivate'
+      ? 'sr-btn sr-btn-terra'
+      : 'sr-btn sr-btn-primary';
+    newOk.innerHTML = opts.type === 'deactivate'
+      ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg> ${opts.confirmLabel}`
+      : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg> ${opts.confirmLabel}`;
+
+    newOk.addEventListener('click', () => { modal.style.display = 'none'; opts.onConfirm(); });
+    newCan.addEventListener('click', () => { modal.style.display = 'none'; });
+
+    const closeOnBg = (e: Event) => { if (e.target === modal) { modal.style.display = 'none'; modal.removeEventListener('click', closeOnBg); } };
+    modal.addEventListener('click', closeOnBg);
+  }
+
+  // ════════════════════════════════════════════════
+  // LEAFLET — mapa crear sitio
+  // ════════════════════════════════════════════════
+  let leafletMap: any = null, leafletMarker: any = null, leafletLoaded = false;
+
+  function loadLeaflet(): Promise<boolean> {
+    return new Promise(res => {
+      if (leafletLoaded || (window as any).L) { leafletLoaded = true; res(true); return; }
+      const s = document.createElement('script');
+      s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      s.onload = () => { leafletLoaded = true; res(true); };
+      document.head.appendChild(s);
     });
   }
 
   async function initLeafletMap() {
     await loadLeaflet();
     const L = (window as any).L;
-    const mapEl = document.getElementById('sr-leaflet-map');
-    if (!mapEl || leafletMap) return;
-
-    const defaultLat = -16.5;
-    const defaultLng = -68.15;
-
-    leafletMap = L.map('sr-leaflet-map', { zoomControl: true, attributionControl: false }).setView([defaultLat, defaultLng], 13);
+    if (!document.getElementById('sr-leaflet-map') || leafletMap) return;
+    leafletMap = L.map('sr-leaflet-map', { zoomControl: true, attributionControl: false }).setView([-16.5, -68.15], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(leafletMap);
-
-    const customIcon = L.divIcon({
-      html: `<svg width="28" height="36" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 0C5.373 0 0 5.373 0 12c0 8 12 20 12 20S24 20 24 12C24 5.373 18.627 0 12 0z" fill="#0F988A"/>
-        <circle cx="12" cy="12" r="5" fill="white"/>
-      </svg>`,
-      className: '',
-      iconSize: [28, 36],
-      iconAnchor: [14, 36],
-    });
-
-    leafletMarker = L.marker([defaultLat, defaultLng], { icon: customIcon, opacity: 0 }).addTo(leafletMap);
-
+    const icon = L.divIcon({ html: `<svg width="28" height="36" viewBox="0 0 24 32" fill="none"><path d="M12 0C5.373 0 0 5.373 0 12c0 8 12 20 12 20S24 20 24 12C24 5.373 18.627 0 12 0z" fill="#0F988A"/><circle cx="12" cy="12" r="5" fill="white"/></svg>`, className: '', iconSize: [28, 36], iconAnchor: [14, 36] });
+    leafletMarker = L.marker([-16.5, -68.15], { icon, opacity: 0 }).addTo(leafletMap);
     leafletMap.on('click', (e: any) => {
-      const { lat, lng } = e.latlng;
-      const latInput = document.getElementById('pt-latitud') as HTMLInputElement;
-      const lngInput = document.getElementById('pt-longitud') as HTMLInputElement;
-      if (latInput) latInput.value = lat.toFixed(6);
-      if (lngInput) lngInput.value = lng.toFixed(6);
+      (document.getElementById('pt-latitud') as HTMLInputElement).value  = e.latlng.lat.toFixed(6);
+      (document.getElementById('pt-longitud') as HTMLInputElement).value = e.latlng.lng.toFixed(6);
       updateMapFromInputs();
     });
   }
 
   function updateMapFromInputs() {
-    const latInput = document.getElementById('pt-latitud') as HTMLInputElement;
-    const lngInput = document.getElementById('pt-longitud') as HTMLInputElement;
-    if (!latInput || !lngInput || !leafletMap || !leafletMarker) return;
-    const lat = parseFloat(latInput.value);
-    const lng = parseFloat(lngInput.value);
+    if (!leafletMap || !leafletMarker) return;
+    const lat = parseFloat((document.getElementById('pt-latitud') as HTMLInputElement).value);
+    const lng = parseFloat((document.getElementById('pt-longitud') as HTMLInputElement).value);
     if (isNaN(lat) || isNaN(lng)) return;
-    leafletMarker.setLatLng([lat, lng]);
-    leafletMarker.setOpacity(1);
+    leafletMarker.setLatLng([lat, lng]); leafletMarker.setOpacity(1);
     leafletMap.setView([lat, lng], 16, { animate: true });
   }
 
-  function resetLeafletMap() {
-    leafletMap = null;
-    leafletMarker = null;
-    // También reiniciar mapa de rutas
-    routeMap = null;
-    routeLayer = null;
-    routeMarkers = [];
-  }
-
-  // =============================================
-  // ---- MAPA DE RUTAS OSRM ----
-  // =============================================
-  let routeMap = null;
-  let routeLayer = null;
-  let routeMarkers = [];
+  // ════════════════════════════════════════════════
+  // OSRM — mapa asignar puntos
+  // ════════════════════════════════════════════════
+  let routeMap: any = null, routeLayer: any = null, routeMarkers: any[] = [];
 
   async function initRouteMap() {
     await loadLeaflet();
     const L = (window as any).L;
-    const mapEl = document.getElementById('sr-route-map');
-    if (!mapEl || routeMap) return;
-
-    routeMap = L.map('sr-route-map', { zoomControl: true, attributionControl: false })
-      .setView([-16.5, -68.15], 13);
-
+    if (!document.getElementById('sr-route-map') || routeMap) return;
+    routeMap = L.map('sr-route-map', { zoomControl: true, attributionControl: false }).setView([-16.5, -68.15], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(routeMap);
   }
 
@@ -506,273 +436,270 @@ import './Rutas.css';
     if (!routeMap) return;
     await loadLeaflet();
     const L = (window as any).L;
-
-    // Limpiar ruta anterior
-    if (routeLayer) {
-      routeMap.removeLayer(routeLayer);
-      routeLayer = null;
-    }
-    // Limpiar marcadores anteriores
-    routeMarkers.forEach((m: any) => routeMap.removeLayer(m));
-    routeMarkers = [];
-
-    // Ocultar stats
-    const statsEl  = document.getElementById('sr-route-stats')!;
-    const hintEl   = document.getElementById('sr-route-hint')!;
-    const loadEl   = document.getElementById('sr-route-loading')!;
-
-    if (points.length < 2) {
-      statsEl.style.display = 'none';
-      hintEl.style.display  = 'flex';
-      routeMap.setView([-16.5, -68.15], 13);
-      return;
-    }
-
-    // Mostrar spinner
-    hintEl.style.display  = 'none';
-    statsEl.style.display = 'none';
-    loadEl.style.display  = 'flex';
-
-    // Construir URL OSRM  /route/v1/driving/{lng,lat};{lng,lat}...
-    const coords = points.map(p => `${p.lng},${p.lat}`).join(';');
-    const url = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`;
-
+    if (routeLayer) { routeMap.removeLayer(routeLayer); routeLayer = null; }
+    routeMarkers.forEach((m: any) => routeMap.removeLayer(m)); routeMarkers = [];
+    const statsEl = document.getElementById('sr-route-stats')!;
+    const hintEl  = document.getElementById('sr-route-hint')!;
+    const loadEl  = document.getElementById('sr-route-loading')!;
+    if (points.length < 2) { statsEl.style.display = 'none'; hintEl.style.display = 'flex'; routeMap.setView([-16.5, -68.15], 13); return; }
+    hintEl.style.display = 'none'; statsEl.style.display = 'none'; loadEl.style.display = 'flex';
     try {
-      const res  = await fetch(url);
+      const res  = await fetch(`https://router.project-osrm.org/route/v1/driving/${points.map(p => `${p.lng},${p.lat}`).join(';')}?overview=full&geometries=geojson`);
       const data = await res.json();
-
       loadEl.style.display = 'none';
-
-      if (data.code !== 'Ok' || !data.routes?.length) {
-        showToast('No se pudo calcular la ruta entre los puntos seleccionados', 'error');
-        hintEl.style.display = 'flex';
-        return;
-      }
-
-      const route  = data.routes[0];
-      const geojson = route.geometry;
-
-      // Dibujar la ruta
-      routeLayer = L.geoJSON(geojson, {
-        style: {
-          color: '#0F988A',
-          weight: 5,
-          opacity: 0.85,
-          lineJoin: 'round',
-          lineCap:  'round',
-        },
-      }).addTo(routeMap);
-
-      // Dibujar marcadores numerados
+      if (data.code !== 'Ok' || !data.routes?.length) { showToast('No se pudo calcular la ruta', 'error'); hintEl.style.display = 'flex'; return; }
+      const route = data.routes[0];
+      routeLayer = L.geoJSON(route.geometry, { style: { color: '#0F988A', weight: 5, opacity: 0.85, lineJoin: 'round', lineCap: 'round' } }).addTo(routeMap);
       points.forEach((p, i) => {
-        const isFirst = i === 0;
-        const isLast  = i === points.length - 1;
-        const bgColor = isFirst ? '#197D61' : isLast ? '#7A3928' : '#D27817';
-
-        const icon = L.divIcon({
-          html: `<div style="
-            width:28px;height:28px;border-radius:50%;
-            background:${bgColor};color:white;
-            display:flex;align-items:center;justify-content:center;
-            font-size:12px;font-weight:700;
-            border:2px solid white;
-            box-shadow:0 2px 8px rgba(0,0,0,0.28);
-            font-family:'DM Sans',sans-serif;
-          ">${i + 1}</div>`,
-          className: '',
-          iconSize: [28, 28],
-          iconAnchor: [14, 14],
-        });
-
-        const marker = L.marker([p.lat, p.lng], { icon })
-          .bindTooltip(p.nombre, {
-            permanent: false,
-            direction: 'top',
-            offset: [0, -14],
-            className: 'sr-leaflet-tooltip',
-          })
-          .addTo(routeMap);
-
-        routeMarkers.push(marker);
+        const bg = i === 0 ? '#197D61' : i === points.length - 1 ? '#7A3928' : '#D27817';
+        const icon = L.divIcon({ html: `<div style="width:28px;height:28px;border-radius:50%;background:${bg};color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:2px solid white;box-shadow:0 2px 8px rgba(0,0,0,.28)">${i + 1}</div>`, className: '', iconSize: [28, 28], iconAnchor: [14, 14] });
+        routeMarkers.push(L.marker([p.lat, p.lng], { icon }).bindTooltip(p.nombre, { permanent: false, direction: 'top', offset: [0, -14], className: 'sr-leaflet-tooltip' }).addTo(routeMap));
       });
-
-      // Ajustar zoom a la ruta
       routeMap.fitBounds(routeLayer.getBounds(), { padding: [32, 32] });
-
-      // Mostrar distancia y duración
-      const distKm  = (route.distance / 1000).toFixed(1);
-      const durMin  = Math.round(route.duration / 60);
-      const durText = durMin >= 60
-        ? `${Math.floor(durMin / 60)}h ${durMin % 60}min`
-        : `${durMin} min`;
-
-      (document.getElementById('sr-route-distance') as HTMLElement).textContent = `${distKm} km`;
-      (document.getElementById('sr-route-duration') as HTMLElement).textContent = durText;
+      const durMin = Math.round(route.duration / 60);
+      (document.getElementById('sr-route-distance') as HTMLElement).textContent = `${(route.distance / 1000).toFixed(1)} km`;
+      (document.getElementById('sr-route-duration') as HTMLElement).textContent = durMin >= 60 ? `${Math.floor(durMin/60)}h ${durMin%60}min` : `${durMin} min`;
       statsEl.style.display = 'flex';
-
-    } catch (err) {
-      loadEl.style.display = 'none';
-      hintEl.style.display = 'flex';
-      showToast('Error al conectar con el servicio de rutas', 'error');
-      console.error('OSRM error:', err);
-    }
+    } catch { loadEl.style.display = 'none'; hintEl.style.display = 'flex'; showToast('Error calculando ruta', 'error'); }
   }
 
-  // =============================================
-  // ---- TOAST ----
-  // =============================================
+  // ════════════════════════════════════════════════
+  // TOAST
+  // ════════════════════════════════════════════════
   function showToast(msg: string, type = 'success') {
     const t = document.getElementById('sr-toast');
     if (!t) return;
-    t.textContent = msg;
-    t.className = 'sr-toast sr-toast-' + type;
+    t.textContent = msg; t.className = 'sr-toast sr-toast-' + type;
     setTimeout(() => { t.className = 'sr-toast sr-toast-hidden'; }, 3500);
   }
 
-  // =============================================
-  // ---- SUBDOMINIOS ----
-  // =============================================
+  // ════════════════════════════════════════════════
+  // SUBDOMINIOS
+  // ════════════════════════════════════════════════
   async function loadCategorias() {
-    try {
-      const { data, error } = await supabase
-        .from('subdominios')
-        .select('*')
-        .eq('id_dominio', DOMINIO_CATEGORIA_POI)
-        .order('descripcion');
-
-      if (error) { showToast('Error cargando categorías', 'error'); return; }
-
-      categorias = data || [];
-      const opts =
-        '<option value="">Sin categoría</option>' +
-        categorias.map((c: any) => `<option value="${c.id}">${c.descripcion}</option>`).join('');
-
-      ['pt-categoria', 'edit-pt-categoria'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.innerHTML = opts;
-      });
-
-      const filterCat = document.getElementById('filter-categoria-puntos');
-      if (filterCat) {
-        filterCat.innerHTML =
-          '<option value="">Todas las categorías</option>' +
-          categorias.map((c: any) => `<option value="${c.id}">${c.descripcion}</option>`).join('');
-      }
-    } catch (err) {
-      console.error('Error inesperado:', err);
-    }
+    const { data } = await supabase.from('subdominios').select('*').eq('id_dominio', DOMINIO_CATEGORIA_POI).order('descripcion');
+    categorias = data || [];
+    const opts = '<option value="">Sin categoría</option>' + categorias.map((c: any) => `<option value="${c.id}">${c.descripcion}</option>`).join('');
+    ['pt-categoria','edit-pt-categoria'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = opts; });
+    const fc = document.getElementById('filter-categoria-puntos');
+    if (fc) fc.innerHTML = '<option value="">Todas las categorías</option>' + categorias.map((c: any) => `<option value="${c.id}">${c.descripcion}</option>`).join('');
   }
 
   async function loadTiposRuta() {
-    const { data } = await supabase
-      .from('subdominios').select('id, descripcion')
-      .eq('id_dominio', DOMINIO_TIPO_RUTA).order('descripcion');
+    const { data } = await supabase.from('subdominios').select('id, descripcion').eq('id_dominio', DOMINIO_TIPO_RUTA).order('descripcion');
     tiposRuta = data || [];
-    const opts = '<option value="">Sin tipo</option>' +
-      tiposRuta.map((t: any) => `<option value="${t.id}">${t.descripcion}</option>`).join('');
+    const opts = '<option value="">Sin tipo</option>' + tiposRuta.map((t: any) => `<option value="${t.id}">${t.descripcion}</option>`).join('');
     ['rt-tipo','edit-rt-tipo'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = opts; });
-    const filterTipo = document.getElementById('filter-tipo-rutas');
-    if (filterTipo) filterTipo.innerHTML =
-      '<option value="">Todos los tipos</option>' +
-      tiposRuta.map((t: any) => `<option value="${t.id}">${t.descripcion}</option>`).join('');
+    const ft = document.getElementById('filter-tipo-rutas');
+    if (ft) ft.innerHTML = '<option value="">Todos los tipos</option>' + tiposRuta.map((t: any) => `<option value="${t.id}">${t.descripcion}</option>`).join('');
   }
 
-  // =============================================
-  // ---- STATS ----
-  // =============================================
   async function loadStats() {
     const [{ count: cp }, { count: cr }] = await Promise.all([
-      supabase.from('punto_turistico').select('*', { count: 'exact', head: true }),
+      supabase.from('punto_turistico').select('*', { count: 'exact', head: true }).eq('estado', true),
       supabase.from('rutas').select('*', { count: 'exact', head: true }).eq('estado', true),
     ]);
-    const statP = document.getElementById('stat-puntos');
-    const statR = document.getElementById('stat-rutas');
-    const statC = document.getElementById('stat-categorias');
-    if (statP) statP.textContent = String(cp ?? 0);
-    if (statR) statR.textContent = String(cr ?? 0);
-    if (statC) statC.textContent = String(categorias.length);
+    const sp = document.getElementById('stat-puntos'), sr2 = document.getElementById('stat-rutas'), sc = document.getElementById('stat-categorias');
+    if (sp)  sp.textContent  = String(cp ?? 0);
+    if (sr2) sr2.textContent = String(cr ?? 0);
+    if (sc)  sc.textContent  = String(categorias.length);
   }
 
-  // =============================================
-  // ---- HELPERS ----
-  // =============================================
-  function getCatNombre(id: any) { return categorias.find((c: any) => c.id === id)?.descripcion || '—'; }
-  function getTipoNombre(id: any) { return tiposRuta.find((t: any) => t.id === id)?.descripcion || '—'; }
+  function getCatNombre(id: any)  { return categorias.find((c: any) => c.id === id)?.descripcion || '—'; }
+  function getTipoNombre(id: any) { return tiposRuta.find((t: any) => t.id === id)?.descripcion  || '—'; }
 
-  function renderPaginator(containerId: string, total: number, currentPage: number, onPageFn: (p: number) => void) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    const totalPages = Math.ceil(total / PAGE_SIZE);
-    if (totalPages <= 1) { container.innerHTML = ''; return; }
-    let html = `<button class="sr-page-btn" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
-    for (let i = 1; i <= Math.min(totalPages, 5); i++) {
-      html += `<button class="sr-page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
-    }
-    html += `<button class="sr-page-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${totalPages + 1}">›</button>`;
-    container.innerHTML = html;
-    container.querySelectorAll('[data-page]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const p = parseInt(btn.getAttribute('data-page')!);
-        if (isNaN(p) || p < 1 || p > totalPages) return;
-        onPageFn(p);
-      });
-    });
-    const prev = container.querySelector('button:first-child') as HTMLButtonElement;
-    if (prev && !prev.disabled) prev.addEventListener('click', () => onPageFn(Math.max(1, currentPage - 1)));
+  function renderPaginator(cid: string, total: number, cur: number, fn: (p: number) => void) {
+    const c = document.getElementById(cid); if (!c) return;
+    const tp = Math.ceil(total / PAGE_SIZE);
+    if (tp <= 1) { c.innerHTML = ''; return; }
+    let h = `<button class="sr-page-btn" ${cur===1?'disabled':''} data-page="${cur-1}">‹</button>`;
+    for (let i = 1; i <= Math.min(tp, 5); i++) h += `<button class="sr-page-btn ${i===cur?'active':''}" data-page="${i}">${i}</button>`;
+    h += `<button class="sr-page-btn" ${cur===tp?'disabled':''} data-page="${cur+1}">›</button>`;
+    c.innerHTML = h;
+    c.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => { const p = parseInt(btn.getAttribute('data-page')!); if (p>=1&&p<=tp) fn(p); }));
   }
 
-  // =============================================
-  // ---- PUNTOS ----
-  // =============================================
+  // ════════════════════════════════════════════════
+  // PUNTOS — tabla ver
+  // ════════════════════════════════════════════════
   async function loadPuntos() {
-    let query = supabase.from('punto_turistico').select('*', { count: 'exact' }).order('id', { ascending: false });
-    if (filtrosBusqPuntos)      query = query.ilike('nombre', `%${filtrosBusqPuntos}%`);
-    if (filtrosCategoriaPuntos) query = query.eq('id_categoria', filtrosCategoriaPuntos);
-    if (filtrosEstadoPuntos !== '') query = query.eq('estado', filtrosEstadoPuntos === 'true');
+    let q = supabase.from('punto_turistico').select('*', { count: 'exact' }).order('id', { ascending: false });
+    if (filtrosBusqPuntos)         q = q.ilike('nombre', `%${filtrosBusqPuntos}%`);
+    if (filtrosCategoriaPuntos)    q = q.eq('id_categoria', filtrosCategoriaPuntos);
+    if (filtrosEstadoPuntos !== '') q = q.eq('estado', filtrosEstadoPuntos === 'true');
     const from = (paginaPuntos - 1) * PAGE_SIZE;
-    query = query.range(from, from + PAGE_SIZE - 1);
-    const { data, count } = await query;
-    const rows = data || [];
-    renderTablaPuntos(rows, count || 0);
-    renderTablaPuntosDel(rows);
+    q = q.range(from, from + PAGE_SIZE - 1);
+    const { data, count } = await q;
+    renderTablaPuntos(data || [], count || 0);
   }
 
   function renderTablaPuntos(rows: any[], total: number) {
-    const tbody = document.getElementById('tbody-puntos');
-    if (!tbody) return;
+    const tbody = document.getElementById('tbody-puntos'); if (!tbody) return;
     tbody.innerHTML = !rows.length
       ? '<tr><td colspan="5" class="sr-empty-row">No se encontraron sitios</td></tr>'
       : rows.map(p => `<tr>
           <td class="sr-td-name">${p.nombre}</td>
           <td>${getCatNombre(p.id_categoria)}</td>
-          <td class="sr-td-coords">${p.latitud ? (+p.latitud).toFixed(4) : '—'}, ${p.longitud ? (+p.longitud).toFixed(4) : '—'}</td>
-          <td><span class="sr-badge ${p.estado ? 'sr-badge-active' : 'sr-badge-inactive'}">${p.estado ? 'Activo' : 'Inactivo'}</span></td>
+          <td class="sr-td-coords">${p.latitud?(+p.latitud).toFixed(4):'—'}, ${p.longitud?(+p.longitud).toFixed(4):'—'}</td>
+          <td><span class="sr-badge ${p.estado?'sr-badge-active':'sr-badge-inactive'}">${p.estado?'● Activo':'○ Inactivo'}</span></td>
           <td class="sr-td-actions"><button class="sr-btn-action sr-btn-edit" data-id="${p.id}" data-action="edit-punto">✏ Editar</button></td>
         </tr>`).join('');
     const info = document.getElementById('info-puntos');
     if (info) info.textContent = `Mostrando ${rows.length} de ${total} sitios`;
     renderPaginator('btns-puntos', total, paginaPuntos, p => { paginaPuntos = p; loadPuntos(); });
-    tbody.querySelectorAll('[data-action="edit-punto"]').forEach(btn => {
-      btn.addEventListener('click', () => editarPunto(parseInt(btn.getAttribute('data-id')!)));
+    tbody.querySelectorAll('[data-action="edit-punto"]').forEach(btn =>
+      btn.addEventListener('click', () => editarPunto(parseInt(btn.getAttribute('data-id')!))));
+  }
+
+  // ════════════════════════════════════════════════
+  // PUNTOS — tabla gestionar estado
+  // ════════════════════════════════════════════════
+  async function loadEstadoPuntos() {
+    const { data } = await supabase
+      .from('punto_turistico')
+      .select('id, nombre, estado, id_categoria')
+      .order('nombre');
+    renderTablaEstadoPuntos(data || []);
+  }
+
+  function renderTablaEstadoPuntos(rows: any[]) {
+    const tbody = document.getElementById('tbody-est-puntos'); if (!tbody) return;
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="4" class="sr-empty-row">No hay sitios registrados</td></tr>';
+      return;
+    }
+    tbody.innerHTML = rows.map(p => `
+      <tr class="${!p.estado ? 'sr-row-inactive' : ''}">
+        <td class="sr-td-name">${p.nombre}</td>
+        <td>${getCatNombre(p.id_categoria)}</td>
+        <td>
+          <span class="sr-badge ${p.estado ? 'sr-badge-active' : 'sr-badge-inactive'}">
+            ${p.estado ? '● Activo' : '○ Inactivo'}
+          </span>
+        </td>
+        <td>
+          ${p.estado
+            ? `<button class="sr-btn-action sr-btn-deactivate" data-id="${p.id}" data-nombre="${p.nombre}" data-tipo="punto" data-action="toggle-estado" data-nuevo-estado="false">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                Desactivar
+              </button>`
+            : `<button class="sr-btn-action sr-btn-activate" data-id="${p.id}" data-nombre="${p.nombre}" data-tipo="punto" data-action="toggle-estado" data-nuevo-estado="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                Activar
+              </button>`
+          }
+        </td>
+      </tr>`).join('');
+
+    tbody.querySelectorAll('[data-action="toggle-estado"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id         = parseInt(btn.getAttribute('data-id')!);
+        const nombre     = btn.getAttribute('data-nombre')!;
+        const tipo       = btn.getAttribute('data-tipo')! as 'punto' | 'ruta';
+        const nuevoEstado = btn.getAttribute('data-nuevo-estado') === 'true';
+        pedirCambioEstado(id, nombre, tipo, nuevoEstado);
+      });
     });
   }
 
-  function renderTablaPuntosDel(rows: any[]) {
-    const tbody = document.getElementById('tbody-del-puntos');
-    if (!tbody) return;
-    tbody.innerHTML = !rows.length
-      ? '<tr><td colspan="4" class="sr-empty-row">No hay sitios</td></tr>'
-      : rows.map(p => `<tr>
-          <td class="sr-td-name">${p.nombre}</td>
-          <td>${getCatNombre(p.id_categoria)}</td>
-          <td><span class="sr-badge ${p.estado ? 'sr-badge-active' : 'sr-badge-inactive'}">${p.estado ? 'Activo' : 'Inactivo'}</span></td>
-          <td><button class="sr-btn-action sr-btn-delete" data-id="${p.id}" data-nombre="${p.nombre}" data-action="del-punto">🗑 Eliminar</button></td>
-        </tr>`).join('');
-    tbody.querySelectorAll('[data-action="del-punto"]').forEach(btn => {
-      btn.addEventListener('click', () => eliminarPunto(parseInt(btn.getAttribute('data-id')!), btn.getAttribute('data-nombre')!));
+  // ════════════════════════════════════════════════
+  // RUTAS — tabla gestionar estado
+  // ════════════════════════════════════════════════
+  async function loadEstadoRutas() {
+    const { data } = await supabase
+      .from('rutas')
+      .select('id, nombre, estado, id_tipo_ruta')
+      .order('nombre');
+    renderTablaEstadoRutas(data || []);
+  }
+
+  function renderTablaEstadoRutas(rows: any[]) {
+    const tbody = document.getElementById('tbody-est-rutas'); if (!tbody) return;
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="4" class="sr-empty-row">No hay rutas registradas</td></tr>';
+      return;
+    }
+    tbody.innerHTML = rows.map(r => `
+      <tr class="${!r.estado ? 'sr-row-inactive' : ''}">
+        <td class="sr-td-name">${r.nombre}</td>
+        <td>${getTipoNombre(r.id_tipo_ruta)}</td>
+        <td>
+          <span class="sr-badge ${r.estado ? 'sr-badge-active' : 'sr-badge-inactive'}">
+            ${r.estado ? '● Activa' : '○ Inactiva'}
+          </span>
+        </td>
+        <td>
+          ${r.estado
+            ? `<button class="sr-btn-action sr-btn-deactivate" data-id="${r.id}" data-nombre="${r.nombre}" data-tipo="ruta" data-action="toggle-estado" data-nuevo-estado="false">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                Desactivar
+              </button>`
+            : `<button class="sr-btn-action sr-btn-activate" data-id="${r.id}" data-nombre="${r.nombre}" data-tipo="ruta" data-action="toggle-estado" data-nuevo-estado="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                Activar
+              </button>`
+          }
+        </td>
+      </tr>`).join('');
+
+    tbody.querySelectorAll('[data-action="toggle-estado"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id         = parseInt(btn.getAttribute('data-id')!);
+        const nombre     = btn.getAttribute('data-nombre')!;
+        const tipo       = btn.getAttribute('data-tipo')! as 'punto' | 'ruta';
+        const nuevoEstado = btn.getAttribute('data-nuevo-estado') === 'true';
+        pedirCambioEstado(id, nombre, tipo, nuevoEstado);
+      });
     });
   }
 
+  // ════════════════════════════════════════════════
+  // CAMBIO DE ESTADO — con confirmación
+  // ════════════════════════════════════════════════
+  function pedirCambioEstado(id: number, nombre: string, tipo: 'punto' | 'ruta', nuevoEstado: boolean) {
+    const accion    = nuevoEstado ? 'activar' : 'desactivar';
+    const entidad   = tipo === 'punto' ? 'sitio turístico' : 'ruta';
+    const confirmType: ConfirmType = nuevoEstado ? 'activate' : 'deactivate';
+
+    showConfirm({
+      type:         confirmType,
+      title:        nuevoEstado ? `¿Activar ${entidad}?` : `¿Desactivar ${entidad}?`,
+      msg:          nuevoEstado
+        ? `El ${entidad} volverá a estar visible en la app.`
+        : `El ${entidad} dejará de aparecer en la app, pero el registro se conserva en la base de datos.`,
+      detail:       `${tipo === 'punto' ? 'Sitio' : 'Ruta'}: "${nombre}"`,
+      confirmLabel: nuevoEstado ? 'Sí, activar' : 'Sí, desactivar',
+      onConfirm:    () => cambiarEstado(id, tipo, nuevoEstado),
+    });
+  }
+
+  async function cambiarEstado(id: number, tipo: 'punto' | 'ruta', nuevoEstado: boolean) {
+    const tabla = tipo === 'punto' ? 'punto_turistico' : 'rutas';
+    const { error } = await supabase
+      .from(tabla)
+      .update({ estado: nuevoEstado, updated_at: new Date().toISOString() })
+      .eq('id', id);
+
+    if (error) {
+      showToast('Error al cambiar estado: ' + error.message, 'error');
+      return;
+    }
+
+    const accion  = nuevoEstado ? 'activado' : 'desactivado';
+    const entidad = tipo === 'punto' ? 'Sitio' : 'Ruta';
+    showToast(`✅ ${entidad} ${accion} correctamente`);
+
+    // Refrescar las tablas afectadas
+    loadEstadoPuntos();
+    loadEstadoRutas();
+    loadPuntos();
+    loadRutas();
+    loadStats();
+  }
+
+  // ════════════════════════════════════════════════
+  // EDITAR PUNTO
+  // ════════════════════════════════════════════════
   async function editarPunto(id: number) {
     const { data } = await supabase.from('punto_turistico').select('*').eq('id', id).single();
     if (!data) return;
@@ -787,31 +714,21 @@ import './Rutas.css';
     openModal('modal-editar-punto');
   }
 
-  async function eliminarPunto(id: number, nombre: string) {
-    if (!confirm(`¿Eliminar el sitio "${nombre}"? No se puede deshacer.`)) return;
-    const { error } = await supabase.from('punto_turistico').delete().eq('id', id);
-    if (error) { showToast('Error: ' + error.message, 'error'); return; }
-    showToast('Sitio eliminado correctamente');
-    loadPuntos(); loadStats();
-  }
-
   document.getElementById('form-editar-punto')?.addEventListener('submit', async e => {
     e.preventDefault();
     const id = parseInt((document.getElementById('edit-pt-id') as HTMLInputElement).value);
     const catVal = (document.getElementById('edit-pt-categoria') as HTMLSelectElement).value;
     const { error } = await supabase.from('punto_turistico').update({
-      nombre: (document.getElementById('edit-pt-nombre') as HTMLInputElement).value.trim(),
-      latitud: parseFloat((document.getElementById('edit-pt-latitud') as HTMLInputElement).value) || null,
-      longitud: parseFloat((document.getElementById('edit-pt-longitud') as HTMLInputElement).value) || null,
+      nombre:      (document.getElementById('edit-pt-nombre') as HTMLInputElement).value.trim(),
+      latitud:     parseFloat((document.getElementById('edit-pt-latitud') as HTMLInputElement).value) || null,
+      longitud:    parseFloat((document.getElementById('edit-pt-longitud') as HTMLInputElement).value) || null,
       descripcion: (document.getElementById('edit-pt-descripcion') as HTMLTextAreaElement).value.trim() || null,
-      imagen_url: (document.getElementById('edit-pt-imagen') as HTMLInputElement).value.trim() || null,
+      imagen_url:  (document.getElementById('edit-pt-imagen') as HTMLInputElement).value.trim() || null,
       id_categoria: catVal ? parseInt(catVal) : null,
-      updated_at: new Date().toISOString(),
+      updated_at:  new Date().toISOString(),
     }).eq('id', id);
     if (error) { showToast('Error: ' + error.message, 'error'); return; }
-    showToast('Sitio actualizado');
-    closeModal('modal-editar-punto');
-    loadPuntos();
+    showToast('Sitio actualizado'); closeModal('modal-editar-punto'); loadPuntos();
   });
 
   document.getElementById('form-crear-punto')?.addEventListener('submit', async e => {
@@ -821,62 +738,52 @@ import './Rutas.css';
     const btn = document.getElementById('btn-guardar-punto') as HTMLButtonElement;
     btn.disabled = true; btn.textContent = 'Guardando...';
     const { error } = await supabase.from('punto_turistico').insert([{
-      nombre: (document.getElementById('pt-nombre') as HTMLInputElement).value.trim(),
-      descripcion: (document.getElementById('pt-descripcion') as HTMLTextAreaElement).value.trim() || null,
-      latitud: parseFloat((document.getElementById('pt-latitud') as HTMLInputElement).value) || null,
-      longitud: parseFloat((document.getElementById('pt-longitud') as HTMLInputElement).value) || null,
+      nombre:           (document.getElementById('pt-nombre') as HTMLInputElement).value.trim(),
+      descripcion:      (document.getElementById('pt-descripcion') as HTMLTextAreaElement).value.trim() || null,
+      latitud:          parseFloat((document.getElementById('pt-latitud') as HTMLInputElement).value) || null,
+      longitud:         parseFloat((document.getElementById('pt-longitud') as HTMLInputElement).value) || null,
       radio_activacion: parseInt((document.getElementById('pt-radio') as HTMLInputElement).value) || 50,
-      precio_nacional: parseFloat((document.getElementById('pt-precio-nac') as HTMLInputElement).value) || null,
+      precio_nacional:  parseFloat((document.getElementById('pt-precio-nac') as HTMLInputElement).value) || null,
       precio_extranjero: parseFloat((document.getElementById('pt-precio-ext') as HTMLInputElement).value) || null,
-      imagen_url: (document.getElementById('pt-imagen') as HTMLInputElement).value.trim() || null,
-      id_categoria: catVal ? parseInt(catVal) : null,
-      estado: estadoRadio?.value === 'true',
+      imagen_url:       (document.getElementById('pt-imagen') as HTMLInputElement).value.trim() || null,
+      id_categoria:     catVal ? parseInt(catVal) : null,
+      estado:           estadoRadio?.value === 'true',
     }]);
     btn.disabled = false; btn.textContent = 'Guardar Sitio';
     if (error) { showToast('Error: ' + error.message, 'error'); return; }
     showToast('¡Sitio turístico creado!');
     (document.getElementById('form-crear-punto') as HTMLFormElement).reset();
     if (leafletMarker) leafletMarker.setOpacity(0);
-    if (leafletMap) leafletMap.setView([-16.5, -68.15], 13);
+    if (leafletMap)    leafletMap.setView([-16.5, -68.15], 13);
     loadPuntos(); loadStats();
   });
 
-  // =============================================
-  // ---- RUTAS ----
-  // =============================================
+  // ════════════════════════════════════════════════
+  // RUTAS — tabla ver
+  // ════════════════════════════════════════════════
   async function loadRutas() {
-    let query = supabase.from('rutas').select('*, ruta_puntos(id)', { count: 'exact' }).order('id', { ascending: false });
-    if (filtrosBusqRutas)   query = query.ilike('nombre', `%${filtrosBusqRutas}%`);
-    if (filtrosTipoRutas)   query = query.eq('id_tipo_ruta', filtrosTipoRutas);
-    if (filtrosEstadoRutas !== '') query = query.eq('estado', filtrosEstadoRutas === 'true');
+    let q = supabase.from('rutas').select('*, ruta_puntos(id)', { count: 'exact' }).order('id', { ascending: false });
+    if (filtrosBusqRutas)   q = q.ilike('nombre', `%${filtrosBusqRutas}%`);
+    if (filtrosTipoRutas)   q = q.eq('id_tipo_ruta', filtrosTipoRutas);
+    if (filtrosEstadoRutas !== '') q = q.eq('estado', filtrosEstadoRutas === 'true');
     const from = (paginaRutas - 1) * PAGE_SIZE;
-    query = query.range(from, from + PAGE_SIZE - 1);
-    const { data, count } = await query;
+    q = q.range(from, from + PAGE_SIZE - 1);
+    const { data, count } = await q;
     const rows = data || [];
     renderTablaRutas(rows, count || 0);
-    renderTablaRutasDel(rows);
     const selAsig = document.getElementById('asig-ruta');
-    if (selAsig) selAsig.innerHTML =
-      '<option value="">Seleccionar ruta...</option>' +
-      rows.map((r: any) => `<option value="${r.id}">${r.nombre}</option>`).join('');
-    const selFTipo = document.getElementById('filter-tipo-rutas');
-    if (selFTipo && selFTipo.options.length <= 1) {
-      selFTipo.innerHTML =
-        '<option value="">Todos los tipos</option>' +
-        tiposRuta.map((t: any) => `<option value="${t.id}">${t.descripcion}</option>`).join('');
-    }
+    if (selAsig) selAsig.innerHTML = '<option value="">Seleccionar ruta...</option>' + rows.map((r: any) => `<option value="${r.id}">${r.nombre}</option>`).join('');
   }
 
   function renderTablaRutas(rows: any[], total: number) {
-    const tbody = document.getElementById('tbody-rutas');
-    if (!tbody) return;
+    const tbody = document.getElementById('tbody-rutas'); if (!tbody) return;
     tbody.innerHTML = !rows.length
       ? '<tr><td colspan="5" class="sr-empty-row">No se encontraron rutas</td></tr>'
       : rows.map(r => `<tr>
           <td class="sr-td-name">${r.nombre}</td>
           <td>${getTipoNombre(r.id_tipo_ruta)}</td>
-          <td><span class="sr-pts-badge">${(r.ruta_puntos || []).length} pts</span></td>
-          <td><span class="sr-badge ${r.estado ? 'sr-badge-active' : 'sr-badge-inactive'}">${r.estado ? 'Activa' : 'Inactiva'}</span></td>
+          <td><span class="sr-pts-badge">${(r.ruta_puntos||[]).length} pts</span></td>
+          <td><span class="sr-badge ${r.estado?'sr-badge-active':'sr-badge-inactive'}">${r.estado?'● Activa':'○ Inactiva'}</span></td>
           <td class="sr-td-actions">
             <button class="sr-btn-action sr-btn-edit" data-id="${r.id}" data-nombre="${r.nombre}" data-action="ver-ruta">👁 Ver</button>
             <button class="sr-btn-action sr-btn-edit" data-id="${r.id}" data-action="edit-ruta">✏ Editar</button>
@@ -885,28 +792,8 @@ import './Rutas.css';
     const info = document.getElementById('info-rutas');
     if (info) info.textContent = `Mostrando ${rows.length} de ${total} rutas`;
     renderPaginator('btns-rutas', total, paginaRutas, p => { paginaRutas = p; loadRutas(); });
-    tbody.querySelectorAll('[data-action="edit-ruta"]').forEach(btn => {
-      btn.addEventListener('click', () => editarRuta(parseInt(btn.getAttribute('data-id')!)));
-    });
-    tbody.querySelectorAll('[data-action="ver-ruta"]').forEach(btn => {
-      btn.addEventListener('click', () => verPuntosRuta(parseInt(btn.getAttribute('data-id')!), btn.getAttribute('data-nombre')!));
-    });
-  }
-
-  function renderTablaRutasDel(rows: any[]) {
-    const tbody = document.getElementById('tbody-del-rutas');
-    if (!tbody) return;
-    tbody.innerHTML = !rows.length
-      ? '<tr><td colspan="4" class="sr-empty-row">No hay rutas</td></tr>'
-      : rows.map(r => `<tr>
-          <td class="sr-td-name">${r.nombre}</td>
-          <td>${getTipoNombre(r.id_tipo_ruta)}</td>
-          <td><span class="sr-badge ${r.estado ? 'sr-badge-active' : 'sr-badge-inactive'}">${r.estado ? 'Activa' : 'Inactiva'}</span></td>
-          <td><button class="sr-btn-action sr-btn-delete" data-id="${r.id}" data-nombre="${r.nombre}" data-action="del-ruta">🗑 Eliminar</button></td>
-        </tr>`).join('');
-    tbody.querySelectorAll('[data-action="del-ruta"]').forEach(btn => {
-      btn.addEventListener('click', () => eliminarRuta(parseInt(btn.getAttribute('data-id')!), btn.getAttribute('data-nombre')!));
-    });
+    tbody.querySelectorAll('[data-action="edit-ruta"]').forEach(btn  => btn.addEventListener('click', () => editarRuta(parseInt(btn.getAttribute('data-id')!))));
+    tbody.querySelectorAll('[data-action="ver-ruta"]').forEach(btn   => btn.addEventListener('click', () => verPuntosRuta(parseInt(btn.getAttribute('data-id')!), btn.getAttribute('data-nombre')!)));
   }
 
   async function editarRuta(id: number) {
@@ -920,31 +807,18 @@ import './Rutas.css';
     openModal('modal-editar-ruta');
   }
 
-  async function eliminarRuta(id: number, nombre: string) {
-    if (!confirm(`¿Eliminar la ruta "${nombre}"? También se eliminarán sus puntos asociados.`)) return;
-    const { error } = await supabase.from('rutas').delete().eq('id', id);
-    if (error) { showToast('Error: ' + error.message, 'error'); return; }
-    showToast('Ruta eliminada');
-    loadRutas(); loadStats();
-  }
-
   async function verPuntosRuta(id: number, nombre: string) {
     (document.getElementById('modal-ruta-titulo') as HTMLElement).textContent = `Puntos: ${nombre}`;
     const list = document.getElementById('modal-ruta-puntos-list')!;
-    list.innerHTML = 'Cargando...';
-    openModal('modal-ver-puntos-ruta');
-    const { data } = await supabase
-      .from('ruta_puntos')
-      .select('orden, punto_turistico(id, nombre, descripcion)')
-      .eq('id_ruta', id)
-      .order('orden');
-    if (!data || !data.length) { list.innerHTML = '<p class="sr-empty-inline">No hay puntos asignados.</p>'; return; }
+    list.innerHTML = 'Cargando...'; openModal('modal-ver-puntos-ruta');
+    const { data } = await supabase.from('ruta_puntos').select('orden, punto_turistico(id, nombre, descripcion)').eq('id_ruta', id).order('orden');
+    if (!data?.length) { list.innerHTML = '<p class="sr-empty-inline">No hay puntos asignados.</p>'; return; }
     list.innerHTML = data.map(rp => `
       <div class="sr-ruta-punto-item">
         <span class="sr-ruta-orden">${rp.orden}</span>
         <div class="sr-ruta-pto-info">
-          <span class="sr-ruta-pto-nombre">${(rp.punto_turistico as any)?.nombre || '—'}</span>
-          ${(rp.punto_turistico as any)?.descripcion ? `<span class="sr-ruta-pto-desc">${(rp.punto_turistico as any).descripcion}</span>` : ''}
+          <span class="sr-ruta-pto-nombre">${(rp.punto_turistico as any)?.nombre||'—'}</span>
+          ${(rp.punto_turistico as any)?.descripcion?`<span class="sr-ruta-pto-desc">${(rp.punto_turistico as any).descripcion}</span>`:''}
         </div>
       </div>`).join('');
   }
@@ -954,15 +828,13 @@ import './Rutas.css';
     const id = parseInt((document.getElementById('edit-rt-id') as HTMLInputElement).value);
     const tipoVal = (document.getElementById('edit-rt-tipo') as HTMLSelectElement).value;
     const { error } = await supabase.from('rutas').update({
-      nombre: (document.getElementById('edit-rt-nombre') as HTMLInputElement).value.trim(),
+      nombre:      (document.getElementById('edit-rt-nombre') as HTMLInputElement).value.trim(),
       descripcion: (document.getElementById('edit-rt-descripcion') as HTMLTextAreaElement).value.trim() || null,
       id_tipo_ruta: tipoVal ? parseInt(tipoVal) : null,
-      updated_at: new Date().toISOString(),
+      updated_at:  new Date().toISOString(),
     }).eq('id', id);
     if (error) { showToast('Error: ' + error.message, 'error'); return; }
-    showToast('Ruta actualizada');
-    closeModal('modal-editar-ruta');
-    loadRutas();
+    showToast('Ruta actualizada'); closeModal('modal-editar-ruta'); loadRutas();
   });
 
   document.getElementById('form-crear-ruta')?.addEventListener('submit', async e => {
@@ -972,11 +844,11 @@ import './Rutas.css';
     const btn = document.getElementById('btn-guardar-ruta') as HTMLButtonElement;
     btn.disabled = true; btn.textContent = 'Guardando...';
     const { error } = await supabase.from('rutas').insert([{
-      nombre: (document.getElementById('rt-nombre') as HTMLInputElement).value.trim(),
+      nombre:      (document.getElementById('rt-nombre') as HTMLInputElement).value.trim(),
       descripcion: (document.getElementById('rt-descripcion') as HTMLTextAreaElement).value.trim() || null,
       id_tipo_ruta: tipoVal ? parseInt(tipoVal) : null,
-      estado: estadoRadio?.value === 'true',
-      ia_generado: false,
+      estado:       estadoRadio?.value === 'true',
+      ia_generado:  false,
     }]);
     btn.disabled = false; btn.textContent = 'Guardar Ruta';
     if (error) { showToast('Error: ' + error.message, 'error'); return; }
@@ -985,75 +857,41 @@ import './Rutas.css';
     loadRutas(); loadStats();
   });
 
-  // =============================================
-  // ---- ASIGNAR PUNTOS ----
-  // =============================================
+  // ════════════════════════════════════════════════
+  // ASIGNAR PUNTOS
+  // ════════════════════════════════════════════════
   async function loadPuntosChecklist() {
-    const { data } = await supabase
-      .from('punto_turistico')
-      .select('id, nombre, latitud, longitud')
-      .eq('estado', true)
-      .order('nombre');
-
-    const container = document.getElementById('sr-puntos-checklist');
-    if (!container) return;
-    if (!data || !data.length) {
-      container.innerHTML = '<p class="sr-empty-inline">No hay sitios disponibles.</p>';
-      return;
-    }
-
+    const { data } = await supabase.from('punto_turistico').select('id, nombre, latitud, longitud').eq('estado', true).order('nombre');
+    const container = document.getElementById('sr-puntos-checklist'); if (!container) return;
+    if (!data?.length) { container.innerHTML = '<p class="sr-empty-inline">No hay sitios activos disponibles.</p>'; return; }
     selectedPuntosOrden = [];
-
     container.innerHTML = data.map((p: any) => `
       <label class="sr-point-check" id="chk-${p.id}">
-        <input type="checkbox" value="${p.id}"
-          data-nombre="${p.nombre}"
-          data-lat="${p.latitud ?? ''}"
-          data-lng="${p.longitud ?? ''}"
-          class="sr-chk-punto" />
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-          <circle cx="12" cy="10" r="3"/>
-        </svg>
+        <input type="checkbox" value="${p.id}" data-nombre="${p.nombre}" data-lat="${p.latitud??''}" data-lng="${p.longitud??''}" class="sr-chk-punto" />
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         ${p.nombre}
       </label>`).join('');
-
     container.querySelectorAll('.sr-chk-punto').forEach(cb => {
       cb.addEventListener('change', () => {
-        const id     = parseInt((cb as HTMLInputElement).value);
+        const id = parseInt((cb as HTMLInputElement).value);
         const nombre = cb.getAttribute('data-nombre')!;
-        const lat    = parseFloat(cb.getAttribute('data-lat')!);
-        const lng    = parseFloat(cb.getAttribute('data-lng')!);
-
-        if ((cb as HTMLInputElement).checked) {
-          selectedPuntosOrden.push({ id, nombre, lat, lng, orden: selectedPuntosOrden.length + 1 });
-        } else {
-          selectedPuntosOrden = selectedPuntosOrden.filter((p: any) => p.id !== id);
-          selectedPuntosOrden.forEach((p: any, i: number) => { p.orden = i + 1; });
-        }
-
+        const lat = parseFloat(cb.getAttribute('data-lat')!);
+        const lng = parseFloat(cb.getAttribute('data-lng')!);
+        if ((cb as HTMLInputElement).checked) { selectedPuntosOrden.push({ id, nombre, lat, lng, orden: selectedPuntosOrden.length + 1 }); }
+        else { selectedPuntosOrden = selectedPuntosOrden.filter((p: any) => p.id !== id); selectedPuntosOrden.forEach((p: any, i: number) => { p.orden = i + 1; }); }
         renderOrdenPreview();
-
-        // Actualizar ruta OSRM en tiempo real
-        const validPoints = selectedPuntosOrden.filter((p: any) => !isNaN(p.lat) && !isNaN(p.lng));
-        drawOSRMRoute(validPoints);
+        drawOSRMRoute(selectedPuntosOrden.filter((p: any) => !isNaN(p.lat) && !isNaN(p.lng)));
       });
     });
   }
 
   function renderOrdenPreview() {
-    const preview = document.getElementById('sr-orden-preview');
-    const list    = document.getElementById('sr-orden-list');
+    const preview = document.getElementById('sr-orden-preview'), list = document.getElementById('sr-orden-list');
     if (!preview || !list) return;
     if (!selectedPuntosOrden.length) { preview.style.display = 'none'; return; }
     preview.style.display = 'block';
-    list.innerHTML = [...selectedPuntosOrden]
-      .sort((a: any, b: any) => a.orden - b.orden)
-      .map((p: any) => `
-        <div class="sr-orden-item">
-          <span class="sr-orden-num">${p.orden}</span>
-          <span>${p.nombre}</span>
-        </div>`).join('');
+    list.innerHTML = [...selectedPuntosOrden].sort((a: any, b: any) => a.orden - b.orden)
+      .map((p: any) => `<div class="sr-orden-item"><span class="sr-orden-num">${p.orden}</span><span>${p.nombre}</span></div>`).join('');
   }
 
   document.getElementById('form-asignar')?.addEventListener('submit', async e => {
@@ -1069,86 +907,65 @@ import './Rutas.css';
     showToast(`${selectedPuntosOrden.length} puntos asignados a la ruta`);
     selectedPuntosOrden = [];
     document.querySelectorAll('.sr-chk-punto').forEach(cb => { (cb as HTMLInputElement).checked = false; });
-    renderOrdenPreview();
-    // Limpiar mapa de rutas
-    drawOSRMRoute([]);
-    loadRutas();
+    renderOrdenPreview(); drawOSRMRoute([]); loadRutas();
   });
 
-  // =============================================
-  // ---- MODALES ----
-  // =============================================
+  // ════════════════════════════════════════════════
+  // MODALES
+  // ════════════════════════════════════════════════
   function openModal(id: string)  { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
   function closeModal(id: string) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
 
-  ['close-modal-punto','close-modal-punto2'].forEach(id =>
-    document.getElementById(id)?.addEventListener('click', () => closeModal('modal-editar-punto')));
-  ['close-modal-ruta','close-modal-ruta2'].forEach(id =>
-    document.getElementById(id)?.addEventListener('click', () => closeModal('modal-editar-ruta')));
+  ['close-modal-punto','close-modal-punto2'].forEach(id => document.getElementById(id)?.addEventListener('click', () => closeModal('modal-editar-punto')));
+  ['close-modal-ruta','close-modal-ruta2'].forEach(id   => document.getElementById(id)?.addEventListener('click', () => closeModal('modal-editar-ruta')));
   document.getElementById('close-modal-puntos-ruta')?.addEventListener('click', () => closeModal('modal-ver-puntos-ruta'));
-  document.querySelectorAll('.sr-modal').forEach(m =>
-    m.addEventListener('click', e => { if (e.target === m) closeModal((m as HTMLElement).id); }));
+  document.querySelectorAll('.sr-modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModal((m as HTMLElement).id); }));
 
-  // =============================================
-  // ---- NAVEGACIÓN ----
-  // =============================================
+  // ════════════════════════════════════════════════
+  // NAVEGACIÓN
+  // ════════════════════════════════════════════════
   const initRutasModule = () => {
     document.querySelectorAll('.sr-action-card').forEach(card => {
       card.addEventListener('click', () => {
         const panelId = 'panel-' + card.getAttribute('data-panel');
-
         document.querySelectorAll('.sr-action-card').forEach(c => c.classList.remove('sr-card-active'));
         card.classList.add('sr-card-active');
         document.querySelectorAll('.sr-panel').forEach(p => p.classList.remove('active'));
-        const target = document.getElementById(panelId);
-        if (target) target.classList.add('active');
+        document.getElementById(panelId)?.classList.add('active');
 
-        // Mapa crear sitio
         if (panelId === 'panel-crear-punto') {
           setTimeout(() => {
-            if (!leafletMap) {
-              initLeafletMap().then(() => {
-                document.getElementById('pt-latitud')?.addEventListener('input', updateMapFromInputs);
-                document.getElementById('pt-longitud')?.addEventListener('input', updateMapFromInputs);
-              });
-            } else {
-              leafletMap.invalidateSize();
-            }
+            if (!leafletMap) initLeafletMap().then(() => {
+              document.getElementById('pt-latitud')?.addEventListener('input', updateMapFromInputs);
+              document.getElementById('pt-longitud')?.addEventListener('input', updateMapFromInputs);
+            });
+            else leafletMap.invalidateSize();
           }, 150);
         }
-
-        // Mapa asignar puntos (OSRM)
         if (panelId === 'panel-asignar-puntos') {
-          loadPuntosChecklist();
-          loadRutas();
-          setTimeout(async () => {
-            if (!routeMap) {
-              await initRouteMap();
-            } else {
-              routeMap.invalidateSize();
-            }
-          }, 150);
+          loadPuntosChecklist(); loadRutas();
+          setTimeout(async () => { if (!routeMap) await initRouteMap(); else routeMap.invalidateSize(); }, 150);
         }
-
-        if (panelId === 'panel-ver-puntos')  loadPuntos();
-        if (panelId === 'panel-ver-rutas')   loadRutas();
-        if (panelId === 'panel-eliminar')    { loadPuntos(); loadRutas(); }
+        if (panelId === 'panel-ver-puntos')       loadPuntos();
+        if (panelId === 'panel-ver-rutas')         loadRutas();
+        if (panelId === 'panel-gestionar-estado') { loadEstadoPuntos(); loadEstadoRutas(); }
       });
     });
 
-    document.getElementById('btn-nuevo-punto')?.addEventListener('click',  () => (document.querySelector('[data-panel="crear-punto"]') as HTMLElement)?.click());
-    document.getElementById('btn-nueva-ruta')?.addEventListener('click',   () => (document.querySelector('[data-panel="crear-ruta"]') as HTMLElement)?.click());
+    document.getElementById('btn-nuevo-punto')?.addEventListener('click',    () => (document.querySelector('[data-panel="crear-punto"]') as HTMLElement)?.click());
+    document.getElementById('btn-nueva-ruta')?.addEventListener('click',     () => (document.querySelector('[data-panel="crear-ruta"]') as HTMLElement)?.click());
     document.getElementById('btn-cancelar-punto')?.addEventListener('click',   () => (document.querySelector('[data-panel="ver-puntos"]') as HTMLElement)?.click());
     document.getElementById('btn-cancelar-ruta')?.addEventListener('click',    () => (document.querySelector('[data-panel="ver-rutas"]') as HTMLElement)?.click());
     document.getElementById('btn-cancelar-asignar')?.addEventListener('click', () => (document.querySelector('[data-panel="ver-rutas"]') as HTMLElement)?.click());
 
-    document.getElementById('search-puntos')?.addEventListener('input',          e => { filtrosBusqPuntos      = (e.target as HTMLInputElement).value;   paginaPuntos = 1; loadPuntos(); });
-    document.getElementById('filter-categoria-puntos')?.addEventListener('change', e => { filtrosCategoriaPuntos = (e.target as HTMLSelectElement).value; paginaPuntos = 1; loadPuntos(); });
-    document.getElementById('filter-estado-puntos')?.addEventListener('change',  e => { filtrosEstadoPuntos    = (e.target as HTMLSelectElement).value;  paginaPuntos = 1; loadPuntos(); });
-    document.getElementById('search-rutas')?.addEventListener('input',             e => { filtrosBusqRutas       = (e.target as HTMLInputElement).value;   paginaRutas  = 1; loadRutas(); });
-    document.getElementById('filter-tipo-rutas')?.addEventListener('change',      e => { filtrosTipoRutas       = (e.target as HTMLSelectElement).value;  paginaRutas  = 1; loadRutas(); });
-    document.getElementById('filter-estado-rutas')?.addEventListener('change',    e => { filtrosEstadoRutas     = (e.target as HTMLSelectElement).value;  paginaRutas  = 1; loadRutas(); });
+    document.getElementById('search-puntos')?.addEventListener('input',             e => { filtrosBusqPuntos      = (e.target as HTMLInputElement).value;   paginaPuntos = 1; loadPuntos(); });
+    document.getElementById('filter-categoria-puntos')?.addEventListener('change',  e => { filtrosCategoriaPuntos = (e.target as HTMLSelectElement).value;  paginaPuntos = 1; loadPuntos(); });
+    document.getElementById('filter-estado-puntos')?.addEventListener('change',     e => { filtrosEstadoPuntos    = (e.target as HTMLSelectElement).value;  paginaPuntos = 1; loadPuntos(); });
+    document.getElementById('search-rutas')?.addEventListener('input',              e => { filtrosBusqRutas       = (e.target as HTMLInputElement).value;   paginaRutas  = 1; loadRutas(); });
+    document.getElementById('filter-tipo-rutas')?.addEventListener('change',        e => { filtrosTipoRutas       = (e.target as HTMLSelectElement).value;  paginaRutas  = 1; loadRutas(); });
+    document.getElementById('filter-estado-rutas')?.addEventListener('change',      e => { filtrosEstadoRutas     = (e.target as HTMLSelectElement).value;  paginaRutas  = 1; loadRutas(); });
 
+    // Tabs del panel Gestionar Estado
     document.querySelectorAll('.sr-del-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.sr-del-tab').forEach(t => t.classList.remove('active'));
@@ -1168,24 +985,14 @@ import './Rutas.css';
       });
     });
 
-    async function initData() {
-      await loadCategorias();
-      await loadTiposRuta();
-      await loadStats();
-    }
-
-    initData();
+    loadCategorias().then(() => { loadTiposRuta(); loadStats(); });
   };
 
   initRutasModule();
 
   document.addEventListener('astro:page-load', () => {
-    leafletMap    = null;
-    leafletMarker = null;
-    leafletLoaded = false;
-    routeMap      = null;
-    routeLayer    = null;
-    routeMarkers  = [];
+    leafletMap = null; leafletMarker = null; leafletLoaded = false;
+    routeMap   = null; routeLayer   = null; routeMarkers  = [];
     initRutasModule();
   });
 </script>
