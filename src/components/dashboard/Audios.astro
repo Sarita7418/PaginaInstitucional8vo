@@ -1,8 +1,7 @@
 ---
+import './Audios.css';
 // Audios.astro — Módulo Audioguías Inteligentes
 ---
-
-<link rel="stylesheet" href="/src/components/dashboard/Audios.css" />
 
 <div data-section-target="audios" class="section">
   <div class="ag-module">
@@ -48,16 +47,17 @@
         </div>
       </button>
 
-      <button class="ag-action-card ag-terra" data-panel="eliminar">
+      <!-- Tarjeta 4: "Gestionar Estado" en vez de "Eliminar" -->
+      <button class="ag-action-card ag-terra" data-panel="gestionar-estado">
         <div class="ag-action-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-            <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
+            <line x1="12" y1="2" x2="12" y2="12"/>
           </svg>
         </div>
         <div class="ag-action-text">
-          <span class="ag-action-title">Eliminar Audioguía</span>
-          <span class="ag-action-desc">Elimina audioguías del sistema</span>
+          <span class="ag-action-title">Gestionar Estado</span>
+          <span class="ag-action-desc">Activa o desactiva audioguías</span>
         </div>
       </button>
     </div>
@@ -66,6 +66,7 @@
 
     <div class="ag-dynamic-area">
 
+      <!-- DEFAULT -->
       <div class="ag-panel active" id="ag-panel-default">
         <div class="ag-default-layout">
           <div class="ag-hero-card">
@@ -98,6 +99,7 @@
         </div>
       </div>
 
+      <!-- CREAR -->
       <div class="ag-panel" id="ag-panel-subir">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-teal-bg">
@@ -135,15 +137,11 @@
               <div class="ag-form-row">
                 <div class="ag-form-group">
                   <label class="ag-label">Idioma</label>
-                  <select class="ag-select" id="au-idioma">
-                    <option value="">Cargando idiomas...</option>
-                  </select>
+                  <select class="ag-select" id="au-idioma"><option value="">Cargando idiomas...</option></select>
                 </div>
                 <div class="ag-form-group">
                   <label class="ag-label">Punto Turístico</label>
-                  <select class="ag-select" id="au-punto">
-                    <option value="">Cargando puntos turísticos...</option>
-                  </select>
+                  <select class="ag-select" id="au-punto"><option value="">Cargando puntos turísticos...</option></select>
                 </div>
               </div>
               <div class="ag-form-row">
@@ -157,7 +155,7 @@
                 </div>
               </div>
               <div class="ag-form-group">
-                <label class="ag-label">Estado</label>
+                <label class="ag-label">Estado inicial</label>
                 <div class="ag-toggle-group">
                   <label class="ag-toggle-opt ag-toggle-active"><input type="radio" name="au-estado" value="true" checked /> Activa</label>
                   <label class="ag-toggle-opt"><input type="radio" name="au-estado" value="false" /> Inactiva</label>
@@ -218,6 +216,7 @@
         </form>
       </div>
 
+      <!-- VER / EDITAR -->
       <div class="ag-panel" id="ag-panel-editar">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-green-bg">
@@ -243,12 +242,8 @@
         </div>
         <div class="ag-table-wrap">
           <table class="ag-table">
-            <thead>
-              <tr><th>Título</th><th>Idioma</th><th>Duración</th><th>Punto Turístico</th><th>Estado</th><th>Acciones</th></tr>
-            </thead>
-            <tbody id="tbody-audios">
-              <tr><td colspan="6" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando datos...</td></tr>
-            </tbody>
+            <thead><tr><th>Título</th><th>Idioma</th><th>Duración</th><th>Punto Turístico</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody id="tbody-audios"><tr><td colspan="6" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando datos...</td></tr></tbody>
           </table>
         </div>
         <div class="ag-pagination">
@@ -257,6 +252,7 @@
         </div>
       </div>
 
+      <!-- IDIOMAS -->
       <div class="ag-panel" id="ag-panel-idiomas">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-amber-bg">
@@ -272,26 +268,28 @@
         </div>
       </div>
 
-      <div class="ag-panel" id="ag-panel-eliminar">
+      <!-- GESTIONAR ESTADO -->
+      <div class="ag-panel" id="ag-panel-gestionar-estado">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-terra-bg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
           </div>
           <div>
-            <h3 class="ag-panel-title">Eliminar Audioguías</h3>
-            <p class="ag-panel-subtitle">Selecciona una audioguía para eliminarla del sistema</p>
+            <h3 class="ag-panel-title">Gestionar Estado</h3>
+            <p class="ag-panel-subtitle">Activa o desactiva audioguías — ningún registro se elimina de la base de datos</p>
           </div>
         </div>
-        <div class="ag-alert-warn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          Esta acción es permanente. Las audioguías eliminadas no se pueden recuperar.
+
+        <!-- Banner informativo -->
+        <div class="ag-info-banner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Las audioguías desactivadas dejan de mostrarse en la app pero permanecen en la base de datos. Puedes reactivarlas en cualquier momento.
         </div>
+
         <div class="ag-table-wrap">
           <table class="ag-table">
-            <thead>
-              <tr><th>Título</th><th>Idioma</th><th>Duración</th><th>Punto Turístico</th><th>Estado</th><th>Acciones</th></tr>
-            </thead>
-            <tbody id="tbody-del-audios">
+            <thead><tr><th>Título</th><th>Idioma</th><th>Duración</th><th>Punto Turístico</th><th>Estado actual</th><th>Acción</th></tr></thead>
+            <tbody id="tbody-estado-audios">
               <tr><td colspan="6" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando...</td></tr>
             </tbody>
           </table>
@@ -302,28 +300,7 @@
   </div>
 </div>
 
-<div id="modal-confirm-delete" class="ag-modal" style="display:none;">
-  <div class="ag-modal-box ag-modal-sm">
-    <div class="ag-modal-header">
-      <h3 class="ag-modal-title">Confirmar eliminación</h3>
-      <button class="ag-modal-close" id="close-delete-modal">✕</button>
-    </div>
-    <div class="ag-modal-body">
-      <p id="delete-message">
-        ¿Estás seguro de eliminar este elemento?
-      </p>
-    </div>
-    <div class="ag-modal-footer">
-      <button class="ag-btn ag-btn-danger" id="confirm-delete-btn">
-        🗑 Sí, eliminar
-      </button>
-      <button class="ag-btn ag-btn-secondary" id="cancel-delete-btn">
-        Cancelar
-      </button>
-    </div>
-  </div>
-</div>
-
+<!-- MODAL EDITAR AUDIOGUÍA -->
 <div id="modal-editar-audio" class="ag-modal" style="display:none;">
   <div class="ag-modal-box">
     <div class="ag-modal-header">
@@ -365,6 +342,22 @@
   </div>
 </div>
 
+<!-- ═══ MODAL CONFIRM PERSONALIZADO (mismo diseño que Rutas) ═══ -->
+<div id="ag-confirm-modal" class="ag-modal" style="display:none;">
+  <div class="ag-confirm-box">
+    <div class="ag-confirm-icon-wrap" id="ag-confirm-icon-wrap">
+      <!-- Ícono inyectado dinámicamente -->
+    </div>
+    <h3 class="ag-confirm-title" id="ag-confirm-title">¿Confirmar acción?</h3>
+    <p class="ag-confirm-msg" id="ag-confirm-msg"></p>
+    <div class="ag-confirm-detail" id="ag-confirm-detail" style="display:none;"></div>
+    <div class="ag-confirm-actions">
+      <button class="ag-btn" id="ag-confirm-ok">Confirmar</button>
+      <button class="ag-btn ag-btn-secondary" id="ag-confirm-cancel">Cancelar</button>
+    </div>
+  </div>
+</div>
+
 <script>
   import { supabase } from '../../lib/supabase';
 
@@ -372,13 +365,68 @@
   const PAGE_SIZE = 8;
 
   let idiomas = [];
-  let puntos = [];
+  let puntos  = [];
   let paginaAudios = 1;
-  let filtrosBusq = '';
+  let filtrosBusq  = '';
   let filtrosIdioma = '';
   let filtrosEstado = '';
 
-  // ---- TOAST ----
+  // ════════════════════════════════════════════════
+  // MODAL CONFIRM PERSONALIZADO
+  // Mismo patrón que Rutas.astro
+  // ════════════════════════════════════════════════
+  function showConfirm(opts) {
+    const modal    = document.getElementById('ag-confirm-modal');
+    const iconWrap = document.getElementById('ag-confirm-icon-wrap');
+    const elT      = document.getElementById('ag-confirm-title');
+    const elM      = document.getElementById('ag-confirm-msg');
+    const elD      = document.getElementById('ag-confirm-detail');
+
+    // Color e ícono según si es activar o desactivar
+    if (opts.type === 'deactivate') {
+      iconWrap.className = 'ag-confirm-icon-wrap ag-confirm-icon-terra';
+      iconWrap.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2">
+        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
+      </svg>`;
+    } else {
+      iconWrap.className = 'ag-confirm-icon-wrap ag-confirm-icon-green';
+      iconWrap.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2">
+        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
+      </svg>`;
+    }
+
+    elT.textContent = opts.title;
+    elM.textContent = opts.msg;
+    if (opts.detail) { elD.textContent = opts.detail; elD.style.display = 'block'; }
+    else { elD.style.display = 'none'; }
+
+    modal.style.display = 'flex';
+
+    // Reclonar botones para limpiar listeners anteriores
+    const oldOk  = document.getElementById('ag-confirm-ok');
+    const oldCan = document.getElementById('ag-confirm-cancel');
+    const newOk  = oldOk.cloneNode(true);
+    const newCan = oldCan.cloneNode(true);
+    oldOk.replaceWith(newOk);
+    oldCan.replaceWith(newCan);
+
+    newOk.className = opts.type === 'deactivate'
+      ? 'ag-btn ag-btn-terra'
+      : 'ag-btn ag-btn-primary';
+    newOk.innerHTML = opts.type === 'deactivate'
+      ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg> ${opts.confirmLabel}`
+      : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg> ${opts.confirmLabel}`;
+
+    newOk.addEventListener('click', () => { modal.style.display = 'none'; opts.onConfirm(); });
+    newCan.addEventListener('click', () => { modal.style.display = 'none'; });
+
+    const closeOnBg = (e) => { if (e.target === modal) { modal.style.display = 'none'; modal.removeEventListener('click', closeOnBg); } };
+    modal.addEventListener('click', closeOnBg);
+  }
+
+  // ════════════════════════════════════════════════
+  // TOAST
+  // ════════════════════════════════════════════════
   function showToast(msg, type = 'success') {
     const t = document.getElementById('ag-toast');
     if (!t) return;
@@ -387,7 +435,9 @@
     setTimeout(() => { t.className = 'ag-toast ag-toast-hidden'; }, 3500);
   }
 
-  // ---- SPEECH SYNTHESIS ----
+  // ════════════════════════════════════════════════
+  // SPEECH SYNTHESIS
+  // ════════════════════════════════════════════════
   function getIdiomaBCP47(idIdioma) {
     const idioma = idiomas.find(i => i.id == idIdioma);
     if (!idioma) return 'es-ES';
@@ -400,24 +450,14 @@
     return 'es-ES';
   }
 
-  let speechUtterance = null;
-
   function reproducirTexto(texto, idIdioma, btnPlay, btnStop) {
     if (!texto || !texto.trim()) { showToast('No hay texto para reproducir', 'error'); return; }
     window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(texto.trim());
     utter.lang = getIdiomaBCP47(idIdioma);
-    utter.rate = 0.9;
-    utter.pitch = 1;
-    utter.onstart = () => {
-      if (btnPlay) btnPlay.style.display = 'none';
-      if (btnStop) btnStop.style.display = 'inline-flex';
-    };
-    utter.onend = utter.onerror = () => {
-      if (btnPlay) btnPlay.style.display = 'inline-flex';
-      if (btnStop) btnStop.style.display = 'none';
-    };
-    speechUtterance = utter;
+    utter.rate = 0.9; utter.pitch = 1;
+    utter.onstart = () => { if (btnPlay) btnPlay.style.display = 'none'; if (btnStop) btnStop.style.display = 'inline-flex'; };
+    utter.onend = utter.onerror = () => { if (btnPlay) btnPlay.style.display = 'inline-flex'; if (btnStop) btnStop.style.display = 'none'; };
     window.speechSynthesis.speak(utter);
   }
 
@@ -427,7 +467,9 @@
     if (btnStop) btnStop.style.display = 'none';
   }
 
-  // ---- CARGAR SELECTS ----
+  // ════════════════════════════════════════════════
+  // CARGAR SELECTS
+  // ════════════════════════════════════════════════
   async function loadIdiomas() {
     const { data } = await supabase.from('subdominios').select('id, descripcion').eq('id_dominio', DOMINIO_IDIOMA).order('descripcion');
     idiomas = data || [];
@@ -444,26 +486,29 @@
     ['au-punto','edit-au-punto'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = opts; });
   }
 
-  // ---- HELPERS ----
+  // ════════════════════════════════════════════════
+  // HELPERS
+  // ════════════════════════════════════════════════
   function getIdiomaNombre(id) { return idiomas.find(i => i.id == id)?.descripcion || '—'; }
-  function getPuntoNombre(id) { return puntos.find(p => p.id == id)?.nombre || '—'; }
+  function getPuntoNombre(id)  { return puntos.find(p => p.id == id)?.nombre        || '—'; }
   function formatDuracion(seg) {
     if (!seg) return '—';
-    const m = Math.floor(seg / 60), s = seg % 60;
-    return `${m}:${String(s).padStart(2,'0')}`;
+    return `${Math.floor(seg / 60)}:${String(seg % 60).padStart(2,'0')}`;
   }
 
-  // ---- STATS Y RECIENTES ----
+  // ════════════════════════════════════════════════
+  // STATS Y RECIENTES
+  // ════════════════════════════════════════════════
   async function loadStats() {
     const [{ count: total }, { count: activas }, { count: inactivas }] = await Promise.all([
       supabase.from('audioguias').select('*', { count: 'exact', head: true }),
       supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('estado', true),
       supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('estado', false),
     ]);
-    document.getElementById('stat-total').textContent = String(total ?? 0);
-    document.getElementById('stat-activas').textContent = String(activas ?? 0);
-    document.getElementById('stat-inactivas').textContent = String(inactivas ?? 0);
-    document.getElementById('stat-idiomas').textContent = String(idiomas.length);
+    document.getElementById('stat-total').textContent    = String(total    ?? 0);
+    document.getElementById('stat-activas').textContent  = String(activas  ?? 0);
+    document.getElementById('stat-inactivas').textContent= String(inactivas?? 0);
+    document.getElementById('stat-idiomas').textContent  = String(idiomas.length);
     await loadRecientes();
   }
 
@@ -471,7 +516,7 @@
     const { data } = await supabase.from('audioguias').select('*, punto_turistico(nombre)').eq('estado', true).order('created_at', { ascending: false }).limit(4);
     const list = document.getElementById('ag-recent-list');
     if (!list) return;
-    if (!data || !data.length) { list.innerHTML = '<div style="padding:16px;color:#B0BEC0;font-size:13px;text-align:center;">No hay audioguías registradas aún</div>'; return; }
+    if (!data?.length) { list.innerHTML = '<div style="padding:16px;color:#B0BEC0;font-size:13px;text-align:center;">No hay audioguías registradas aún</div>'; return; }
     list.innerHTML = data.map(a => `
       <div class="ag-recent-item">
         <div class="ag-recent-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
@@ -483,21 +528,18 @@
       </div>`).join('');
   }
 
-  // ---- CARGAR TABLA AUDIOS ----
+  // ════════════════════════════════════════════════
+  // TABLA VER / EDITAR
+  // ════════════════════════════════════════════════
   async function loadAudios() {
-    let query = supabase
-      .from('audioguias')
-      .select('*, punto_turistico(nombre), subdominios(descripcion)', { count: 'exact' })
-      .order('id', { ascending: false });
-    if (filtrosBusq) query = query.ilike('titulo', `%${filtrosBusq}%`);
+    let query = supabase.from('audioguias').select('*, punto_turistico(nombre), subdominios(descripcion)', { count: 'exact' }).order('id', { ascending: false });
+    if (filtrosBusq)   query = query.ilike('titulo', `%${filtrosBusq}%`);
     if (filtrosIdioma) query = query.eq('id_idioma', filtrosIdioma);
     if (filtrosEstado !== '') query = query.eq('estado', filtrosEstado === 'true');
     const from = (paginaAudios - 1) * PAGE_SIZE;
     query = query.range(from, from + PAGE_SIZE - 1);
     const { data, count } = await query;
-    const rows = data || [];
-    renderTablaAudios(rows, count || 0);
-    renderTablaAudiosDel(rows);
+    renderTablaAudios(data || [], count || 0);
   }
 
   const iconAudio = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>`;
@@ -512,116 +554,179 @@
           <td>${a.subdominios?.descripcion || getIdiomaNombre(a.id_idioma)}</td>
           <td>${formatDuracion(a.duracion_segundos)}</td>
           <td>${a.punto_turistico?.nombre || getPuntoNombre(a.id_punto_turistico)}</td>
-          <td><span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">${a.estado ? 'Activa' : 'Inactiva'}</span></td>
+          <td><span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">${a.estado ? '● Activa' : '○ Inactiva'}</span></td>
           <td><button class="ag-btn-action ag-btn-edit" data-id="${a.id}" data-action="edit-audio">✏ Editar</button></td>
         </tr>`).join('');
     const info = document.getElementById('info-audios');
     if (info) info.textContent = `Mostrando ${rows.length} de ${total} audioguías`;
     renderPaginator('btns-audios', total, paginaAudios, p => { paginaAudios = p; loadAudios(); });
-    tbody.querySelectorAll('[data-action="edit-audio"]').forEach(btn => {
-      btn.addEventListener('click', () => editarAudio(parseInt(btn.getAttribute('data-id'))));
-    });
+    tbody.querySelectorAll('[data-action="edit-audio"]').forEach(btn =>
+      btn.addEventListener('click', () => editarAudio(parseInt(btn.getAttribute('data-id')))));
   }
 
-  function renderTablaAudiosDel(rows) {
-    const tbody = document.getElementById('tbody-del-audios');
+  // ════════════════════════════════════════════════
+  // TABLA GESTIONAR ESTADO
+  // ════════════════════════════════════════════════
+  async function loadEstadoAudios() {
+    const { data } = await supabase
+      .from('audioguias')
+      .select('id, titulo, estado, id_idioma, duracion_segundos, id_punto_turistico, punto_turistico(nombre), subdominios(descripcion)')
+      .order('titulo');
+    renderTablaEstadoAudios(data || []);
+  }
+
+  function renderTablaEstadoAudios(rows) {
+    const tbody = document.getElementById('tbody-estado-audios');
     if (!tbody) return;
-    tbody.innerHTML = !rows.length
-      ? '<tr><td colspan="6" style="text-align:center;padding:32px;color:#B0BEC0;font-style:italic;">No hay audioguías</td></tr>'
-      : rows.map(a => `<tr>
-          <td class="ag-td-title">${iconAudio} ${a.titulo}</td>
-          <td>${a.subdominios?.descripcion || getIdiomaNombre(a.id_idioma)}</td>
-          <td>${formatDuracion(a.duracion_segundos)}</td>
-          <td>${a.punto_turistico?.nombre || getPuntoNombre(a.id_punto_turistico)}</td>
-          <td><span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">${a.estado ? 'Activa' : 'Inactiva'}</span></td>
-          <td><button class="ag-btn-action ag-btn-delete" data-id="${a.id}" data-titulo="${a.titulo}" data-action="del-audio">🗑 Eliminar</button></td>
-        </tr>`).join('');
-    tbody.querySelectorAll('[data-action="del-audio"]').forEach(btn => {
-      btn.addEventListener('click', () => eliminarAudio(parseInt(btn.getAttribute('data-id')), btn.getAttribute('data-titulo')));
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:32px;color:#B0BEC0;font-style:italic;">No hay audioguías registradas</td></tr>';
+      return;
+    }
+    tbody.innerHTML = rows.map(a => `
+      <tr class="${!a.estado ? 'ag-row-inactive' : ''}">
+        <td class="ag-td-title">${iconAudio} ${a.titulo}</td>
+        <td>${a.subdominios?.descripcion || getIdiomaNombre(a.id_idioma)}</td>
+        <td>${formatDuracion(a.duracion_segundos)}</td>
+        <td>${a.punto_turistico?.nombre || getPuntoNombre(a.id_punto_turistico)}</td>
+        <td>
+          <span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">
+            ${a.estado ? '● Activa' : '○ Inactiva'}
+          </span>
+        </td>
+        <td>
+          ${a.estado
+            ? `<button class="ag-btn-action ag-btn-deactivate" data-id="${a.id}" data-titulo="${a.titulo}" data-nuevo-estado="false" data-action="toggle-audio">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                Desactivar
+              </button>`
+            : `<button class="ag-btn-action ag-btn-activate" data-id="${a.id}" data-titulo="${a.titulo}" data-nuevo-estado="true" data-action="toggle-audio">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                Activar
+              </button>`
+          }
+        </td>
+      </tr>`).join('');
+
+    tbody.querySelectorAll('[data-action="toggle-audio"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id          = parseInt(btn.getAttribute('data-id'));
+        const titulo      = btn.getAttribute('data-titulo');
+        const nuevoEstado = btn.getAttribute('data-nuevo-estado') === 'true';
+        pedirCambioEstado(id, titulo, nuevoEstado);
+      });
     });
   }
 
-  // ---- PAGINADOR ----
+  // ════════════════════════════════════════════════
+  // CAMBIO DE ESTADO CON CONFIRMACIÓN
+  // ════════════════════════════════════════════════
+  function pedirCambioEstado(id, titulo, nuevoEstado) {
+    showConfirm({
+      type:         nuevoEstado ? 'activate' : 'deactivate',
+      title:        nuevoEstado ? '¿Activar audioguía?' : '¿Desactivar audioguía?',
+      msg:          nuevoEstado
+        ? 'La audioguía volverá a estar visible en la app.'
+        : 'La audioguía dejará de aparecer en la app, pero el registro se conserva en la base de datos.',
+      detail:       `Audioguía: "${titulo}"`,
+      confirmLabel: nuevoEstado ? 'Sí, activar' : 'Sí, desactivar',
+      onConfirm:    () => cambiarEstado(id, nuevoEstado),
+    });
+  }
+
+  async function cambiarEstado(id, nuevoEstado) {
+    const { error } = await supabase
+      .from('audioguias')
+      .update({ estado: nuevoEstado, updated_at: new Date().toISOString() })
+      .eq('id', id);
+    if (error) { showToast('Error: ' + error.message, 'error'); return; }
+    const accion = nuevoEstado ? 'activada' : 'desactivada';
+    showToast(`✅ Audioguía ${accion} correctamente`);
+    loadEstadoAudios();
+    loadAudios();
+    loadStats();
+  }
+
+  // ════════════════════════════════════════════════
+  // PAGINADOR
+  // ════════════════════════════════════════════════
   function renderPaginator(containerId, total, currentPage, onPageFn) {
     const container = document.getElementById(containerId);
     if (!container) return;
     const totalPages = Math.ceil(total / PAGE_SIZE);
     if (totalPages <= 1) { container.innerHTML = ''; return; }
-    let html = `<button class="ag-page-btn" ${currentPage === 1 ? 'disabled' : ''} data-p="${currentPage - 1}">‹</button>`;
-    for (let i = 1; i <= Math.min(totalPages, 5); i++) {
-      html += `<button class="ag-page-btn ${i === currentPage ? 'active' : ''}" data-p="${i}">${i}</button>`;
-    }
-    html += `<button class="ag-page-btn" ${currentPage === totalPages ? 'disabled' : ''} data-p="${currentPage + 1}">›</button>`;
+    let html = `<button class="ag-page-btn" ${currentPage===1?'disabled':''} data-p="${currentPage-1}">‹</button>`;
+    for (let i = 1; i <= Math.min(totalPages, 5); i++) html += `<button class="ag-page-btn ${i===currentPage?'active':''}" data-p="${i}">${i}</button>`;
+    html += `<button class="ag-page-btn" ${currentPage===totalPages?'disabled':''} data-p="${currentPage+1}">›</button>`;
     container.innerHTML = html;
     container.querySelectorAll('[data-p]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const p = parseInt(btn.getAttribute('data-p'));
-        if (p < 1 || p > totalPages || btn.disabled) return;
-        onPageFn(p);
-      });
+      btn.addEventListener('click', () => { const p = parseInt(btn.getAttribute('data-p')); if (p>=1&&p<=totalPages) onPageFn(p); });
     });
   }
 
-  // ---- CREAR AUDIO ----
+  // ════════════════════════════════════════════════
+  // CREAR AUDIOGUÍA
+  // ════════════════════════════════════════════════
   document.getElementById('form-crear-audio')?.addEventListener('submit', async e => {
     e.preventDefault();
     const estadoRadio = document.querySelector('input[name="au-estado"]:checked');
-    const idiomaVal = document.getElementById('au-idioma').value;
-    const puntoVal = document.getElementById('au-punto').value;
-    const durVal = document.getElementById('au-duracion').value;
-    const btn = document.getElementById('btn-guardar-audio');
+    const idiomaVal   = document.getElementById('au-idioma').value;
+    const puntoVal    = document.getElementById('au-punto').value;
+    const durVal      = document.getElementById('au-duracion').value;
+    const btn         = document.getElementById('btn-guardar-audio');
     btn.disabled = true; btn.textContent = 'Guardando...';
     const { error } = await supabase.from('audioguias').insert([{
-      titulo: document.getElementById('au-titulo').value.trim(),
-      descripcion_corta: document.getElementById('au-desc-corta').value.trim() || null,
+      titulo:              document.getElementById('au-titulo').value.trim(),
+      descripcion_corta:   document.getElementById('au-desc-corta').value.trim() || null,
       texto_transcripcion: document.getElementById('au-texto').value.trim() || null,
-      audio_url: document.getElementById('au-audio-url').value.trim() || null,
-      duracion_segundos: durVal ? parseInt(durVal) : null,
-      id_idioma: idiomaVal ? parseInt(idiomaVal) : null,
-      id_punto_turistico: puntoVal ? parseInt(puntoVal) : null,
-      estado: estadoRadio?.value === 'true',
+      audio_url:           document.getElementById('au-audio-url').value.trim() || null,
+      duracion_segundos:   durVal ? parseInt(durVal) : null,
+      id_idioma:           idiomaVal ? parseInt(idiomaVal) : null,
+      id_punto_turistico:  puntoVal  ? parseInt(puntoVal)  : null,
+      estado:              estadoRadio?.value === 'true',
     }]);
     btn.disabled = false; btn.textContent = 'Guardar Audioguía';
     if (error) { showToast('Error: ' + error.message, 'error'); return; }
     showToast('¡Audioguía creada correctamente!');
     document.getElementById('form-crear-audio').reset();
-    document.getElementById('ag-preview-box').style.display = 'none';
+    document.getElementById('ag-preview-box').style.display    = 'none';
     document.getElementById('ag-duracion-preview').style.display = 'none';
     loadStats(); loadAudios();
   });
 
-  // ---- EDITAR AUDIO ----
+  // ════════════════════════════════════════════════
+  // EDITAR AUDIOGUÍA
+  // ════════════════════════════════════════════════
   async function editarAudio(id) {
     const { data } = await supabase.from('audioguias').select('*').eq('id', id).single();
     if (!data) return;
-    document.getElementById('edit-au-id').value = id;
-    document.getElementById('edit-au-titulo').value = data.titulo;
-    document.getElementById('edit-au-desc').value = data.descripcion_corta || '';
-    document.getElementById('edit-au-texto').value = data.texto_transcripcion || '';
+    document.getElementById('edit-au-id').value       = id;
+    document.getElementById('edit-au-titulo').value   = data.titulo;
+    document.getElementById('edit-au-desc').value     = data.descripcion_corta || '';
+    document.getElementById('edit-au-texto').value    = data.texto_transcripcion || '';
     document.getElementById('edit-au-duracion').value = data.duracion_segundos || '';
-    document.getElementById('edit-au-url').value = data.audio_url || '';
+    document.getElementById('edit-au-url').value      = data.audio_url || '';
     const selIdioma = document.getElementById('edit-au-idioma');
-    const selPunto = document.getElementById('edit-au-punto');
-    if (data.id_idioma) selIdioma.value = data.id_idioma;
-    if (data.id_punto_turistico) selPunto.value = data.id_punto_turistico;
+    const selPunto  = document.getElementById('edit-au-punto');
+    if (data.id_idioma)           selIdioma.value = data.id_idioma;
+    if (data.id_punto_turistico)  selPunto.value  = data.id_punto_turistico;
     openModal('modal-editar-audio');
   }
 
   document.getElementById('form-editar-audio')?.addEventListener('submit', async e => {
     e.preventDefault();
-    const id = parseInt(document.getElementById('edit-au-id').value);
+    const id       = parseInt(document.getElementById('edit-au-id').value);
     const idiomaVal = document.getElementById('edit-au-idioma').value;
-    const puntoVal = document.getElementById('edit-au-punto').value;
-    const durVal = document.getElementById('edit-au-duracion').value;
+    const puntoVal  = document.getElementById('edit-au-punto').value;
+    const durVal    = document.getElementById('edit-au-duracion').value;
     const { error } = await supabase.from('audioguias').update({
-      titulo: document.getElementById('edit-au-titulo').value.trim(),
-      descripcion_corta: document.getElementById('edit-au-desc').value.trim() || null,
+      titulo:              document.getElementById('edit-au-titulo').value.trim(),
+      descripcion_corta:   document.getElementById('edit-au-desc').value.trim() || null,
       texto_transcripcion: document.getElementById('edit-au-texto').value.trim() || null,
-      audio_url: document.getElementById('edit-au-url').value.trim() || null,
-      duracion_segundos: durVal ? parseInt(durVal) : null,
-      id_idioma: idiomaVal ? parseInt(idiomaVal) : null,
-      id_punto_turistico: puntoVal ? parseInt(puntoVal) : null,
-      updated_at: new Date().toISOString(),
+      audio_url:           document.getElementById('edit-au-url').value.trim() || null,
+      duracion_segundos:   durVal ? parseInt(durVal) : null,
+      id_idioma:           idiomaVal ? parseInt(idiomaVal) : null,
+      id_punto_turistico:  puntoVal  ? parseInt(puntoVal)  : null,
+      updated_at:          new Date().toISOString(),
     }).eq('id', id);
     if (error) { showToast('Error: ' + error.message, 'error'); return; }
     showToast('Audioguía actualizada');
@@ -629,21 +734,9 @@
     loadAudios(); loadStats();
   });
 
-  // ---- ELIMINAR AUDIO ----
-let deleteId = null;
-
-function eliminarAudio(id, titulo) {
-  deleteId = id;
-
-  const modal = document.getElementById('modal-confirm-delete');
-  const msg = document.getElementById('delete-message');
-
-  msg.textContent = `¿Eliminar la audioguía "${titulo}"? Esta acción no se puede deshacer.`;
-
-  modal.style.display = 'flex';
-}
-
-  // ---- IDIOMAS PANEL (datos reales) ----
+  // ════════════════════════════════════════════════
+  // PANEL IDIOMAS
+  // ════════════════════════════════════════════════
   async function loadIdiomasPanel() {
     const grid = document.getElementById('ag-lang-grid');
     if (!grid) return;
@@ -651,14 +744,11 @@ function eliminarAudio(id, titulo) {
     const total = totalAudios || 1;
     const htmlCards = await Promise.all(idiomas.map(async idioma => {
       const { count } = await supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('id_idioma', idioma.id);
-      const n = count || 0;
+      const n   = count || 0;
       const pct = Math.round((n / total) * 100);
       const barColor = pct >= 75 ? 'ag-bar-teal' : pct >= 40 ? 'ag-bar-green' : 'ag-bar-amber';
       return `<div class="ag-lang-card">
-        <div class="ag-lang-top">
-          <span class="ag-lang-name">${idioma.descripcion}</span>
-          <span class="ag-lang-count">${n} guías</span>
-        </div>
+        <div class="ag-lang-top"><span class="ag-lang-name">${idioma.descripcion}</span><span class="ag-lang-count">${n} guías</span></div>
         <div class="ag-lang-bar-track"><div class="ag-lang-bar-fill ${barColor}" style="width:${pct}%"></div></div>
         <span class="ag-lang-pct">${pct}% del total</span>
       </div>`;
@@ -666,104 +756,80 @@ function eliminarAudio(id, titulo) {
     grid.innerHTML = htmlCards.join('') || '<div style="grid-column:1/-1;color:#B0BEC0;text-align:center;padding:20px;">Sin idiomas registrados</div>';
   }
 
-  // ---- MODALES ----
-  function openModal(id) { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
+  // ════════════════════════════════════════════════
+  // MODALES
+  // ════════════════════════════════════════════════
+  function openModal(id)  { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
   function closeModal(id) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
-  ['close-modal-audio','close-modal-audio2'].forEach(id => document.getElementById(id)?.addEventListener('click', () => closeModal('modal-editar-audio')));
-  document.getElementById('modal-editar-audio')?.addEventListener('click', e => { if (e.target.id === 'modal-editar-audio') closeModal('modal-editar-audio'); });
-// ---- MODAL ELIMINAR ----
-document.getElementById('confirm-delete-btn')?.addEventListener('click', async () => {
-  if (!deleteId) return;
 
-  const { error } = await supabase
-    .from('audioguias')
-    .delete()
-    .eq('id', deleteId);
+  ['close-modal-audio','close-modal-audio2'].forEach(id =>
+    document.getElementById(id)?.addEventListener('click', () => closeModal('modal-editar-audio')));
+  document.getElementById('modal-editar-audio')?.addEventListener('click', e => {
+    if (e.target.id === 'modal-editar-audio') closeModal('modal-editar-audio');
+  });
 
-  if (error) {
-    showToast('Error: ' + error.message, 'error');
-    return;
-  }
-
-  showToast('Audioguía eliminada');
-  closeModal('modal-confirm-delete');
-  deleteId = null;
-
-  loadAudios();
-  loadStats();
-});
-
-document.getElementById('cancel-delete-btn')?.addEventListener('click', () => {
-  closeModal('modal-confirm-delete');
-});
-
-document.getElementById('close-delete-modal')?.addEventListener('click', () => {
-  closeModal('modal-confirm-delete');
-});
-
-document.getElementById('modal-confirm-delete')?.addEventListener('click', e => {
-  if (e.target.id === 'modal-confirm-delete') {
-    closeModal('modal-confirm-delete');
-  }
-});
-  // ---- SPEECH BUTTONS ----
+  // ════════════════════════════════════════════════
+  // SPEECH BUTTONS
+  // ════════════════════════════════════════════════
   document.getElementById('btn-escuchar')?.addEventListener('click', () => {
-    const texto = document.getElementById('au-texto').value;
-    const idIdioma = document.getElementById('au-idioma').value;
-    reproducirTexto(texto, idIdioma, document.getElementById('btn-escuchar'), document.getElementById('btn-detener'));
+    reproducirTexto(document.getElementById('au-texto').value, document.getElementById('au-idioma').value,
+      document.getElementById('btn-escuchar'), document.getElementById('btn-detener'));
   });
   document.getElementById('btn-detener')?.addEventListener('click', () => {
     detenerAudio(document.getElementById('btn-escuchar'), document.getElementById('btn-detener'));
   });
   document.getElementById('btn-escuchar-edit')?.addEventListener('click', () => {
-    const texto = document.getElementById('edit-au-texto').value;
-    const idIdioma = document.getElementById('edit-au-idioma').value;
-    reproducirTexto(texto, idIdioma, document.getElementById('btn-escuchar-edit'), document.getElementById('btn-detener-edit'));
+    reproducirTexto(document.getElementById('edit-au-texto').value, document.getElementById('edit-au-idioma').value,
+      document.getElementById('btn-escuchar-edit'), document.getElementById('btn-detener-edit'));
   });
   document.getElementById('btn-detener-edit')?.addEventListener('click', () => {
     detenerAudio(document.getElementById('btn-escuchar-edit'), document.getElementById('btn-detener-edit'));
   });
 
-  // ---- IA SIMULACIÓN ----
+  // ════════════════════════════════════════════════
+  // IA SIMULACIÓN
+  // ════════════════════════════════════════════════
   document.getElementById('btn-generar-ia')?.addEventListener('click', () => {
     const titulo = document.getElementById('au-titulo').value;
-    const punto = document.getElementById('au-punto');
+    const punto  = document.getElementById('au-punto');
     const puntoNombre = punto.options[punto.selectedIndex]?.text || 'este sitio';
     if (!titulo) { showToast('Completa el título primero', 'error'); return; }
     const texto = `Bienvenidos a ${puntoNombre}. ${titulo}. Este fascinante lugar en La Paz, Bolivia, es un testimonio vivo de la cultura andina. A lo largo de su historia, ha sido testigo de importantes eventos que forjaron la identidad de la ciudad. Te invitamos a explorar cada rincón y descubrir los secretos que guarda.`;
     document.getElementById('au-texto').value = texto;
-    document.getElementById('ag-preview-box').style.display = 'block';
-    document.getElementById('ag-preview-text').textContent = texto;
+    document.getElementById('ag-preview-box').style.display  = 'block';
+    document.getElementById('ag-preview-text').textContent   = texto;
     showToast('Texto generado con IA — revísalo antes de guardar');
   });
 
-  // ---- PREVIEW EN TIEMPO REAL ----
+  // ════════════════════════════════════════════════
+  // PREVIEW EN TIEMPO REAL
+  // ════════════════════════════════════════════════
   document.getElementById('au-texto')?.addEventListener('input', e => {
     const val = e.target.value.trim();
-    const box = document.getElementById('ag-preview-box');
+    const box  = document.getElementById('ag-preview-box');
     const prev = document.getElementById('ag-preview-text');
     if (val.length > 10) { box.style.display = 'block'; prev.textContent = val; }
     else { box.style.display = 'none'; }
   });
 
   document.getElementById('au-duracion')?.addEventListener('input', e => {
-    const seg = parseInt(e.target.value);
+    const seg   = parseInt(e.target.value);
     const badge = document.getElementById('ag-duracion-preview');
-    const txt = document.getElementById('ag-duracion-text');
-    if (seg > 0) {
-      badge.style.display = 'flex';
-      txt.textContent = formatDuracion(seg);
-    } else {
-      badge.style.display = 'none';
-    }
+    const txt   = document.getElementById('ag-duracion-text');
+    if (seg > 0) { badge.style.display = 'flex'; txt.textContent = formatDuracion(seg); }
+    else { badge.style.display = 'none'; }
   });
 
-  // ---- FILTROS TABLA ----
-  document.getElementById('search-audios')?.addEventListener('input', e => { filtrosBusq = e.target.value; paginaAudios = 1; loadAudios(); });
+  // ════════════════════════════════════════════════
+  // FILTROS TABLA
+  // ════════════════════════════════════════════════
+  document.getElementById('search-audios')?.addEventListener('input',    e => { filtrosBusq   = e.target.value; paginaAudios = 1; loadAudios(); });
   document.getElementById('filter-idioma-audios')?.addEventListener('change', e => { filtrosIdioma = e.target.value; paginaAudios = 1; loadAudios(); });
   document.getElementById('filter-estado-audios')?.addEventListener('change', e => { filtrosEstado = e.target.value; paginaAudios = 1; loadAudios(); });
 
-  // ---- TOGGLE RADIOS ----
+  // ════════════════════════════════════════════════
+  // TOGGLE RADIOS
+  // ════════════════════════════════════════════════
   document.querySelectorAll('.ag-toggle-group').forEach(group => {
     group.querySelectorAll('input[type=radio]').forEach(radio => {
       radio.addEventListener('change', () => {
@@ -773,9 +839,11 @@ document.getElementById('modal-confirm-delete')?.addEventListener('click', e => 
     });
   });
 
-  // ---- NAVEGACIÓN ----
+  // ════════════════════════════════════════════════
+  // NAVEGACIÓN ENTRE PANELES
+  // ════════════════════════════════════════════════
   const initAudiosModule = () => {
-    const cards = document.querySelectorAll('.ag-action-card');
+    const cards  = document.querySelectorAll('.ag-action-card');
     const panels = document.querySelectorAll('.ag-panel');
 
     cards.forEach(card => {
@@ -784,11 +852,10 @@ document.getElementById('modal-confirm-delete')?.addEventListener('click', e => 
         cards.forEach(c => c.classList.remove('ag-card-active'));
         card.classList.add('ag-card-active');
         panels.forEach(p => p.classList.remove('active'));
-        const target = document.getElementById(panelId);
-        if (target) target.classList.add('active');
-        if (panelId === 'ag-panel-editar') loadAudios();
-        if (panelId === 'ag-panel-eliminar') loadAudios();
-        if (panelId === 'ag-panel-idiomas') loadIdiomasPanel();
+        document.getElementById(panelId)?.classList.add('active');
+        if (panelId === 'ag-panel-editar')           loadAudios();
+        if (panelId === 'ag-panel-idiomas')          loadIdiomasPanel();
+        if (panelId === 'ag-panel-gestionar-estado') loadEstadoAudios();
       });
     });
 
@@ -799,7 +866,6 @@ document.getElementById('modal-confirm-delete')?.addEventListener('click', e => 
       document.querySelector('[data-panel="editar"]')?.click();
     });
 
-    // Inicializar datos
     loadIdiomas().then(() => { loadPuntos(); loadStats(); });
   };
 
