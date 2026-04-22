@@ -28,8 +28,7 @@
 /* --- SECCIÓN HERO (PRIMER VISTAZO CLARO) --- */
 .hero {
   position: relative;
-  height: calc(100vh - var(--header-height)); 
-  min-height: 600px;
+  min-height: max(600px, calc(100vh - var(--header-height)));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,18 +59,17 @@
   position: relative; z-index: 3;
   width: 100%; max-width: 1240px;
   margin: 0 auto;
-  padding: 0 64px;
-  padding-bottom: 160px;
+  padding: clamp(28px, 4vw, 56px) 64px clamp(120px, 8vw, 160px);
   display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 52px;
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) clamp(240px, 24vw, 320px);
+  gap: clamp(24px, 3vw, 52px);
+  align-items: start;
 }
 
 .badge {
   display: inline-flex; align-items: center; gap: 7px;
   border: 1px solid var(--color-teal); border-radius: 2px;
-  padding: 5px 13px; font-size: 12px; font-weight: 600;
+  padding: 5px 13px; font-size: clamp(10px, .75vw, 12px); font-weight: 600;
   letter-spacing: .15em; text-transform: uppercase;
   color: var(--color-teal); background: rgba(15,152,138,.1);
   margin-bottom: 20px; animation: up .7s ease both;
@@ -85,14 +83,14 @@
 /* TÍTULOS HERO (Oscuros) */
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-size: clamp(2.4rem, 4.2vw, 4rem);
   font-weight: 700; line-height: 1.1; color: var(--color-dark);
   animation: up .8s .07s ease both;
 }
 .hero-title em {
   font-style: italic; color: var(--color-orange);
   display: block; position: relative;
-  font-size: clamp(3.2rem, 6vw, 5.2rem);
+  font-size: clamp(2.8rem, 4.8vw, 4.6rem);
 }
 .hero-title em::after {
   content: ''; position: absolute; left: 0; bottom: -1px;
@@ -101,9 +99,9 @@
 }
 
 .hero-sub {
-  margin-top: 14px; font-size: 1.25rem; font-weight: 500;
-  line-height: 1.78; color: var(--color-dark);
-  max-width: 580px; animation: up .8s .14s ease both;
+  margin-top: 14px; font-size: clamp(1rem, 1.05vw, 1.15rem); font-weight: 500;
+  line-height: 1.65; color: var(--color-dark);
+  max-width: min(100%, 560px); animation: up .8s .14s ease both;
   background: rgba(255,255,255,.85); /* Fondo blanco traslúcido */
   border-left: 4px solid var(--color-teal);
   padding: 12px 20px;
@@ -212,7 +210,8 @@
   border: 1px solid rgba(35,55,62,.1);
   border-radius: 16px;
   backdrop-filter: blur(20px);
-  padding: 36px 28px;
+  padding: clamp(24px, 2.6vw, 36px) clamp(20px, 2.2vw, 28px);
+  max-width: clamp(260px, 26vw, 360px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -222,16 +221,23 @@
   box-shadow: 0 8px 32px rgba(35,55,62,.08);
 }
 
-.logo-card-img { width: 340px; height: auto; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,.1); margin-bottom: 4px; }
-.logo-card-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 800; color: var(--color-dark); letter-spacing: .01em; }
-.logo-card-sub { font-size: .75rem; color: var(--color-teal); letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+.logo-card-img { width: min(100%, clamp(240px, 22vw, 320px)); height: auto; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,.1); margin-bottom: 4px; }
+.logo-card-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.05rem, 1.35vw, 1.25rem); font-weight: 800; color: var(--color-dark); letter-spacing: .01em; }
+.logo-card-sub { font-size: clamp(.68rem, .75vw, .75rem); color: var(--color-teal); letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
 .logo-card-line { width: 40px; height: 2px; background: linear-gradient(to right, transparent, var(--color-orange), transparent); margin: 4px 0; }
-.logo-card-alt { font-size: .8rem; color: rgba(35,55,62,.6); letter-spacing: .05em; font-weight: 500; }
+.logo-card-alt { font-size: clamp(.72rem, .8vw, .8rem); color: rgba(35,55,62,.6); letter-spacing: .05em; font-weight: 500; }
 
 .ticker {
   position: absolute; bottom: 10px; left: 0; right: 0; z-index: 15;
   background: var(--color-green); padding: 11px 0; overflow: hidden;
   border-top: 1px solid rgba(255,255,255,.2);
+}
+.ticker.hero-pin {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 420;
 }
 .ticker-track { display: flex; white-space: nowrap; animation: mq 36s linear infinite; }
 .ticker-item {
@@ -616,6 +622,16 @@
 
   .cta-features { gap: 10px; }
   .cta-feat { font-size: .85rem; padding: 8px 16px; }
+}
+
+@media (min-width: 961px) {
+  .hero {
+    justify-content: flex-start;
+  }
+
+  .hero-inner {
+    align-items: start;
+  }
 }
 
 @media (max-width: 580px) {

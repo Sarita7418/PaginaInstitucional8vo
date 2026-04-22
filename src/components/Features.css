@@ -192,6 +192,20 @@
   background: rgba(242, 235, 224, 0.88); /* Fondo ofuscado color crema */
 }
 
+.ventajas-intro-title {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto 36px;
+  padding: 0 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  line-height: 1.08;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
 /* ENCABEZADOS (TÍTULOS POR FUERA) */
 .feat-header {
   position: relative; z-index: 3;

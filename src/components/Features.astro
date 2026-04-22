@@ -112,6 +112,12 @@ const features = [
       <div class="feat-bg-img" style={`background-image: url('${feat.bg}')`}></div>
       <div class="feat-bg-overlay overlay-cream"></div>
 
+      {index === 0 && (
+        <h2 class="ventajas-intro-title reveal from-bottom">
+          :A continuación te describimos las ventajas de nuestra aplicación
+        </h2>
+      )}
+
       <div class="feat-header reveal from-bottom">
         <div class="stag-main">{feat.tag}</div>
         <h2 class="stit-main">{feat.title}</h2>
