@@ -675,6 +675,49 @@
   .paq-btn.n { right: 4px; }
 }
 
+@media (max-height: 860px) {
+  .s-cta {
+    min-height: auto;
+    justify-content: flex-start;
+    padding: 24px 32px 20px;
+  }
+
+  .cta-tag {
+    margin-bottom: 12px;
+  }
+
+  .s-cta h2 {
+    font-size: clamp(2.1rem, 4.4vw, 3.2rem);
+    margin-bottom: 12px;
+    line-height: 1.03;
+  }
+
+  .s-cta p {
+    font-size: clamp(1rem, 1.45vw, 1.08rem);
+    line-height: 1.55;
+    margin-bottom: 18px;
+    max-width: 640px;
+  }
+
+  .cta-features {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .cta-feat {
+    padding: 8px 14px;
+    font-size: .84rem;
+  }
+
+  .cta-btns {
+    margin-bottom: 10px;
+  }
+
+  .cta-note {
+    font-size: .74rem;
+  }
+}
+
 /* =========================================
    CORRECCIÓN HERO MÓVIL (Pégalo al final de Inicio.css)
 ========================================= */

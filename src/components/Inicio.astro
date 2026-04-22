@@ -491,13 +491,55 @@ function initMap() {
   }).addTo(map);
 
   const spots = [
-    { lat: -16.4955, lng: -68.1336, name: 'Calle de las Brujas',   desc: 'Misticismo aymara' },
-    { lat: -16.5400, lng: -68.0800, name: 'Valle de la Luna',      desc: 'Naturaleza única' },
-    { lat: -16.4900, lng: -68.1200, name: 'Mirador Killi Killi',   desc: 'La Paz a tus pies' },
-    { lat: -16.4970, lng: -68.1330, name: 'Iglesia San Francisco', desc: 'Joya colonial' },
-    { lat: -16.4960, lng: -68.1344, name: 'Plaza Murillo',         desc: 'Corazón político' },
-    { lat: -16.4940, lng: -68.1350, name: 'Calle Jaén',            desc: 'La más colonial' },
-    { lat: -16.5010, lng: -68.1300, name: 'Teleférico',            desc: 'Vuela sobre La Paz' },
+    {
+      lat: -16.4955,
+      lng: -68.1336,
+      name: 'Calle de las Brujas',
+      desc: 'Misticismo aymara',
+      detail: 'Artesanías rituales, yatiris y cultura viva en pleno centro histórico.'
+    },
+    {
+      lat: -16.5400,
+      lng: -68.0800,
+      name: 'Valle de la Luna',
+      desc: 'Naturaleza única',
+      detail: 'Formaciones de arcilla y senderos panorámicos a pocos minutos de la ciudad.'
+    },
+    {
+      lat: -16.4900,
+      lng: -68.1200,
+      name: 'Mirador Killi Killi',
+      desc: 'La Paz a tus pies',
+      detail: 'Vista completa de la hoyada paceña con el Illimani como telón de fondo.'
+    },
+    {
+      lat: -16.4970,
+      lng: -68.1330,
+      name: 'Iglesia San Francisco',
+      desc: 'Joya colonial',
+      detail: 'Templo emblemático con fachada barroco-mestiza e historia virreinal.'
+    },
+    {
+      lat: -16.4960,
+      lng: -68.1344,
+      name: 'Plaza Murillo',
+      desc: 'Corazón político',
+      detail: 'Centro cívico de Bolivia, rodeado por Palacio y edificios históricos.'
+    },
+    {
+      lat: -16.4940,
+      lng: -68.1350,
+      name: 'Calle Jaén',
+      desc: 'La más colonial',
+      detail: 'Arquitectura colonial, museos y uno de los paseos más fotogénicos de La Paz.'
+    },
+    {
+      lat: -16.5010,
+      lng: -68.1300,
+      name: 'Teleférico',
+      desc: 'Vuela sobre La Paz',
+      detail: 'Recorrido aéreo con miradores urbanos y conexión entre zonas clave.'
+    },
   ];
 
   const pulseIcon = L.divIcon({
@@ -512,20 +554,26 @@ function initMap() {
     iconAnchor: [6, 6],
   });
 
-  spots.forEach(s => {
+  const markers = spots.map((s) =>
     L.marker([s.lat, s.lng], { icon: pulseIcon })
       .addTo(map)
       .bindPopup(
-        `<b style="font-family:'Cormorant Garamond',serif">${s.name}</b>
-         <br><span style="font-size:.76rem;color:#999">${s.desc}</span>`,
+        `<b style="font-family:'Cormorant Garamond',serif;font-size:1.05rem">${s.name}</b>
+         <br><span style="font-size:.78rem;color:#6c7a80;font-weight:600">${s.desc}</span>
+         <br><span style="font-size:.76rem;color:#51626a;line-height:1.45;display:inline-block;margin-top:4px">${s.detail}</span>`,
         { className: 'dp' }
-      );
-  });
+      )
+  );
 
   document.querySelectorAll('.mp-item').forEach((el, i) => {
-    el.addEventListener('click', () =>
-      map.setView([spots[i].lat, spots[i].lng], 15, { animate: true })
-    );
+    el.addEventListener('click', () => {
+      const spot = spots[i];
+      const marker = markers[i];
+      if (!spot || !marker) return;
+
+      map.flyTo([spot.lat, spot.lng], 15, { animate: true, duration: 0.6 });
+      setTimeout(() => marker.openPopup(), 320);
+    });
   });
 }
 
