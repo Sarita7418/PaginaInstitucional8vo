@@ -41,6 +41,7 @@ import './Registro.css';
                                 <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                 <input type="text" id="nombres" name="nombres" placeholder="Tus nombres" required autocomplete="given-name" />
                             </div>
+                            <span class="field-error" id="err-nombres"></span>
                         </div>
 
                         <div class="field-row">
@@ -50,6 +51,7 @@ import './Registro.css';
                                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                     <input type="text" id="ap-paterno" name="ap_paterno" placeholder="Apellido paterno" required autocomplete="family-name" />
                                 </div>
+                                <span class="field-error" id="err-ap-paterno"></span>
                             </div>
                             <div class="field">
                                 <label for="ap-materno">Apellido Materno</label>
@@ -57,6 +59,7 @@ import './Registro.css';
                                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                     <input type="text" id="ap-materno" name="ap_materno" placeholder="Apellido materno" autocomplete="additional-name" />
                                 </div>
+                                <span class="field-error" id="err-ap-materno"></span>
                             </div>
                         </div>
 
@@ -67,6 +70,7 @@ import './Registro.css';
                                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.32 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                     <input type="tel" id="telefono" name="telefono" placeholder="Ej: 76599447" required autocomplete="tel" />
                                 </div>
+                                <span class="field-error" id="err-telefono"></span>
                             </div>
                             <div class="field">
                                 <label for="fecha-nac">Fecha de Nac. <span class="required">*</span></label>
@@ -74,6 +78,7 @@ import './Registro.css';
                                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                                     <input type="date" id="fecha-nac" name="fecha_nacimiento" required />
                                 </div>
+                                <span class="field-error" id="err-fecha-nac"></span>
                             </div>
                         </div>
 
@@ -83,6 +88,7 @@ import './Registro.css';
                                 <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                 <input type="email" id="email" name="email" placeholder="tu@correo.com" required autocomplete="email" />
                             </div>
+                            <span class="field-error" id="err-email"></span>
                         </div>
 
                         <div class="field-row">
@@ -95,6 +101,7 @@ import './Registro.css';
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                     </button>
                                 </div>
+                                <span class="field-error" id="err-password"></span>
                             </div>
                             <div class="field">
                                 <label for="password2">Confirmar <span class="required">*</span></label>
@@ -105,6 +112,7 @@ import './Registro.css';
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                     </button>
                                 </div>
+                                <span class="field-error" id="err-password2"></span>
                             </div>
                         </div>
 
@@ -115,6 +123,7 @@ import './Registro.css';
                                 <a href="#">Política de Privacidad</a> de Aventuras Paceñas S.R.L.
                             </label>
                         </div>
+                        <span class="field-error" id="err-terminos" style="margin-top:-10px; margin-bottom:15px; display:block; text-align:center;"></span>
 
                         <button type="submit" class="btn-primary" id="btn-submit">
                             <span id="btn-text">Crear mi Cuenta</span>
@@ -141,14 +150,12 @@ import './Registro.css';
         <div class="modal-icon">
             <img src="/images/logo.png" alt="Logo Aventuras Paceñas" style="height:80px;width:auto;border-radius:12px;" />
         </div>
-        <h2 class="modal-title">¡Bienvenido!</h2>
-        <p class="modal-msg">
-            Tu cuenta ha sido creada exitosamente,
-            <strong class="modal-name" id="modal-nombre"></strong>.<br /><br />
-            Ya eres parte de la comunidad de Aventuras Paceñas.
+        <h2 class="modal-title" style="color: var(--color-green); margin-bottom: 0.5rem;">¡Felicidades!</h2>
+        <p class="modal-msg" style="font-size: 1.05rem; line-height: 1.5; color: var(--color-dark);">
+            Tu cuenta ha sido creada exitosamente, <strong class="modal-name" id="modal-nombre"></strong>.<br /><br />
+            Con esta misma cuenta ya puedes acceder tanto a nuestra plataforma web como a la <strong>App Móvil Wali</strong> para llevar a La Paz en tu bolsillo.
         </p>
-        <a href="/" class="modal-btn">Ir al Inicio →</a>
-    </div>
+<button type="button" class="modal-btn" id="btn-cerrar-modal" style="width: 100%; margin-top: 1rem; cursor: pointer; border: none; text-align: center; justify-content: center; display: flex; align-items: center;">Continuar</button>    </div>
 </div>
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -174,6 +181,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnText   = document.getElementById('btn-text');
     const btnIcon   = document.getElementById('btn-icon');
     const spinner   = document.getElementById('btn-spinner');
+    const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+
+    // === LÓGICA DEL BOTÓN DEL MODAL ===
+    btnCerrarModal.addEventListener('click', () => {
+        modal.classList.remove('open');
+        // Redirige al usuario al inicio (o cambia '/' por la URL de tu dashboard si prefieres)
+        window.location.href = '/'; 
+    });
+
+    // === REGLAS DE ENTRADA EN TIEMPO REAL ===
+    // 1. Teléfono: Solo números, máximo 8 dígitos
+    const telInput = document.getElementById('telefono');
+    telInput.addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, ''); // Elimina todo lo que no sea número
+        if (this.value.length > 8) {
+            this.value = this.value.slice(0, 8);
+        }
+    });
+
+    // 2. Nombres y Apellidos: Solo letras y espacios
+    const textFields = ['nombres', 'ap-paterno', 'ap-materno'];
+    textFields.forEach(id => {
+        document.getElementById(id).addEventListener('input', function() {
+            this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+        });
+    });
+
+    // Función para mostrar errores en línea
+    function setFieldError(inputId, message) {
+        const inputWrapper = document.getElementById(inputId).closest('.input-wrapper');
+        const errorSpan = document.getElementById(`err-${inputId}`);
+        
+        if (message) {
+            if(inputWrapper) inputWrapper.style.borderColor = '#d32f2f'; // Borde rojo
+            errorSpan.textContent = message;
+            errorSpan.style.display = 'block';
+            errorSpan.style.color = '#d32f2f';
+            errorSpan.style.fontSize = '0.8rem';
+            errorSpan.style.marginTop = '4px';
+        } else {
+            if(inputWrapper) inputWrapper.style.borderColor = ''; // Restaura el borde original
+            errorSpan.style.display = 'none';
+        }
+    }
+
+    // Función para limpiar todos los errores
+    function clearAllErrors() {
+        errorDiv.style.display = 'none';
+        document.querySelectorAll('.field-error').forEach(span => span.style.display = 'none');
+        document.querySelectorAll('.input-wrapper').forEach(wrapper => wrapper.style.borderColor = '');
+        document.getElementById('err-terminos').style.display = 'none';
+    }
 
     function showError(msg) {
         errorDiv.textContent = msg;
@@ -191,7 +250,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        errorDiv.style.display = 'none';
+        clearAllErrors();
+        let hasErrors = false;
 
         const nombres  = form.nombres.value.trim();
         const apPat    = form.ap_paterno.value.trim();
@@ -203,22 +263,55 @@ document.addEventListener('DOMContentLoaded', () => {
         const pass2    = form.password2.value;
         const terminos = form.terminos.checked;
 
-        if (!nombres || !apPat || !telefono || !fechaNac || !email || !pass) {
-            showError('Por favor completa todos los campos obligatorios (*).');
-            return;
+        // === VALIDACIONES AL ENVIAR ===
+        if (!nombres) { setFieldError('nombres', 'Este campo es obligatorio.'); hasErrors = true; }
+        if (!apPat) { setFieldError('ap-paterno', 'Este campo es obligatorio.'); hasErrors = true; }
+        
+        if (!telefono) { 
+            setFieldError('telefono', 'Este campo es obligatorio.'); 
+            hasErrors = true; 
+        } else if (telefono.length !== 8) {
+            setFieldError('telefono', 'El teléfono debe tener exactamente 8 dígitos.'); 
+            hasErrors = true; 
         }
-        if (pass.length < 6) {
-            showError('La contraseña debe tener al menos 6 caracteres.');
-            return;
+
+        if (!fechaNac) { setFieldError('fecha-nac', 'Selecciona tu fecha de nacimiento.'); hasErrors = true; }
+        
+        // Validación de formato de correo
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+            setFieldError('email', 'Este campo es obligatorio.');
+            hasErrors = true;
+        } else if (!emailRegex.test(email)) {
+            setFieldError('email', 'Ingresa un correo electrónico válido.');
+            hasErrors = true;
         }
-        if (pass !== pass2) {
-            showError('Las contraseñas no coinciden. Verifícalas.');
-            return;
+
+        if (!pass) {
+            setFieldError('password', 'Este campo es obligatorio.');
+            hasErrors = true;
+        } else if (pass.length < 6) {
+            setFieldError('password', 'La contraseña debe tener al menos 6 caracteres.');
+            hasErrors = true;
         }
+
+        if (!pass2) {
+            setFieldError('password2', 'Confirma tu contraseña.');
+            hasErrors = true;
+        } else if (pass !== pass2) {
+            setFieldError('password2', 'Las contraseñas no coinciden.');
+            hasErrors = true;
+        }
+
         if (!terminos) {
-            showError('Debes aceptar los Términos y Condiciones para continuar.');
-            return;
+            const errTerm = document.getElementById('err-terminos');
+            errTerm.textContent = 'Debes aceptar los Términos y Condiciones.';
+            errTerm.style.display = 'block';
+            errTerm.style.color = '#d32f2f';
+            hasErrors = true;
         }
+
+        if (hasErrors) return; // Detiene el envío si hay errores
 
         setLoading(true);
 
@@ -255,6 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Muestra el modal si todo fue exitoso
             modalNm.textContent = nombres;
             modal.classList.add('open');
 
