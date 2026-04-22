@@ -13,23 +13,23 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'DM Sans', sans-serif; background-color: var(--dark-bg); overflow: hidden; }
+body { font-family: 'DM Sans', sans-serif; background-color: var(--dark-bg); overflow-y: auto; }
 
 /* CONTENEDOR RAIZ: OCUPA TODA LA PANTALLA */
 .reg-root {
-    height: 100vh; width: 100vw;
-    display: flex; align-items: center; justify-content: center; overflow: hidden;
+    min-height: calc(100vh - 103px); width: 100%;
+    display: flex; align-items: flex-start; justify-content: center; overflow: visible;
 }
 
 /* CONTENEDOR SPLIT: DIVIDE LA PANTALLA EN DOS (Laptop) */
 .reg-split-container { 
-    display: flex; width: 100%; height: 100%; overflow: hidden; 
+    display: flex; width: 100%; min-height: calc(100vh - 103px); overflow: visible; 
 }
 
 /* === BLOQUE IZQUIERDO: IMAGEN === */
 .reg-image-pane {
     flex: 1; position: relative;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: flex-start; justify-content: center;
     padding: 60px; color: var(--text-on-dark); overflow: hidden;
 }
 
@@ -88,8 +88,8 @@ body { font-family: 'DM Sans', sans-serif; background-color: var(--dark-bg); ove
 .reg-form-pane {
     flex: 1; 
     background-color: var(--form-bg);
-    display: flex; align-items: center; justify-content: center;
-    padding: 60px; height: 100%; overflow-y: auto;
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 28px 60px 60px; min-height: calc(100vh - 103px); overflow-y: auto;
 }
 
 /* Form wrapper ligeramente más ancho que el login (480px vs 420px) porque tiene 2 columnas */
