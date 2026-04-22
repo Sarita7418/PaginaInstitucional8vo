@@ -108,7 +108,7 @@
    ESTRUCTURA DE SECCIONES
 ========================================= */
 .w-section {
-  min-height: calc(100vh - var(--header-height)); 
+  min-height: max(620px, calc(100vh - var(--header-height))); 
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -116,7 +116,7 @@
   align-items: center;    
   position: relative;
   overflow: hidden;
-  padding-top: 60px; 
+  padding: clamp(20px, 3vh, 40px) 0 clamp(14px, 2vh, 24px);
 }
 
 /* LÍNEA SEPARADORA ÁMBAR PARA CADA SECCIÓN (Excepto el Hero) */
@@ -151,11 +151,11 @@
 
 .hero-title { 
   font-family: 'Cormorant Garamond', serif; 
-  font-size: clamp(3.5rem, 8vw, 6rem); 
+  font-size: clamp(2.8rem, 6vw, 4.8rem); 
   font-weight: 900; 
-  line-height: 0.95; 
+  line-height: 0.98; 
   letter-spacing: -1.5px;
-  margin-bottom: 16px; 
+  margin-bottom: 10px; 
   color: var(--color-dark);
 }
 
@@ -166,17 +166,17 @@
 }
 
 .hero-sub { 
-  font-size: clamp(1.2rem, 2.5vw, 1.6rem); 
+  font-size: clamp(1rem, 1.8vw, 1.3rem); 
   font-weight: 500; 
-  line-height: 1.6; 
+  line-height: 1.45; 
   color: rgba(35,55,62,.85); 
   max-width: 650px; 
-  margin: 0 0 16px 0; 
+  margin: 0 0 10px 0; 
   text-align: left; 
 }
 
 .hero-btns { 
-  margin-top: 24px; display: flex; gap: 11px; flex-wrap: wrap; justify-content: flex-start; 
+  margin-top: 14px; display: flex; gap: 11px; flex-wrap: wrap; justify-content: flex-start; 
 }
 
 /* --- SECCIONES DE FUNCIONES --- */
@@ -197,10 +197,10 @@
   z-index: 3;
   text-align: center;
   max-width: 1100px;
-  margin: 0 auto 36px;
+  margin: 0 auto 18px;
   padding: 0 20px;
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  font-size: clamp(1.8rem, 3.7vw, 3.2rem);
   line-height: 1.08;
   font-weight: 700;
   color: var(--color-dark);
@@ -210,7 +210,7 @@
 .feat-header {
   position: relative; z-index: 3;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   padding: 0 20px;
 }
 
@@ -223,7 +223,7 @@
 
 .stit-main {
   font-family: 'Cormorant Garamond', serif; 
-  font-size: clamp(2.5rem, 4vw, 3.8rem); 
+  font-size: clamp(2rem, 3.1vw, 3rem); 
   font-weight: 700; line-height: 1.15; 
   color: var(--color-teal); /* Turquesa para mayor impacto */
   margin: 0;
@@ -234,14 +234,14 @@
   position: relative; z-index: 3;
   max-width: 1240px; margin: 0 0 0 0; width: 100%;
   padding: 0 64px; display: grid; grid-template-columns: 1fr 1fr;
-  gap: 60px; align-items: center;
+  gap: clamp(20px, 3vw, 48px); align-items: center;
 }
 .feat-container.row-reverse { direction: rtl; }
 .feat-container.row-reverse > * { direction: ltr; }
 
 /* 🌟 Tarjeta Blanca */
 .feat-text-card {
-  padding: 35px 40px; /* Un poco menos de padding ya que no tiene título */
+  padding: clamp(16px, 2.2vw, 32px) clamp(18px, 2.6vw, 36px); /* Un poco menos de padding ya que no tiene título */
   border-radius: 24px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -253,7 +253,7 @@
   box-shadow: 0 20px 40px rgba(35,55,62,0.05);
 }
 
-.feat-desc { font-size: 1.15rem; color: var(--color-dark); line-height: 1.7; margin: 0; font-weight: 500; } 
+.feat-desc { font-size: clamp(1rem, 1.2vw, 1.12rem); color: var(--color-dark); line-height: 1.55; margin: 0; font-weight: 500; } 
 
 /* Imágenes UI */
 .feat-visual-content { position: relative; display: flex; justify-content: center; }
@@ -311,19 +311,83 @@
   
   .w-section { 
     min-height: calc(100vh - var(--header-height)); 
-    height: calc(100dvh - var(--header-height)); 
     padding: 40px 0 30px; 
-    justify-content: center;
+    justify-content: flex-start;
   }
   
   .hero-wali { 
     min-height: calc(100vh - var(--header-height)); 
-    height: calc(100dvh - var(--header-height)); 
   }
   
   .s-cta { padding: 0 24px; }
   .stit-main { font-size: clamp(2rem, 6vw, 2.6rem); }
   .feat-desc { font-size: 1.05rem; }
+}
+
+@media (max-height: 900px) {
+  .w-section {
+    min-height: auto;
+    justify-content: flex-start;
+    padding: 16px 0 14px;
+  }
+
+  .hero-wali {
+    min-height: calc(100vh - var(--header-height));
+  }
+
+  .badge {
+    margin-bottom: 10px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 5.2vw, 3.6rem);
+    margin-bottom: 6px;
+  }
+
+  .hero-sub {
+    font-size: clamp(.95rem, 1.3vw, 1.05rem);
+    line-height: 1.38;
+    margin-bottom: 8px;
+  }
+
+  .hero-btns {
+    margin-top: 8px;
+  }
+
+  .ventajas-intro-title {
+    margin-bottom: 10px;
+    font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+  }
+
+  .feat-header {
+    margin-bottom: 12px;
+  }
+
+  .stit-main {
+    font-size: clamp(1.65rem, 2.4vw, 2.4rem);
+  }
+
+  .feat-container {
+    gap: 16px;
+  }
+
+  .feat-text-card {
+    padding: 14px 16px;
+  }
+
+  .feat-desc {
+    font-size: .96rem;
+    line-height: 1.42;
+  }
+
+  .s-cta {
+    min-height: auto;
+    padding: 18px 32px;
+  }
+
+  .cta-tag {
+    margin-bottom: 10px;
+  }
 }
 
 @media (max-width: 580px) {
