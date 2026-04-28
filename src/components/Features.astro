@@ -1,49 +1,83 @@
 ---
 import './Features.css';
 
-// Las secciones mantienen su data, pero el diseño será unificado al estilo claro.
 const features = [
   {
-    id: 'audioguia', tag: 'Contexto Histórico', title: 'Audioguías Narrativas',
+    id: 'audioguia',
+    tag: 'Contexto Histórico',
+    title: 'Audioguías Narrativas',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`,
     desc: 'Wali te enviará una notificación al acercarte a un sitio turístico, activando audioguías inmersivas que te explicarán toda la historia y el contexto del lugar.',
+    detail: 'Activación automática por geofencing · Descarga offline · Transcripción para personas con discapacidad auditiva',
     bg: '/images/calle_jaen.jpg',
-    interfaz: '/images/interfaz1.png'
+    interfaz: '/images/interfaz1.png',
+    color: 'var(--color-teal)'
   },
   {
-    id: 'mapas', tag: 'Cartografía Avanzada', title: 'Mapas y Geolocalización',
+    id: 'mapas',
+    tag: 'Cartografía Avanzada',
+    title: 'Mapas y Geolocalización',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>`,
     desc: 'Observa tu entorno con precisión. Encuentra sitios de interés, descubre rutas turísticas recomendadas y visualiza el mapa interactivo offline.',
+    detail: 'POIs categorizados · Modo "Cerca de mí" · Rutas en tiempo real a pie o en transporte',
     bg: '/images/altiplano.jpg',
-    interfaz: '/images/interfaz2.png'
+    interfaz: '/images/interfaz2.png',
+    color: 'var(--color-green)'
   },
   {
-    id: 'itinerarios', tag: 'Planificación a Medida', title: 'Itinerarios Inteligentes',
+    id: 'itinerarios',
+    tag: 'Planificación a Medida',
+    title: 'Itinerarios Inteligentes',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/></svg>`,
     desc: 'Dinos qué te gusta y nosotros armamos el plan. Escoge tus actividades y Wali generará un itinerario recomendado, completamente editable.',
+    detail: 'IA personalizada · Drag & drop de actividades · Vista de calendario · Recálculo automático de tiempos',
     bg: '/images/valle_luna.jpg',
-    interfaz: '/images/interfaz3.png'
+    interfaz: '/images/interfaz3.png',
+    color: 'var(--color-orange)'
   },
   {
-    id: 'asistente', tag: 'Atención 24/7', title: 'Asistente Inteligente',
+    id: 'asistente',
+    tag: 'Atención 24/7',
+    title: 'Asistente Inteligente',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
     desc: 'Tu guía paceño de bolsillo. Nuestro chatbot de IA está listo para hacerte recomendaciones de rutas y resolver dudas turísticas en tiempo real.',
+    detail: 'Recomendaciones contextuales · Consultas culturales · Disponible en múltiples idiomas',
     bg: '/images/mirador_killi.jpg',
-    interfaz: '/images/interfaz4.png'
+    interfaz: '/images/interfaz4.png',
+    color: 'var(--color-teal)'
   },
   {
-    id: 'gastronomia', tag: 'Sabores sin Riesgos', title: 'Decodificador Gastronómico',
+    id: 'gastronomia',
+    tag: 'Sabores sin Riesgos',
+    title: 'Decodificador Gastronómico',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2l1.5 1.5"/><path d="M7.5 2L9 3.5"/><path d="M12 2l1.5 1.5"/><path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10S2 17.5 2 12z"/><path d="M12 6v6l4 2"/></svg>`,
     desc: 'Apunta tu cámara al menú. Wali identificará el plato, mostrará sus ingredientes y preparación para prevenir reacciones alérgicas y sorpresas.',
+    detail: 'Escaneo OCR de menús · Enciclopedia de platos típicos · Alerta de alérgenos · Traducción instantánea',
     bg: '/images/mercado_ancestral.jpg',
-    interfaz: '/images/interfaz5.png'
+    interfaz: '/images/interfaz5.png',
+    color: 'var(--color-brown)'
   },
   {
-    id: 'seguridad', tag: 'Exploración Segura', title: 'Seguridad y Tranquilidad',
+    id: 'seguridad',
+    tag: 'Exploración Segura',
+    title: 'Seguridad y Tranquilidad',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
     desc: 'Muévete con confianza. El mapa marca zonas de precaución y cuentas con un botón de pánico integrado para llamar a la policía en emergencias.',
+    detail: 'Zonas de riesgo en mapa · Botón SOS · Alertas push · Ubicación compartida con contacto de confianza',
     bg: '/images/twanaku.jpg',
-    interfaz: '/images/interfaz6.png'
+    interfaz: '/images/interfaz6.png',
+    color: 'var(--color-green)'
   },
   {
-    id: 'tarifas', tag: 'Economía Justa', title: 'Recomendador de Tarifas',
+    id: 'tarifas',
+    tag: 'Economía Justa',
+    title: 'Recomendador de Tarifas',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
     desc: 'Evita cobros excesivos. En una ciudad sin taxímetros, nuestra herramienta te calcula la tarifa recomendada para tu ruta de transporte.',
+    detail: 'Calculadora de taxis · Precios de entradas a museos · Estimador de presupuesto diario',
     bg: '/images/Ciudad_de_La_Paz_de_noche.jpg',
-    interfaz: '/images/interfaz7.png'
+    interfaz: '/images/interfaz7.png',
+    color: 'var(--color-orange)'
   }
 ];
 ---
@@ -52,119 +86,172 @@ const features = [
 
 <div class="inicio-root wali-root">
 
+  <!-- ===== HERO ===== -->
   <section class="w-section hero-wali" style="position: relative; display: flex; align-items: center; justify-content: center;">
     <div class="hero-wali-bg" style="background-image: url('/images/lapaz.jpg')"></div>
     <div class="hero-wali-overlay"></div>
     
-    {/* CONTENEDOR SPLIT: Divide el espacio entre el texto a la izquierda y la promo a la derecha */}
-    <div class="hero-content-split" style="position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; padding: clamp(0.5rem, 2vh, 1rem) 2rem; gap: clamp(1rem, 2vw, 2rem);">
-        
-        {/* PARTE IZQUIERDA: Textos originales */}
-        <div class="hero-wali-inner" style="flex: 1 1 500px; max-width: 600px; margin: 0;">
-          <div class="badge reveal scale-in">
-            <span class="bdot"></span>
-            Aventuras Paceñas S.R.L.
-          </div>
-          
-          <h1 class="hero-title reveal from-left reveal-delay-1">
-            Conoce a <em>Wali</em>
-          </h1>
-          
-          <p class="hero-sub reveal from-left reveal-delay-2">
-            Tu navaja suiza para explorar La Paz. La aplicación móvil diseñada exclusivamente para turistas, fusionando la sabiduría local con tecnología de punta para que tu experiencia sea inolvidable.
-          </p>
-          
-          <div class="hero-btns reveal from-left reveal-delay-3">
-            <button class="btn-p" onclick="scrollToSection(1)">Descubrir Funciones ↓</button>
-            <a href="/descarga" class="btn-s">Descargar App</a>
-          </div>
+    <div class="hero-content-split">
+      <div class="hero-wali-inner">
+        <div class="badge reveal scale-in">
+          <span class="bdot"></span>
+          Aventuras Paceñas S.R.L.
         </div>
-
-        {/* PARTE DERECHA: Nueva tarjeta de promoción de Registro */}
-        <div class="hero-promo reveal from-right reveal-delay-4" style="flex: 0 1 clamp(300px, 30vw, 400px);">
-          <div class="promo-card" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); padding: clamp(1.4rem, 2.5vw, 2.5rem); border-radius: 20px; box-shadow: 0 24px 48px rgba(0,0,0,0.2); text-align: center; border: 1px solid rgba(255,255,255,0.5);">
-                
-                <div style="background: var(--color-teal); width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; box-shadow: 0 8px 16px rgba(15, 152, 138, 0.3);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
-                </div>
-                
-                <h3 style="color: var(--color-dark); font-family: 'Cormorant Garamond', serif; font-size: clamp(1.45rem, 2.1vw, 2rem); font-weight: 700; margin-bottom: .8rem; line-height: 1.2;">
-                    Inicia tu Aventura
-                </h3>
-                
-                <p style="color: var(--color-dark); font-size: clamp(.95rem, 1.05vw, 1.05rem); margin-bottom: 1.25rem; line-height: 1.45;">
-                    Regístrate ahora y crea tu cuenta para acceder a la <strong>App Móvil Wali</strong>. Explora, planifica y descubre la ciudad sin límites.
-                </p>
-                
-                <a href="/registro" style="display: block; width: 100%; padding: 14px 20px; background: var(--color-orange); color: white; font-weight: 600; text-decoration: none; border-radius: 12px; font-size: 1.1rem; box-shadow: 0 8px 20px rgba(210, 120, 23, 0.35); transition: background 0.3s ease;">
-                    Crear mi Cuenta
-                </a>
-
-            </div>
+        <h1 class="hero-title reveal from-left reveal-delay-1">
+          Conoce a <em>Wali</em>
+        </h1>
+        <p class="hero-sub reveal from-left reveal-delay-2">
+          Tu navaja suiza para explorar La Paz. La aplicación móvil diseñada exclusivamente para turistas, fusionando la sabiduría local con tecnología de punta para que tu experiencia sea inolvidable.
+        </p>
+        <div class="hero-btns reveal from-left reveal-delay-3">
+          <button class="btn-p" onclick="scrollToFeatures()">Descubrir Funciones ↓</button>
+          <a href="/descarga" class="btn-s">Descargar App</a>
         </div>
+      </div>
 
+      <div class="hero-promo reveal from-right reveal-delay-4">
+        <div class="promo-card">
+          <div class="promo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          </div>
+          <h3 class="promo-title">Inicia tu Aventura</h3>
+          <p class="promo-desc">Regístrate ahora y crea tu cuenta para acceder a la <strong>App Móvil Wali</strong>. Explora, planifica y descubre la ciudad sin límites.</p>
+          <a href="/registro" class="promo-btn">Crear mi Cuenta</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  {features.map((feat, index) => (
-    <section class="w-section feat-section" style="position: relative;">
-      
-      <div class="feat-bg-img" style={`background-image: url('${feat.bg}')`}></div>
-      <div class="feat-bg-overlay overlay-cream"></div>
+  <!-- ===== SECCIÓN FEATURES (CARRUSEL HORIZONTAL) ===== -->
+  <section class="w-section feat-showcase" id="features-section">
+    
+    <div class="feat-showcase-header reveal from-bottom">
+      <p class="feat-showcase-eyebrow">Todo lo que necesitas</p>
+      <h2 class="feat-showcase-title">Las ventajas de <em>Wali</em></h2>
+      <p class="feat-showcase-sub">7 funciones pensadas para tu experiencia en La Paz</p>
+    </div>
 
-      {index === 0 && (
-        <h2 class="ventajas-intro-title reveal from-bottom">
-          A continuación te describimos las ventajas de nuestra aplicación
-        </h2>
-      )}
+    <!-- TABS DE NAVEGACIÓN -->
+    <div class="feat-tabs reveal from-bottom reveal-delay-1" id="feat-tabs">
+      {features.map((f, i) => (
+        <button class={`feat-tab ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={f.title}>
+          <span class="feat-tab-icon" set:html={f.icon}></span>
+          <span class="feat-tab-label">{f.tag}</span>
+        </button>
+      ))}
+    </div>
 
-      <div class="feat-header reveal from-bottom">
-        <div class="stag-main">{feat.tag}</div>
-        <h2 class="stit-main">{feat.title}</h2>
-      </div>
-
-      <div class={`feat-container ${index % 2 !== 0 ? 'row-reverse' : ''}`}>
-        
-        {/* TEXTO CENTRADO */}
-        <div class="feat-text-content" style="display: flex; align-items: center; justify-content: center; height: 100%;">
-          <div class="feat-text-card card-white reveal from-left">
-            <p class="feat-desc">
-              {feat.desc}
-            </p>
-          </div>
-        </div>
-
-        {/* CONTENEDOR VISUAL ESTANDARIZADO PARA LA INTERFAZ */}
-        <div class="feat-visual-content reveal scale-in reveal-delay-2" style="display: flex; align-items: center; justify-content: center; height: 100%;">
+    <!-- PANEL PRINCIPAL -->
+    <div class="feat-panel-wrapper reveal from-bottom reveal-delay-2">
+      {features.map((feat, i) => (
+        <div class={`feat-panel ${i === 0 ? 'active' : ''}`} data-panel={i} id={`panel-${feat.id}`}>
           
-          <div class="mockup-container" style="width: clamp(180px, 18vw, 260px); height: clamp(310px, 31vw, 448px); border-radius: 24px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.25); background: var(--white); position: relative; flex-shrink: 0; margin-bottom: .75rem;">
-            <img 
-              src={feat.interfaz} 
-              alt={`Interfaz de ${feat.title}`} 
-              loading="lazy" 
-              style="width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;"
-            />
+          <!-- Fondo con imagen -->
+          <div class="feat-panel-bg" style={`background-image: url('${feat.bg}')`}></div>
+          <div class="feat-panel-overlay"></div>
+
+          <div class="feat-panel-inner">
+
+            <!-- LADO IZQUIERDO: Texto -->
+            <div class="feat-panel-text">
+              <div class="feat-panel-tag">{feat.tag}</div>
+              <h3 class="feat-panel-title">{feat.title}</h3>
+              <p class="feat-panel-desc">{feat.desc}</p>
+              <div class="feat-panel-details">
+                {feat.detail.split(' · ').map(d => (
+                  <span class="feat-detail-chip">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    {d}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <!-- LADO DERECHO: Mockup + decoraciones -->
+            <div class="feat-panel-mockup">
+
+              <!-- Elementos decorativos alrededor del teléfono -->
+              <div class="mockup-orb"></div>
+              <div class="mockup-line-top"></div>
+              <div class="mockup-line-left"></div>
+              <div class="mockup-diamond"></div>
+              <div class="mockup-cross"></div>
+
+              <!-- Cuadrícula de puntos (4×4) -->
+              <div class="mockup-dots-grid">
+                {Array.from({ length: 16 }).map(() => (
+                  <span></span>
+                ))}
+              </div>
+
+              <!-- Marco del teléfono -->
+              <div class="mockup-phone-frame">
+                <div class="mockup-notch"></div>
+                <div class="mockup-screen">
+                  <img 
+                    src={feat.interfaz}
+                    alt={`Interfaz de ${feat.title}`}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <!-- Badge flotante con ícono del módulo -->
+              <div class="mockup-badge" style={`background: ${feat.color}`}>
+                <span set:html={feat.icon}></span>
+              </div>
+
+            </div>
+
           </div>
 
-          
+          <!-- Contador de sección -->
+          <div class="feat-panel-counter">
+            <span class="counter-current">{String(i + 1).padStart(2, '0')}</span>
+            <span class="counter-sep">/</span>
+            <span class="counter-total">{String(features.length).padStart(2, '0')}</span>
+          </div>
+
         </div>
+      ))}
+    </div>
 
-      </div>
-    </section>
-  ))}
+    <!-- NAVEGACIÓN DE PUNTOS (pills) con barra de progreso autoplay -->
+    <div class="feat-dots" id="feat-dots">
+      {features.map((_, i) => (
+        <button class={`feat-dot ${i === 0 ? 'active' : ''}`} data-dot={i} aria-label={`Ir a ${features[i].title}`}>
+          <span class="feat-dot-progress"></span>
+        </button>
+      ))}
+    </div>
 
+    <!-- Botón pausa/play autoplay -->
+    <button class="feat-autoplay-btn" id="feat-autoplay-btn" aria-label="Pausar autoplay" title="Pausar autoplay">
+      <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    </button>
+
+    <!-- Flechas prev / next -->
+    <div class="feat-arrows">
+      <button class="feat-arrow feat-arrow-prev" id="feat-prev" aria-label="Anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="feat-arrow feat-arrow-next" id="feat-next" aria-label="Siguiente">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
   <section class="w-section s-cta">
-    <div class="s-cta::before"></div>
     <div class="cta-tag reveal">📱 DISPONIBLE AHORA</div>
-
     <h2 class="stit-main reveal reveal-delay-1" style="text-align: center; margin-bottom: 15px;">
       ¿Listo para llevar<br />a <em style="color: var(--color-orange); font-style: italic;">La Paz</em> en tu bolsillo?
     </h2>
-
     <p class="reveal reveal-delay-2" style="text-align: center; margin: 0 auto 32px; color: var(--color-dark); font-size: 1.15rem;">
       Únete a los viajeros que ya están redefiniendo el turismo local con la tecnología desarrollada por Aventuras Paceñas.
     </p>
-
     <div class="cta-btns reveal reveal-delay-4">
       <a href="/descarga" class="btn-p">
         <img src="/icons/telefono.png" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:4px" alt="" />
@@ -175,30 +262,195 @@ const features = [
 
 </div>
 
+<!-- Dots de navegación lateral -->
+<div id="section-nav">
+  <button class="snav-dot active" data-i="0" aria-label="Ir a sección 1"></button>
+  <button class="snav-dot" data-i="1" aria-label="Ir a sección 2"></button>
+  <button class="snav-dot" data-i="2" aria-label="Ir a sección 3"></button>
+</div>
+<div id="kb-hint">
+  <div class="kb-key">ReP</div>
+  <div class="kb-key">AvP</div>
+</div>
+
 <script>
-  // Observer para animaciones
-  const observer = new IntersectionObserver(
+  // ========== REVEAL ANIMATIONS ==========
+  const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target); 
+          revealObserver.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
   );
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // Lógica de Navegación por Secciones
+  // ========== FEATURE TABS INTERACTIVITY ==========
+  const panels     = document.querySelectorAll('.feat-panel');
+  const tabs       = document.querySelectorAll('.feat-tab');
+  const dots       = document.querySelectorAll('.feat-dot');
+  const prevBtn    = document.getElementById('feat-prev');
+  const nextBtn    = document.getElementById('feat-next');
+  const autoplayBtn = document.getElementById('feat-autoplay-btn');
+  let current      = 0;
+
+  // ========== AUTOPLAY ==========
+  const AUTOPLAY_DELAY = 4500; // ms entre slides
+  let autoplayTimer: ReturnType<typeof setInterval> | null = null;
+  let autoplayPaused = false;
+  let progressRafId: number | null = null;
+  let progressStart: number | null = null;
+
+  function startProgressBar() {
+    // Reinicia la barra de progreso del dot activo
+    const activeDot = dots[current] as HTMLElement;
+    const bar = activeDot.querySelector('.feat-dot-progress') as HTMLElement;
+    if (!bar) return;
+
+    // Reset todas las barras
+    dots.forEach(d => {
+      const b = d.querySelector('.feat-dot-progress') as HTMLElement;
+      if (b) b.style.width = '0%';
+    });
+
+    progressStart = null;
+    if (progressRafId) cancelAnimationFrame(progressRafId);
+
+    function animateBar(ts: number) {
+      if (!progressStart) progressStart = ts;
+      const elapsed = ts - progressStart;
+      const pct = Math.min((elapsed / AUTOPLAY_DELAY) * 100, 100);
+      bar.style.width = pct + '%';
+      if (pct < 100) {
+        progressRafId = requestAnimationFrame(animateBar);
+      }
+    }
+    progressRafId = requestAnimationFrame(animateBar);
+  }
+
+  function stopProgressBar() {
+    if (progressRafId) {
+      cancelAnimationFrame(progressRafId);
+      progressRafId = null;
+    }
+    dots.forEach(d => {
+      const b = d.querySelector('.feat-dot-progress') as HTMLElement;
+      if (b) b.style.width = '0%';
+    });
+  }
+
+  function startAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    startProgressBar();
+    autoplayTimer = setInterval(() => {
+      if (!autoplayPaused) {
+        goTo(current + 1);
+      }
+    }, AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+    stopProgressBar();
+  }
+
+  function toggleAutoplay() {
+    autoplayPaused = !autoplayPaused;
+    const iconPause = autoplayBtn?.querySelector('.icon-pause') as HTMLElement;
+    const iconPlay  = autoplayBtn?.querySelector('.icon-play') as HTMLElement;
+    if (autoplayPaused) {
+      stopAutoplay();
+      if (iconPause) iconPause.style.display = 'none';
+      if (iconPlay)  iconPlay.style.display  = '';
+      autoplayBtn?.setAttribute('aria-label', 'Reanudar autoplay');
+      autoplayBtn?.setAttribute('title', 'Reanudar autoplay');
+    } else {
+      if (iconPause) iconPause.style.display = '';
+      if (iconPlay)  iconPlay.style.display  = 'none';
+      autoplayBtn?.setAttribute('aria-label', 'Pausar autoplay');
+      autoplayBtn?.setAttribute('title', 'Pausar autoplay');
+      startAutoplay();
+    }
+  }
+
+  autoplayBtn?.addEventListener('click', toggleAutoplay);
+
+  // Pausar autoplay si el usuario interactúa con los tabs, dots o flechas
+  // y retomar tras 8 segundos de inactividad
+  let resumeTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function userInteracted() {
+    if (autoplayPaused) return; // si ya está pausado manualmente, no hacer nada
+    stopAutoplay();
+    if (resumeTimer) clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      if (!autoplayPaused) startAutoplay();
+    }, 8000);
+  }
+
+  function goTo(idx: number) {
+    panels[current].classList.remove('active');
+    tabs[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (idx + panels.length) % panels.length;
+    panels[current].classList.add('active');
+    tabs[current].classList.add('active');
+    dots[current].classList.add('active');
+    tabs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    // Reinicia barra si autoplay está corriendo
+    if (!autoplayPaused && autoplayTimer) startProgressBar();
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => { userInteracted(); goTo(i); });
+  });
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => { userInteracted(); goTo(i); });
+  });
+  prevBtn?.addEventListener('click', () => { userInteracted(); goTo(current - 1); });
+  nextBtn?.addEventListener('click', () => { userInteracted(); goTo(current + 1); });
+
+  // Touch swipe
+  let touchStartX = 0;
+  const panelWrapper = document.querySelector('.feat-panel-wrapper');
+  panelWrapper?.addEventListener('touchstart', (e: Event) => {
+    touchStartX = (e as TouchEvent).changedTouches[0].screenX;
+  }, { passive: true });
+  panelWrapper?.addEventListener('touchend', (e: Event) => {
+    const diff = touchStartX - (e as TouchEvent).changedTouches[0].screenX;
+    if (Math.abs(diff) > 40) {
+      userInteracted();
+      goTo(diff > 0 ? current + 1 : current - 1);
+    }
+  }, { passive: true });
+
+  // Pausar cuando el mouse está sobre el panel
+  const featShowcase = document.getElementById('features-section');
+  featShowcase?.addEventListener('mouseenter', () => {
+    if (!autoplayPaused && autoplayTimer) {
+      stopAutoplay();
+    }
+  });
+  featShowcase?.addEventListener('mouseleave', () => {
+    if (!autoplayPaused) {
+      startAutoplay();
+    }
+  });
+
+  // ========== SECTION SCROLL NAV ==========
   const sections = Array.from(document.querySelectorAll('.w-section'));
-  let currentSection = 0;
+  const snavDots = document.querySelectorAll('.snav-dot');
   let isScrolling = false;
 
   function getActiveSection() {
     const mid = window.innerHeight / 2;
-    let closest = 0;
-    let closestDist = Infinity;
+    let closest = 0, closestDist = Infinity;
     sections.forEach((s, i) => {
       const rect = s.getBoundingClientRect();
       const dist = Math.abs(rect.top + rect.height / 2 - mid);
@@ -210,71 +462,52 @@ const features = [
   function scrollToSection(idx: number) {
     if (idx < 0 || idx >= sections.length || isScrolling) return;
     isScrolling = true;
-    currentSection = idx;
-    const el = sections[idx];
-    const headerH = document.querySelector('header')?.offsetHeight || 0; 
-    const top = el.getBoundingClientRect().top + window.scrollY - headerH;
+    const headerH = (document.querySelector('header') as HTMLElement)?.offsetHeight || 0;
+    const top = sections[idx].getBoundingClientRect().top + window.scrollY - headerH;
     window.scrollTo({ top, behavior: 'smooth' });
     setTimeout(() => { isScrolling = false; }, 900);
   }
 
+  (window as any).scrollToFeatures = () => scrollToSection(1);
   (window as any).scrollToSection = scrollToSection;
 
-  // Dots de navegación derecha
-  const navDots = document.createElement('div');
-  navDots.id = 'section-nav';
-  navDots.innerHTML = sections.map((_, i) =>
-    `<button class="snav-dot" data-i="${i}" aria-label="Ir a sección ${i + 1}"></button>`
-  ).join('');
-  const waliRoot = document.querySelector('.wali-root');
-  if (waliRoot) {
-    waliRoot.appendChild(navDots);
-
-    // Hint teclado
-    const kbHint = document.createElement('div');
-    kbHint.id = 'kb-hint';
-    kbHint.innerHTML = `<div class="kb-key">ReP</div><div class="kb-key">AvP</div>`;
-    waliRoot.appendChild(kbHint);
-
-    navDots.querySelectorAll('.snav-dot').forEach(dot => {
-      dot.addEventListener('click', () => {
-        const idx = Number((dot as HTMLElement).dataset.i);
-        scrollToSection(idx);
-      });
-    });
-
-    function updateActiveDot() {
-      const active = getActiveSection();
-      currentSection = active;
-      navDots.querySelectorAll('.snav-dot').forEach((d, i) =>
-        d.classList.toggle('active', i === active)
-      );
-    }
-
-    window.addEventListener('scroll', updateActiveDot, { passive: true });
-    updateActiveDot();
-  }
-
-  // Atajos Teclado
-  document.addEventListener('keydown', e => {
-    const activeTag = document.activeElement?.tagName || '';
+  document.addEventListener('keydown', (e) => {
+    const activeTag = (document.activeElement as HTMLElement)?.tagName || '';
     if (['INPUT','TEXTAREA','SELECT'].includes(activeTag)) return;
 
-    const isNext = e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey);
-    const isPrev = e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey);
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); userInteracted(); goTo(current - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); userInteracted(); goTo(current + 1); }
 
-    if (isNext) {
-      e.preventDefault();
-      scrollToSection(getActiveSection() + 1);
-    } else if (isPrev) {
-      e.preventDefault();
-      scrollToSection(getActiveSection() - 1);
-    } else if (e.key === 'Home') {
-      e.preventDefault();
-      scrollToSection(0);
-    } else if (e.key === 'End') {
-      e.preventDefault();
-      scrollToSection(sections.length - 1);
-    }
+    const isNext = e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey);
+    const isPrev = e.key === 'ArrowUp'   || e.key === 'PageUp'   || (e.key === ' ' && e.shiftKey);
+    if (isNext) { e.preventDefault(); scrollToSection(getActiveSection() + 1); }
+    if (isPrev) { e.preventDefault(); scrollToSection(getActiveSection() - 1); }
+    if (e.key === 'Home') { e.preventDefault(); scrollToSection(0); }
+    if (e.key === 'End')  { e.preventDefault(); scrollToSection(sections.length - 1); }
   });
+
+  snavDots.forEach(dot => {
+    dot.addEventListener('click', () => scrollToSection(Number((dot as HTMLElement).dataset.i)));
+  });
+
+  function updateSnavDots() {
+    const active = getActiveSection();
+    snavDots.forEach((d, i) => d.classList.toggle('active', i === active));
+  }
+  window.addEventListener('scroll', updateSnavDots, { passive: true });
+  updateSnavDots();
+
+  // ========== ARRANCAR AUTOPLAY AL CARGAR ==========
+  // Esperar a que la sección sea visible antes de arrancar
+  const showcaseObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!autoplayTimer && !autoplayPaused) startAutoplay();
+      } else {
+        stopAutoplay();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  if (featShowcase) showcaseObserver.observe(featShowcase);
 </script>
