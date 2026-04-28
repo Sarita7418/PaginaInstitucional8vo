@@ -33,23 +33,34 @@
 @media(max-width:680px) { #section-nav, #kb-hint { display: none; } }
 
 /* ══════════════════════════════════════
-   ESTRUCTURA DE SECCIONES (100vh - header)
+   ESTRUCTURA DE SECCIONES (100vh estricto - header)
 ══════════════════════════════════════ */
 .n-section {
-   min-height: max(620px, calc(100vh - var(--header-height))); 
+  /* Forzamos el alto exacto restando el header. Usamos dvh para navegadores móviles */
+  height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height)); 
   width: 100%;
-   display: flex; flex-direction: column; justify-content: center; align-items: center;
-   position: relative; overflow: hidden;
-   padding: clamp(18px, 2.8vh, 40px) 0 clamp(12px, 2vh, 24px);
-  border-bottom: 2px solid var(--color-orange); /* Línea separadora ámbar */
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  position: relative; 
+  
+  /* Si en algún monitor el contenido es más alto que la pantalla, hace scroll interno */
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+  /* Reducimos un poco el padding vertical para dar más espacio al contenido */
+  padding: clamp(10px, 2vh, 40px) 0 clamp(10px, 2vh, 24px);
+  border-bottom: 2px solid var(--color-orange);
 }
+
 /* Al Hero no le ponemos la línea separadora inferior */
 .nos-hero-section { border-bottom: none; }
 
 .nos-hero {
-   justify-content: flex-start;
-   min-height: clamp(460px, 58vh, calc(100vh - var(--header-height)));
-   padding-top: clamp(24px, 4.5vh, 64px);
+   justify-content: center; /* Centrado perfecto para el hero */
+   padding-top: 0; /* Eliminamos el padding top forzado para que el flex center haga su trabajo */
 }
 
 /* ══════════════════════════════════════
@@ -230,10 +241,15 @@
    RESPONSIVE MOBILE (100dvh + Sliders Fix)
 ══════════════════════════════════════ */
 @media (max-width: 960px) {
-   .n-section { min-height: calc(100vh - var(--header-height)); justify-content: flex-start; padding: 24px 0 14px; }
+   .n-section { 
+      /* Mantenemos la altura estricta en móvil */
+      height: calc(100dvh - var(--header-height)); 
+      min-height: unset;
+      justify-content: center; 
+      padding: 10px 0; 
+   }
 
-  /* Hero */
-   .nos-hero { padding-top: 20px; }
+   .nos-hero { padding-top: 0; }
    .nos-hero-inner { padding: 0 20px; text-align: center; align-items: center; }
    .nos-hero-subtitle { font-size: 1.05rem; max-width: 100%; }
   .nos-hero-desc { display: none; } 
@@ -290,13 +306,16 @@
 
 @media (max-height: 900px) {
    .n-section {
-      min-height: auto;
-      justify-content: flex-start;
-      padding: 14px 0 10px;
+      /* Evitamos que regrese a min-height: auto */
+      height: calc(100dvh - var(--header-height));
+      min-height: unset;
+      justify-content: center;
+      padding: 10px 0;
    }
 
    .nos-hero {
-      min-height: clamp(420px, 56vh, calc(100vh - var(--header-height)));
+      /* Eliminamos el clamp del min-height */
+      min-height: unset;
    }
 
    .nos-hero-inner { padding: 0 28px; }
