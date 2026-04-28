@@ -1,15 +1,15 @@
 /* =========================================
-   VARIABLES GLOBALES Y RESET (NUEVA PALETA)
+   VARIABLES GLOBALES Y RESET
 ========================================= */
 :root {
-  --color-cream:  #F2EBE0; /* Fondo general (Crema) */
-  --color-dark:   #23373E; /* Sidebar / Textos (Verde oscuro) */
-  --color-teal:   #0F988A; /* Elemento activo / Títulos (Turquesa) */
-  --color-green:  #197D61; /* Botones positivos (Esmeralda) */
-  --color-orange: #D27817; /* Destacados / Separadores (Ámbar) */
-  --color-brown:  #7A3928; /* Acciones críticas (Terracota) */
+  --color-cream:  #F2EBE0;
+  --color-dark:   #23373E;
+  --color-teal:   #0F988A;
+  --color-green:  #197D61;
+  --color-orange: #D27817;
+  --color-brown:  #7A3928;
   --white:        #ffffff;
-  --header-height: 103px;  /* Variable para el cálculo del 100% */
+  --header-height: 103px;
 }
 
 .wali-root *, .wali-root *::before, .wali-root *::after {
@@ -18,7 +18,7 @@
 
 .wali-root {
   font-family: 'DM Sans', sans-serif;
-  color: var(--color-dark); /* Texto por defecto en verde oscuro */
+  color: var(--color-dark);
   overflow-x: hidden;
   background-color: var(--color-cream);
 }
@@ -32,11 +32,11 @@
 }
 .snav-dot {
   width: 8px; height: 8px; border-radius: 50%;
-  background: rgba(35,55,62,0.15); border: 1px solid rgba(35,55,62,0.3); 
+  background: rgba(35,55,62,0.15); border: 1px solid rgba(35,55,62,0.3);
   cursor: pointer; transition: all 0.3s; padding: 0;
 }
 .snav-dot.active {
-  background: var(--color-teal); border-color: var(--color-teal); /* Turquesa para el activo */
+  background: var(--color-teal); border-color: var(--color-teal);
   transform: scale(1.4); height: 20px; border-radius: 4px;
 }
 .snav-dot:hover { background: rgba(15,152,138,0.6); }
@@ -52,7 +52,6 @@
   border-radius: 4px; display: flex; align-items: center; justify-content: center;
   font-size: 10px; color: var(--color-dark); background: rgba(35,55,62,0.05);
 }
-
 @media(max-width:680px) { #section-nav, #kb-hint { display: none; } }
 
 /* =========================================
@@ -63,7 +62,7 @@
   border: 1px solid var(--color-teal); border-radius: 2px;
   padding: 5px 13px; font-size: 12px; font-weight: 600;
   letter-spacing: .15em; text-transform: uppercase;
-  color: var(--color-teal); background: rgba(15,152,138,.1); 
+  color: var(--color-teal); background: rgba(15,152,138,.1);
   margin-bottom: 20px;
 }
 .bdot {
@@ -72,7 +71,6 @@
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
 
-/* Botones Principales (Esmeralda) */
 .btn-p {
   display: inline-flex; align-items: center; gap: 7px;
   padding: 12px 26px; background: var(--color-green); color: var(--white);
@@ -96,304 +94,781 @@
 ========================================= */
 .reveal { opacity: 0; transform: translateY(36px); transition: all .75s cubic-bezier(.22,1,.36,1); }
 .reveal.from-left  { transform: translateX(-44px); }
+.reveal.from-right { transform: translateX(44px); }
 .reveal.scale-in   { transform: translateY(20px) scale(.96); }
 .reveal.visible    { opacity: 1; transform: translate(0,0) scale(1); }
 .reveal-delay-1 { transition-delay: .08s; }
 .reveal-delay-2 { transition-delay: .16s; }
 .reveal-delay-3 { transition-delay: .24s; }
 .reveal-delay-4 { transition-delay: .32s; }
-.reveal-delay-5 { transition-delay: .40s; }
 
 /* =========================================
-   ESTRUCTURA DE SECCIONES
+   ESTRUCTURA BASE DE SECCIONES
 ========================================= */
 .w-section {
-  min-height: max(620px, calc(100vh - var(--header-height))); 
+  min-height: calc(100vh - var(--header-height));
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center;    
+  justify-content: center;
+  align-items: center;
   position: relative;
   overflow: hidden;
-  padding: clamp(20px, 3vh, 40px) 0 clamp(14px, 2vh, 24px);
 }
 
-/* LÍNEA SEPARADORA ÁMBAR PARA CADA SECCIÓN (Excepto el Hero) */
-.feat-section {
-  border-bottom: 2px solid var(--color-orange);
+/* =========================================
+   HERO
+========================================= */
+.hero-wali {
+  text-align: left;
+  padding: clamp(20px, 3vh, 40px) 0;
 }
-
-/* --- SECCIÓN HERO WALI --- */
-.hero-wali { 
-  text-align: left; 
-}
-
-.hero-wali-bg { 
-  position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; 
-}
-
-.hero-wali-overlay {
-  position: absolute; inset: 0; z-index: 1;
-  border-bottom: 2px solid var(--color-orange); /* Línea ámbar separadora */
-  /* Gradiente crema para integrar la paleta */
-  background: linear-gradient(110deg, rgba(242,235,224,.98) 0%, rgba(242,235,224,.92) 38%, rgba(255,255,255,.75) 65%, rgba(255,255,255,.4) 100%);
-}
-
-.hero-wali-inner {
-  position: relative; z-index: 3; 
-  width: 100%; 
-  max-width: 1200px; 
-  padding: 0 40px;
-  display: flex; flex-direction: column; 
-  align-items: flex-start; 
-}
-
-.hero-title { 
-  font-family: 'Cormorant Garamond', serif; 
-  font-size: clamp(2.8rem, 6vw, 4.8rem); 
-  font-weight: 900; 
-  line-height: 0.98; 
-  letter-spacing: -1.5px;
-  margin-bottom: 10px; 
-  color: var(--color-dark);
-}
-
-.hero-title em { 
-  font-style: italic; color: var(--color-orange); 
-  display: block; 
-  margin-top: 5px;
-}
-
-.hero-sub { 
-  font-size: clamp(1rem, 1.8vw, 1.3rem); 
-  font-weight: 500; 
-  line-height: 1.45; 
-  color: rgba(35,55,62,.85); 
-  max-width: 650px; 
-  margin: 0 0 10px 0; 
-  text-align: left; 
-}
-
-.hero-btns { 
-  margin-top: 14px; display: flex; gap: 11px; flex-wrap: wrap; justify-content: flex-start; 
-}
-
-/* --- SECCIONES DE FUNCIONES --- */
-
-.feat-bg-img {
+.hero-wali-bg {
   position: absolute; inset: 0; z-index: 0;
   background-size: cover; background-position: center;
 }
-
-/* Superposición Crema/Blanca ofuscada */
-.overlay-cream {
+.hero-wali-overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: rgba(242, 235, 224, 0.88); /* Fondo ofuscado color crema */
+  border-bottom: 2px solid var(--color-orange);
+  background: linear-gradient(110deg, rgba(242,235,224,.98) 0%, rgba(242,235,224,.92) 38%, rgba(255,255,255,.75) 65%, rgba(255,255,255,.4) 100%);
 }
-
-.ventajas-intro-title {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  max-width: 1100px;
-  margin: 0 auto 18px;
-  padding: 0 20px;
+.hero-content-split {
+  position: relative; z-index: 2;
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: space-between;
+  width: 100%; max-width: 1200px;
+  padding: clamp(0.5rem, 2vh, 1rem) 2rem;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+.hero-wali-inner {
+  flex: 1 1 500px; max-width: 600px;
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.8rem, 3.7vw, 3.2rem);
-  line-height: 1.08;
-  font-weight: 700;
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-weight: 900; line-height: 0.98;
+  letter-spacing: -1.5px; margin-bottom: 10px;
   color: var(--color-dark);
 }
+.hero-title em {
+  font-style: italic; color: var(--color-orange);
+  display: block; margin-top: 5px;
+}
+.hero-sub {
+  font-size: clamp(1rem, 1.8vw, 1.3rem); font-weight: 500;
+  line-height: 1.45; color: rgba(35,55,62,.85);
+  max-width: 650px; margin: 0 0 10px 0;
+}
+.hero-btns {
+  margin-top: 14px; display: flex; gap: 11px; flex-wrap: wrap;
+}
+.hero-promo {
+  flex: 0 1 clamp(300px, 30vw, 400px);
+}
+.promo-card {
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+  padding: clamp(1.4rem, 2.5vw, 2.5rem); border-radius: 20px;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.2); text-align: center;
+  border: 1px solid rgba(255,255,255,0.5);
+}
+.promo-icon {
+  background: var(--color-teal); width: 64px; height: 64px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem; color: white;
+  box-shadow: 0 8px 16px rgba(15,152,138,0.3);
+}
+.promo-title {
+  color: var(--color-dark); font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.45rem, 2.1vw, 2rem); font-weight: 700;
+  margin-bottom: .8rem; line-height: 1.2;
+}
+.promo-desc {
+  color: var(--color-dark); font-size: clamp(.95rem, 1.05vw, 1.05rem);
+  margin-bottom: 1.25rem; line-height: 1.45;
+}
+.promo-btn {
+  display: block; width: 100%; padding: 14px 20px;
+  background: var(--color-orange); color: white;
+  font-weight: 600; text-decoration: none; border-radius: 12px;
+  font-size: 1.1rem; box-shadow: 0 8px 20px rgba(210,120,23,0.35);
+  transition: background 0.3s ease;
+}
+.promo-btn:hover { background: var(--color-brown); }
 
-/* ENCABEZADOS (TÍTULOS POR FUERA) */
-.feat-header {
-  position: relative; z-index: 3;
+/* =========================================
+   SECCIÓN FEATURES SHOWCASE (CARRUSEL)
+========================================= */
+.feat-showcase {
+  background: var(--color-cream);
+  min-height: calc(100vh - var(--header-height));
+  height: calc(100vh - var(--header-height));
+  max-height: calc(100vh - var(--header-height));
+  padding: clamp(10px, 1.5vh, 20px) 0 clamp(8px, 1.2vh, 14px);
+  border-bottom: 2px solid var(--color-orange);
+  gap: 0;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+/* --- Encabezado --- */
+.feat-showcase-header {
   text-align: center;
-  margin-bottom: 20px;
-  padding: 0 20px;
+  padding: 0 24px;
+  margin-bottom: clamp(8px, 1.2vh, 16px);
+}
+.feat-showcase-eyebrow {
+  display: none;
+}
+.feat-showcase-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.6rem);
+  font-weight: 700; color: var(--color-dark);
+  line-height: 1.1; margin-bottom: 4px;
+}
+.feat-showcase-title em {
+  font-style: italic; color: var(--color-teal);
+}
+.feat-showcase-sub {
+  font-size: clamp(.9rem, 1.2vw, 1.05rem);
+  color: rgba(35,55,62,.65); font-weight: 400;
 }
 
-.stag-main {
-  display: inline-block; font-size: .85rem; font-weight: 700;
-  letter-spacing: .16em; text-transform: uppercase;
-  color: var(--color-teal); /* Turquesa */
-  margin-bottom: 15px;
+/* --- Tabs de navegación --- */
+.feat-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 clamp(16px, 4vw, 64px) 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  width: 100%;
+  max-width: 1240px;
+  margin-bottom: clamp(8px, 1.2vh, 16px);
+}
+.feat-tabs::-webkit-scrollbar { display: none; }
+
+.feat-tab {
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0; scroll-snap-align: start;
+  padding: 9px 16px; border-radius: 50px;
+  border: 1.5px solid rgba(35,55,62,.12);
+  background: rgba(255,255,255,0.7); cursor: pointer;
+  transition: all .25s; color: rgba(35,55,62,.55);
+  font-family: 'DM Sans', sans-serif; font-size: .8rem;
+  font-weight: 600; white-space: nowrap;
+}
+.feat-tab:hover {
+  border-color: var(--color-teal);
+  color: var(--color-teal);
+  background: rgba(15,152,138,.06);
+}
+.feat-tab.active {
+  background: var(--color-teal); color: white;
+  border-color: var(--color-teal);
+  box-shadow: 0 4px 16px rgba(15,152,138,.3);
+}
+.feat-tab-icon {
+  display: flex; align-items: center;
+  width: 18px; height: 18px;
+}
+.feat-tab-icon svg { width: 100%; height: 100%; }
+.feat-tab-label { letter-spacing: .02em; }
+
+/* --- Panel wrapper --- */
+.feat-panel-wrapper {
+  position: relative;
+  width: 100%; max-width: 1240px;
+  padding: 0 clamp(16px, 4vw, 64px);
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(0 12px 32px rgba(35,55,62,.09));
 }
 
-.stit-main {
-  font-family: 'Cormorant Garamond', serif; 
-  font-size: clamp(2rem, 3.1vw, 3rem); 
-  font-weight: 700; line-height: 1.15; 
-  color: var(--color-teal); /* Turquesa para mayor impacto */
-  margin: 0;
-}
-
-/* Contenedor Flex para Tarjeta e Imagen */
-.feat-container {
-  position: relative; z-index: 3;
-  max-width: 1240px; margin: 0 0 0 0; width: 100%;
-  padding: 0 64px; display: grid; grid-template-columns: 1fr 1fr;
-  gap: clamp(20px, 3vw, 48px); align-items: center;
-}
-.feat-container.row-reverse { direction: rtl; }
-.feat-container.row-reverse > * { direction: ltr; }
-
-/* 🌟 Tarjeta Blanca */
-.feat-text-card {
-  padding: clamp(16px, 2.2vw, 32px) clamp(18px, 2.6vw, 36px); /* Un poco menos de padding ya que no tiene título */
+/* --- Cada panel --- */
+.feat-panel {
+  display: none;
+  position: relative;
   border-radius: 24px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: transform 0.3s ease;
-}
-.card-white {
-  background: rgba(255, 255, 255, 0.95); /* Tarjeta muy clara/blanca */
-  border: 1px solid rgba(35,55,62,0.05);
-  box-shadow: 0 20px 40px rgba(35,55,62,0.05);
-}
-
-.feat-desc { font-size: clamp(1rem, 1.2vw, 1.12rem); color: var(--color-dark); line-height: 1.55; margin: 0; font-weight: 500; } 
-
-/* Imágenes UI */
-.feat-visual-content { position: relative; display: flex; justify-content: center; }
-.feat-app-img {
-  width: 100%; max-width: 340px; height: auto; border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid rgba(15,152,138,.18);
+  border-left: 4px solid var(--color-teal);
+  box-shadow:
+    0 2px 0px rgba(255,255,255,.9),
+    0 8px 32px rgba(35,55,62,.12),
+    0 24px 64px rgba(35,55,62,.15),
+    0 0 0 1px rgba(15,152,138,.06) inset;
+  background: rgba(255,255,255,.60);
+  animation: panelFadeIn .5s cubic-bezier(.22,1,.36,1) both;
 }
 
-.feat-glass {
-  position: absolute; bottom: -15px; right: 10%; background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(35,55,62,0.1); padding: 8px 16px; border-radius: 30px;
-  font-size: 0.8rem; font-weight: 700; color: var(--color-dark); box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+/* Franja de acento superior */
+.feat-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--color-teal) 0%,
+    var(--color-green) 40%,
+    var(--color-orange) 100%
+  );
+  z-index: 10;
+  pointer-events: none;
+}
+.feat-panel.active {
+  display: flex;
+  flex-direction: column;
+}
+@keyframes panelFadeIn {
+  from { opacity: 0; transform: translateY(12px) scale(.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* --- SECCIÓN CTA FINAL --- */
+/* Fondo imagen panel */
+.feat-panel-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transition: transform 6s ease;
+}
+.feat-panel.active .feat-panel-bg {
+  transform: scale(1.04);
+}
+.feat-panel-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    115deg,
+    rgba(255,255,255,.97) 0%,
+    rgba(252,249,244,.93) 32%,
+    rgba(245,240,233,.50) 55%,
+    rgba(240,235,228,.15) 75%,
+    transparent 100%
+  );
+}
+
+/* Inner layout */
+.feat-panel-inner {
+  position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: stretch;
+  gap: clamp(16px, 2.5vw, 40px);
+  padding: clamp(20px, 3vh, 40px) clamp(20px, 3.5vw, 48px);
+  flex: 1;
+  min-height: 0;
+}
+
+/* Texto */
+.feat-panel-text {
+  max-width: 520px;
+}
+.feat-panel-tag {
+  font-size: .75rem; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--color-teal);
+  margin-bottom: 12px;
+}
+.feat-panel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 700; color: var(--color-dark);
+  line-height: 1.1; margin-bottom: 16px;
+}
+.feat-panel-desc {
+  font-size: clamp(.95rem, 1.1vw, 1.08rem);
+  line-height: 1.6; color: rgba(35,55,62,.82);
+  font-weight: 400; margin-bottom: 20px;
+}
+.feat-panel-details {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.feat-detail-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 12px; border-radius: 20px;
+  background: rgba(15,152,138,.1); color: var(--color-teal);
+  font-size: .78rem; font-weight: 600; border: 1px solid rgba(15,152,138,.2);
+}
+.feat-detail-chip svg { flex-shrink: 0; }
+
+/* =========================================
+   MOCKUP — DECORADO, CENTRADO CON OFFSET IZQUIERDA/ARRIBA
+========================================= */
+.feat-panel-mockup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  margin-right: 0;
+  margin-left: -52px;
+  padding: 4px 146px 32px 16px;
+  transform: translateY(-18px);
+}
+
+/* ---- Anillo exterior (glow suave) ---- */
+.feat-panel-mockup::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border-radius: 44px;
+  background: radial-gradient(
+    ellipse 80% 90% at 60% 50%,
+    rgba(15,152,138,.13) 0%,
+    rgba(210,120,23,.07) 55%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Arco decorativo superior-derecho ---- */
+.feat-panel-mockup::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 10px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 2px dashed rgba(15,152,138,.25);
+  pointer-events: none;
+  z-index: 0;
+  animation: rotateDeco 18s linear infinite;
+}
+@keyframes rotateDeco {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ---- Orbe decorativo inferior-izquierdo ---- */
+.mockup-orb {
+  position: absolute;
+  bottom: 14px;
+  left: -14px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(210,120,23,.22) 0%, transparent 70%);
+  border: 1.5px solid rgba(210,120,23,.3);
+  pointer-events: none;
+  z-index: 1;
+  animation: floatOrb 4s ease-in-out infinite;
+}
+@keyframes floatOrb {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-8px) scale(1.06); }
+}
+
+/* ---- Puntos decorativos (cuadrícula) ---- */
+.mockup-dots-grid {
+  position: absolute;
+  top: 16px;
+  left: -8px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  pointer-events: none;
+  z-index: 1;
+}
+.mockup-dots-grid span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(35,55,62,.18);
+  display: block;
+}
+
+/* ---- Línea decorativa horizontal superior ---- */
+.mockup-line-top {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(15,152,138,.4), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---- Línea decorativa vertical izquierda ---- */
+.mockup-line-left {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 55%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(15,152,138,.35), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---- Rombo pequeño superior-izquierdo ---- */
+.mockup-diamond {
+  position: absolute;
+  top: 36px;
+  left: 8px;
+  width: 10px;
+  height: 10px;
+  background: var(--color-orange);
+  transform: rotate(45deg);
+  opacity: .55;
+  pointer-events: none;
+  z-index: 1;
+  animation: pulseDiamond 3s ease-in-out infinite;
+}
+@keyframes pulseDiamond {
+  0%,100% { opacity:.55; transform: rotate(45deg) scale(1); }
+  50%      { opacity:.9;  transform: rotate(45deg) scale(1.3); }
+}
+
+/* ---- Cruz decorativa ---- */
+.mockup-cross {
+  position: absolute;
+  bottom: 52px;
+  left: 16px;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: .4;
+}
+.mockup-cross::before,
+.mockup-cross::after {
+  content: '';
+  position: absolute;
+  background: var(--color-teal);
+}
+.mockup-cross::before {
+  width: 100%; height: 1.5px;
+  top: 50%; transform: translateY(-50%);
+}
+.mockup-cross::after {
+  height: 100%; width: 1.5px;
+  left: 50%; transform: translateX(-50%);
+}
+
+/* ---- Marco / teléfono ---- */
+.mockup-phone-frame {
+  height: min(88%, 420px);
+  width: auto;
+  aspect-ratio: 9/19.5;
+  background: #1a1a2e;
+  border-radius: 32px;
+  padding: 10px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.15),
+    0 0 0 8px rgba(15,152,138,.08),
+    0 24px 48px rgba(0,0,0,.28),
+    0 8px 16px rgba(0,0,0,.18);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+.mockup-notch {
+  width: 55px; height: 16px;
+  background: #1a1a2e; border-radius: 0 0 10px 10px;
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  z-index: 5;
+}
+.mockup-screen {
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--color-cream);
+  flex: 1;
+  min-height: 0;
+}
+.mockup-screen img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+}
+
+/* Badge flotante */
+.mockup-badge {
+  position: absolute;
+  bottom: clamp(10px, 2vw, 20px);
+  left: clamp(-20px, -2vw, -30px);
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  animation: floatBadge 3s ease-in-out infinite;
+  z-index: 3;
+}
+.mockup-badge svg { width: 22px; height: 22px; }
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* Contador */
+.feat-panel-counter {
+  position: absolute;
+  bottom: clamp(14px, 2vh, 22px);
+  right: clamp(20px, 3vw, 36px);
+  z-index: 3;
+  display: flex; align-items: baseline; gap: 4px;
+}
+.counter-current {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 700;
+  color: var(--color-teal); line-height: 1;
+}
+.counter-sep {
+  font-size: 1rem; color: rgba(35,55,62,.3); font-weight: 300;
+}
+.counter-total {
+  font-size: 1rem; color: rgba(35,55,62,.45); font-weight: 500;
+}
+
+/* =========================================
+   DOTS INFERIORES CON BARRA DE PROGRESO AUTOPLAY
+========================================= */
+.feat-dots {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: clamp(8px, 1vh, 14px);
+  position: relative;
+  z-index: 10;
+}
+
+.feat-dot {
+  position: relative;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(35,55,62,.18); border: none; cursor: pointer;
+  transition: width .3s ease, border-radius .3s ease, background .3s ease;
+  padding: 0;
+  overflow: hidden;
+}
+.feat-dot.active {
+  background: rgba(15,152,138,.25);
+  width: 36px;
+  border-radius: 4px;
+}
+.feat-dot:hover:not(.active) { background: rgba(15,152,138,.5); }
+
+/* Barra de progreso dentro del dot activo */
+.feat-dot-progress {
+  display: block;
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--color-teal);
+  border-radius: 4px;
+  transition: none; /* se controla via JS con requestAnimationFrame */
+  pointer-events: none;
+}
+
+/* =========================================
+   BOTÓN PAUSA / PLAY AUTOPLAY
+========================================= */
+.feat-autoplay-btn {
+  position: absolute;
+  /* Posicionado justo a la derecha de los dots,
+     al mismo nivel vertical */
+  bottom: clamp(8px, 1vh, 14px);
+  /* Centrado horizontal respecto al feat-showcase */
+  left: 50%;
+  transform: translateX(calc(7 * 7px + 6 * 6px + 36px / 2 + 10px));
+  /* Fallback si los cálculos no son exactos: simplemente desplazado */
+  margin-left: 60px;
+
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(35,55,62,.15);
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--color-dark);
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  transition: all .2s;
+  z-index: 10;
+}
+.feat-autoplay-btn:hover {
+  background: var(--color-teal);
+  color: white;
+  border-color: var(--color-teal);
+  box-shadow: 0 4px 14px rgba(15,152,138,.3);
+}
+
+/* Alineación más sencilla: usar flex en el contenedor de dots */
+/* Redefinimos la posición del botón para que esté al lado de los dots */
+.feat-dots-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(8px, 1vh, 14px);
+  position: relative;
+  z-index: 10;
+}
+
+/* Reposicionamos el botón de autoplay para que esté
+   al lado de los dots sin depender de cálculos complejos */
+.feat-autoplay-btn {
+  /* Sobreescribimos el posicionamiento absoluto anterior */
+  position: static;
+  transform: none;
+  margin-left: 0;
+  bottom: auto;
+  left: auto;
+  flex-shrink: 0;
+}
+
+/* Para que el botón quede junto a los dots,
+   envolvemos ambos en .feat-dots-row desde el HTML.
+   Pero como los dots ya están en .feat-dots, usamos
+   un truco: hacemos que .feat-dots sea flex y añadimos
+   el botón dentro con CSS via sibling selector  */
+
+/* Alternativa limpia: el botón está posicionado
+   de forma relativa al feat-showcase */
+.feat-showcase {
+  /* necesitamos position: relative para el botón absoluto */
+  /* ya tiene overflow: hidden; usamos un wrapper interno */
+}
+
+/* Reajuste final: colocamos el botón junto al grupo de dots
+   aprovechando que feat-dots y feat-autoplay-btn son hermanos
+   dentro de feat-showcase (flex column), y usamos order */
+.feat-dots {
+  order: 0;
+}
+.feat-autoplay-btn {
+  order: 0;
+  /* position static sobreescrito arriba ya es correcto */
+}
+
+/* Agrupamos visualmente dots + botón en una fila */
+/* Usamos un pseudo-contenedor con CSS */
+.feat-showcase > .feat-dots,
+.feat-showcase > .feat-autoplay-btn {
+  align-self: center;
+}
+
+/* Truco: hacer que el botón de autoplay quede
+   inline con los dots usando margin negativo */
+.feat-autoplay-btn {
+  margin-top: calc(-1 * clamp(8px, 1vh, 14px) - 14px);
+  margin-left: calc(7 * 7px + 6 * 6px + 36px + 10px);
+  /* Equivale a: 7 dots normales (7px c/u) + 6 gaps (6px) + 1 dot activo (36px) + gap extra */
+  /* Como esto es variable, usamos posición absoluta dentro del feat-showcase */
+  position: absolute;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+/* Posicionamiento final limpio para el botón autoplay:
+   se ubica justo debajo del panel, centrado,
+   con un offset horizontal para quedar junto a los dots */
+.feat-autoplay-btn {
+  position: absolute;
+  bottom: clamp(8px, 1.2vh, 16px);
+  /* Los dots están centrados horizontalmente.
+     Estimamos su ancho total: 7 dots * ~7px + 6 dots activo ~36px + 6 gaps * 6px = ~127px
+     La mitad es ~63px. El botón va 63px + 8px a la derecha del centro. */
+  left: calc(50% + 72px);
+  transform: translateX(0);
+  z-index: 10;
+  width: 28px; height: 28px;
+}
+
+/* --- Flechas prev/next --- */
+.feat-arrows {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  width: 100%; max-width: 1240px;
+  padding: 0 clamp(4px, 1vw, 12px);
+  display: flex; justify-content: space-between;
+  pointer-events: none; z-index: 10;
+}
+.feat-arrow {
+  width: 40px; height: 40px;
+  border-radius: 50%; border: 1.5px solid rgba(35,55,62,.15);
+  background: rgba(255,255,255,.85); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; pointer-events: all;
+  transition: all .2s; color: var(--color-dark);
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+.feat-arrow:hover {
+  background: var(--color-teal); color: white;
+  border-color: var(--color-teal);
+  box-shadow: 0 8px 20px rgba(15,152,138,.3);
+}
+@media(max-width: 680px) { .feat-arrows { display: none; } }
+
+/* =========================================
+   CTA FINAL
+========================================= */
 .s-cta {
-  background: var(--color-cream); 
+  background: var(--color-cream);
   text-align: center; padding: 0 64px;
+  min-height: auto;
+  padding-top: clamp(40px, 6vh, 80px);
+  padding-bottom: clamp(40px, 6vh, 80px);
 }
 .s-cta::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(ellipse 80% 50% at 50% 40%, rgba(15,152,138,.08), transparent 70%),
-              radial-gradient(ellipse 40% 40% at 20% 80%, rgba(210,120,23,.08), transparent 60%);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 40%, rgba(15,152,138,.08), transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(210,120,23,.08), transparent 60%);
 }
 .cta-tag {
-  display: inline-flex; align-items: center; gap: 6px; background: rgba(210,120,23,.15);
-  border: 1px solid var(--color-orange); color: var(--color-orange); font-size: .75rem;
-  font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-  padding: 6px 16px; border-radius: 50px; margin-bottom: 24px; position: relative; z-index: 2;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(210,120,23,.15); border: 1px solid var(--color-orange);
+  color: var(--color-orange); font-size: .75rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 50px; margin-bottom: 24px;
+  position: relative; z-index: 2;
+}
+.stit-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.1vw, 3rem);
+  font-weight: 700; line-height: 1.15;
+  color: var(--color-dark); margin: 0;
 }
 .cta-btns { position: relative; z-index: 2; }
 
 /* =========================================
    RESPONSIVE MOBILE
 ========================================= */
-@media (max-width: 960px) {
-  .feat-container { 
-    grid-template-columns: 1fr; 
-    text-align: center; 
-    padding: 0 24px; 
-    gap: 30px; 
+@media (max-width: 900px) {
+  .feat-panel-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: clamp(20px, 4vw, 36px) clamp(16px, 4vw, 28px) clamp(50px, 6vw, 64px);
   }
-  
-  .feat-container.row-reverse { direction: ltr; }
-  .feat-header { margin-bottom: 25px; }
-  .feat-text-card { padding: 20px; }
-  .feat-app-img { max-width: 240px; }
-
-  .feat-glass { 
-    right: 50%; 
-    transform: translateX(50%); 
-    bottom: -10px;
+  .feat-panel-text { max-width: 100%; }
+  .feat-panel-details { justify-content: center; }
+  .feat-panel-mockup {
+    display: none;
   }
-  
-  .w-section { 
-    min-height: calc(100vh - var(--header-height)); 
-    padding: 40px 0 30px; 
-    justify-content: flex-start;
-  }
-  
-  .hero-wali { 
-    min-height: calc(100vh - var(--header-height)); 
-  }
-  
-  .s-cta { padding: 0 24px; }
-  .stit-main { font-size: clamp(2rem, 6vw, 2.6rem); }
-  .feat-desc { font-size: 1.05rem; }
-}
-
-@media (max-height: 900px) {
-  .w-section {
-    min-height: auto;
-    justify-content: flex-start;
-    padding: 16px 0 14px;
-  }
-
-  .hero-wali {
-    min-height: calc(100vh - var(--header-height));
-  }
-
-  .badge {
-    margin-bottom: 10px;
-  }
-
-  .hero-title {
-    font-size: clamp(2.4rem, 5.2vw, 3.6rem);
-    margin-bottom: 6px;
-  }
-
-  .hero-sub {
-    font-size: clamp(.95rem, 1.3vw, 1.05rem);
-    line-height: 1.38;
-    margin-bottom: 8px;
-  }
-
-  .hero-btns {
-    margin-top: 8px;
-  }
-
-  .ventajas-intro-title {
-    margin-bottom: 10px;
-    font-size: clamp(1.5rem, 2.8vw, 2.4rem);
-  }
-
-  .feat-header {
-    margin-bottom: 12px;
-  }
-
-  .stit-main {
-    font-size: clamp(1.65rem, 2.4vw, 2.4rem);
-  }
-
-  .feat-container {
-    gap: 16px;
-  }
-
-  .feat-text-card {
-    padding: 14px 16px;
-  }
-
-  .feat-desc {
-    font-size: .96rem;
-    line-height: 1.42;
-  }
-
-  .s-cta {
-    min-height: auto;
-    padding: 18px 32px;
-  }
-
-  .cta-tag {
-    margin-bottom: 10px;
-  }
+  .feat-panel-counter { right: 16px; bottom: 12px; }
 }
 
 @media (max-width: 580px) {
   .hero-title { font-size: clamp(2.4rem, 8vw, 3.2rem); }
   .hero-btns { flex-direction: column; gap: 10px; }
   .btn-p, .btn-s { width: 100%; justify-content: center; }
-  .feat-app-img { max-width: 180px; }
-  .feat-text-card { padding: 15px; }
+  .feat-tab-label { display: none; }
+  .feat-tab { padding: 10px 12px; }
+  .s-cta { padding: 40px 24px; }
+  .feat-autoplay-btn { display: none; }
+}
+
+@media (max-height: 700px) {
+  .feat-panel { min-height: 300px; }
+  .feat-showcase { padding-top: 20px; }
+  .feat-showcase-header { margin-bottom: 14px; }
+  .feat-tabs { margin-bottom: 12px; }
 }
