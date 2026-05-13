@@ -1,0 +1,100 @@
+---
+import './Curiosidades.css';
+---
+
+<div data-section-target="curiosidades" class="section">
+  <div class="page-header">
+    <h2 class="page-title">Información cultural</h2>
+    <p class="page-subtitle">Edita el texto del asistente y guarda los cambios en Supabase.</p>
+  </div>
+
+  <div class="card curiosidades-card">
+    <div class="card-body">
+      <div class="form-group">
+        <label class="form-label" for="curiosidades-textarea">Contenido</label>
+        <textarea id="curiosidades-textarea" class="form-control curiosidades-textarea" rows="12" placeholder="Cargando contenido desde Supabase..." disabled></textarea>
+      </div>
+
+      <div class="curiosidades-actions">
+        <button id="curiosidades-save" class="button button-primary" disabled>Guardar cambios</button>
+        <span id="curiosidades-status" class="curiosidades-status">Esperando contenido...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { supabase } from '../../lib/supabase.js';
+
+  const CURIO_ID = 1;
+  const section = document.querySelector('[data-section-target="curiosidades"]');
+  if (!section) throw new Error('Sección curiosidades no encontrada');
+
+  const textarea = section.querySelector<HTMLTextAreaElement>('#curiosidades-textarea');
+  const saveBtn = section.querySelector<HTMLButtonElement>('#curiosidades-save');
+  const statusEl = section.querySelector<HTMLSpanElement>('#curiosidades-status');
+
+  const updateStatus = (text: string, type = 'info') => {
+    if (!statusEl) return;
+    statusEl.textContent = text;
+    statusEl.classList.toggle('success', type === 'success');
+    statusEl.classList.toggle('error', type === 'error');
+  };
+
+  const setControls = (enabled: boolean) => {
+    if (textarea) textarea.disabled = !enabled;
+    if (saveBtn) saveBtn.disabled = !enabled;
+  };
+
+  const fetchCuriosidad = async () => {
+    try {
+      updateStatus('Cargando contenido...');
+      setControls(false);
+
+      const { data, error } = await supabase
+        .from('curiosidades_bolivia')
+        .select('contenido')
+        .eq('id', CURIO_ID)
+        .maybeSingle();
+
+      if (error) throw error;
+      if (textarea) textarea.value = (data as any)?.contenido ?? '';
+      updateStatus('Contenido cargado. Puedes editarlo y guardar.');
+    } catch (err) {
+      console.error(err);
+      updateStatus('Error al cargar el contenido. Revisa la conexión.', 'error');
+    } finally {
+      setControls(true);
+    }
+  };
+
+  const saveCuriosidad = async () => {
+    if (!textarea) return;
+    const contenido = textarea.value.trim();
+
+    try {
+      updateStatus('Guardando contenido...');
+      setControls(false);
+
+      const { error } = await supabase
+        .from('curiosidades_bolivia')
+        .update({ contenido })
+        .eq('id', CURIO_ID);
+
+      if (error) throw error;
+      updateStatus('Contenido guardado correctamente.', 'success');
+    } catch (err) {
+      console.error(err);
+      updateStatus('No se pudo guardar. Intenta nuevamente.', 'error');
+    } finally {
+      setControls(true);
+    }
+  };
+
+  const initCuriosidades = () => {
+    fetchCuriosidad();
+    if (saveBtn) saveBtn.addEventListener('click', saveCuriosidad);
+  };
+
+  initCuriosidades();
+</script>
