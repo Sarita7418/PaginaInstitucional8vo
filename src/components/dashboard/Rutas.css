@@ -7,10 +7,10 @@
 
 .sr-module { font-family: 'DM Sans', sans-serif; }
 
-/* ===== TARJETAS ===== */
+/* ===== TARJETAS DE ACCIÓN ===== */
 .sr-actions-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 12px;
   margin-bottom: 20px;
 }
@@ -73,6 +73,88 @@
 .sr-panel-subtitle { font-size: 12.5px; color: #8A9BA0; }
 .sr-ml-auto        { margin-left: auto; }
 
+/* ===== SECCIONES NUMERADAS (Crear Ruta) ===== */
+.sr-section-block {
+  border: 1px solid #E2D9CE;
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 20px;
+  background: #FDFAF7;
+}
+.sr-section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1C2B30;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #E2D9CE;
+  flex-wrap: wrap;
+}
+.sr-section-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #0F988A;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sr-section-num-sm {
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
+}
+.sr-section-optional {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: #8A9BA0;
+  margin-left: 2px;
+}
+
+/* ===== INSTRUCCIÓN DE USO — CHECKLIST ===== */
+.sr-points-instruction {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(15,152,138,0.07);
+  border: 1px solid rgba(15,152,138,0.18);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: #0c6e63;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.sr-points-instruction svg { flex-shrink: 0; margin-top: 1px; color: #0F988A; }
+.sr-points-instruction strong { font-weight: 600; }
+.sr-points-instruction-modal { font-size: 12px; margin-bottom: 12px; }
+
+/* ===== LAYOUT CREAR RUTA — puntos + mapa ===== */
+.sr-crear-ruta-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  align-items: start;
+}
+.sr-crear-ruta-left  { display: flex; flex-direction: column; }
+.sr-crear-ruta-right { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 8px; }
+
+#sr-route-map-crear {
+  width: 100%; height: 300px;
+  border-radius: 10px;
+  border: 1px solid #E2D9CE;
+  background: #f0ece4;
+  overflow: hidden;
+  z-index: 1;
+}
+
 /* ===== FORMULARIOS ===== */
 .sr-form-layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
 .sr-form-main   { display: flex; flex-direction: column; }
@@ -96,15 +178,14 @@
 #sr-leaflet-map .leaflet-control-zoom { border: none !important; box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important; }
 #sr-leaflet-map .leaflet-control-zoom a { width: 28px !important; height: 28px !important; line-height: 28px !important; font-size: 14px !important; color: #1C2B30 !important; border-radius: 6px !important; }
 
-/* ===== ASIGNAR — MAPA OSRM ===== */
-.sr-asignar-layout { display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start; }
-.sr-asignar-left  { display: flex; flex-direction: column; }
-.sr-asignar-right { position: sticky; top: 20px; display: flex; flex-direction: column; gap: 8px; }
-#sr-route-map { width: 100%; height: 380px; border-radius: 10px; border: 1px solid #E2D9CE; background: #f0ece4; overflow: hidden; z-index: 1; }
-#sr-route-map .leaflet-control-zoom { border: none !important; box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important; }
-#sr-route-map .leaflet-control-zoom a { width: 28px !important; height: 28px !important; line-height: 28px !important; font-size: 14px !important; color: #1C2B30 !important; border-radius: 6px !important; }
+/* ===== MAPAS DE RUTA (crear y editar) ===== */
+#sr-route-map-crear .leaflet-control-zoom,
+#sr-route-map-editar .leaflet-control-zoom { border: none !important; box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important; }
+#sr-route-map-crear .leaflet-control-zoom a,
+#sr-route-map-editar .leaflet-control-zoom a { width: 28px !important; height: 28px !important; line-height: 28px !important; font-size: 14px !important; color: #1C2B30 !important; border-radius: 6px !important; }
 .sr-leaflet-tooltip { background: #1C2B30 !important; color: white !important; border: none !important; border-radius: 6px !important; font-family: 'DM Sans', sans-serif !important; font-size: 12px !important; font-weight: 500 !important; padding: 5px 10px !important; box-shadow: 0 3px 10px rgba(0,0,0,0.2) !important; }
 .sr-leaflet-tooltip::before { border-top-color: #1C2B30 !important; }
+
 .sr-route-stats { display: flex; align-items: center; background: rgba(15,152,138,0.07); border: 1px solid rgba(15,152,138,0.2); border-radius: 8px; overflow: hidden; }
 .sr-route-stat { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 14px; font-size: 13px; font-weight: 600; color: #0F988A; }
 .sr-route-stat-div { width: 1px; height: 28px; background: rgba(15,152,138,0.2); }
@@ -132,6 +213,37 @@
 .sr-btn-secondary:hover { background: #E8E0D4; }
 .sr-btn:disabled  { opacity: 0.55; cursor: not-allowed; }
 
+/* ===== BOTÓN "VER RUTA EN MAPA" ===== */
+.sr-btn-ver-ruta {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(15,152,138,0.35);
+  background: rgba(15,152,138,0.07);
+  color: #0F988A;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.sr-btn-ver-ruta:hover {
+  background: rgba(15,152,138,0.14);
+  border-color: #0F988A;
+}
+.sr-btn-ver-ruta--active {
+  background: #0F988A;
+  border-color: #0F988A;
+  color: white;
+}
+.sr-btn-ver-ruta--active:hover {
+  background: #0c7a6e;
+}
+
 /* ===== TOOLBAR ===== */
 .sr-toolbar      { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
 .sr-search-wrap  { position: relative; flex: 1; min-width: 180px; }
@@ -158,7 +270,7 @@
 .sr-loading-inline { color: #8A9BA0; font-size: 13px; padding: 12px; }
 .sr-empty-inline   { color: #B0BEC0; font-size: 13px; font-style: italic; padding: 20px; text-align: center; }
 
-/* Fila visualmente atenuada para registros inactivos */
+/* Fila atenuada para inactivos */
 .sr-row-inactive td { opacity: 0.55; }
 .sr-row-inactive .sr-btn-activate { opacity: 1 !important; }
 
@@ -181,175 +293,371 @@
 .sr-btn-action     { padding: 5px 11px; border-radius: 6px; border: 1px solid; font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
 .sr-btn-edit       { border-color: rgba(25,125,97,0.25);  background: rgba(25,125,97,0.06);  color: #197D61; }
 .sr-btn-edit:hover { background: rgba(25,125,97,0.14); }
-
-/* Desactivar — tono tierra/naranja apagado */
-.sr-btn-deactivate {
-  border-color: rgba(122,57,40,0.28);
-  background: rgba(122,57,40,0.06);
-  color: #7A3928;
-}
+.sr-btn-deactivate { border-color: rgba(122,57,40,0.28); background: rgba(122,57,40,0.06); color: #7A3928; }
 .sr-btn-deactivate:hover { background: rgba(122,57,40,0.14); }
-
-/* Activar — tono verde */
-.sr-btn-activate {
-  border-color: rgba(25,125,97,0.28);
-  background: rgba(25,125,97,0.06);
-  color: #197D61;
-}
+.sr-btn-activate   { border-color: rgba(25,125,97,0.28); background: rgba(25,125,97,0.06); color: #197D61; }
 .sr-btn-activate:hover { background: rgba(25,125,97,0.14); }
 
-/* ===== PANEL GESTIONAR ESTADO ===== */
-
-/* Banner informativo azul-teal */
-.sr-info-banner {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  background: rgba(15,152,138,0.07);
-  border: 1px solid rgba(15,152,138,0.22);
-  border-radius: 8px;
-  padding: 13px 16px;
-  font-size: 13px;
-  color: #0c6e63;
-  margin-bottom: 20px;
-  line-height: 1.5;
+/* ═══════════════════════════════════════════════════════
+   BOTONES TOGGLE DE PUNTOS — reemplaza checkboxes ocultos
+   Cada botón muestra: número de orden (si está seleccionado),
+   icono de pin, nombre del sitio, y acción "+ Añadir / ✕ Quitar"
+   ═══════════════════════════════════════════════════════ */
+.sr-points-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
 }
+
+.sr-point-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1.5px solid #E2D9CE;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  color: #4A5C60;
+  background: white;
+  text-align: left;
+  transition: all 0.18s ease;
+  position: relative;
+  min-height: 44px;
+}
+.sr-point-toggle:hover {
+  border-color: #0F988A;
+  background: rgba(15,152,138,0.04);
+  box-shadow: 0 2px 8px rgba(15,152,138,0.1);
+}
+
+/* Número de orden (visible cuando está seleccionado) */
+.sr-point-toggle__num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #0F988A;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.18s ease;
+}
+
+/* Icono de pin */
+.sr-point-toggle__icon {
+  color: #B0BEC0;
+  flex-shrink: 0;
+  transition: color 0.18s ease;
+}
+
+/* Nombre del sitio */
+.sr-point-toggle__name {
+  flex: 1;
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+/* Etiqueta de acción — derecha */
+.sr-point-toggle__action {
+  font-size: 11px;
+  font-weight: 600;
+  color: #0F988A;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(15,152,138,0.1);
+}
+
+/* Hover: mostrar acción */
+.sr-point-toggle:hover .sr-point-toggle__action {
+  opacity: 1;
+}
+
+/* Estado seleccionado */
+.sr-point-toggle--selected {
+  border-color: #0F988A;
+  background: rgba(15,152,138,0.07);
+  color: #0F988A;
+}
+.sr-point-toggle--selected .sr-point-toggle__name {
+  font-weight: 600;
+  color: #0c6e63;
+}
+.sr-point-toggle--selected .sr-point-toggle__num {
+  opacity: 1;
+  transform: scale(1);
+}
+.sr-point-toggle--selected .sr-point-toggle__icon {
+  color: #0F988A;
+}
+.sr-point-toggle--selected .sr-point-toggle__action {
+  opacity: 1;
+  color: #7A3928;
+  background: rgba(122,57,40,0.1);
+}
+.sr-point-toggle--selected:hover {
+  border-color: #7A3928;
+  background: rgba(122,57,40,0.05);
+}
+
+/* Grilla modal: más compacta con scroll */
+.sr-points-grid-modal {
+  grid-template-columns: 1fr 1fr;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.sr-points-grid-modal::-webkit-scrollbar { width: 4px; }
+.sr-points-grid-modal::-webkit-scrollbar-track { background: transparent; }
+.sr-points-grid-modal::-webkit-scrollbar-thumb { background: #D4C9BC; border-radius: 4px; }
+
+/* ===== ORDEN PREVIEW ===== */
+.sr-orden-preview {
+  background: #F7F4EF;
+  border: 1px solid #E2D9CE;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.sr-orden-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.sr-orden-title { font-size: 12.5px; font-weight: 600; color: #4A5C60; }
+
+/* Botón "Quitar todos" */
+.sr-orden-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(122,57,40,0.25);
+  background: rgba(122,57,40,0.06);
+  color: #7A3928;
+  font-size: 11.5px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.sr-orden-clear:hover {
+  background: rgba(122,57,40,0.12);
+  border-color: #7A3928;
+}
+
+.sr-orden-list { display: flex; flex-direction: column; gap: 6px; }
+.sr-orden-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #1C2B30;
+  background: white;
+  border: 1px solid #E2D9CE;
+  border-radius: 8px;
+  padding: 7px 10px;
+}
+.sr-orden-num  { width: 26px; height: 26px; background: #0F988A; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+.sr-orden-name { flex: 1; font-size: 13px; }
+
+/* Botón quitar individual del preview */
+.sr-orden-remove {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid rgba(122,57,40,0.2);
+  background: rgba(122,57,40,0.06);
+  color: #7A3928;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  font-family: 'DM Sans', sans-serif;
+}
+.sr-orden-remove:hover {
+  background: rgba(122,57,40,0.14);
+  border-color: #7A3928;
+}
+
+/* ===== PANEL GESTIONAR ESTADO ===== */
+.sr-info-banner { display: flex; align-items: flex-start; gap: 10px; background: rgba(15,152,138,0.07); border: 1px solid rgba(15,152,138,0.22); border-radius: 8px; padding: 13px 16px; font-size: 13px; color: #0c6e63; margin-bottom: 20px; line-height: 1.5; }
 .sr-info-banner svg { flex-shrink: 0; margin-top: 1px; color: #0F988A; }
 
-/* ===== TABS DEL PANEL ===== */
+/* ===== TABS ===== */
 .sr-delete-tabs { display: flex; gap: 4px; border-bottom: 1.5px solid #E2D9CE; margin-bottom: 18px; }
 .sr-del-tab     { padding: 9px 20px; font-size: 13px; font-weight: 500; color: #4A5C60; cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -1.5px; transition: all 0.2s ease; font-family: 'DM Sans', sans-serif; }
 .sr-del-tab:hover  { color: #0F988A; }
 .sr-del-tab.active { color: #0F988A; border-bottom-color: #0F988A; font-weight: 600; }
 
-/* ===== CHECKLIST PUNTOS ===== */
-.sr-points-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
-.sr-point-check  { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid #E2D9CE; border-radius: 8px; cursor: pointer; font-size: 13px; color: #4A5C60; transition: all 0.2s ease; background: white; }
-.sr-point-check:hover { border-color: #0F988A; background: rgba(15,152,138,0.04); }
-.sr-point-check input { display: none; }
-.sr-point-check:has(input:checked) { border-color: #0F988A; background: rgba(15,152,138,0.08); color: #0F988A; font-weight: 500; }
-
-/* ===== ORDEN PREVIEW ===== */
-.sr-orden-preview { background: #F7F4EF; border: 1px solid #E2D9CE; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
-.sr-orden-title   { font-size: 12.5px; font-weight: 600; color: #4A5C60; margin-bottom: 10px; }
-.sr-orden-list    { display: flex; flex-direction: column; gap: 6px; }
-.sr-orden-item    { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #1C2B30; }
-.sr-orden-num     { width: 26px; height: 26px; background: #0F988A; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
-
-/* ===== MODALES EDITAR ===== */
+/* ===== MODAL EDITAR SITIO (con mapa) ===== */
 .sr-modal         { display: none; position: fixed; inset: 0; background: rgba(35,55,62,0.55); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
 .sr-modal-box     { background: white; border-radius: 14px; max-width: 500px; width: 92%; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(35,55,62,0.25); }
-.sr-modal-box-lg  { max-width: 600px; }
-.sr-modal-header  { display: flex; justify-content: space-between; align-items: center; padding: 22px 24px 18px; border-bottom: 1px solid #E2D9CE; }
+
+/* Modal editar punto: más ancho para el mapa */
+.sr-modal-box-edit-punto {
+  max-width: 860px;
+  width: 96%;
+  max-height: 90vh;
+}
+
+/* Layout dos columnas: campos + mapa */
+.sr-edit-punto-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 16px;
+}
+.sr-edit-punto-fields { display: flex; flex-direction: column; gap: 14px; }
+.sr-edit-punto-map    { position: sticky; top: 0; display: flex; flex-direction: column; gap: 8px; }
+
+#sr-edit-punto-map {
+  width: 100%;
+  height: 340px;
+  border-radius: 10px;
+  border: 1px solid #E2D9CE;
+  background: #f0ece4;
+  overflow: hidden;
+  z-index: 1;
+}
+#sr-edit-punto-map .leaflet-control-zoom { border: none !important; box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important; }
+#sr-edit-punto-map .leaflet-control-zoom a { width: 28px !important; height: 28px !important; line-height: 28px !important; font-size: 14px !important; color: #1C2B30 !important; border-radius: 6px !important; }
+
+.sr-modal-header  { display: flex; justify-content: space-between; align-items: center; padding: 22px 24px 18px; border-bottom: 1px solid #E2D9CE; position: sticky; top: 0; background: white; z-index: 1; border-radius: 14px 14px 0 0; }
 .sr-modal-title   { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: #1C2B30; }
 .sr-modal-close   { background: none; border: none; font-size: 20px; cursor: pointer; color: #8A9BA0; line-height: 1; transition: color 0.2s; }
 .sr-modal-close:hover { color: #1C2B30; }
 .sr-modal-box > form { padding: 20px 24px; }
+.sr-modal-box-edit-punto > form { padding: 20px 24px; }
 .sr-modal-footer  { display: flex; gap: 10px; justify-content: flex-end; padding-top: 16px; border-top: 1px solid #E2D9CE; margin-top: 8px; }
 
-/* ===== MODAL PUNTOS RUTA ===== */
-.sr-ruta-puntos-list  { padding: 20px 24px; display: flex; flex-direction: column; gap: 10px; }
-.sr-ruta-punto-item   { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid #F0EBE3; }
-.sr-ruta-punto-item:last-child { border-bottom: none; }
-.sr-ruta-orden        { width: 32px; height: 32px; background: #0F988A; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
-.sr-ruta-pto-info     { display: flex; flex-direction: column; gap: 3px; }
-.sr-ruta-pto-nombre   { font-size: 14px; font-weight: 500; color: #1C2B30; }
-.sr-ruta-pto-desc     { font-size: 12px; color: #8A9BA0; line-height: 1.4; }
+/* ===== MODAL EDITAR RUTA — extra grande ===== */
+.sr-modal-box-xl {
+  max-width: 920px;
+  width: 96%;
+  max-height: 90vh;
+}
+.sr-modal-box-xl > form {
+  padding: 20px 24px;
+}
 
-/* ===== MODAL CONFIRM PERSONALIZADO ===== */
-.sr-confirm-box {
-  background: white;
-  border-radius: 18px;
-  max-width: 420px;
-  width: 92%;
-  padding: 36px 32px 28px;
-  box-shadow: 0 24px 64px rgba(35,55,62,0.28);
+/* Secciones dentro del modal editar ruta */
+.sr-modal-section {
+  border: 1px solid #E2D9CE;
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+  background: #FDFAF7;
+}
+.sr-modal-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1C2B30;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E2D9CE;
+  flex-wrap: wrap;
+}
+
+/* ===== LAYOUT EDITAR RUTA — puntos solos (sin mapa) ===== */
+.sr-editar-ruta-layout {
+  display: block; /* una columna por defecto — mapa oculto */
+}
+
+/* Con mapa visible: dos columnas */
+.sr-editar-ruta-layout.sr-editar-ruta-layout--with-map {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 18px;
+  align-items: start;
+}
+
+.sr-editar-ruta-left  { display: flex; flex-direction: column; }
+.sr-editar-ruta-right {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  gap: 8px;
+  position: sticky;
+  top: 16px;
+}
+
+#sr-route-map-editar {
+  width: 100%; height: 280px;
+  border-radius: 10px;
+  border: 1px solid #E2D9CE;
+  background: #f0ece4;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* ===== MODAL CONFIRM ===== */
+.sr-confirm-box {
+  background: white; border-radius: 18px; max-width: 420px; width: 92%;
+  padding: 36px 32px 28px; box-shadow: 0 24px 64px rgba(35,55,62,0.28);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
   animation: srConfirmIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-@keyframes srConfirmIn {
-  from { opacity: 0; transform: scale(0.85) translateY(16px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
-}
+@keyframes srConfirmIn { from { opacity: 0; transform: scale(0.85) translateY(16px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-/* Ícono: variante desactivar (terra) */
-.sr-confirm-icon-wrap {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-.sr-confirm-icon-terra {
-  background: linear-gradient(135deg, #7A3928, #a34a33);
-  box-shadow: 0 8px 24px rgba(122,57,40,0.35);
-}
-/* Ícono: variante activar (green) */
-.sr-confirm-icon-green {
-  background: linear-gradient(135deg, #197D61, #0F988A);
-  box-shadow: 0 8px 24px rgba(25,125,97,0.35);
-}
+.sr-confirm-icon-wrap { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.sr-confirm-icon-terra { background: linear-gradient(135deg, #7A3928, #a34a33); box-shadow: 0 8px 24px rgba(122,57,40,0.35); }
+.sr-confirm-icon-green { background: linear-gradient(135deg, #197D61, #0F988A); box-shadow: 0 8px 24px rgba(25,125,97,0.35); }
 
-.sr-confirm-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: #1C2B30;
-  margin-bottom: 10px;
-  line-height: 1.2;
-}
-.sr-confirm-msg {
-  font-size: 13.5px;
-  color: #4A5C60;
-  line-height: 1.6;
-}
-.sr-confirm-detail {
-  display: none;
-  margin-top: 12px;
-  padding: 10px 16px;
-  background: #F7F4EF;
-  border: 1px solid #E2D9CE;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #7A3928;
-  font-weight: 500;
-  width: 100%;
-}
-.sr-confirm-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 24px;
-  width: 100%;
-  justify-content: center;
-}
-.sr-confirm-actions .sr-btn {
-  flex: 1;
-  justify-content: center;
-  padding: 11px 20px;
-}
+.sr-confirm-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: #1C2B30; margin-bottom: 10px; line-height: 1.2; }
+.sr-confirm-msg   { font-size: 13.5px; color: #4A5C60; line-height: 1.6; }
+.sr-confirm-detail { display: none; margin-top: 12px; padding: 10px 16px; background: #F7F4EF; border: 1px solid #E2D9CE; border-radius: 8px; font-size: 13px; color: #7A3928; font-weight: 500; width: 100%; }
+.sr-confirm-actions { display: flex; gap: 10px; margin-top: 24px; width: 100%; justify-content: center; }
+.sr-confirm-actions .sr-btn { flex: 1; justify-content: center; padding: 11px 20px; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1100px) {
-  .sr-actions-grid  { grid-template-columns: repeat(3, 1fr); }
-  .sr-form-layout   { grid-template-columns: 1fr; }
-  .sr-map-preview   { position: static; }
-  #sr-leaflet-map   { height: 220px; }
-  .sr-asignar-layout { grid-template-columns: 1fr; }
-  .sr-asignar-right  { position: static; }
-  #sr-route-map      { height: 260px; }
+  .sr-actions-grid        { grid-template-columns: repeat(3, 1fr); }
+  .sr-form-layout         { grid-template-columns: 1fr; }
+  .sr-map-preview         { position: static; }
+  #sr-leaflet-map         { height: 220px; }
+  .sr-crear-ruta-layout   { grid-template-columns: 1fr; }
+  .sr-crear-ruta-right    { position: static; }
+  #sr-route-map-crear     { height: 240px; }
+  .sr-editar-ruta-layout.sr-editar-ruta-layout--with-map { grid-template-columns: 1fr; }
+  .sr-editar-ruta-right   { position: static; }
+  #sr-route-map-editar    { height: 220px; }
+  .sr-modal-box-xl        { max-width: 98%; }
+  .sr-modal-box-edit-punto { max-width: 98%; }
+  .sr-edit-punto-layout   { grid-template-columns: 1fr; }
+  .sr-edit-punto-map      { position: static; }
+  #sr-edit-punto-map      { height: 220px; }
 }
 @media (max-width: 700px) {
-  .sr-actions-grid { grid-template-columns: repeat(2, 1fr); }
-  .sr-form-row     { grid-template-columns: 1fr; }
-  .sr-points-grid  { grid-template-columns: 1fr; }
-  .sr-panel        { padding: 18px; }
-  #sr-leaflet-map  { height: 180px; }
-  #sr-route-map    { height: 220px; }
-  .sr-confirm-box  { padding: 28px 20px 22px; }
-  .sr-confirm-actions { flex-direction: column; }
+  .sr-actions-grid        { grid-template-columns: repeat(2, 1fr); }
+  .sr-form-row            { grid-template-columns: 1fr; }
+  .sr-points-grid         { grid-template-columns: 1fr; }
+  .sr-points-grid-modal   { grid-template-columns: 1fr; }
+  .sr-panel               { padding: 16px; }
+  #sr-leaflet-map         { height: 180px; }
+  #sr-route-map-crear     { height: 200px; }
+  #sr-route-map-editar    { height: 200px; }
+  #sr-edit-punto-map      { height: 200px; }
+  .sr-confirm-box         { padding: 28px 20px 22px; }
+  .sr-confirm-actions     { flex-direction: column; }
+  .sr-section-block       { padding: 16px; }
+  .sr-modal-section       { padding: 16px; }
+  .sr-btn-ver-ruta        { font-size: 11px; padding: 6px 10px; }
 }

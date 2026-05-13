@@ -1,8 +1,7 @@
 ---
+import './Usuarios.css';
 // Componente Usuarios - CRUD Completo con Auth, Diseño Mejorado y Restauración
 ---
-
-<link rel="stylesheet" href="/src/components/dashboard/Audios.css" />
 
 <div data-section-target="usuarios" class="section">
   <div class="ag-module">
@@ -10,53 +9,53 @@
     <div class="ag-summary" style="margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-radius: 12px; padding: 20px; background: white; border-left: 5px solid #0F988A;">
       <h3 class="ag-summary-title" style="margin-top: 0; font-size: 1.1em; color: #333;">Resumen de Plataforma</h3>
       <div class="ag-summary-stats" style="margin-top: 15px;">
-        <div class="ag-summary-stat"><span class="ag-sstat-num ag-teal-text" id="stat-total">0</span><span class="ag-sstat-lbl">Total Registrados</span></div>
-        <div class="ag-summary-stat"><span class="ag-sstat-num ag-green-text" id="stat-activos">0</span><span class="ag-sstat-lbl">Activos</span></div>
-        <div class="ag-summary-stat"><span class="ag-sstat-num ag-terra-text" id="stat-inactivos">0</span><span class="ag-sstat-lbl">Inactivos (Bajas)</span></div>
+        <div class="ag-summary-stat"><span class="ag-sstat-num ag-teal-text" id="us-stat-total">0</span><span class="ag-sstat-lbl">Total Registrados</span></div>
+        <div class="ag-summary-stat"><span class="ag-sstat-num ag-green-text" id="us-stat-activos">0</span><span class="ag-sstat-lbl">Activos</span></div>
+        <div class="ag-summary-stat"><span class="ag-sstat-num ag-terra-text" id="us-stat-inactivos">0</span><span class="ag-sstat-lbl">Inactivos (Bajas)</span></div>
       </div>
     </div>
 
-    <div class="ag-actions-grid">
-      <button class="ag-action-card ag-teal active-card" data-panel="crear">
+    <div class="us-actions-grid">
+      <button class="us-action-card ag-teal us-card-active" data-panel="crear">
         <div class="ag-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg></div>
         <div class="ag-action-text"><span class="ag-action-title">Nuevo Perfil</span></div>
       </button>
-      <button class="ag-action-card ag-green" data-panel="editar">
+      <button class="us-action-card ag-green" data-panel="editar">
         <div class="ag-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
         <div class="ag-action-text"><span class="ag-action-title">Editar Perfiles</span></div>
       </button>
-      <button class="ag-action-card ag-terra" data-panel="eliminar">
+      <button class="us-action-card ag-terra" data-panel="eliminar">
         <div class="ag-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg></div>
         <div class="ag-action-text"><span class="ag-action-title">Bajas / Altas</span></div>
       </button>
-      <button class="ag-action-card ag-amber" data-panel="exportar">
+      <button class="us-action-card ag-amber" data-panel="exportar">
         <div class="ag-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h8"/><path d="M8 17h8"/><polyline points="10 9 12 11 14 9"/></svg></div>
         <div class="ag-action-text"><span class="ag-action-title">Exportar Excel</span></div>
       </button>
     </div>
 
-    <div class="ag-dynamic-area">
+    <div class="us-dynamic-area">
 
-      <div class="ag-panel active" id="ag-panel-crear">
+      <div class="us-panel active" id="us-panel-crear">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-teal-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg></div>
           <div><h3 class="ag-panel-title">Registrar Nuevo Usuario</h3><p class="ag-panel-subtitle">Crea las credenciales y el perfil en el sistema.</p></div>
         </div>
 
-        <form id="form-crear-usuario" class="stylish-form">
+        <form id="us-form-crear" class="stylish-form">
           <div class="form-section-box">
             <h4 class="section-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Credenciales de Acceso</h4>
             <div class="ag-form-grid-2">
               <div class="ag-form-group">
                 <label class="ag-label">Correo Electrónico</label>
-                <input type="email" id="create-email" class="ag-input" required placeholder="turista@ejemplo.com" />
+                <input type="email" id="us-create-email" class="ag-input" required placeholder="turista@ejemplo.com" />
               </div>
               <div class="ag-form-group">
                 <label class="ag-label">Contraseña</label>
                 <div class="password-wrapper">
-                  <input type="password" id="create-password" class="ag-input" required placeholder="Mínimo 6 caracteres" minlength="6" />
-                  <button type="button" class="btn-toggle-pass" onclick="togglePassword('create-password')">
-                    <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  <input type="password" id="us-create-password" class="ag-input" required placeholder="Mínimo 6 caracteres" minlength="6" />
+                  <button type="button" class="btn-toggle-pass" data-target="us-create-password">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                   </button>
                 </div>
               </div>
@@ -65,29 +64,26 @@
 
           <div class="form-section-box">
             <h4 class="section-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Datos Personales</h4>
-            
             <div class="ag-form-grid-3">
-              <div class="ag-form-group"><label class="ag-label">Nombres</label><input type="text" id="create-nombres" class="ag-input" required /></div>
-              <div class="ag-form-group"><label class="ag-label">Apellido Paterno</label><input type="text" id="create-ap" class="ag-input" required /></div>
-              <div class="ag-form-group"><label class="ag-label">Apellido Materno</label><input type="text" id="create-am" class="ag-input" /></div>
+              <div class="ag-form-group"><label class="ag-label">Nombres</label><input type="text" id="us-create-nombres" class="ag-input" required /></div>
+              <div class="ag-form-group"><label class="ag-label">Apellido Paterno</label><input type="text" id="us-create-ap" class="ag-input" required /></div>
+              <div class="ag-form-group"><label class="ag-label">Apellido Materno</label><input type="text" id="us-create-am" class="ag-input" /></div>
             </div>
-            
             <div class="ag-form-grid-3">
-              <div class="ag-form-group"><label class="ag-label">Teléfono</label><input type="tel" id="create-tel" class="ag-input" /></div>
-              <div class="ag-form-group"><label class="ag-label">Fecha Nacimiento</label><input type="date" id="create-fn" class="ag-input" /></div>
-              <div class="ag-form-group"><label class="ag-label">ID Rol</label><input type="number" id="create-rol" class="ag-input" placeholder="Ej: 2 (Guía)" /></div>
+              <div class="ag-form-group"><label class="ag-label">Teléfono</label><input type="tel" id="us-create-tel" class="ag-input" /></div>
+              <div class="ag-form-group"><label class="ag-label">Fecha Nacimiento</label><input type="date" id="us-create-fn" class="ag-input" /></div>
+              <div class="ag-form-group"><label class="ag-label">ID Rol</label><input type="number" id="us-create-rol" class="ag-input" placeholder="Ej: 2 (Guía)" /></div>
             </div>
-            
             <div class="ag-form-grid-3">
-              <div class="ag-form-group"><label class="ag-label">ID Idioma Fav</label><input type="number" id="create-idioma" class="ag-input" /></div>
-              <div class="ag-form-group"><label class="ag-label">ID Sist. Medida</label><input type="number" id="create-medida" class="ag-input" /></div>
+              <div class="ag-form-group"><label class="ag-label">ID Idioma Fav</label><input type="number" id="us-create-idioma" class="ag-input" /></div>
+              <div class="ag-form-group"><label class="ag-label">ID Sist. Medida</label><input type="number" id="us-create-medida" class="ag-input" /></div>
               <div class="ag-form-group checkbox-container">
-                <input type="checkbox" id="create-publico" checked class="custom-checkbox" />
-                <label class="ag-label" for="create-publico">Perfil Público Visible</label>
+                <input type="checkbox" id="us-create-publico" checked class="custom-checkbox" />
+                <label class="ag-label" for="us-create-publico">Perfil Público Visible</label>
               </div>
             </div>
           </div>
-          
+
           <div style="display: flex; gap: 15px; margin-top: 15px;">
             <button type="submit" class="ag-btn ag-btn-primary">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
@@ -101,47 +97,47 @@
         </form>
       </div>
 
-      <div class="ag-panel" id="ag-panel-editar">
+      <div class="us-panel" id="us-panel-editar">
         <div class="ag-toolbar">
           <div class="ag-search-wrap" style="width: 100%;">
             <svg class="ag-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="search-editar" class="ag-search" placeholder="Buscar por nombre o correo para editar..." style="width: 100%;" />
+            <input type="text" id="us-search-editar" class="ag-search" placeholder="Buscar por nombre o correo para editar..." style="width: 100%;" />
           </div>
         </div>
-        <div class="ag-table-wrap" style="overflow-x: auto;">
-          <table class="ag-table" style="width: 100%; text-align: left;">
+        <div class="ag-table-wrap">
+          <table class="ag-table">
             <thead><tr><th>ID</th><th>Nombre Completo</th><th>Correo Electrónico</th><th>Rol</th><th>Acción</th></tr></thead>
-            <tbody id="tbody-editar"><tr><td colspan="5" style="text-align: center;">Cargando...</td></tr></tbody>
+            <tbody id="us-tbody-editar"><tr><td colspan="5" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando...</td></tr></tbody>
           </table>
         </div>
       </div>
 
-      <div class="ag-panel" id="ag-panel-eliminar">
+      <div class="us-panel" id="us-panel-eliminar">
         <div class="ag-toolbar">
           <div class="ag-search-wrap">
             <svg class="ag-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="search-eliminar" class="ag-search" placeholder="Buscar usuario..." />
+            <input type="text" id="us-search-eliminar" class="ag-search" placeholder="Buscar usuario..." />
           </div>
-          <select id="filter-eliminar-estado" class="ag-filter" style="padding: 10px; font-weight: 500;">
+          <select id="us-filter-estado" class="ag-filter">
             <option value="activos" selected>🟢 Usuarios Activos (Dar de baja)</option>
             <option value="inactivos">🔴 Usuarios Inactivos (Dar de alta)</option>
           </select>
         </div>
-        <div class="ag-table-wrap" style="overflow-x: auto;">
-          <table class="ag-table" style="width: 100%; text-align: left;">
+        <div class="ag-table-wrap">
+          <table class="ag-table">
             <thead><tr><th>ID</th><th>Nombre Completo</th><th>Estado</th><th>Acción</th></tr></thead>
-            <tbody id="tbody-eliminar"><tr><td colspan="4" style="text-align: center;">Cargando...</td></tr></tbody>
+            <tbody id="us-tbody-eliminar"><tr><td colspan="4" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando...</td></tr></tbody>
           </table>
         </div>
       </div>
 
-      <div class="ag-panel" id="ag-panel-exportar">
-        <div class="ag-form-layout" style="padding: 40px; text-align: center; background: #fafafa; border-radius: 12px; border: 1px dashed #ccc;">
+      <div class="us-panel" id="us-panel-exportar">
+        <div style="padding: 40px; text-align: center; background: #fafafa; border-radius: 12px; border: 1px dashed #ccc;">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="1.5" style="margin-bottom: 15px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h8"/><path d="M8 17h8"/><polyline points="10 9 12 11 14 9"/></svg>
           <h3 style="margin-bottom: 10px;">Descargar Reporte</h3>
-          <p style="color: #666; margin-bottom: 25px;">Genera un archivo CSV compatible con Excel que incluye todos los perfiles de la base de datos de Aventuras Paceñas.</p>
-          <button id="btn-exportar" class="ag-btn ag-btn-amber" style="width: 100%; max-width: 300px; justify-content: center; margin: 0 auto;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <p style="color: #666; margin-bottom: 25px;">Genera un archivo CSV compatible con Excel que incluye todos los perfiles de la base de datos.</p>
+          <button id="us-btn-exportar" class="ag-btn ag-btn-amber" style="width: 100%; max-width: 300px; justify-content: center; margin: 0 auto;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Exportar CSV
           </button>
         </div>
@@ -151,36 +147,37 @@
   </div>
 </div>
 
-<div id="editarUsuariosModal" class="modal">
-  <div class="modal-content" style="max-width: 750px; border-radius: 12px; padding: 0;">
-    <div class="modal-header" style="background: #f8f9fa; border-radius: 12px 12px 0 0; padding: 20px; border-bottom: 1px solid #eee;">
-      <h3 class="modal-title" style="margin: 0; display: flex; align-items: center; gap: 8px;">
+<!-- MODAL EDITAR USUARIO -->
+<div id="us-modal-editar" class="us-modal" style="display:none;">
+  <div class="us-modal-content">
+    <div class="us-modal-header">
+      <h3 class="us-modal-title">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         Actualizar Perfil
       </h3>
-      <button type="button" class="modal-close" onclick="closeModal('editarUsuariosModal')" style="font-size: 1.5em;">✕</button>
+      <button type="button" class="us-modal-close" id="us-close-modal">✕</button>
     </div>
-    
-    <form id="form-editar-usuario" class="stylish-form">
-      <input type="hidden" id="edit-id" />
-      <div class="modal-body" style="max-height: 65vh; overflow-y: auto; padding: 25px;">
-        
+
+    <form id="us-form-editar" class="stylish-form">
+      <input type="hidden" id="us-edit-id" />
+      <div class="us-modal-body">
+
         <div class="form-section-box">
           <h4 class="section-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Acceso y Seguridad</h4>
           <div class="ag-form-grid-2">
             <div class="ag-form-group">
               <label class="ag-label">Correo (Solo Lectura)</label>
-              <input type="email" id="edit-email-view" class="ag-input" readonly style="background-color: #e9ecef; cursor: not-allowed; color: #495057; border-color: #ced4da;" />
+              <input type="email" id="us-edit-email" class="ag-input" readonly style="background:#e9ecef;cursor:not-allowed;color:#495057;border-color:#ced4da;" />
             </div>
             <div class="ag-form-group">
               <label class="ag-label">Sobrescribir Contraseña</label>
               <div class="password-wrapper">
-                <input type="password" id="edit-password" class="ag-input" placeholder="Nueva contraseña o dejar en blanco" />
-                <button type="button" class="btn-toggle-pass" onclick="togglePassword('edit-password')">
-                  <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <input type="password" id="us-edit-password" class="ag-input" placeholder="Nueva contraseña o dejar en blanco" />
+                <button type="button" class="btn-toggle-pass" data-target="us-edit-password">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                 </button>
               </div>
-              <span style="font-size: 0.75em; color: #6c757d; margin-top: 6px; display: block;">*Escribe aquí solo si deseas cambiarla.</span>
+              <span style="font-size:0.75em;color:#6c757d;margin-top:6px;display:block;">*Escribe aquí solo si deseas cambiarla.</span>
             </div>
           </div>
         </div>
@@ -188,28 +185,28 @@
         <div class="form-section-box">
           <h4 class="section-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Datos Personales</h4>
           <div class="ag-form-grid-3">
-            <div class="ag-form-group"><label class="ag-label">Nombres</label><input type="text" id="edit-nombres" class="ag-input" required /></div>
-            <div class="ag-form-group"><label class="ag-label">Apellido Paterno</label><input type="text" id="edit-ap" class="ag-input" required /></div>
-            <div class="ag-form-group"><label class="ag-label">Apellido Materno</label><input type="text" id="edit-am" class="ag-input" /></div>
+            <div class="ag-form-group"><label class="ag-label">Nombres</label><input type="text" id="us-edit-nombres" class="ag-input" required /></div>
+            <div class="ag-form-group"><label class="ag-label">Apellido Paterno</label><input type="text" id="us-edit-ap" class="ag-input" required /></div>
+            <div class="ag-form-group"><label class="ag-label">Apellido Materno</label><input type="text" id="us-edit-am" class="ag-input" /></div>
           </div>
           <div class="ag-form-grid-3">
-            <div class="ag-form-group"><label class="ag-label">Teléfono</label><input type="tel" id="edit-tel" class="ag-input" /></div>
-            <div class="ag-form-group"><label class="ag-label">Fecha Nacimiento</label><input type="date" id="edit-fn" class="ag-input" /></div>
-            <div class="ag-form-group"><label class="ag-label">ID Rol</label><input type="number" id="edit-rol" class="ag-input" /></div>
+            <div class="ag-form-group"><label class="ag-label">Teléfono</label><input type="tel" id="us-edit-tel" class="ag-input" /></div>
+            <div class="ag-form-group"><label class="ag-label">Fecha Nacimiento</label><input type="date" id="us-edit-fn" class="ag-input" /></div>
+            <div class="ag-form-group"><label class="ag-label">ID Rol</label><input type="number" id="us-edit-rol" class="ag-input" /></div>
           </div>
           <div class="ag-form-grid-3">
-            <div class="ag-form-group"><label class="ag-label">ID Idioma Fav</label><input type="number" id="edit-idioma" class="ag-input" /></div>
-            <div class="ag-form-group"><label class="ag-label">ID Sist. Medida</label><input type="number" id="edit-medida" class="ag-input" /></div>
+            <div class="ag-form-group"><label class="ag-label">ID Idioma Fav</label><input type="number" id="us-edit-idioma" class="ag-input" /></div>
+            <div class="ag-form-group"><label class="ag-label">ID Sist. Medida</label><input type="number" id="us-edit-medida" class="ag-input" /></div>
             <div class="ag-form-group checkbox-container">
-              <input type="checkbox" id="edit-publico" class="custom-checkbox" /> 
-              <label class="ag-label" for="edit-publico">Perfil Público Visible</label>
+              <input type="checkbox" id="us-edit-publico" class="custom-checkbox" />
+              <label class="ag-label" for="us-edit-publico">Perfil Público Visible</label>
             </div>
           </div>
         </div>
 
       </div>
-      <div class="modal-footer" style="padding: 20px 25px; text-align: right; border-top: 1px solid #eee; background: #f8f9fa; border-radius: 0 0 12px 12px; display: flex; justify-content: flex-end; gap: 10px;">
-        <button type="button" class="ag-btn ag-btn-secondary" onclick="closeModal('editarUsuariosModal')">
+      <div class="us-modal-footer">
+        <button type="button" class="ag-btn ag-btn-secondary" id="us-cancel-modal">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           Cancelar
         </button>
@@ -222,8 +219,431 @@
   </div>
 </div>
 
+<script>
+  import { supabase } from '../../lib/supabase.js';
+
+  // ── scope al contenedor de usuarios ──
+  const usSection = document.querySelector('[data-section-target="usuarios"]');
+  if (!usSection) throw new Error('Usuarios section not found');
+
+  // ── toggle password (sin onclick global) ──
+  usSection.querySelectorAll('.btn-toggle-pass').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const input = document.getElementById(targetId) as HTMLInputElement;
+      if (input) input.type = input.type === 'password' ? 'text' : 'password';
+    });
+  });
+
+  let usuariosList: any[] = [];
+  const tbodyEditar   = document.getElementById('us-tbody-editar')   as HTMLTableSectionElement;
+  const tbodyEliminar = document.getElementById('us-tbody-eliminar') as HTMLTableSectionElement;
+
+  // ── NAVEGACIÓN ENTRE PANELES (scoped) ──
+  const usCards  = usSection.querySelectorAll('.us-action-card');
+  const usPanels = usSection.querySelectorAll('.us-panel');
+
+  usCards.forEach(card => {
+    card.addEventListener('click', () => {
+      usCards.forEach(c => c.classList.remove('us-card-active'));
+      usPanels.forEach(p => p.classList.remove('active'));
+      card.classList.add('us-card-active');
+      usSection.querySelector(`#us-panel-${card.getAttribute('data-panel')}`)?.classList.add('active');
+    });
+  });
+
+  // ── MODAL ──
+  function openUsModal() {
+    const m = document.getElementById('us-modal-editar');
+    if (m) m.style.display = 'flex';
+  }
+  function closeUsModal() {
+    const m = document.getElementById('us-modal-editar');
+    if (m) m.style.display = 'none';
+  }
+
+  document.getElementById('us-close-modal')?.addEventListener('click', closeUsModal);
+  document.getElementById('us-cancel-modal')?.addEventListener('click', closeUsModal);
+  document.getElementById('us-modal-editar')?.addEventListener('click', (e: any) => {
+    if (e.target.id === 'us-modal-editar') closeUsModal();
+  });
+
+  // ── CARGAR DATOS ──
+  async function fetchUsuarios() {
+    const { data, error } = await supabase
+      .from('vista_personas_completa')
+      .select('*')
+      .order('id', { ascending: true });
+
+    if (error) { console.error('Error:', error.message); return; }
+
+    usuariosList = data || [];
+
+    (document.getElementById('us-stat-total') as HTMLElement).innerText    = usuariosList.length.toString();
+    (document.getElementById('us-stat-activos') as HTMLElement).innerText  = usuariosList.filter(u => u.estado).length.toString();
+    (document.getElementById('us-stat-inactivos') as HTMLElement).innerText= usuariosList.filter(u => !u.estado).length.toString();
+
+    renderTablaEditar();
+    renderTablaEliminar();
+  }
+
+  // ── TABLA EDITAR ──
+  function renderTablaEditar() {
+    if (!tbodyEditar) return;
+    const q  = (document.getElementById('us-search-editar') as HTMLInputElement)?.value.toLowerCase() || '';
+    const filtered = usuariosList.filter(u =>
+      u.estado &&
+      (`${u.nombres} ${u.apellido_paterno}`.toLowerCase().includes(q) ||
+       (u.correo_electronico || '').toLowerCase().includes(q))
+    );
+
+    if (!filtered.length) {
+      tbodyEditar.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px;">Sin resultados encontrados.</td></tr>';
+      return;
+    }
+
+    tbodyEditar.innerHTML = filtered.map(u => `
+      <tr>
+        <td>#${u.id}</td>
+        <td style="font-weight:500;color:#1C2B30;">${u.nombres} ${u.apellido_paterno}</td>
+        <td>${u.correo_electronico || '-'}</td>
+        <td>${u.id_rol || '-'}</td>
+        <td>
+          <button class="ag-btn-action ag-btn-edit us-btn-abrir-editar" data-id="${u.id}"
+            style="display:inline-flex;align-items:center;gap:5px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+            Editar
+          </button>
+        </td>
+      </tr>`).join('');
+  }
+
+  // ── TABLA BAJA/ALTA ──
+  function renderTablaEliminar() {
+    if (!tbodyEliminar) return;
+    const q  = (document.getElementById('us-search-eliminar') as HTMLInputElement)?.value.toLowerCase() || '';
+    const st = (document.getElementById('us-filter-estado') as HTMLSelectElement)?.value || 'activos';
+
+    const filtered = usuariosList.filter(u => {
+      if (st === 'activos'   && !u.estado) return false;
+      if (st === 'inactivos' &&  u.estado) return false;
+      return `${u.nombres} ${u.apellido_paterno}`.toLowerCase().includes(q);
+    });
+
+    if (!filtered.length) {
+      tbodyEliminar.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;">No hay registros para mostrar.</td></tr>';
+      return;
+    }
+
+    tbodyEliminar.innerHTML = filtered.map(u => `
+      <tr>
+        <td>#${u.id}</td>
+        <td style="font-weight:500;color:#1C2B30;">${u.nombres} ${u.apellido_paterno}</td>
+        <td>${u.estado
+          ? '<span class="ag-badge ag-badge-pub">Activo</span>'
+          : '<span class="ag-badge ag-badge-draft">Inactivo</span>'}</td>
+        <td>${u.estado
+          ? `<button class="ag-btn-action ag-btn-delete us-btn-baja" data-id="${u.id}"
+                style="display:inline-flex;align-items:center;gap:5px;">
+               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                 <polyline points="3 6 5 6 21 6"/>
+                 <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+               </svg>
+               Dar de Baja
+             </button>`
+          : `<button class="ag-btn-action us-btn-alta" data-id="${u.id}"
+                style="display:inline-flex;align-items:center;gap:5px;
+                       background:#e6f4ea;color:#1e8e3e;border:1px solid #1e8e3e;
+                       padding:5px 11px;border-radius:6px;font-size:12px;cursor:pointer;">
+               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                 <polyline points="1 4 1 10 7 10"/>
+                 <polyline points="23 20 23 14 17 14"/>
+                 <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+               </svg>
+               Dar de Alta
+             </button>`
+        }</td>
+      </tr>`).join('');
+  }
+
+  // ── FILTROS ──
+  document.getElementById('us-search-editar')?.addEventListener('input',   renderTablaEditar);
+  document.getElementById('us-search-eliminar')?.addEventListener('input', renderTablaEliminar);
+  document.getElementById('us-filter-estado')?.addEventListener('change',  renderTablaEliminar);
+
+  // ── CLICK EDITAR (event delegation en tbody) ──
+  tbodyEditar?.addEventListener('click', (e: any) => {
+    const btn = e.target.closest('.us-btn-abrir-editar');
+    if (!btn) return;
+    const id = btn.getAttribute('data-id');
+    const u  = usuariosList.find(x => x.id == id);
+    if (!u) return;
+
+    (document.getElementById('us-edit-id') as HTMLInputElement).value      = u.id;
+    (document.getElementById('us-edit-email') as HTMLInputElement).value   = u.correo_electronico || 'No vinculado';
+    const passInput = document.getElementById('us-edit-password') as HTMLInputElement;
+    passInput.value = ''; passInput.type = 'password';
+    (document.getElementById('us-edit-nombres') as HTMLInputElement).value = u.nombres || '';
+    (document.getElementById('us-edit-ap') as HTMLInputElement).value      = u.apellido_paterno || '';
+    (document.getElementById('us-edit-am') as HTMLInputElement).value      = u.apellido_materno || '';
+    (document.getElementById('us-edit-tel') as HTMLInputElement).value     = u.telefono || '';
+    (document.getElementById('us-edit-fn') as HTMLInputElement).value      = u.fecha_nacimiento || '';
+    (document.getElementById('us-edit-rol') as HTMLInputElement).value     = u.id_rol || '';
+    (document.getElementById('us-edit-idioma') as HTMLInputElement).value  = u.id_idioma_fav || '';
+    (document.getElementById('us-edit-medida') as HTMLInputElement).value  = u.id_sistema_medida || '';
+    (document.getElementById('us-edit-publico') as HTMLInputElement).checked = u.perfil_publico;
+
+    // guardamos auth id en dataset del form
+    const form = document.getElementById('us-form-editar') as HTMLFormElement;
+    form.dataset.authId = u.id_usuario || '';
+
+    openUsModal();
+  });
+
+  // ── CLICK BAJA/ALTA (event delegation en tbody) ──
+  tbodyEliminar?.addEventListener('click', async (e: any) => {
+    const btnBaja = e.target.closest('.us-btn-baja');
+    const btnAlta = e.target.closest('.us-btn-alta');
+
+    if (btnBaja) {
+      const id = btnBaja.getAttribute('data-id');
+      if (confirm(`¿Dar de BAJA al usuario #${id}?`)) {
+        await supabase.from('personas').update({ estado: false, updated_at: new Date().toISOString() }).eq('id', id);
+        fetchUsuarios();
+      }
+    }
+
+    if (btnAlta) {
+      const id = btnAlta.getAttribute('data-id');
+      if (confirm(`¿Dar de ALTA al usuario #${id}?`)) {
+        await supabase.from('personas').update({ estado: true, updated_at: new Date().toISOString() }).eq('id', id);
+        fetchUsuarios();
+      }
+    }
+  });
+
+  // ── CREAR USUARIO ──
+  document.getElementById('us-form-crear')?.addEventListener('submit', async (e: Event) => {
+    e.preventDefault();
+    const form      = e.target as HTMLFormElement;
+    const btnSubmit = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const oldHtml   = btnSubmit.innerHTML;
+    btnSubmit.textContent = 'Guardando...';
+    btnSubmit.disabled    = true;
+
+    try {
+      const payload = {
+        email:    (document.getElementById('us-create-email')    as HTMLInputElement).value,
+        password: (document.getElementById('us-create-password') as HTMLInputElement).value,
+        personaData: {
+          nombres:           (document.getElementById('us-create-nombres') as HTMLInputElement).value,
+          apellido_paterno:  (document.getElementById('us-create-ap')      as HTMLInputElement).value,
+          apellido_materno:  (document.getElementById('us-create-am')      as HTMLInputElement).value || null,
+          telefono:          (document.getElementById('us-create-tel')     as HTMLInputElement).value || null,
+          fecha_nacimiento:  (document.getElementById('us-create-fn')      as HTMLInputElement).value || null,
+          id_rol:            (document.getElementById('us-create-rol')     as HTMLInputElement).value || null,
+          id_idioma_fav:     (document.getElementById('us-create-idioma')  as HTMLInputElement).value || null,
+          id_sistema_medida: (document.getElementById('us-create-medida')  as HTMLInputElement).value || null,
+          perfil_publico:    (document.getElementById('us-create-publico') as HTMLInputElement).checked,
+          estado: true,
+        },
+      };
+
+      const res  = await fetch('/api/admin/crear-usuario', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
+      alert('¡Usuario creado con éxito!');
+      form.reset();
+      (document.getElementById('us-create-password') as HTMLInputElement).type = 'password';
+      fetchUsuarios();
+    } catch (err: any) {
+      alert('Error: ' + err.message);
+    } finally {
+      btnSubmit.innerHTML  = oldHtml;
+      btnSubmit.disabled   = false;
+    }
+  });
+
+  // ── GUARDAR EDICIÓN ──
+  document.getElementById('us-form-editar')?.addEventListener('submit', async (e: Event) => {
+    e.preventDefault();
+    const form      = e.target as HTMLFormElement;
+    const btnSubmit = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const oldHtml   = btnSubmit.innerHTML;
+    btnSubmit.textContent = 'Actualizando...';
+    btnSubmit.disabled    = true;
+
+    try {
+      const payload = {
+        id_persona: (document.getElementById('us-edit-id') as HTMLInputElement).value,
+        id_auth:    form.dataset.authId || null,
+        nuevaClave: (document.getElementById('us-edit-password') as HTMLInputElement).value,
+        personaData: {
+          nombres:           (document.getElementById('us-edit-nombres') as HTMLInputElement).value,
+          apellido_paterno:  (document.getElementById('us-edit-ap')      as HTMLInputElement).value,
+          apellido_materno:  (document.getElementById('us-edit-am')      as HTMLInputElement).value || null,
+          telefono:          (document.getElementById('us-edit-tel')     as HTMLInputElement).value || null,
+          fecha_nacimiento:  (document.getElementById('us-edit-fn')      as HTMLInputElement).value || null,
+          id_rol:            (document.getElementById('us-edit-rol')     as HTMLInputElement).value || null,
+          id_idioma_fav:     (document.getElementById('us-edit-idioma')  as HTMLInputElement).value || null,
+          id_sistema_medida: (document.getElementById('us-edit-medida')  as HTMLInputElement).value || null,
+          perfil_publico:    (document.getElementById('us-edit-publico') as HTMLInputElement).checked,
+          updated_at:        new Date().toISOString(),
+        },
+      };
+
+      const res  = await fetch('/api/admin/editar-usuario', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
+      alert('¡Perfil actualizado con éxito!');
+      closeUsModal();
+      fetchUsuarios();
+    } catch (err: any) {
+      alert('Error: ' + err.message);
+    } finally {
+      btnSubmit.innerHTML = oldHtml;
+      btnSubmit.disabled  = false;
+    }
+  });
+
+  // ── EXPORTAR CSV ──
+  document.getElementById('us-btn-exportar')?.addEventListener('click', () => {
+    let csv = 'ID,Nombres,Correo,Rol,Estado\n';
+    usuariosList.forEach(u => {
+      csv += `${u.id},"${u.nombres} ${u.apellido_paterno}","${u.correo_electronico || ''}","${u.id_rol || ''}","${u.estado ? 'Activo' : 'Inactivo'}"\n`;
+    });
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href  = URL.createObjectURL(blob);
+    link.download = 'Exportacion_Usuarios.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  // ── INIT ──
+  fetchUsuarios();
+  document.addEventListener('astro:page-load', fetchUsuarios);
+</script>
+
 <style>
-  /* ================= CSS DEL GRID Y FORMULARIOS ================= */
+  /* ── Tarjetas propias (prefijo us-) ── */
+  .us-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .us-action-card {
+    border: none;
+    border-radius: 14px;
+    padding: 22px 18px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.22s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .us-action-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.18); }
+  .us-card-active {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.22) !important;
+    outline: 3px solid rgba(255,255,255,0.35);
+    outline-offset: -3px;
+  }
+
+  /* ── Área dinámica propia ── */
+  .us-dynamic-area {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid #E2D9CE;
+    overflow: hidden;
+    min-height: 320px;
+  }
+
+  .us-panel { display: none; padding: 28px; animation: usFadeIn 0.22s ease; }
+  .us-panel.active { display: block; }
+  @keyframes usFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── Modal propio ── */
+  .us-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(35,55,62,0.55);
+    z-index: 3000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+  }
+  .us-modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 750px;
+    width: 92%;
+    box-shadow: 0 20px 60px rgba(35,55,62,0.25);
+    overflow: hidden;
+  }
+  .us-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 20px 24px;
+    border-bottom: 1px solid #eee;
+  }
+  .us-modal-title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1C2B30;
+  }
+  .us-modal-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #8A9BA0;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .us-modal-close:hover { color: #1C2B30; }
+  .us-modal-body {
+    max-height: 65vh;
+    overflow-y: auto;
+    padding: 25px;
+  }
+  .us-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 25px;
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+  }
+
+  /* ── Secciones de form ── */
   .stylish-form .form-section-box {
     background: #fdfdfd;
     border: 1px solid #e9ecef;
@@ -231,7 +651,6 @@
     padding: 15px 20px;
     margin-bottom: 20px;
   }
-  
   .stylish-form .section-title {
     color: #0F988A;
     font-size: 1em;
@@ -245,383 +664,30 @@
     gap: 8px;
   }
 
-  /* Sistemas de Grid Responsivo */
-  .ag-form-grid-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .ag-form-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 15px;
-  }
+  /* ── Grids ── */
+  .ag-form-grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 15px; margin-bottom: 15px; }
+  .ag-form-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; margin-bottom: 15px; }
 
-  @media (max-width: 768px) {
-    .ag-form-grid-2, .ag-form-grid-3 {
-      grid-template-columns: 1fr; /* Columna única en móviles */
-    }
-  }
-
-  /* Ajustes de Input */
-  .ag-input {
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .password-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
+  /* ── Password ── */
+  .password-wrapper { position: relative; display: flex; align-items: center; }
   .btn-toggle-pass {
-    position: absolute;
-    right: 12px;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    color: #6c757d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute; right: 12px;
+    background: none; border: none; padding: 0;
+    cursor: pointer; color: #6c757d;
+    display: flex; align-items: center; justify-content: center;
   }
   .btn-toggle-pass:hover { color: #0F988A; }
 
-  /* Checkbox perfectamente alineado con los inputs de texto */
-  .checkbox-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    height: 100%; /* Toma la altura completa de la celda */
-    padding-top: 22px; /* Lo empuja hacia abajo para alinearse con los inputs (compensando el label vacío) */
-  }
-  .custom-checkbox {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: #0F988A;
-    margin: 0;
-  }
-  .checkbox-container label {
-    margin-bottom: 0;
-    cursor: pointer;
-    font-weight: 500;
-  }
+  /* ── Checkbox ── */
+  .checkbox-container { display: flex; align-items: center; gap: 10px; height: 100%; padding-top: 22px; }
+  .custom-checkbox { width: 20px; height: 20px; cursor: pointer; accent-color: #0F988A; margin: 0; }
+  .checkbox-container label { margin-bottom: 0; cursor: pointer; font-weight: 500; }
 
-  /* Botones de tabla */
-  .btn-alta {
-    background-color: #e6f4ea;
-    color: #1e8e3e !important;
-    border: 1px solid #1e8e3e !important;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  /* ── Responsive ── */
+  @media (max-width: 1100px) { .us-actions-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 768px) {
+    .ag-form-grid-2, .ag-form-grid-3 { grid-template-columns: 1fr; }
+    .us-actions-grid { grid-template-columns: repeat(2,1fr); }
+    .us-panel { padding: 18px; }
   }
-  .btn-alta:hover { background-color: #1e8e3e !important; color: white !important; }
-  .btn-baja { display: flex; align-items: center; gap: 5px; }
 </style>
-
-<script>
-  import { supabase } from '../../lib/supabase.js';
-
-  declare global {
-    interface Window { 
-      openModal: (id: string) => void; 
-      closeModal: (id: string) => void; 
-      togglePassword: (id: string) => void;
-    }
-  }
-
-  // Lógica para el botón de "Ver Contraseña"
-  window.togglePassword = function(inputId: string) {
-    const input = document.getElementById(inputId) as HTMLInputElement;
-    if (input) {
-      if (input.type === "password") {
-        input.type = "text";
-      } else {
-        input.type = "password";
-      }
-    }
-  };
-
-  let usuariosList: any[] = [];
-  const tbodyEditar = document.getElementById('tbody-editar') as HTMLTableSectionElement;
-  const tbodyEliminar = document.getElementById('tbody-eliminar') as HTMLTableSectionElement;
-
-  // Animación y Lógica de Tabs
-  const actionCards = document.querySelectorAll('.ag-action-card');
-  const panels = document.querySelectorAll('.ag-panel');
-  actionCards.forEach(card => {
-    card.addEventListener('click', () => {
-      actionCards.forEach(c => c.classList.remove('active-card'));
-      panels.forEach(p => p.classList.remove('active'));
-      card.classList.add('active-card');
-      document.getElementById(`ag-panel-${card.getAttribute('data-panel')}`)?.classList.add('active');
-    });
-  });
-
-  const style = document.createElement('style');
-  style.innerHTML = `.active-card { outline: 3px solid #0F988A; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); }`;
-  document.head.appendChild(style);
-
-  // 1. LEER DATOS (DESDE LA VISTA SQL)
-  async function fetchUsuarios() {
-    const { data, error } = await supabase.from('vista_personas_completa').select('*').order('id', { ascending: true });
-    if (error) return console.error('Error:', error.message);
-    
-    usuariosList = data || [];
-    
-    (document.getElementById('stat-total') as HTMLElement).innerText = usuariosList.length.toString();
-    (document.getElementById('stat-activos') as HTMLElement).innerText = usuariosList.filter(u => u.estado).length.toString();
-    (document.getElementById('stat-inactivos') as HTMLElement).innerText = usuariosList.filter(u => !u.estado).length.toString();
-
-    renderTablaEditar();
-    renderTablaEliminar();
-  }
-
-  function renderTablaEditar() {
-    if (!tbodyEditar) return;
-    tbodyEditar.innerHTML = '';
-    const q = (document.getElementById('search-editar') as HTMLInputElement)?.value.toLowerCase() || '';
-    
-    const data = usuariosList.filter(u => u.estado && (`${u.nombres} ${u.apellido_paterno}`.toLowerCase().includes(q) || (u.correo_electronico || '').toLowerCase().includes(q)));
-    if (data.length === 0) return tbodyEditar.innerHTML = '<tr><td colspan="5" align="center" style="padding:20px;">Sin resultados encontrados.</td></tr>';
-
-    data.forEach(u => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>#${u.id}</td>
-        <td class="ag-td-title">${u.nombres} ${u.apellido_paterno}</td>
-        <td>${u.correo_electronico || '-'}</td>
-        <td>${u.id_rol || '-'}</td>
-        <td>
-          <button class="ag-btn-action ag-btn-edit btn-abrir-editar" data-id="${u.id}" style="display:flex; align-items:center; gap:5px;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            Editar
-          </button>
-        </td>`;
-      tbodyEditar.appendChild(tr);
-    });
-  }
-
-  function renderTablaEliminar() {
-    if (!tbodyEliminar) return;
-    tbodyEliminar.innerHTML = '';
-    const q = (document.getElementById('search-eliminar') as HTMLInputElement)?.value.toLowerCase() || '';
-    const st = (document.getElementById('filter-eliminar-estado') as HTMLSelectElement)?.value || 'activos';
-
-    const data = usuariosList.filter(u => {
-      if (st === 'activos' && !u.estado) return false;
-      if (st === 'inactivos' && u.estado) return false;
-      return `${u.nombres} ${u.apellido_paterno}`.toLowerCase().includes(q);
-    });
-
-    if (data.length === 0) return tbodyEliminar.innerHTML = '<tr><td colspan="4" align="center" style="padding:20px;">No hay registros para mostrar.</td></tr>';
-
-    data.forEach(u => {
-      // Diferenciamos los botones de Baja vs Alta con iconos
-      const btn = u.estado 
-        ? `<button class="ag-btn-action ag-btn-delete btn-baja" data-id="${u.id}">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-            Dar de Baja
-           </button>` 
-        : `<button class="ag-btn-action btn-alta" data-id="${u.id}">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
-            Dar de Alta
-           </button>`;
-      
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>#${u.id}</td>
-        <td class="ag-td-title">${u.nombres} ${u.apellido_paterno}</td>
-        <td>${u.estado ? '<span class="ag-badge ag-badge-pub">Activo</span>' : '<span class="ag-badge ag-badge-draft">Inactivo</span>'}</td>
-        <td>${btn}</td>
-      `;
-      tbodyEliminar.appendChild(tr);
-    });
-  }
-
-  document.getElementById('search-editar')?.addEventListener('input', renderTablaEditar);
-  document.getElementById('search-eliminar')?.addEventListener('input', renderTablaEliminar);
-  document.getElementById('filter-eliminar-estado')?.addEventListener('change', renderTablaEliminar);
-
-  // ==========================================
-  // CREAR USUARIO
-  // ==========================================
-  document.getElementById('form-crear-usuario')?.addEventListener('submit', async (e: Event) => {
-    e.preventDefault();
-    const btnSubmit = (e.target as HTMLFormElement).querySelector('button[type="submit"]') as HTMLButtonElement;
-    btnSubmit.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> Guardando...';
-    btnSubmit.disabled = true;
-
-    try {
-      const payload = {
-        email: (document.getElementById('create-email') as HTMLInputElement).value,
-        password: (document.getElementById('create-password') as HTMLInputElement).value,
-        personaData: {
-          nombres: (document.getElementById('create-nombres') as HTMLInputElement).value,
-          apellido_paterno: (document.getElementById('create-ap') as HTMLInputElement).value,
-          apellido_materno: (document.getElementById('create-am') as HTMLInputElement).value || null,
-          telefono: (document.getElementById('create-tel') as HTMLInputElement).value || null,
-          fecha_nacimiento: (document.getElementById('create-fn') as HTMLInputElement).value || null,
-          id_rol: (document.getElementById('create-rol') as HTMLInputElement).value || null,
-          id_idioma_fav: (document.getElementById('create-idioma') as HTMLInputElement).value || null,
-          id_sistema_medida: (document.getElementById('create-medida') as HTMLInputElement).value || null,
-          perfil_publico: (document.getElementById('create-publico') as HTMLInputElement).checked,
-          estado: true
-        }
-      };
-
-      const res = await fetch('/api/admin/crear-usuario', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
-
-      alert('¡Usuario creado con éxito!');
-      (e.target as HTMLFormElement).reset();
-      // Resetear password type
-      (document.getElementById('create-password') as HTMLInputElement).type = 'password';
-      fetchUsuarios();
-    } catch (err: any) {
-      alert('Error: ' + err.message);
-    } finally {
-      btnSubmit.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Guardar Usuario';
-      btnSubmit.disabled = false;
-    }
-  });
-
-  // ==========================================
-  // ABRIR MODAL EDITAR
-  // ==========================================
-  let currentEditAuthId: string | null = null;
-
-  tbodyEditar?.addEventListener('click', (e: any) => {
-    const target = e.target as HTMLElement;
-    const btn = target.closest('.btn-abrir-editar');
-    
-    if (btn) {
-      const id = btn.getAttribute('data-id');
-      const u = usuariosList.find(x => x.id == id);
-      if (u) {
-        currentEditAuthId = u.id_usuario; 
-        
-        (document.getElementById('edit-id') as HTMLInputElement).value = u.id;
-        (document.getElementById('edit-email-view') as HTMLInputElement).value = u.correo_electronico || 'No vinculado';
-        
-        const passInput = document.getElementById('edit-password') as HTMLInputElement;
-        passInput.value = ''; 
-        passInput.type = 'password'; 
-        
-        (document.getElementById('edit-nombres') as HTMLInputElement).value = u.nombres || '';
-        (document.getElementById('edit-ap') as HTMLInputElement).value = u.apellido_paterno || '';
-        (document.getElementById('edit-am') as HTMLInputElement).value = u.apellido_materno || '';
-        (document.getElementById('edit-tel') as HTMLInputElement).value = u.telefono || '';
-        (document.getElementById('edit-fn') as HTMLInputElement).value = u.fecha_nacimiento || '';
-        (document.getElementById('edit-rol') as HTMLInputElement).value = u.id_rol || '';
-        (document.getElementById('edit-idioma') as HTMLInputElement).value = u.id_idioma_fav || '';
-        (document.getElementById('edit-medida') as HTMLInputElement).value = u.id_sistema_medida || '';
-        (document.getElementById('edit-publico') as HTMLInputElement).checked = u.perfil_publico;
-        window.openModal('editarUsuariosModal');
-      }
-    }
-  });
-
-  // ==========================================
-  // GUARDAR EDICIÓN
-  // ==========================================
-  document.getElementById('form-editar-usuario')?.addEventListener('submit', async (e: Event) => {
-    e.preventDefault();
-    const btnSubmit = (e.target as HTMLFormElement).querySelector('button[type="submit"]') as HTMLButtonElement;
-    const oldHtml = btnSubmit.innerHTML;
-    btnSubmit.innerText = 'Actualizando...';
-    btnSubmit.disabled = true;
-
-    try {
-      const payload = {
-        id_persona: (document.getElementById('edit-id') as HTMLInputElement).value,
-        id_auth: currentEditAuthId,
-        nuevaClave: (document.getElementById('edit-password') as HTMLInputElement).value,
-        personaData: {
-          nombres: (document.getElementById('edit-nombres') as HTMLInputElement).value,
-          apellido_paterno: (document.getElementById('edit-ap') as HTMLInputElement).value,
-          apellido_materno: (document.getElementById('edit-am') as HTMLInputElement).value || null,
-          telefono: (document.getElementById('edit-tel') as HTMLInputElement).value || null,
-          fecha_nacimiento: (document.getElementById('edit-fn') as HTMLInputElement).value || null,
-          id_rol: (document.getElementById('edit-rol') as HTMLInputElement).value || null,
-          id_idioma_fav: (document.getElementById('edit-idioma') as HTMLInputElement).value || null,
-          id_sistema_medida: (document.getElementById('edit-medida') as HTMLInputElement).value || null,
-          perfil_publico: (document.getElementById('edit-publico') as HTMLInputElement).checked,
-          updated_at: new Date().toISOString()
-        }
-      };
-
-      const res = await fetch('/api/admin/editar-usuario', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
-
-      alert('¡Perfil actualizado con éxito!');
-      window.closeModal('editarUsuariosModal');
-      fetchUsuarios();
-    } catch (err: any) {
-      alert('Error: ' + err.message);
-    } finally {
-      btnSubmit.innerHTML = oldHtml;
-      btnSubmit.disabled = false;
-    }
-  });
-
-  // ==========================================
-  // ELIMINAR / RESTABLECER (Alta/Baja)
-  // ==========================================
-  tbodyEliminar?.addEventListener('click', async (e: any) => {
-    const target = e.target as HTMLElement;
-    const btnAlta = target.closest('.btn-alta');
-    const btnBaja = target.closest('.btn-baja');
-    
-    if (btnBaja) {
-      const id = btnBaja.getAttribute('data-id');
-      if (confirm(`¿Estás seguro que deseas dar de BAJA al usuario #${id}?`)) {
-        await supabase.from('personas').update({ estado: false, updated_at: new Date().toISOString() }).eq('id', id);
-        fetchUsuarios(); 
-      }
-    }
-    
-    if (btnAlta) {
-      const id = btnAlta.getAttribute('data-id');
-      if (confirm(`¿Confirmas que deseas dar de ALTA al usuario #${id}?`)) {
-        await supabase.from('personas').update({ estado: true, updated_at: new Date().toISOString() }).eq('id', id);
-        fetchUsuarios(); 
-      }
-    }
-  });
-
-  // ==========================================
-  // EXPORTAR A EXCEL (CSV)
-  // ==========================================
-  document.getElementById('btn-exportar')?.addEventListener('click', () => {
-    let csvContent = "ID,Nombres,Correo,Rol,Estado\n";
-    usuariosList.forEach(u => csvContent += `${u.id},"${u.nombres} ${u.apellido_paterno}","${u.correo_electronico || ''}","${u.id_rol || ''}","${u.estado ? 'Activo' : 'Inactivo'}"\n`);
-    const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `Exportacion_Wally.csv`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  });
-
-  document.addEventListener('DOMContentLoaded', fetchUsuarios);
-</script>

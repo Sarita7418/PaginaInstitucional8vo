@@ -1,5 +1,5 @@
 ---
-// Rutas.astro — Módulo Sitios y Rutas
+// Rutas.astro — Módulo Sitios y Rutas (refactorizado)
 import './Rutas.css';
 ---
 
@@ -19,15 +19,11 @@ import './Rutas.css';
       </button>
       <button class="sr-action-card sr-amber" data-panel="crear-ruta">
         <div class="sr-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg></div>
-        <div class="sr-action-text"><span class="sr-action-title">Crear Ruta</span><span class="sr-action-desc">Diseña una nueva ruta turística</span></div>
+        <div class="sr-action-text"><span class="sr-action-title">Crear Ruta</span><span class="sr-action-desc">Diseña una nueva ruta con sus sitios</span></div>
       </button>
       <button class="sr-action-card sr-green" data-panel="ver-rutas">
         <div class="sr-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-        <div class="sr-action-text"><span class="sr-action-title">Ver Rutas</span><span class="sr-action-desc">Gestiona rutas existentes</span></div>
-      </button>
-      <button class="sr-action-card sr-teal2" data-panel="asignar-puntos">
-        <div class="sr-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
-        <div class="sr-action-text"><span class="sr-action-title">Asignar Puntos</span><span class="sr-action-desc">Conecta sitios a una ruta</span></div>
+        <div class="sr-action-text"><span class="sr-action-title">Ver / Editar Rutas</span><span class="sr-action-desc">Gestiona rutas y sus sitios asignados</span></div>
       </button>
       <button class="sr-action-card sr-terra" data-panel="gestionar-estado">
         <div class="sr-action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></div>
@@ -124,19 +120,70 @@ import './Rutas.css';
         <div class="sr-pagination"><span class="sr-page-info" id="info-puntos">—</span><div class="sr-page-btns" id="btns-puntos"></div></div>
       </div>
 
-      <!-- CREAR RUTA -->
+      <!-- ══════════════════════════════════════════════
+           CREAR RUTA — Nombre + Puntos en un solo flujo
+           ══════════════════════════════════════════════ -->
       <div class="sr-panel" id="panel-crear-ruta">
         <div class="sr-panel-header">
           <div class="sr-panel-icon sr-amber-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg></div>
-          <div><h3 class="sr-panel-title">Crear Ruta</h3><p class="sr-panel-subtitle">Diseña y configura una nueva ruta turística</p></div>
+          <div><h3 class="sr-panel-title">Crear Ruta</h3><p class="sr-panel-subtitle">Define la ruta y asigna sus sitios turísticos en un solo paso</p></div>
         </div>
+
         <form id="form-crear-ruta" autocomplete="off">
-          <div class="sr-form-row"><div class="sr-form-group sr-full"><label class="sr-label">Nombre de la Ruta *</label><input type="text" class="sr-input" id="rt-nombre" placeholder="Ej: Ruta Histórica del Centro" required /></div></div>
-          <div class="sr-form-row">
-            <div class="sr-form-group"><label class="sr-label">Tipo de Ruta</label><select class="sr-select" id="rt-tipo"><option value="">Cargando...</option></select></div>
-            <div class="sr-form-group"><label class="sr-label">Estado inicial</label><div class="sr-toggle-group"><label class="sr-toggle-opt sr-toggle-active"><input type="radio" name="rt-estado" value="true" checked /> Activa</label><label class="sr-toggle-opt"><input type="radio" name="rt-estado" value="false" /> Inactiva</label></div></div>
+          <!-- SECCIÓN 1: Datos de la ruta -->
+          <div class="sr-section-block">
+            <div class="sr-section-label">
+              <span class="sr-section-num">1</span>
+              <span>Información de la ruta</span>
+            </div>
+            <div class="sr-form-row">
+              <div class="sr-form-group sr-full"><label class="sr-label">Nombre de la Ruta *</label><input type="text" class="sr-input" id="rt-nombre" placeholder="Ej: Ruta Histórica del Centro" required /></div>
+            </div>
+            <div class="sr-form-row">
+              <div class="sr-form-group"><label class="sr-label">Tipo de Ruta</label><select class="sr-select" id="rt-tipo"><option value="">Cargando...</option></select></div>
+              <div class="sr-form-group"><label class="sr-label">Estado inicial</label><div class="sr-toggle-group"><label class="sr-toggle-opt sr-toggle-active"><input type="radio" name="rt-estado" value="true" checked /> Activa</label><label class="sr-toggle-opt"><input type="radio" name="rt-estado" value="false" /> Inactiva</label></div></div>
+            </div>
+            <div class="sr-form-row"><div class="sr-form-group sr-full"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="rt-descripcion" placeholder="Describe el recorrido..."></textarea></div></div>
           </div>
-          <div class="sr-form-row"><div class="sr-form-group sr-full"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="rt-descripcion" placeholder="Describe el recorrido..."></textarea></div></div>
+
+          <!-- SECCIÓN 2: Asignar sitios -->
+          <div class="sr-section-block">
+            <div class="sr-section-label">
+              <span class="sr-section-num">2</span>
+              <span>Sitios turísticos de la ruta <span class="sr-section-optional">(opcional — puedes añadirlos luego)</span></span>
+            </div>
+            <div class="sr-crear-ruta-layout">
+              <div class="sr-crear-ruta-left">
+                <!-- Instrucción de uso -->
+                <div class="sr-points-instruction">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span>Haz clic en un sitio para <strong>añadirlo</strong>. Vuelve a hacer clic para <strong>quitarlo</strong>. El orden de recorrido sigue el orden de selección.</span>
+                </div>
+                <div id="sr-puntos-checklist-crear" class="sr-points-grid"><div class="sr-loading-inline">Cargando sitios...</div></div>
+                <div id="sr-orden-preview-crear" class="sr-orden-preview" style="display:none;">
+                  <div class="sr-orden-header">
+                    <span class="sr-orden-title">Orden de recorrido</span>
+                    <button type="button" class="sr-orden-clear" id="btn-clear-crear">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                      Quitar todos
+                    </button>
+                  </div>
+                  <div id="sr-orden-list-crear" class="sr-orden-list"></div>
+                </div>
+              </div>
+              <div class="sr-crear-ruta-right">
+                <div class="sr-map-hint" id="sr-route-hint-crear"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg><span>Selecciona 2 o más sitios para ver la ruta</span></div>
+                <div id="sr-route-stats-crear" class="sr-route-stats" style="display:none;">
+                  <div class="sr-route-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18"/><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/></svg><span id="sr-route-distance-crear">—</span></div>
+                  <div class="sr-route-stat-div"></div>
+                  <div class="sr-route-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="sr-route-duration-crear">—</span></div>
+                </div>
+                <div id="sr-route-loading-crear" class="sr-route-loading" style="display:none;"><div class="sr-route-spinner"></div><span>Calculando ruta...</span></div>
+                <div id="sr-route-map-crear"></div>
+              </div>
+            </div>
+          </div>
+
           <div class="sr-form-actions">
             <button type="submit" class="sr-btn sr-btn-amber" id="btn-guardar-ruta">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
@@ -147,11 +194,13 @@ import './Rutas.css';
         </form>
       </div>
 
-      <!-- VER RUTAS -->
+      <!-- ══════════════════════════════════════════════
+           VER / EDITAR RUTAS — tabla con edición completa
+           ══════════════════════════════════════════════ -->
       <div class="sr-panel" id="panel-ver-rutas">
         <div class="sr-panel-header">
           <div class="sr-panel-icon sr-green-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-          <div><h3 class="sr-panel-title">Rutas Turísticas</h3><p class="sr-panel-subtitle">Listado de rutas disponibles en el sistema</p></div>
+          <div><h3 class="sr-panel-title">Ver / Editar Rutas</h3><p class="sr-panel-subtitle">Listado de rutas — edita tanto los datos como los sitios asignados</p></div>
           <button class="sr-btn sr-btn-amber sr-btn-small sr-ml-auto" id="btn-nueva-ruta">+ Nueva</button>
         </div>
         <div class="sr-toolbar">
@@ -168,63 +217,20 @@ import './Rutas.css';
         <div class="sr-pagination"><span class="sr-page-info" id="info-rutas">—</span><div class="sr-page-btns" id="btns-rutas"></div></div>
       </div>
 
-      <!-- ASIGNAR PUNTOS -->
-      <div class="sr-panel" id="panel-asignar-puntos">
-        <div class="sr-panel-header">
-          <div class="sr-panel-icon sr-teal2-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
-          <div><h3 class="sr-panel-title">Asignar Puntos a Ruta</h3><p class="sr-panel-subtitle">Vincula sitios turísticos activos a las rutas creadas</p></div>
-        </div>
-        <form id="form-asignar" autocomplete="off">
-          <div class="sr-asignar-layout">
-            <div class="sr-asignar-left">
-              <div class="sr-form-row"><div class="sr-form-group sr-full"><label class="sr-label">Seleccionar Ruta *</label><select class="sr-select" id="asig-ruta" required><option value="">Cargando rutas...</option></select></div></div>
-              <div class="sr-form-group sr-full" style="margin-bottom:16px;">
-                <label class="sr-label">Sitios Turísticos activos</label>
-                <p class="sr-label-hint">Selecciona los sitios — el orden se asigna automáticamente según selección</p>
-                <div id="sr-puntos-checklist" class="sr-points-grid"><div class="sr-loading-inline">Cargando sitios...</div></div>
-              </div>
-              <div id="sr-orden-preview" class="sr-orden-preview" style="display:none;">
-                <div class="sr-orden-title">Orden de recorrido:</div>
-                <div id="sr-orden-list" class="sr-orden-list"></div>
-              </div>
-              <div class="sr-form-actions">
-                <button type="submit" class="sr-btn sr-btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Guardar Asignación</button>
-                <button type="button" class="sr-btn sr-btn-secondary" id="btn-cancelar-asignar">Cancelar</button>
-              </div>
-            </div>
-            <div class="sr-asignar-right">
-              <div class="sr-map-hint" id="sr-route-hint"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg><span>Selecciona 2 o más sitios para ver la ruta</span></div>
-              <div id="sr-route-stats" class="sr-route-stats" style="display:none;">
-                <div class="sr-route-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18"/><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/></svg><span id="sr-route-distance">—</span></div>
-                <div class="sr-route-stat-div"></div>
-                <div class="sr-route-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="sr-route-duration">—</span></div>
-              </div>
-              <div id="sr-route-loading" class="sr-route-loading" style="display:none;"><div class="sr-route-spinner"></div><span>Calculando ruta...</span></div>
-              <div id="sr-route-map"></div>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <!-- GESTIONAR ESTADO (antes "Eliminar") -->
+      <!-- GESTIONAR ESTADO -->
       <div class="sr-panel" id="panel-gestionar-estado">
         <div class="sr-panel-header">
           <div class="sr-panel-icon sr-terra-bg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></div>
           <div><h3 class="sr-panel-title">Gestionar Estado</h3><p class="sr-panel-subtitle">Activa o desactiva sitios y rutas — ningún registro se elimina de la base de datos</p></div>
         </div>
-
-        <!-- Banner informativo -->
         <div class="sr-info-banner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           Los registros desactivados dejan de mostrarse en la app pero permanecen en la base de datos. Puedes reactivarlos en cualquier momento.
         </div>
-
         <div class="sr-delete-tabs">
           <button class="sr-del-tab active" data-target="est-puntos">Sitios Turísticos</button>
           <button class="sr-del-tab" data-target="est-rutas">Rutas</button>
         </div>
-
-        <!-- TABLA SITIOS -->
         <div id="est-puntos" class="sr-del-panel">
           <div class="sr-table-wrap">
             <table class="sr-table">
@@ -233,8 +239,6 @@ import './Rutas.css';
             </table>
           </div>
         </div>
-
-        <!-- TABLA RUTAS -->
         <div id="est-rutas" class="sr-del-panel" style="display:none;">
           <div class="sr-table-wrap">
             <table class="sr-table">
@@ -249,50 +253,129 @@ import './Rutas.css';
   </div>
 </div>
 
-<!-- MODAL EDITAR PUNTO -->
+<!-- ══════════════════════════════════════════════════════
+     MODAL EDITAR SITIO TURÍSTICO (con mapa)
+     ══════════════════════════════════════════════════════ -->
 <div id="modal-editar-punto" class="sr-modal" style="display:none;">
-  <div class="sr-modal-box">
-    <div class="sr-modal-header"><h3 class="sr-modal-title">Editar Sitio Turístico</h3><button class="sr-modal-close" id="close-modal-punto">✕</button></div>
+  <div class="sr-modal-box sr-modal-box-edit-punto">
+    <div class="sr-modal-header">
+      <h3 class="sr-modal-title">Editar Sitio Turístico</h3>
+      <button class="sr-modal-close" id="close-modal-punto">✕</button>
+    </div>
     <form id="form-editar-punto" autocomplete="off">
       <input type="hidden" id="edit-pt-id" />
-      <div class="sr-form-group"><label class="sr-label">Nombre *</label><input type="text" class="sr-input" id="edit-pt-nombre" required /></div>
-      <div class="sr-form-row"><div class="sr-form-group"><label class="sr-label">Latitud</label><input type="number" step="any" class="sr-input" id="edit-pt-latitud" /></div><div class="sr-form-group"><label class="sr-label">Longitud</label><input type="number" step="any" class="sr-input" id="edit-pt-longitud" /></div></div>
-      <div class="sr-form-group"><label class="sr-label">Categoría</label><select class="sr-select" id="edit-pt-categoria"></select></div>
-      <div class="sr-form-group"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="edit-pt-descripcion"></textarea></div>
-      <div class="sr-form-group"><label class="sr-label">URL Imagen</label><input type="url" class="sr-input" id="edit-pt-imagen" /></div>
-      <div class="sr-modal-footer"><button type="submit" class="sr-btn sr-btn-primary">Guardar Cambios</button><button type="button" class="sr-btn sr-btn-secondary" id="close-modal-punto2">Cancelar</button></div>
+      <!-- Layout: formulario + mapa lado a lado -->
+      <div class="sr-edit-punto-layout">
+        <div class="sr-edit-punto-fields">
+          <div class="sr-form-group"><label class="sr-label">Nombre *</label><input type="text" class="sr-input" id="edit-pt-nombre" required /></div>
+          <div class="sr-form-row">
+            <div class="sr-form-group"><label class="sr-label">Latitud</label><input type="number" step="any" class="sr-input" id="edit-pt-latitud" placeholder="-16.4956" /></div>
+            <div class="sr-form-group"><label class="sr-label">Longitud</label><input type="number" step="any" class="sr-input" id="edit-pt-longitud" placeholder="-68.1335" /></div>
+          </div>
+          <div class="sr-form-group"><label class="sr-label">Categoría</label><select class="sr-select" id="edit-pt-categoria"></select></div>
+          <div class="sr-form-group"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="edit-pt-descripcion"></textarea></div>
+          <div class="sr-form-group"><label class="sr-label">URL Imagen</label><input type="url" class="sr-input" id="edit-pt-imagen" /></div>
+        </div>
+        <div class="sr-edit-punto-map">
+          <div class="sr-map-hint">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Escribe lat/lng o haz clic en el mapa</span>
+          </div>
+          <div id="sr-edit-punto-map"></div>
+        </div>
+      </div>
+      <div class="sr-modal-footer">
+        <button type="submit" class="sr-btn sr-btn-primary">Guardar Cambios</button>
+        <button type="button" class="sr-btn sr-btn-secondary" id="close-modal-punto2">Cancelar</button>
+      </div>
     </form>
   </div>
 </div>
 
-<!-- MODAL EDITAR RUTA -->
+<!-- ══════════════════════════════════════════════════════
+     MODAL EDITAR RUTA — datos + puntos asignados juntos
+     ══════════════════════════════════════════════════════ -->
 <div id="modal-editar-ruta" class="sr-modal" style="display:none;">
-  <div class="sr-modal-box">
-    <div class="sr-modal-header"><h3 class="sr-modal-title">Editar Ruta</h3><button class="sr-modal-close" id="close-modal-ruta">✕</button></div>
+  <div class="sr-modal-box sr-modal-box-xl">
+    <div class="sr-modal-header">
+      <h3 class="sr-modal-title">Editar Ruta</h3>
+      <button class="sr-modal-close" id="close-modal-ruta">✕</button>
+    </div>
     <form id="form-editar-ruta" autocomplete="off">
       <input type="hidden" id="edit-rt-id" />
-      <div class="sr-form-group"><label class="sr-label">Nombre *</label><input type="text" class="sr-input" id="edit-rt-nombre" required /></div>
-      <div class="sr-form-group"><label class="sr-label">Tipo de Ruta</label><select class="sr-select" id="edit-rt-tipo"></select></div>
-      <div class="sr-form-group"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="edit-rt-descripcion"></textarea></div>
-      <div class="sr-modal-footer"><button type="submit" class="sr-btn sr-btn-primary">Guardar Cambios</button><button type="button" class="sr-btn sr-btn-secondary" id="close-modal-ruta2">Cancelar</button></div>
-    </form>
-  </div>
-</div>
 
-<!-- MODAL VER PUNTOS DE RUTA -->
-<div id="modal-ver-puntos-ruta" class="sr-modal" style="display:none;">
-  <div class="sr-modal-box sr-modal-box-lg">
-    <div class="sr-modal-header"><h3 class="sr-modal-title" id="modal-ruta-titulo">Puntos de la Ruta</h3><button class="sr-modal-close" id="close-modal-puntos-ruta">✕</button></div>
-    <div id="modal-ruta-puntos-list" class="sr-ruta-puntos-list">Cargando...</div>
+      <!-- Sección 1: Datos de la ruta -->
+      <div class="sr-modal-section">
+        <div class="sr-modal-section-title">
+          <span class="sr-section-num sr-section-num-sm">1</span>
+          Información de la ruta
+        </div>
+        <div class="sr-form-group"><label class="sr-label">Nombre *</label><input type="text" class="sr-input" id="edit-rt-nombre" required /></div>
+        <div class="sr-form-row">
+          <div class="sr-form-group"><label class="sr-label">Tipo de Ruta</label><select class="sr-select" id="edit-rt-tipo"></select></div>
+        </div>
+        <div class="sr-form-group"><label class="sr-label">Descripción</label><textarea class="sr-textarea" id="edit-rt-descripcion"></textarea></div>
+      </div>
+
+      <!-- Sección 2: Puntos asignados -->
+      <div class="sr-modal-section">
+        <div class="sr-modal-section-title">
+          <span class="sr-section-num sr-section-num-sm">2</span>
+          Sitios turísticos asignados
+          <!-- Botón Ver Ruta -->
+          <button type="button" class="sr-btn-ver-ruta" id="btn-ver-ruta-editar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg>
+            Ver ruta en mapa
+          </button>
+        </div>
+        <!-- Instrucción de uso en el modal -->
+        <div class="sr-points-instruction sr-points-instruction-modal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Haz clic en un sitio para <strong>añadirlo</strong> o <strong>quitarlo</strong> de la ruta. El orden sigue el orden de selección.</span>
+        </div>
+        <div class="sr-editar-ruta-layout">
+          <div class="sr-editar-ruta-left">
+            <div id="sr-puntos-checklist-editar" class="sr-points-grid sr-points-grid-modal"><div class="sr-loading-inline">Cargando sitios...</div></div>
+            <div id="sr-orden-preview-editar" class="sr-orden-preview" style="display:none;">
+              <div class="sr-orden-header">
+                <span class="sr-orden-title">Orden de recorrido</span>
+                <button type="button" class="sr-orden-clear" id="btn-clear-editar">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                  Quitar todos
+                </button>
+              </div>
+              <div id="sr-orden-list-editar" class="sr-orden-list"></div>
+            </div>
+          </div>
+          <!-- Mapa lateral en editar — oculto hasta que se pulse "Ver ruta" -->
+          <div class="sr-editar-ruta-right" id="sr-editar-ruta-right-panel" style="display:none;">
+            <div class="sr-map-hint" id="sr-route-hint-editar"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg><span>Selecciona 2 o más sitios para ver la ruta</span></div>
+            <div id="sr-route-stats-editar" class="sr-route-stats" style="display:none;">
+              <div class="sr-route-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18"/><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/></svg><span id="sr-route-distance-editar">—</span></div>
+              <div class="sr-route-stat-div"></div>
+              <div class="sr-route-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="sr-route-duration-editar">—</span></div>
+            </div>
+            <div id="sr-route-loading-editar" class="sr-route-loading" style="display:none;"><div class="sr-route-spinner"></div><span>Calculando ruta...</span></div>
+            <div id="sr-route-map-editar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sr-modal-footer">
+        <button type="submit" class="sr-btn sr-btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+          Guardar Cambios
+        </button>
+        <button type="button" class="sr-btn sr-btn-secondary" id="close-modal-ruta2">Cancelar</button>
+      </div>
+    </form>
   </div>
 </div>
 
 <!-- MODAL CONFIRM PERSONALIZADO -->
 <div id="sr-confirm-modal" class="sr-modal" style="display:none;">
   <div class="sr-confirm-box">
-    <div class="sr-confirm-icon-wrap" id="sr-confirm-icon-wrap">
-      <!-- El ícono se inyecta dinámicamente -->
-    </div>
+    <div class="sr-confirm-icon-wrap" id="sr-confirm-icon-wrap"></div>
     <h3 class="sr-confirm-title" id="sr-confirm-title">¿Confirmar acción?</h3>
     <p class="sr-confirm-msg" id="sr-confirm-msg"></p>
     <div class="sr-confirm-detail" id="sr-confirm-detail" style="display:none;"></div>
@@ -315,40 +398,34 @@ import './Rutas.css';
   let paginaPuntos = 1, paginaRutas = 1;
   let filtrosBusqPuntos = '', filtrosCategoriaPuntos = '', filtrosEstadoPuntos = '';
   let filtrosBusqRutas  = '', filtrosTipoRutas = '', filtrosEstadoRutas = '';
-  let selectedPuntosOrden: any[] = [];
 
-  // ════════════════════════════════════════════════
-  // MODAL CONFIRM PERSONALIZADO
-  // Soporta distintos íconos y colores según la acción
-  // ════════════════════════════════════════════════
+  // Estados de selección para cada contexto
+  let selectedPuntosCrear:  any[] = [];
+  let selectedPuntosEditar: any[] = [];
+
+  // Control de visibilidad del mapa de editar
+  let mapEditarVisible = false;
+
+  // ══════════════════════════════════════════════════
+  // MODAL CONFIRM
+  // ══════════════════════════════════════════════════
   type ConfirmType = 'deactivate' | 'activate';
 
   function showConfirm(opts: {
-    type: ConfirmType;
-    title: string;
-    msg: string;
-    detail?: string;
-    confirmLabel: string;
-    onConfirm: () => void;
+    type: ConfirmType; title: string; msg: string; detail?: string;
+    confirmLabel: string; onConfirm: () => void;
   }) {
-    const modal   = document.getElementById('sr-confirm-modal')!;
+    const modal    = document.getElementById('sr-confirm-modal')!;
     const iconWrap = document.getElementById('sr-confirm-icon-wrap')!;
-    const elT     = document.getElementById('sr-confirm-title')!;
-    const elM     = document.getElementById('sr-confirm-msg')!;
-    const elD     = document.getElementById('sr-confirm-detail')!;
+    const elT      = document.getElementById('sr-confirm-title')!;
+    const elM      = document.getElementById('sr-confirm-msg')!;
+    const elD      = document.getElementById('sr-confirm-detail')!;
 
-    // Ícono y color según tipo
-    if (opts.type === 'deactivate') {
-      iconWrap.className = 'sr-confirm-icon-wrap sr-confirm-icon-terra';
-      iconWrap.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2">
-        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
-      </svg>`;
-    } else {
-      iconWrap.className = 'sr-confirm-icon-wrap sr-confirm-icon-green';
-      iconWrap.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2">
-        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
-      </svg>`;
-    }
+    const iconSvg = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>`;
+    iconWrap.className = opts.type === 'deactivate'
+      ? 'sr-confirm-icon-wrap sr-confirm-icon-terra'
+      : 'sr-confirm-icon-wrap sr-confirm-icon-green';
+    iconWrap.innerHTML = iconSvg;
 
     elT.textContent = opts.title;
     elM.textContent = opts.msg;
@@ -357,7 +434,6 @@ import './Rutas.css';
 
     modal.style.display = 'flex';
 
-    // Reclonar botones para limpiar listeners anteriores
     const oldOk  = document.getElementById('sr-confirm-ok')!;
     const oldCan = document.getElementById('sr-confirm-cancel')!;
     const newOk  = oldOk.cloneNode(true) as HTMLElement;
@@ -365,24 +441,28 @@ import './Rutas.css';
     oldOk.replaceWith(newOk);
     oldCan.replaceWith(newCan);
 
-    // Clases del botón de confirmar según tipo
-    newOk.className = opts.type === 'deactivate'
-      ? 'sr-btn sr-btn-terra'
-      : 'sr-btn sr-btn-primary';
-    newOk.innerHTML = opts.type === 'deactivate'
-      ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg> ${opts.confirmLabel}`
-      : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg> ${opts.confirmLabel}`;
+    newOk.className = opts.type === 'deactivate' ? 'sr-btn sr-btn-terra' : 'sr-btn sr-btn-primary';
+    newOk.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg> ${opts.confirmLabel}`;
 
     newOk.addEventListener('click', () => { modal.style.display = 'none'; opts.onConfirm(); });
     newCan.addEventListener('click', () => { modal.style.display = 'none'; });
-
     const closeOnBg = (e: Event) => { if (e.target === modal) { modal.style.display = 'none'; modal.removeEventListener('click', closeOnBg); } };
     modal.addEventListener('click', closeOnBg);
   }
 
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
+  // TOAST
+  // ══════════════════════════════════════════════════
+  function showToast(msg: string, type = 'success') {
+    const t = document.getElementById('sr-toast');
+    if (!t) return;
+    t.textContent = msg; t.className = 'sr-toast sr-toast-' + type;
+    setTimeout(() => { t.className = 'sr-toast sr-toast-hidden'; }, 3500);
+  }
+
+  // ══════════════════════════════════════════════════
   // LEAFLET — mapa crear sitio
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
   let leafletMap: any = null, leafletMarker: any = null, leafletLoaded = false;
 
   function loadLeaflet(): Promise<boolean> {
@@ -419,63 +499,127 @@ import './Rutas.css';
     leafletMap.setView([lat, lng], 16, { animate: true });
   }
 
-  // ════════════════════════════════════════════════
-  // OSRM — mapa asignar puntos
-  // ════════════════════════════════════════════════
-  let routeMap: any = null, routeLayer: any = null, routeMarkers: any[] = [];
+  // ══════════════════════════════════════════════════
+  // LEAFLET — mapa editar sitio (dentro del modal)
+  // ══════════════════════════════════════════════════
+  let editPuntoMap: any = null, editPuntoMarker: any = null;
 
-  async function initRouteMap() {
+  async function initEditPuntoMap(lat?: number, lng?: number) {
     await loadLeaflet();
     const L = (window as any).L;
-    if (!document.getElementById('sr-route-map') || routeMap) return;
-    routeMap = L.map('sr-route-map', { zoomControl: true, attributionControl: false }).setView([-16.5, -68.15], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(routeMap);
+    const el = document.getElementById('sr-edit-punto-map');
+    if (!el) return;
+
+    const centerLat = (lat && !isNaN(lat)) ? lat : -16.5;
+    const centerLng = (lng && !isNaN(lng)) ? lng : -68.15;
+    const zoom      = (lat && !isNaN(lat)) ? 16 : 13;
+
+    if (editPuntoMap) {
+      // Ya inicializado: solo mover el marcador
+      editPuntoMap.invalidateSize();
+      editPuntoMarker.setLatLng([centerLat, centerLng]);
+      editPuntoMarker.setOpacity((lat && !isNaN(lat)) ? 1 : 0);
+      editPuntoMap.setView([centerLat, centerLng], zoom, { animate: false });
+      return;
+    }
+
+    const icon = L.divIcon({ html: `<svg width="28" height="36" viewBox="0 0 24 32" fill="none"><path d="M12 0C5.373 0 0 5.373 0 12c0 8 12 20 12 20S24 20 24 12C24 5.373 18.627 0 12 0z" fill="#0F988A"/><circle cx="12" cy="12" r="5" fill="white"/></svg>`, className: '', iconSize: [28, 36], iconAnchor: [14, 36] });
+    editPuntoMap = L.map('sr-edit-punto-map', { zoomControl: true, attributionControl: false }).setView([centerLat, centerLng], zoom);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(editPuntoMap);
+    editPuntoMarker = L.marker([centerLat, centerLng], { icon, opacity: (lat && !isNaN(lat)) ? 1 : 0 }).addTo(editPuntoMap);
+
+    editPuntoMap.on('click', (e: any) => {
+      (document.getElementById('edit-pt-latitud') as HTMLInputElement).value  = e.latlng.lat.toFixed(6);
+      (document.getElementById('edit-pt-longitud') as HTMLInputElement).value = e.latlng.lng.toFixed(6);
+      updateEditMapFromInputs();
+    });
   }
 
-  async function drawOSRMRoute(points: { nombre: string; lat: number; lng: number }[]) {
+  function updateEditMapFromInputs() {
+    if (!editPuntoMap || !editPuntoMarker) return;
+    const lat = parseFloat((document.getElementById('edit-pt-latitud') as HTMLInputElement).value);
+    const lng = parseFloat((document.getElementById('edit-pt-longitud') as HTMLInputElement).value);
+    if (isNaN(lat) || isNaN(lng)) return;
+    editPuntoMarker.setLatLng([lat, lng]); editPuntoMarker.setOpacity(1);
+    editPuntoMap.setView([lat, lng], 16, { animate: true });
+  }
+
+  function destroyEditPuntoMap() {
+    if (editPuntoMap) { editPuntoMap.remove(); editPuntoMap = null; editPuntoMarker = null; }
+  }
+
+  // ══════════════════════════════════════════════════
+  // OSRM — mapas de rutas (crear y editar)
+  // ══════════════════════════════════════════════════
+  let routeMapCrear: any   = null, routeLayerCrear: any   = null, routeMarkersCrear: any[]   = [];
+  let routeMapEditar: any  = null, routeLayerEditar: any  = null, routeMarkersEditar: any[]  = [];
+
+  async function initRouteMap(mapId: string, mapRef: 'crear' | 'editar') {
+    await loadLeaflet();
+    const L = (window as any).L;
+    const el = document.getElementById(mapId);
+    if (!el) return;
+    if (mapRef === 'crear' && routeMapCrear)  { routeMapCrear.invalidateSize();  return; }
+    if (mapRef === 'editar' && routeMapEditar){ routeMapEditar.invalidateSize(); return; }
+    const map = L.map(mapId, { zoomControl: true, attributionControl: false }).setView([-16.5, -68.15], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    if (mapRef === 'crear')  routeMapCrear  = map;
+    if (mapRef === 'editar') routeMapEditar = map;
+  }
+
+  async function drawOSRMRoute(
+    points: { nombre: string; lat: number; lng: number }[],
+    context: 'crear' | 'editar'
+  ) {
+    const routeMap     = context === 'crear' ? routeMapCrear  : routeMapEditar;
+    let   routeLayer   = context === 'crear' ? routeLayerCrear  : routeLayerEditar;
+    let   routeMarkers = context === 'crear' ? routeMarkersCrear : routeMarkersEditar;
+
     if (!routeMap) return;
     await loadLeaflet();
     const L = (window as any).L;
     if (routeLayer) { routeMap.removeLayer(routeLayer); routeLayer = null; }
     routeMarkers.forEach((m: any) => routeMap.removeLayer(m)); routeMarkers = [];
-    const statsEl = document.getElementById('sr-route-stats')!;
-    const hintEl  = document.getElementById('sr-route-hint')!;
-    const loadEl  = document.getElementById('sr-route-loading')!;
+
+    const statsEl  = document.getElementById(`sr-route-stats-${context}`)!;
+    const hintEl   = document.getElementById(`sr-route-hint-${context}`)!;
+    const loadEl   = document.getElementById(`sr-route-loading-${context}`)!;
+
+    if (context === 'crear')  { routeLayerCrear  = routeLayer; routeMarkersCrear  = routeMarkers; }
+    if (context === 'editar') { routeLayerEditar = routeLayer; routeMarkersEditar = routeMarkers; }
+
     if (points.length < 2) { statsEl.style.display = 'none'; hintEl.style.display = 'flex'; routeMap.setView([-16.5, -68.15], 13); return; }
     hintEl.style.display = 'none'; statsEl.style.display = 'none'; loadEl.style.display = 'flex';
+
     try {
       const res  = await fetch(`https://router.project-osrm.org/route/v1/driving/${points.map(p => `${p.lng},${p.lat}`).join(';')}?overview=full&geometries=geojson`);
       const data = await res.json();
       loadEl.style.display = 'none';
       if (data.code !== 'Ok' || !data.routes?.length) { showToast('No se pudo calcular la ruta', 'error'); hintEl.style.display = 'flex'; return; }
       const route = data.routes[0];
-      routeLayer = L.geoJSON(route.geometry, { style: { color: '#0F988A', weight: 5, opacity: 0.85, lineJoin: 'round', lineCap: 'round' } }).addTo(routeMap);
+      const newLayer = L.geoJSON(route.geometry, { style: { color: '#0F988A', weight: 5, opacity: 0.85, lineJoin: 'round', lineCap: 'round' } }).addTo(routeMap);
+      const newMarkers: any[] = [];
       points.forEach((p, i) => {
         const bg = i === 0 ? '#197D61' : i === points.length - 1 ? '#7A3928' : '#D27817';
         const icon = L.divIcon({ html: `<div style="width:28px;height:28px;border-radius:50%;background:${bg};color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:2px solid white;box-shadow:0 2px 8px rgba(0,0,0,.28)">${i + 1}</div>`, className: '', iconSize: [28, 28], iconAnchor: [14, 14] });
-        routeMarkers.push(L.marker([p.lat, p.lng], { icon }).bindTooltip(p.nombre, { permanent: false, direction: 'top', offset: [0, -14], className: 'sr-leaflet-tooltip' }).addTo(routeMap));
+        newMarkers.push(L.marker([p.lat, p.lng], { icon }).bindTooltip(p.nombre, { permanent: false, direction: 'top', offset: [0, -14], className: 'sr-leaflet-tooltip' }).addTo(routeMap));
       });
-      routeMap.fitBounds(routeLayer.getBounds(), { padding: [32, 32] });
+      routeMap.fitBounds(newLayer.getBounds(), { padding: [32, 32] });
       const durMin = Math.round(route.duration / 60);
-      (document.getElementById('sr-route-distance') as HTMLElement).textContent = `${(route.distance / 1000).toFixed(1)} km`;
-      (document.getElementById('sr-route-duration') as HTMLElement).textContent = durMin >= 60 ? `${Math.floor(durMin/60)}h ${durMin%60}min` : `${durMin} min`;
+      (document.getElementById(`sr-route-distance-${context}`) as HTMLElement).textContent = `${(route.distance / 1000).toFixed(1)} km`;
+      (document.getElementById(`sr-route-duration-${context}`) as HTMLElement).textContent  = durMin >= 60 ? `${Math.floor(durMin/60)}h ${durMin%60}min` : `${durMin} min`;
       statsEl.style.display = 'flex';
-    } catch { loadEl.style.display = 'none'; hintEl.style.display = 'flex'; showToast('Error calculando ruta', 'error'); }
+      if (context === 'crear')  { routeLayerCrear  = newLayer; routeMarkersCrear  = newMarkers; }
+      if (context === 'editar') { routeLayerEditar = newLayer; routeMarkersEditar = newMarkers; }
+    } catch {
+      loadEl.style.display = 'none'; hintEl.style.display = 'flex';
+      showToast('Error calculando ruta', 'error');
+    }
   }
 
-  // ════════════════════════════════════════════════
-  // TOAST
-  // ════════════════════════════════════════════════
-  function showToast(msg: string, type = 'success') {
-    const t = document.getElementById('sr-toast');
-    if (!t) return;
-    t.textContent = msg; t.className = 'sr-toast sr-toast-' + type;
-    setTimeout(() => { t.className = 'sr-toast sr-toast-hidden'; }, 3500);
-  }
-
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
   // SUBDOMINIOS
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
   async function loadCategorias() {
     const { data } = await supabase.from('subdominios').select('*').eq('id_dominio', DOMINIO_CATEGORIA_POI).order('descripcion');
     categorias = data || [];
@@ -519,13 +663,13 @@ import './Rutas.css';
     c.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => { const p = parseInt(btn.getAttribute('data-page')!); if (p>=1&&p<=tp) fn(p); }));
   }
 
-  // ════════════════════════════════════════════════
-  // PUNTOS — tabla ver
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
+  // PUNTOS — tabla
+  // ══════════════════════════════════════════════════
   async function loadPuntos() {
     let q = supabase.from('punto_turistico').select('*', { count: 'exact' }).order('id', { ascending: false });
-    if (filtrosBusqPuntos)         q = q.ilike('nombre', `%${filtrosBusqPuntos}%`);
-    if (filtrosCategoriaPuntos)    q = q.eq('id_categoria', filtrosCategoriaPuntos);
+    if (filtrosBusqPuntos)          q = q.ilike('nombre', `%${filtrosBusqPuntos}%`);
+    if (filtrosCategoriaPuntos)     q = q.eq('id_categoria', filtrosCategoriaPuntos);
     if (filtrosEstadoPuntos !== '') q = q.eq('estado', filtrosEstadoPuntos === 'true');
     const from = (paginaPuntos - 1) * PAGE_SIZE;
     q = q.range(from, from + PAGE_SIZE - 1);
@@ -551,155 +695,80 @@ import './Rutas.css';
       btn.addEventListener('click', () => editarPunto(parseInt(btn.getAttribute('data-id')!))));
   }
 
-  // ════════════════════════════════════════════════
-  // PUNTOS — tabla gestionar estado
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
+  // PUNTOS — gestionar estado
+  // ══════════════════════════════════════════════════
   async function loadEstadoPuntos() {
-    const { data } = await supabase
-      .from('punto_turistico')
-      .select('id, nombre, estado, id_categoria')
-      .order('nombre');
+    const { data } = await supabase.from('punto_turistico').select('id, nombre, estado, id_categoria').order('nombre');
     renderTablaEstadoPuntos(data || []);
   }
 
   function renderTablaEstadoPuntos(rows: any[]) {
     const tbody = document.getElementById('tbody-est-puntos'); if (!tbody) return;
-    if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="4" class="sr-empty-row">No hay sitios registrados</td></tr>';
-      return;
-    }
+    if (!rows.length) { tbody.innerHTML = '<tr><td colspan="4" class="sr-empty-row">No hay sitios registrados</td></tr>'; return; }
     tbody.innerHTML = rows.map(p => `
       <tr class="${!p.estado ? 'sr-row-inactive' : ''}">
         <td class="sr-td-name">${p.nombre}</td>
         <td>${getCatNombre(p.id_categoria)}</td>
-        <td>
-          <span class="sr-badge ${p.estado ? 'sr-badge-active' : 'sr-badge-inactive'}">
-            ${p.estado ? '● Activo' : '○ Inactivo'}
-          </span>
-        </td>
+        <td><span class="sr-badge ${p.estado ? 'sr-badge-active' : 'sr-badge-inactive'}">${p.estado ? '● Activo' : '○ Inactivo'}</span></td>
         <td>
           ${p.estado
-            ? `<button class="sr-btn-action sr-btn-deactivate" data-id="${p.id}" data-nombre="${p.nombre}" data-tipo="punto" data-action="toggle-estado" data-nuevo-estado="false">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
-                Desactivar
-              </button>`
-            : `<button class="sr-btn-action sr-btn-activate" data-id="${p.id}" data-nombre="${p.nombre}" data-tipo="punto" data-action="toggle-estado" data-nuevo-estado="true">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
-                Activar
-              </button>`
+            ? `<button class="sr-btn-action sr-btn-deactivate" data-id="${p.id}" data-nombre="${p.nombre}" data-tipo="punto" data-action="toggle-estado" data-nuevo-estado="false"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>Desactivar</button>`
+            : `<button class="sr-btn-action sr-btn-activate" data-id="${p.id}" data-nombre="${p.nombre}" data-tipo="punto" data-action="toggle-estado" data-nuevo-estado="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>Activar</button>`
           }
         </td>
       </tr>`).join('');
-
-    tbody.querySelectorAll('[data-action="toggle-estado"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id         = parseInt(btn.getAttribute('data-id')!);
-        const nombre     = btn.getAttribute('data-nombre')!;
-        const tipo       = btn.getAttribute('data-tipo')! as 'punto' | 'ruta';
-        const nuevoEstado = btn.getAttribute('data-nuevo-estado') === 'true';
-        pedirCambioEstado(id, nombre, tipo, nuevoEstado);
-      });
-    });
+    tbody.querySelectorAll('[data-action="toggle-estado"]').forEach(btn =>
+      btn.addEventListener('click', () => pedirCambioEstado(parseInt(btn.getAttribute('data-id')!), btn.getAttribute('data-nombre')!, btn.getAttribute('data-tipo')! as 'punto'|'ruta', btn.getAttribute('data-nuevo-estado') === 'true')));
   }
 
-  // ════════════════════════════════════════════════
-  // RUTAS — tabla gestionar estado
-  // ════════════════════════════════════════════════
   async function loadEstadoRutas() {
-    const { data } = await supabase
-      .from('rutas')
-      .select('id, nombre, estado, id_tipo_ruta')
-      .order('nombre');
+    const { data } = await supabase.from('rutas').select('id, nombre, estado, id_tipo_ruta').order('nombre');
     renderTablaEstadoRutas(data || []);
   }
 
   function renderTablaEstadoRutas(rows: any[]) {
     const tbody = document.getElementById('tbody-est-rutas'); if (!tbody) return;
-    if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="4" class="sr-empty-row">No hay rutas registradas</td></tr>';
-      return;
-    }
+    if (!rows.length) { tbody.innerHTML = '<tr><td colspan="4" class="sr-empty-row">No hay rutas registradas</td></tr>'; return; }
     tbody.innerHTML = rows.map(r => `
       <tr class="${!r.estado ? 'sr-row-inactive' : ''}">
         <td class="sr-td-name">${r.nombre}</td>
         <td>${getTipoNombre(r.id_tipo_ruta)}</td>
-        <td>
-          <span class="sr-badge ${r.estado ? 'sr-badge-active' : 'sr-badge-inactive'}">
-            ${r.estado ? '● Activa' : '○ Inactiva'}
-          </span>
-        </td>
+        <td><span class="sr-badge ${r.estado ? 'sr-badge-active' : 'sr-badge-inactive'}">${r.estado ? '● Activa' : '○ Inactiva'}</span></td>
         <td>
           ${r.estado
-            ? `<button class="sr-btn-action sr-btn-deactivate" data-id="${r.id}" data-nombre="${r.nombre}" data-tipo="ruta" data-action="toggle-estado" data-nuevo-estado="false">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
-                Desactivar
-              </button>`
-            : `<button class="sr-btn-action sr-btn-activate" data-id="${r.id}" data-nombre="${r.nombre}" data-tipo="ruta" data-action="toggle-estado" data-nuevo-estado="true">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
-                Activar
-              </button>`
+            ? `<button class="sr-btn-action sr-btn-deactivate" data-id="${r.id}" data-nombre="${r.nombre}" data-tipo="ruta" data-action="toggle-estado" data-nuevo-estado="false"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>Desactivar</button>`
+            : `<button class="sr-btn-action sr-btn-activate" data-id="${r.id}" data-nombre="${r.nombre}" data-tipo="ruta" data-action="toggle-estado" data-nuevo-estado="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>Activar</button>`
           }
         </td>
       </tr>`).join('');
-
-    tbody.querySelectorAll('[data-action="toggle-estado"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id         = parseInt(btn.getAttribute('data-id')!);
-        const nombre     = btn.getAttribute('data-nombre')!;
-        const tipo       = btn.getAttribute('data-tipo')! as 'punto' | 'ruta';
-        const nuevoEstado = btn.getAttribute('data-nuevo-estado') === 'true';
-        pedirCambioEstado(id, nombre, tipo, nuevoEstado);
-      });
-    });
+    tbody.querySelectorAll('[data-action="toggle-estado"]').forEach(btn =>
+      btn.addEventListener('click', () => pedirCambioEstado(parseInt(btn.getAttribute('data-id')!), btn.getAttribute('data-nombre')!, btn.getAttribute('data-tipo')! as 'punto'|'ruta', btn.getAttribute('data-nuevo-estado') === 'true')));
   }
 
-  // ════════════════════════════════════════════════
-  // CAMBIO DE ESTADO — con confirmación
-  // ════════════════════════════════════════════════
-  function pedirCambioEstado(id: number, nombre: string, tipo: 'punto' | 'ruta', nuevoEstado: boolean) {
-    const accion    = nuevoEstado ? 'activar' : 'desactivar';
-    const entidad   = tipo === 'punto' ? 'sitio turístico' : 'ruta';
-    const confirmType: ConfirmType = nuevoEstado ? 'activate' : 'deactivate';
-
+  function pedirCambioEstado(id: number, nombre: string, tipo: 'punto'|'ruta', nuevoEstado: boolean) {
+    const entidad = tipo === 'punto' ? 'sitio turístico' : 'ruta';
     showConfirm({
-      type:         confirmType,
+      type:         nuevoEstado ? 'activate' : 'deactivate',
       title:        nuevoEstado ? `¿Activar ${entidad}?` : `¿Desactivar ${entidad}?`,
-      msg:          nuevoEstado
-        ? `El ${entidad} volverá a estar visible en la app.`
-        : `El ${entidad} dejará de aparecer en la app, pero el registro se conserva en la base de datos.`,
+      msg:          nuevoEstado ? `El ${entidad} volverá a estar visible en la app.` : `El ${entidad} dejará de aparecer en la app, pero el registro se conserva en la base de datos.`,
       detail:       `${tipo === 'punto' ? 'Sitio' : 'Ruta'}: "${nombre}"`,
       confirmLabel: nuevoEstado ? 'Sí, activar' : 'Sí, desactivar',
       onConfirm:    () => cambiarEstado(id, tipo, nuevoEstado),
     });
   }
 
-  async function cambiarEstado(id: number, tipo: 'punto' | 'ruta', nuevoEstado: boolean) {
+  async function cambiarEstado(id: number, tipo: 'punto'|'ruta', nuevoEstado: boolean) {
     const tabla = tipo === 'punto' ? 'punto_turistico' : 'rutas';
-    const { error } = await supabase
-      .from(tabla)
-      .update({ estado: nuevoEstado, updated_at: new Date().toISOString() })
-      .eq('id', id);
-
-    if (error) {
-      showToast('Error al cambiar estado: ' + error.message, 'error');
-      return;
-    }
-
-    const accion  = nuevoEstado ? 'activado' : 'desactivado';
-    const entidad = tipo === 'punto' ? 'Sitio' : 'Ruta';
-    showToast(`✅ ${entidad} ${accion} correctamente`);
-
-    // Refrescar las tablas afectadas
-    loadEstadoPuntos();
-    loadEstadoRutas();
-    loadPuntos();
-    loadRutas();
-    loadStats();
+    const { error } = await supabase.from(tabla).update({ estado: nuevoEstado, updated_at: new Date().toISOString() }).eq('id', id);
+    if (error) { showToast('Error al cambiar estado: ' + error.message, 'error'); return; }
+    showToast(`✅ ${tipo === 'punto' ? 'Sitio' : 'Ruta'} ${nuevoEstado ? 'activado' : 'desactivado'} correctamente`);
+    loadEstadoPuntos(); loadEstadoRutas(); loadPuntos(); loadRutas(); loadStats();
   }
 
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
   // EDITAR PUNTO
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
   async function editarPunto(id: number) {
     const { data } = await supabase.from('punto_turistico').select('*').eq('id', id).single();
     if (!data) return;
@@ -712,6 +781,21 @@ import './Rutas.css';
     const sel = document.getElementById('edit-pt-categoria') as HTMLSelectElement;
     if (data.id_categoria) sel.value = data.id_categoria;
     openModal('modal-editar-punto');
+
+    // Inicializar mapa con las coordenadas del sitio
+    const lat = parseFloat(data.latitud);
+    const lng = parseFloat(data.longitud);
+    setTimeout(async () => {
+      await initEditPuntoMap(isNaN(lat) ? undefined : lat, isNaN(lng) ? undefined : lng);
+      // Registrar listeners de input (sólo una vez usando flag en el elemento)
+      const latInput  = document.getElementById('edit-pt-latitud') as HTMLInputElement;
+      const lngInput  = document.getElementById('edit-pt-longitud') as HTMLInputElement;
+      if (!latInput.dataset.mapListener) {
+        latInput.addEventListener('input', updateEditMapFromInputs);
+        lngInput.addEventListener('input', updateEditMapFromInputs);
+        latInput.dataset.mapListener = '1';
+      }
+    }, 120);
   }
 
   document.getElementById('form-editar-punto')?.addEventListener('submit', async e => {
@@ -744,7 +828,7 @@ import './Rutas.css';
       longitud:         parseFloat((document.getElementById('pt-longitud') as HTMLInputElement).value) || null,
       radio_activacion: parseInt((document.getElementById('pt-radio') as HTMLInputElement).value) || 50,
       precio_nacional:  parseFloat((document.getElementById('pt-precio-nac') as HTMLInputElement).value) || null,
-      precio_extranjero: parseFloat((document.getElementById('pt-precio-ext') as HTMLInputElement).value) || null,
+      precio_extranjero:parseFloat((document.getElementById('pt-precio-ext') as HTMLInputElement).value) || null,
       imagen_url:       (document.getElementById('pt-imagen') as HTMLInputElement).value.trim() || null,
       id_categoria:     catVal ? parseInt(catVal) : null,
       estado:           estadoRadio?.value === 'true',
@@ -758,21 +842,18 @@ import './Rutas.css';
     loadPuntos(); loadStats();
   });
 
-  // ════════════════════════════════════════════════
-  // RUTAS — tabla ver
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
+  // RUTAS — tabla
+  // ══════════════════════════════════════════════════
   async function loadRutas() {
     let q = supabase.from('rutas').select('*, ruta_puntos(id)', { count: 'exact' }).order('id', { ascending: false });
-    if (filtrosBusqRutas)   q = q.ilike('nombre', `%${filtrosBusqRutas}%`);
-    if (filtrosTipoRutas)   q = q.eq('id_tipo_ruta', filtrosTipoRutas);
+    if (filtrosBusqRutas)    q = q.ilike('nombre', `%${filtrosBusqRutas}%`);
+    if (filtrosTipoRutas)    q = q.eq('id_tipo_ruta', filtrosTipoRutas);
     if (filtrosEstadoRutas !== '') q = q.eq('estado', filtrosEstadoRutas === 'true');
     const from = (paginaRutas - 1) * PAGE_SIZE;
     q = q.range(from, from + PAGE_SIZE - 1);
     const { data, count } = await q;
-    const rows = data || [];
-    renderTablaRutas(rows, count || 0);
-    const selAsig = document.getElementById('asig-ruta');
-    if (selAsig) selAsig.innerHTML = '<option value="">Seleccionar ruta...</option>' + rows.map((r: any) => `<option value="${r.id}">${r.nombre}</option>`).join('');
+    renderTablaRutas(data || [], count || 0);
   }
 
   function renderTablaRutas(rows: any[], total: number) {
@@ -785,145 +866,353 @@ import './Rutas.css';
           <td><span class="sr-pts-badge">${(r.ruta_puntos||[]).length} pts</span></td>
           <td><span class="sr-badge ${r.estado?'sr-badge-active':'sr-badge-inactive'}">${r.estado?'● Activa':'○ Inactiva'}</span></td>
           <td class="sr-td-actions">
-            <button class="sr-btn-action sr-btn-edit" data-id="${r.id}" data-nombre="${r.nombre}" data-action="ver-ruta">👁 Ver</button>
             <button class="sr-btn-action sr-btn-edit" data-id="${r.id}" data-action="edit-ruta">✏ Editar</button>
           </td>
         </tr>`).join('');
     const info = document.getElementById('info-rutas');
     if (info) info.textContent = `Mostrando ${rows.length} de ${total} rutas`;
     renderPaginator('btns-rutas', total, paginaRutas, p => { paginaRutas = p; loadRutas(); });
-    tbody.querySelectorAll('[data-action="edit-ruta"]').forEach(btn  => btn.addEventListener('click', () => editarRuta(parseInt(btn.getAttribute('data-id')!))));
-    tbody.querySelectorAll('[data-action="ver-ruta"]').forEach(btn   => btn.addEventListener('click', () => verPuntosRuta(parseInt(btn.getAttribute('data-id')!), btn.getAttribute('data-nombre')!)));
+    tbody.querySelectorAll('[data-action="edit-ruta"]').forEach(btn =>
+      btn.addEventListener('click', () => editarRuta(parseInt(btn.getAttribute('data-id')!))));
   }
 
+  // ══════════════════════════════════════════════════
+  // CHECKLIST DE PUNTOS — reutilizable para crear y editar
+  // Toggle: clic añade/quita, sin checkbox oculto confuso
+  // ══════════════════════════════════════════════════
+  async function loadPuntosChecklist(
+    containerId: string,
+    context: 'crear' | 'editar',
+    preseleccionados: { id: number; nombre: string; lat: number; lng: number; orden: number }[] = []
+  ) {
+    const { data } = await supabase.from('punto_turistico').select('id, nombre, latitud, longitud').eq('estado', true).order('nombre');
+    const container = document.getElementById(containerId); if (!container) return;
+    if (!data?.length) { container.innerHTML = '<p class="sr-empty-inline">No hay sitios activos disponibles.</p>'; return; }
+
+    if (context === 'crear')  selectedPuntosCrear  = [...preseleccionados];
+    if (context === 'editar') selectedPuntosEditar = [...preseleccionados];
+
+    const preIds = new Set(preseleccionados.map(p => p.id));
+
+    // Renderizar como botones toggle (más intuitivo que checkboxes)
+    container.innerHTML = data.map((p: any) => {
+      const isSelected = preIds.has(p.id);
+      const orden = isSelected ? preseleccionados.find(ps => ps.id === p.id)?.orden ?? '' : '';
+      return `
+      <button type="button"
+        class="sr-point-toggle ${isSelected ? 'sr-point-toggle--selected' : ''}"
+        data-id="${p.id}"
+        data-nombre="${p.nombre}"
+        data-lat="${p.latitud ?? ''}"
+        data-lng="${p.longitud ?? ''}"
+        data-context="${context}"
+      >
+        <span class="sr-point-toggle__num">${isSelected ? orden : ''}</span>
+        <svg class="sr-point-toggle__icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="sr-point-toggle__name">${p.nombre}</span>
+        <span class="sr-point-toggle__action">${isSelected ? '✕ Quitar' : '+ Añadir'}</span>
+      </button>`;
+    }).join('');
+
+    // Eventos de toggle
+    container.querySelectorAll('.sr-point-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id     = parseInt(btn.getAttribute('data-id')!);
+        const nombre = btn.getAttribute('data-nombre')!;
+        const lat    = parseFloat(btn.getAttribute('data-lat')!);
+        const lng    = parseFloat(btn.getAttribute('data-lng')!);
+        const arr    = context === 'crear' ? selectedPuntosCrear : selectedPuntosEditar;
+        const idx    = arr.findIndex((p: any) => p.id === id);
+
+        if (idx === -1) {
+          // Añadir
+          arr.push({ id, nombre, lat, lng, orden: arr.length + 1 });
+        } else {
+          // Quitar y reordenar
+          arr.splice(idx, 1);
+          arr.forEach((p: any, i: number) => { p.orden = i + 1; });
+        }
+
+        if (context === 'crear')  selectedPuntosCrear  = arr;
+        if (context === 'editar') selectedPuntosEditar = arr;
+
+        // Actualizar visual de todos los botones del mismo contexto
+        refreshChecklist(containerId, arr);
+        renderOrdenPreview(context);
+
+        // Redibujar ruta automáticamente solo en crear (en editar es bajo demanda)
+        if (context === 'crear') {
+          drawOSRMRoute(arr.filter((p: any) => !isNaN(p.lat) && !isNaN(p.lng)), context);
+        } else if (context === 'editar' && mapEditarVisible) {
+          drawOSRMRoute(arr.filter((p: any) => !isNaN(p.lat) && !isNaN(p.lng)), context);
+        }
+      });
+    });
+
+    renderOrdenPreview(context);
+    if (preseleccionados.length >= 2 && context === 'crear') {
+      drawOSRMRoute(preseleccionados.filter((p: any) => !isNaN(p.lat) && !isNaN(p.lng)), context);
+    }
+  }
+
+  // Actualiza el estado visual de los botones de toggle sin re-renderizar el DOM
+  function refreshChecklist(containerId: string, arr: any[]) {
+    const container = document.getElementById(containerId); if (!container) return;
+    container.querySelectorAll('.sr-point-toggle').forEach(btn => {
+      const id  = parseInt(btn.getAttribute('data-id')!);
+      const item = arr.find((p: any) => p.id === id);
+      const numEl    = btn.querySelector('.sr-point-toggle__num') as HTMLElement;
+      const actionEl = btn.querySelector('.sr-point-toggle__action') as HTMLElement;
+      if (item) {
+        btn.classList.add('sr-point-toggle--selected');
+        numEl.textContent    = String(item.orden);
+        actionEl.textContent = '✕ Quitar';
+      } else {
+        btn.classList.remove('sr-point-toggle--selected');
+        numEl.textContent    = '';
+        actionEl.textContent = '+ Añadir';
+      }
+    });
+  }
+
+  function renderOrdenPreview(context: 'crear' | 'editar') {
+    const arr     = context === 'crear' ? selectedPuntosCrear : selectedPuntosEditar;
+    const preview = document.getElementById(`sr-orden-preview-${context}`);
+    const list    = document.getElementById(`sr-orden-list-${context}`);
+    if (!preview || !list) return;
+    if (!arr.length) { preview.style.display = 'none'; return; }
+    preview.style.display = 'block';
+    list.innerHTML = [...arr].sort((a: any, b: any) => a.orden - b.orden)
+      .map((p: any) => `
+        <div class="sr-orden-item">
+          <span class="sr-orden-num">${p.orden}</span>
+          <span class="sr-orden-name">${p.nombre}</span>
+          <button type="button" class="sr-orden-remove" data-id="${p.id}" data-context="${context}" title="Quitar este sitio">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>`).join('');
+
+    // Botones de quitar individual desde el preview
+    list.querySelectorAll('.sr-orden-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id  = parseInt(btn.getAttribute('data-id')!);
+        const ctx = btn.getAttribute('data-context') as 'crear' | 'editar';
+        const arr2 = ctx === 'crear' ? selectedPuntosCrear : selectedPuntosEditar;
+        const idx  = arr2.findIndex((p: any) => p.id === id);
+        if (idx > -1) {
+          arr2.splice(idx, 1);
+          arr2.forEach((p: any, i: number) => { p.orden = i + 1; });
+          if (ctx === 'crear')  selectedPuntosCrear  = arr2;
+          if (ctx === 'editar') selectedPuntosEditar = arr2;
+          const containerId = ctx === 'crear' ? 'sr-puntos-checklist-crear' : 'sr-puntos-checklist-editar';
+          refreshChecklist(containerId, arr2);
+          renderOrdenPreview(ctx);
+          if (ctx === 'crear') {
+            drawOSRMRoute(arr2.filter((p: any) => !isNaN(p.lat) && !isNaN(p.lng)), ctx);
+          } else if (ctx === 'editar' && mapEditarVisible) {
+            drawOSRMRoute(arr2.filter((p: any) => !isNaN(p.lat) && !isNaN(p.lng)), ctx);
+          }
+        }
+      });
+    });
+  }
+
+  // Quitar todos (botón del header del preview)
+  function clearAllPoints(context: 'crear' | 'editar') {
+    if (context === 'crear')  selectedPuntosCrear  = [];
+    if (context === 'editar') selectedPuntosEditar = [];
+    const containerId = context === 'crear' ? 'sr-puntos-checklist-crear' : 'sr-puntos-checklist-editar';
+    refreshChecklist(containerId, []);
+    renderOrdenPreview(context);
+    if (context === 'crear') drawOSRMRoute([], 'crear');
+    else if (mapEditarVisible) drawOSRMRoute([], 'editar');
+  }
+
+  document.getElementById('btn-clear-crear')?.addEventListener('click',  () => clearAllPoints('crear'));
+  document.getElementById('btn-clear-editar')?.addEventListener('click', () => clearAllPoints('editar'));
+
+  // ══════════════════════════════════════════════════
+  // BOTÓN "VER RUTA EN MAPA" (editar)
+  // ══════════════════════════════════════════════════
+  document.getElementById('btn-ver-ruta-editar')?.addEventListener('click', async () => {
+    const panel = document.getElementById('sr-editar-ruta-right-panel')!;
+    const btn   = document.getElementById('btn-ver-ruta-editar') as HTMLButtonElement;
+
+    if (!mapEditarVisible) {
+      // Mostrar panel del mapa
+      panel.style.display = 'flex';
+      mapEditarVisible = true;
+      btn.classList.add('sr-btn-ver-ruta--active');
+      btn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Ocultar mapa`;
+
+      // Cambiar layout a dos columnas
+      const layout = document.querySelector('.sr-editar-ruta-layout') as HTMLElement;
+      if (layout) layout.classList.add('sr-editar-ruta-layout--with-map');
+
+      // Inicializar mapa y dibujar ruta actual
+      setTimeout(async () => {
+        await initRouteMap('sr-route-map-editar', 'editar');
+        const puntosConCoordenadas = selectedPuntosEditar.filter((p: any) => !isNaN(p.lat) && !isNaN(p.lng));
+        if (puntosConCoordenadas.length >= 2) {
+          drawOSRMRoute(puntosConCoordenadas, 'editar');
+        }
+      }, 80);
+    } else {
+      // Ocultar panel del mapa
+      panel.style.display = 'none';
+      mapEditarVisible = false;
+      btn.classList.remove('sr-btn-ver-ruta--active');
+      btn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg>
+        Ver ruta en mapa`;
+      const layout = document.querySelector('.sr-editar-ruta-layout') as HTMLElement;
+      if (layout) layout.classList.remove('sr-editar-ruta-layout--with-map');
+    }
+  });
+
+  // ══════════════════════════════════════════════════
+  // CREAR RUTA (con puntos incluidos)
+  // ══════════════════════════════════════════════════
+  document.getElementById('form-crear-ruta')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const estadoRadio = document.querySelector('input[name="rt-estado"]:checked') as HTMLInputElement;
+    const tipoVal = (document.getElementById('rt-tipo') as HTMLSelectElement).value;
+    const btn = document.getElementById('btn-guardar-ruta') as HTMLButtonElement;
+    btn.disabled = true; btn.innerHTML = '<span>Guardando...</span>';
+
+    const { data: rutaData, error: rutaError } = await supabase.from('rutas').insert([{
+      nombre:      (document.getElementById('rt-nombre') as HTMLInputElement).value.trim(),
+      descripcion: (document.getElementById('rt-descripcion') as HTMLTextAreaElement).value.trim() || null,
+      id_tipo_ruta: tipoVal ? parseInt(tipoVal) : null,
+      estado:       estadoRadio?.value === 'true',
+      ia_generado:  false,
+    }]).select().single();
+
+    if (rutaError || !rutaData) {
+      btn.disabled = false; btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>Guardar Ruta';
+      showToast('Error: ' + rutaError?.message, 'error'); return;
+    }
+
+    if (selectedPuntosCrear.length > 0) {
+      await supabase.from('ruta_puntos').insert(
+        selectedPuntosCrear.map((p: any) => ({ id_ruta: rutaData.id, id_punto_turistico: p.id, orden: p.orden }))
+      );
+    }
+
+    btn.disabled = false; btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>Guardar Ruta';
+
+    const msg = selectedPuntosCrear.length > 0
+      ? `¡Ruta creada con ${selectedPuntosCrear.length} sitio${selectedPuntosCrear.length > 1 ? 's' : ''}!`
+      : '¡Ruta creada!';
+    showToast(msg);
+
+    (document.getElementById('form-crear-ruta') as HTMLFormElement).reset();
+    selectedPuntosCrear = [];
+    const cont = document.getElementById('sr-puntos-checklist-crear');
+    if (cont) cont.querySelectorAll('.sr-point-toggle').forEach(b => { b.classList.remove('sr-point-toggle--selected'); const n = b.querySelector('.sr-point-toggle__num') as HTMLElement; const a = b.querySelector('.sr-point-toggle__action') as HTMLElement; if(n) n.textContent=''; if(a) a.textContent='+ Añadir'; });
+    renderOrdenPreview('crear');
+    drawOSRMRoute([], 'crear');
+    loadRutas(); loadStats();
+  });
+
+  // ══════════════════════════════════════════════════
+  // EDITAR RUTA — carga datos y puntos preseleccionados
+  // ══════════════════════════════════════════════════
   async function editarRuta(id: number) {
-    const { data } = await supabase.from('rutas').select('*').eq('id', id).single();
-    if (!data) return;
-    (document.getElementById('edit-rt-id') as HTMLInputElement).value = id.toString();
-    (document.getElementById('edit-rt-nombre') as HTMLInputElement).value = data.nombre;
-    (document.getElementById('edit-rt-descripcion') as HTMLTextAreaElement).value = data.descripcion || '';
-    const sel = document.getElementById('edit-rt-tipo') as HTMLSelectElement;
-    if (data.id_tipo_ruta) sel.value = data.id_tipo_ruta;
-    openModal('modal-editar-ruta');
-  }
+    const [{ data: rutaData }, { data: puntosData }] = await Promise.all([
+      supabase.from('rutas').select('*').eq('id', id).single(),
+      supabase.from('ruta_puntos').select('orden, punto_turistico(id, nombre, latitud, longitud)').eq('id_ruta', id).order('orden'),
+    ]);
+    if (!rutaData) return;
 
-  async function verPuntosRuta(id: number, nombre: string) {
-    (document.getElementById('modal-ruta-titulo') as HTMLElement).textContent = `Puntos: ${nombre}`;
-    const list = document.getElementById('modal-ruta-puntos-list')!;
-    list.innerHTML = 'Cargando...'; openModal('modal-ver-puntos-ruta');
-    const { data } = await supabase.from('ruta_puntos').select('orden, punto_turistico(id, nombre, descripcion)').eq('id_ruta', id).order('orden');
-    if (!data?.length) { list.innerHTML = '<p class="sr-empty-inline">No hay puntos asignados.</p>'; return; }
-    list.innerHTML = data.map(rp => `
-      <div class="sr-ruta-punto-item">
-        <span class="sr-ruta-orden">${rp.orden}</span>
-        <div class="sr-ruta-pto-info">
-          <span class="sr-ruta-pto-nombre">${(rp.punto_turistico as any)?.nombre||'—'}</span>
-          ${(rp.punto_turistico as any)?.descripcion?`<span class="sr-ruta-pto-desc">${(rp.punto_turistico as any).descripcion}</span>`:''}
-        </div>
-      </div>`).join('');
+    (document.getElementById('edit-rt-id') as HTMLInputElement).value = id.toString();
+    (document.getElementById('edit-rt-nombre') as HTMLInputElement).value = rutaData.nombre;
+    (document.getElementById('edit-rt-descripcion') as HTMLTextAreaElement).value = rutaData.descripcion || '';
+    const selTipo = document.getElementById('edit-rt-tipo') as HTMLSelectElement;
+    if (rutaData.id_tipo_ruta) selTipo.value = rutaData.id_tipo_ruta;
+
+    const preseleccionados = (puntosData || []).map((rp: any) => ({
+      id:     (rp.punto_turistico as any)?.id,
+      nombre: (rp.punto_turistico as any)?.nombre || '—',
+      lat:    parseFloat((rp.punto_turistico as any)?.latitud) || NaN,
+      lng:    parseFloat((rp.punto_turistico as any)?.longitud) || NaN,
+      orden:  rp.orden,
+    })).filter((p: any) => p.id);
+
+    // Resetear estado del mapa editar
+    mapEditarVisible = false;
+    const panel = document.getElementById('sr-editar-ruta-right-panel')!;
+    panel.style.display = 'none';
+    const layout = document.querySelector('.sr-editar-ruta-layout') as HTMLElement;
+    if (layout) layout.classList.remove('sr-editar-ruta-layout--with-map');
+    const btnVerRuta = document.getElementById('btn-ver-ruta-editar') as HTMLButtonElement;
+    if (btnVerRuta) {
+      btnVerRuta.classList.remove('sr-btn-ver-ruta--active');
+      btnVerRuta.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v2a7 7 0 0 0 7 7"/><path d="M19 8v2a7 7 0 0 1-7 7"/></svg>Ver ruta en mapa`;
+    }
+
+    openModal('modal-editar-ruta');
+
+    setTimeout(async () => {
+      await loadPuntosChecklist('sr-puntos-checklist-editar', 'editar', preseleccionados);
+    }, 80);
   }
 
   document.getElementById('form-editar-ruta')?.addEventListener('submit', async e => {
     e.preventDefault();
     const id = parseInt((document.getElementById('edit-rt-id') as HTMLInputElement).value);
     const tipoVal = (document.getElementById('edit-rt-tipo') as HTMLSelectElement).value;
-    const { error } = await supabase.from('rutas').update({
+
+    const { error: rutaError } = await supabase.from('rutas').update({
       nombre:      (document.getElementById('edit-rt-nombre') as HTMLInputElement).value.trim(),
       descripcion: (document.getElementById('edit-rt-descripcion') as HTMLTextAreaElement).value.trim() || null,
       id_tipo_ruta: tipoVal ? parseInt(tipoVal) : null,
       updated_at:  new Date().toISOString(),
     }).eq('id', id);
-    if (error) { showToast('Error: ' + error.message, 'error'); return; }
-    showToast('Ruta actualizada'); closeModal('modal-editar-ruta'); loadRutas();
+
+    if (rutaError) { showToast('Error: ' + rutaError.message, 'error'); return; }
+
+    await supabase.from('ruta_puntos').delete().eq('id_ruta', id);
+    if (selectedPuntosEditar.length > 0) {
+      await supabase.from('ruta_puntos').insert(
+        selectedPuntosEditar.map((p: any) => ({ id_ruta: id, id_punto_turistico: p.id, orden: p.orden }))
+      );
+    }
+
+    showToast('✅ Ruta actualizada correctamente');
+    closeModal('modal-editar-ruta');
+    selectedPuntosEditar = [];
+    if (routeMapEditar) { routeMapEditar.remove(); routeMapEditar = null; routeLayerEditar = null; routeMarkersEditar = []; }
+    loadRutas();
   });
 
-  document.getElementById('form-crear-ruta')?.addEventListener('submit', async e => {
-    e.preventDefault();
-    const estadoRadio = document.querySelector('input[name="rt-estado"]:checked') as HTMLInputElement;
-    const tipoVal = (document.getElementById('rt-tipo') as HTMLSelectElement).value;
-    const btn = document.getElementById('btn-guardar-ruta') as HTMLButtonElement;
-    btn.disabled = true; btn.textContent = 'Guardando...';
-    const { error } = await supabase.from('rutas').insert([{
-      nombre:      (document.getElementById('rt-nombre') as HTMLInputElement).value.trim(),
-      descripcion: (document.getElementById('rt-descripcion') as HTMLTextAreaElement).value.trim() || null,
-      id_tipo_ruta: tipoVal ? parseInt(tipoVal) : null,
-      estado:       estadoRadio?.value === 'true',
-      ia_generado:  false,
-    }]);
-    btn.disabled = false; btn.textContent = 'Guardar Ruta';
-    if (error) { showToast('Error: ' + error.message, 'error'); return; }
-    showToast('¡Ruta creada!');
-    (document.getElementById('form-crear-ruta') as HTMLFormElement).reset();
-    loadRutas(); loadStats();
-  });
-
-  // ════════════════════════════════════════════════
-  // ASIGNAR PUNTOS
-  // ════════════════════════════════════════════════
-  async function loadPuntosChecklist() {
-    const { data } = await supabase.from('punto_turistico').select('id, nombre, latitud, longitud').eq('estado', true).order('nombre');
-    const container = document.getElementById('sr-puntos-checklist'); if (!container) return;
-    if (!data?.length) { container.innerHTML = '<p class="sr-empty-inline">No hay sitios activos disponibles.</p>'; return; }
-    selectedPuntosOrden = [];
-    container.innerHTML = data.map((p: any) => `
-      <label class="sr-point-check" id="chk-${p.id}">
-        <input type="checkbox" value="${p.id}" data-nombre="${p.nombre}" data-lat="${p.latitud??''}" data-lng="${p.longitud??''}" class="sr-chk-punto" />
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F988A" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        ${p.nombre}
-      </label>`).join('');
-    container.querySelectorAll('.sr-chk-punto').forEach(cb => {
-      cb.addEventListener('change', () => {
-        const id = parseInt((cb as HTMLInputElement).value);
-        const nombre = cb.getAttribute('data-nombre')!;
-        const lat = parseFloat(cb.getAttribute('data-lat')!);
-        const lng = parseFloat(cb.getAttribute('data-lng')!);
-        if ((cb as HTMLInputElement).checked) { selectedPuntosOrden.push({ id, nombre, lat, lng, orden: selectedPuntosOrden.length + 1 }); }
-        else { selectedPuntosOrden = selectedPuntosOrden.filter((p: any) => p.id !== id); selectedPuntosOrden.forEach((p: any, i: number) => { p.orden = i + 1; }); }
-        renderOrdenPreview();
-        drawOSRMRoute(selectedPuntosOrden.filter((p: any) => !isNaN(p.lat) && !isNaN(p.lng)));
-      });
-    });
-  }
-
-  function renderOrdenPreview() {
-    const preview = document.getElementById('sr-orden-preview'), list = document.getElementById('sr-orden-list');
-    if (!preview || !list) return;
-    if (!selectedPuntosOrden.length) { preview.style.display = 'none'; return; }
-    preview.style.display = 'block';
-    list.innerHTML = [...selectedPuntosOrden].sort((a: any, b: any) => a.orden - b.orden)
-      .map((p: any) => `<div class="sr-orden-item"><span class="sr-orden-num">${p.orden}</span><span>${p.nombre}</span></div>`).join('');
-  }
-
-  document.getElementById('form-asignar')?.addEventListener('submit', async e => {
-    e.preventDefault();
-    const rutaId = parseInt((document.getElementById('asig-ruta') as HTMLSelectElement).value);
-    if (!rutaId) { showToast('Selecciona una ruta primero', 'error'); return; }
-    if (!selectedPuntosOrden.length) { showToast('Selecciona al menos un punto', 'error'); return; }
-    await supabase.from('ruta_puntos').delete().eq('id_ruta', rutaId);
-    const { error } = await supabase.from('ruta_puntos').insert(
-      selectedPuntosOrden.map((p: any) => ({ id_ruta: rutaId, id_punto_turistico: p.id, orden: p.orden }))
-    );
-    if (error) { showToast('Error: ' + error.message, 'error'); return; }
-    showToast(`${selectedPuntosOrden.length} puntos asignados a la ruta`);
-    selectedPuntosOrden = [];
-    document.querySelectorAll('.sr-chk-punto').forEach(cb => { (cb as HTMLInputElement).checked = false; });
-    renderOrdenPreview(); drawOSRMRoute([]); loadRutas();
-  });
-
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
   // MODALES
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
   function openModal(id: string)  { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
   function closeModal(id: string) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
 
-  ['close-modal-punto','close-modal-punto2'].forEach(id => document.getElementById(id)?.addEventListener('click', () => closeModal('modal-editar-punto')));
-  ['close-modal-ruta','close-modal-ruta2'].forEach(id   => document.getElementById(id)?.addEventListener('click', () => closeModal('modal-editar-ruta')));
-  document.getElementById('close-modal-puntos-ruta')?.addEventListener('click', () => closeModal('modal-ver-puntos-ruta'));
-  document.querySelectorAll('.sr-modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModal((m as HTMLElement).id); }));
+  function cleanupEditarRutaModal() {
+    closeModal('modal-editar-ruta');
+    if (routeMapEditar) { routeMapEditar.remove(); routeMapEditar = null; routeLayerEditar = null; routeMarkersEditar = []; }
+    mapEditarVisible = false;
+  }
 
-  // ════════════════════════════════════════════════
+  ['close-modal-punto','close-modal-punto2'].forEach(id => document.getElementById(id)?.addEventListener('click', () => { closeModal('modal-editar-punto'); destroyEditPuntoMap(); }));
+  document.getElementById('close-modal-ruta')?.addEventListener('click',  cleanupEditarRutaModal);
+  document.getElementById('close-modal-ruta2')?.addEventListener('click', cleanupEditarRutaModal);
+  document.querySelectorAll('.sr-modal').forEach(m => m.addEventListener('click', e => {
+    if (e.target === m) {
+      if ((m as HTMLElement).id === 'modal-editar-ruta') cleanupEditarRutaModal();
+      else { closeModal((m as HTMLElement).id); if ((m as HTMLElement).id === 'modal-editar-punto') destroyEditPuntoMap(); }
+    }
+  }));
+
+  // ══════════════════════════════════════════════════
   // NAVEGACIÓN
-  // ════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════
   const initRutasModule = () => {
     document.querySelectorAll('.sr-action-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -942,9 +1231,11 @@ import './Rutas.css';
             else leafletMap.invalidateSize();
           }, 150);
         }
-        if (panelId === 'panel-asignar-puntos') {
-          loadPuntosChecklist(); loadRutas();
-          setTimeout(async () => { if (!routeMap) await initRouteMap(); else routeMap.invalidateSize(); }, 150);
+        if (panelId === 'panel-crear-ruta') {
+          loadPuntosChecklist('sr-puntos-checklist-crear', 'crear');
+          setTimeout(async () => {
+            await initRouteMap('sr-route-map-crear', 'crear');
+          }, 150);
         }
         if (panelId === 'panel-ver-puntos')       loadPuntos();
         if (panelId === 'panel-ver-rutas')         loadRutas();
@@ -952,20 +1243,18 @@ import './Rutas.css';
       });
     });
 
-    document.getElementById('btn-nuevo-punto')?.addEventListener('click',    () => (document.querySelector('[data-panel="crear-punto"]') as HTMLElement)?.click());
-    document.getElementById('btn-nueva-ruta')?.addEventListener('click',     () => (document.querySelector('[data-panel="crear-ruta"]') as HTMLElement)?.click());
-    document.getElementById('btn-cancelar-punto')?.addEventListener('click',   () => (document.querySelector('[data-panel="ver-puntos"]') as HTMLElement)?.click());
-    document.getElementById('btn-cancelar-ruta')?.addEventListener('click',    () => (document.querySelector('[data-panel="ver-rutas"]') as HTMLElement)?.click());
-    document.getElementById('btn-cancelar-asignar')?.addEventListener('click', () => (document.querySelector('[data-panel="ver-rutas"]') as HTMLElement)?.click());
+    document.getElementById('btn-nuevo-punto')?.addEventListener('click',  () => (document.querySelector('[data-panel="crear-punto"]') as HTMLElement)?.click());
+    document.getElementById('btn-nueva-ruta')?.addEventListener('click',   () => (document.querySelector('[data-panel="crear-ruta"]') as HTMLElement)?.click());
+    document.getElementById('btn-cancelar-punto')?.addEventListener('click', () => (document.querySelector('[data-panel="ver-puntos"]') as HTMLElement)?.click());
+    document.getElementById('btn-cancelar-ruta')?.addEventListener('click',  () => (document.querySelector('[data-panel="ver-rutas"]') as HTMLElement)?.click());
 
-    document.getElementById('search-puntos')?.addEventListener('input',             e => { filtrosBusqPuntos      = (e.target as HTMLInputElement).value;   paginaPuntos = 1; loadPuntos(); });
-    document.getElementById('filter-categoria-puntos')?.addEventListener('change',  e => { filtrosCategoriaPuntos = (e.target as HTMLSelectElement).value;  paginaPuntos = 1; loadPuntos(); });
-    document.getElementById('filter-estado-puntos')?.addEventListener('change',     e => { filtrosEstadoPuntos    = (e.target as HTMLSelectElement).value;  paginaPuntos = 1; loadPuntos(); });
-    document.getElementById('search-rutas')?.addEventListener('input',              e => { filtrosBusqRutas       = (e.target as HTMLInputElement).value;   paginaRutas  = 1; loadRutas(); });
-    document.getElementById('filter-tipo-rutas')?.addEventListener('change',        e => { filtrosTipoRutas       = (e.target as HTMLSelectElement).value;  paginaRutas  = 1; loadRutas(); });
-    document.getElementById('filter-estado-rutas')?.addEventListener('change',      e => { filtrosEstadoRutas     = (e.target as HTMLSelectElement).value;  paginaRutas  = 1; loadRutas(); });
+    document.getElementById('search-puntos')?.addEventListener('input',            e => { filtrosBusqPuntos      = (e.target as HTMLInputElement).value;  paginaPuntos = 1; loadPuntos(); });
+    document.getElementById('filter-categoria-puntos')?.addEventListener('change', e => { filtrosCategoriaPuntos = (e.target as HTMLSelectElement).value; paginaPuntos = 1; loadPuntos(); });
+    document.getElementById('filter-estado-puntos')?.addEventListener('change',    e => { filtrosEstadoPuntos    = (e.target as HTMLSelectElement).value; paginaPuntos = 1; loadPuntos(); });
+    document.getElementById('search-rutas')?.addEventListener('input',             e => { filtrosBusqRutas       = (e.target as HTMLInputElement).value;  paginaRutas  = 1; loadRutas(); });
+    document.getElementById('filter-tipo-rutas')?.addEventListener('change',       e => { filtrosTipoRutas       = (e.target as HTMLSelectElement).value; paginaRutas  = 1; loadRutas(); });
+    document.getElementById('filter-estado-rutas')?.addEventListener('change',     e => { filtrosEstadoRutas     = (e.target as HTMLSelectElement).value; paginaRutas  = 1; loadRutas(); });
 
-    // Tabs del panel Gestionar Estado
     document.querySelectorAll('.sr-del-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.sr-del-tab').forEach(t => t.classList.remove('active'));
@@ -992,7 +1281,10 @@ import './Rutas.css';
 
   document.addEventListener('astro:page-load', () => {
     leafletMap = null; leafletMarker = null; leafletLoaded = false;
-    routeMap   = null; routeLayer   = null; routeMarkers  = [];
+    routeMapCrear = null; routeLayerCrear = null; routeMarkersCrear = [];
+    routeMapEditar = null; routeLayerEditar = null; routeMarkersEditar = [];
+    editPuntoMap = null; editPuntoMarker = null;
+    mapEditarVisible = false;
     initRutasModule();
   });
 </script>
