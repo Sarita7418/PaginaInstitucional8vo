@@ -3,9 +3,10 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  output: 'static',   // 👈 CAMBIA ESTO
+  output: 'server', // Tu nueva configuración de servidor
 
   vite: {
+    // @ts-ignore - Silencia el falso error de tipos entre Astro y Tailwind
     plugins: [tailwindcss()]
   }
 });

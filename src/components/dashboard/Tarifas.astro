@@ -423,7 +423,6 @@ import '/src/components/dashboard/Audios.css';
 <script>
     import { supabase } from "../../lib/supabase.js";
 
-    // 1. DEFINICIÓN DE TIPOS Y VARIABLES GLOBALES
     declare global {
         interface Window {
             openModal: (id: string) => void;
@@ -433,87 +432,72 @@ import '/src/components/dashboard/Audios.css';
         }
     }
 
-    // Soluciona: Variable implicitly has type 'any[]'
     let tarifasData: any[] = [];
     let subdominiosData: any[] = [];
-
-    const tbodyEd = document.getElementById(
-        "tbody-tarifas-editar",
-    ) as HTMLTableSectionElement;
-    const tbodyEl = document.getElementById(
-        "tbody-tarifas-eliminar",
-    ) as HTMLTableSectionElement;
+    let puntosData: any[] = []; // Nueva variable para Puntos Turísticos
 
     // 2. CARGAR DATOS INICIALES
     async function initTarifas() {
-        const { data: subs, error } = await supabase
+        // Cargar Zonas y Transportes
+        const { data: subs, error: errSubs } = await supabase
             .from("subdominios")
             .select("id, id_dominio, descripcion");
-
-        if (error) {
-            console.error("Error cargando subdominios:", error.message);
-            return;
-        }
-
+        if (errSubs) console.error("Error cargando subdominios:", errSubs.message);
         subdominiosData = subs || [];
+
+        // Cargar Puntos Turísticos
+        const { data: puntos, error: errPuntos } = await supabase
+            .from("punto_turistico")
+            .select("id, nombre")
+            .eq("estado", true);
+        if (errPuntos) console.error("Error cargando puntos:", errPuntos.message);
+        puntosData = puntos || [];
+
         fillSelects();
         await fetchTarifas();
     }
 
     function fillSelects() {
-        const idsSelects = [
-            "create-tarifa-transporte",
-            "edit-tarifa-transporte",
-            "create-tarifa-origen",
-            "edit-tarifa-origen",
-            "create-tarifa-destino",
-            "edit-tarifa-destino",
-        ];
-
         const transportes = subdominiosData.filter((s) => s.id_dominio == 9);
         const zonas = subdominiosData.filter((s) => s.id_dominio == 10);
 
-        idsSelects.forEach((id) => {
-            const select = document.getElementById(id) as HTMLSelectElement;
-            if (!select) return;
+        // Opciones para transporte
+        const htmlTransportes = '<option value="">Seleccione...</option>' + 
+            transportes.map(t => `<option value="${t.id}">${t.descripcion}</option>`).join('');
 
-            select.innerHTML = '<option value="">Seleccione...</option>';
+        // Opciones agrupadas para Origen y Destino (Zonas + Puntos)
+        const htmlLugares = `
+            <option value="">Seleccione...</option>
+            <optgroup label="Zonas (Macrodistritos)">
+                ${zonas.map(z => `<option value="ZONA-${z.id}">📍 ${z.descripcion}</option>`).join('')}
+            </optgroup>
+            <optgroup label="Puntos Turísticos">
+                ${puntosData.map(p => `<option value="PUNTO-${p.id}">📸 ${p.nombre}</option>`).join('')}
+            </optgroup>
+        `;
 
-            if (id.includes("transporte")) {
-                transportes.forEach(
-                    (t) =>
-                        (select.innerHTML += `<option value="${t.id}">${t.descripcion}</option>`),
-                );
-            } else {
-                zonas.forEach(
-                    (z) =>
-                        (select.innerHTML += `<option value="${z.id}">${z.descripcion}</option>`),
-                );
-            }
-        });
+        (document.getElementById("create-tarifa-transporte") as HTMLSelectElement).innerHTML = htmlTransportes;
+        (document.getElementById("edit-tarifa-transporte") as HTMLSelectElement).innerHTML = htmlTransportes;
+
+        (document.getElementById("create-tarifa-origen") as HTMLSelectElement).innerHTML = htmlLugares;
+        (document.getElementById("edit-tarifa-origen") as HTMLSelectElement).innerHTML = htmlLugares;
+        (document.getElementById("create-tarifa-destino") as HTMLSelectElement).innerHTML = htmlLugares;
+        (document.getElementById("edit-tarifa-destino") as HTMLSelectElement).innerHTML = htmlLugares;
     }
 
     async function fetchTarifas() {
-        console.log("🔄 Intentando cargar tarifas...");
-
-        // Consultamos directamente a la vista
+        // Consultamos directo a la tabla para manejar la lógica en JS
         const { data, error } = await supabase
-            .from("vista_tarifas_detallada")
-            .select("*");
+            .from("tarifas_transporte")
+            .select("*")
+            .order('created_at', { ascending: false });
 
         if (error) {
             console.error("❌ Error de Supabase:", error.message);
             return;
         }
 
-        if (!data || data.length === 0) {
-            console.warn(
-                "⚠️ La base de datos devolvió 0 registros. Verifica la tabla tarifas_transporte.",
-            );
-        }
-
         tarifasData = data || [];
-        console.log("✅ Datos cargados con éxito:", tarifasData);
 
         // Actualizar contadores
         const totalEl = document.getElementById("stat-tarifas-total");
@@ -521,74 +505,62 @@ import '/src/components/dashboard/Audios.css';
         const bajasEl = document.getElementById("stat-tarifas-bajas");
 
         if (totalEl) totalEl.innerText = tarifasData.length.toString();
-        if (activasEl)
-            activasEl.innerText = tarifasData
-                .filter((t) => t.estado)
-                .length.toString();
-        if (bajasEl)
-            bajasEl.innerText = tarifasData
-                .filter((t) => !t.estado)
-                .length.toString();
+        if (activasEl) activasEl.innerText = tarifasData.filter((t) => t.estado).length.toString();
+        if (bajasEl) bajasEl.innerText = tarifasData.filter((t) => !t.estado).length.toString();
 
         renderTarifas();
     }
 
-    function renderTarifas() {
-        const tbodyEd = document.getElementById(
-            "tbody-tarifas-editar",
-        ) as HTMLTableSectionElement;
-        const tbodyEl = document.getElementById(
-            "tbody-tarifas-eliminar",
-        ) as HTMLTableSectionElement;
-
-        if (!tbodyEd || !tbodyEl) {
-            console.error("No se encontraron los elementos tbody en el HTML");
-            return;
+    function resolverNombreLugar(idZona: number | null, idPunto: number | null): string {
+        if (idZona) {
+            const z = subdominiosData.find(s => s.id === idZona);
+            return z ? `📍 ${z.descripcion}` : "S/N";
+        } else if (idPunto) {
+            const p = puntosData.find(p => p.id === idPunto);
+            return p ? `📸 ${p.nombre}` : "S/N";
         }
+        return "S/N";
+    }
 
-        const searchInput = document.getElementById(
-            "search-tarifa",
-        ) as HTMLInputElement;
+    function renderTarifas() {
+        const tbodyEd = document.getElementById("tbody-tarifas-editar") as HTMLTableSectionElement;
+        const tbodyEl = document.getElementById("tbody-tarifas-eliminar") as HTMLTableSectionElement;
+        if (!tbodyEd || !tbodyEl) return;
+
+        const searchInput = document.getElementById("search-tarifa") as HTMLInputElement;
         const q = searchInput?.value.toLowerCase() || "";
-        const filterEstado =
-            (
-                document.getElementById(
-                    "filter-tarifa-estado",
-                ) as HTMLSelectElement
-            )?.value || "activos";
+        const filterEstado = (document.getElementById("filter-tarifa-estado") as HTMLSelectElement)?.value || "activos";
 
         tbodyEd.innerHTML = "";
         tbodyEl.innerHTML = "";
 
         if (tarifasData.length === 0) {
-            tbodyEd.innerHTML =
-                '<tr><td colspan="5" align="center">No hay datos en la base de datos</td></tr>';
+            tbodyEd.innerHTML = '<tr><td colspan="5" align="center">No hay datos en la base de datos</td></tr>';
             return;
         }
 
         tarifasData.forEach((t) => {
-            const trans = t.nombre_transporte || "S/N";
-            const origen = t.nombre_origen || "S/N";
-            const destino = t.nombre_destino || "S/N";
-            const coincidencia = (trans + origen + destino)
-                .toLowerCase()
-                .includes(q);
+            const transObj = subdominiosData.find(s => s.id === t.id_tipo_transporte);
+            const trans = transObj ? transObj.descripcion : "S/N";
+            
+            // Resolvemos los nombres dinámicamente
+            const origen = resolverNombreLugar(t.id_zona_origen, t.id_punto_origen);
+            const destino = resolverNombreLugar(t.id_zona_destino, t.id_punto_destino);
 
-            // Lógica para la tabla de EDICIÓN (Activos)
+            const coincidencia = (trans + origen + destino).toLowerCase().includes(q);
+
             if (t.estado && coincidencia) {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-          <td><b>${trans}</b></td>
-          <td>${origen} ➔ ${destino}</td>
-          <td>Bs. ${t.costo_estimado}</td>
-          <td><button class="ag-btn-action ag-btn-edit" onclick="abrirEditarTarifa(${t.id})">✏️ Editar</button></td>
-        `;
+                    <td><b>${trans}</b></td>
+                    <td>${origen} ➔ ${destino}</td>
+                    <td>Bs. ${t.costo_estimado}</td>
+                    <td><button class="ag-btn-action ag-btn-edit" onclick="abrirEditarTarifa(${t.id})">✏️ Editar</button></td>
+                `;
                 tbodyEd.appendChild(tr);
             }
 
-            // Lógica para la tabla de BAJAS/ALTAS
-            const mostrarPorFiltro =
-                filterEstado === "activos" ? t.estado : !t.estado;
+            const mostrarPorFiltro = filterEstado === "activos" ? t.estado : !t.estado;
             if (mostrarPorFiltro && coincidencia) {
                 const tr = document.createElement("tr");
                 const btn = t.estado
@@ -596,51 +568,37 @@ import '/src/components/dashboard/Audios.css';
                     : `<button class="ag-btn-action btn-alta-tarifa" onclick="cambiarEstadoTarifa(${t.id}, true)">♻️ Alta</button>`;
 
                 tr.innerHTML = `
-          <td><small>${trans}</small><br><b>${origen} - ${destino}</b></td>
-          <td>Bs ${t.costo_estimado}</td>
-          <td>${t.estado ? '<span class="ag-badge ag-badge-pub">Activo</span>' : '<span class="ag-badge ag-badge-draft">Inactivo</span>'}</td>
-          <td>${btn}</td>
-        `;
+                    <td><small>${trans}</small><br><b>${origen} - ${destino}</b></td>
+                    <td>Bs ${t.costo_estimado}</td>
+                    <td>${t.estado ? '<span class="ag-badge ag-badge-pub">Activo</span>' : '<span class="ag-badge ag-badge-draft">Inactivo</span>'}</td>
+                    <td>${btn}</td>
+                `;
                 tbodyEl.appendChild(tr);
             }
         });
     }
 
     // ACCIÓN: CREAR
-    const formCrear = document.getElementById(
-        "form-crear-tarifa",
-    ) as HTMLFormElement;
+    const formCrear = document.getElementById("form-crear-tarifa") as HTMLFormElement;
     formCrear?.addEventListener("submit", async (e: Event) => {
         e.preventDefault();
+        
+        const origenVal = (document.getElementById("create-tarifa-origen") as HTMLSelectElement).value;
+        const destinoVal = (document.getElementById("create-tarifa-destino") as HTMLSelectElement).value;
+
         const payload = {
-            id_tipo_transporte: (
-                document.getElementById(
-                    "create-tarifa-transporte",
-                ) as HTMLSelectElement
-            ).value,
-            id_zona_origen: (
-                document.getElementById(
-                    "create-tarifa-origen",
-                ) as HTMLSelectElement
-            ).value,
-            id_zona_destino: (
-                document.getElementById(
-                    "create-tarifa-destino",
-                ) as HTMLSelectElement
-            ).value,
-            costo_estimado: (
-                document.getElementById(
-                    "create-tarifa-costo",
-                ) as HTMLInputElement
-            ).value,
-            observaciones: (
-                document.getElementById("create-tarifa-obs") as HTMLInputElement
-            ).value,
+            id_tipo_transporte: (document.getElementById("create-tarifa-transporte") as HTMLSelectElement).value,
+            costo_estimado: (document.getElementById("create-tarifa-costo") as HTMLInputElement).value,
+            observaciones: (document.getElementById("create-tarifa-obs") as HTMLInputElement).value,
             estado: true,
+            // Aquí la magia: guardamos en la columna correcta dependiendo de si es ZONA o PUNTO
+            id_zona_origen: origenVal.startsWith("ZONA-") ? parseInt(origenVal.split("-")[1]) : null,
+            id_punto_origen: origenVal.startsWith("PUNTO-") ? parseInt(origenVal.split("-")[1]) : null,
+            id_zona_destino: destinoVal.startsWith("ZONA-") ? parseInt(destinoVal.split("-")[1]) : null,
+            id_punto_destino: destinoVal.startsWith("PUNTO-") ? parseInt(destinoVal.split("-")[1]) : null,
         };
-        const { error } = await supabase
-            .from("tarifas_transporte")
-            .insert([payload]);
+
+        const { error } = await supabase.from("tarifas_transporte").insert([payload]);
         if (error) alert(error.message);
         else {
             alert("Tarifa creada exitosamente");
@@ -649,67 +607,49 @@ import '/src/components/dashboard/Audios.css';
         }
     });
 
-    // FUNCIONES VENTANA (ASIGNACIÓN A WINDOW)
     window.abrirEditarTarifa = (id: number) => {
         const t = tarifasData.find((x) => x.id == id);
         if (!t) return;
-        (document.getElementById("edit-tarifa-id") as HTMLInputElement).value =
-            t.id;
-        (
-            document.getElementById("edit-tarifa-costo") as HTMLInputElement
-        ).value = t.costo_estimado;
-        (
-            document.getElementById(
-                "edit-tarifa-transporte",
-            ) as HTMLSelectElement
-        ).value = t.id_tipo_transporte;
-        (
-            document.getElementById("edit-tarifa-origen") as HTMLSelectElement
-        ).value = t.id_zona_origen;
-        (
-            document.getElementById("edit-tarifa-destino") as HTMLSelectElement
-        ).value = t.id_zona_destino;
-        (document.getElementById("edit-tarifa-obs") as HTMLInputElement).value =
-            t.observaciones || "";
+        
+        (document.getElementById("edit-tarifa-id") as HTMLInputElement).value = t.id;
+        (document.getElementById("edit-tarifa-costo") as HTMLInputElement).value = t.costo_estimado;
+        (document.getElementById("edit-tarifa-transporte") as HTMLSelectElement).value = t.id_tipo_transporte;
+        
+        // Reconstruimos el valor compuesto para los selects
+        let origenVal = "";
+        if (t.id_zona_origen) origenVal = "ZONA-" + t.id_zona_origen;
+        else if (t.id_punto_origen) origenVal = "PUNTO-" + t.id_punto_origen;
+
+        let destinoVal = "";
+        if (t.id_zona_destino) destinoVal = "ZONA-" + t.id_zona_destino;
+        else if (t.id_punto_destino) destinoVal = "PUNTO-" + t.id_punto_destino;
+
+        (document.getElementById("edit-tarifa-origen") as HTMLSelectElement).value = origenVal;
+        (document.getElementById("edit-tarifa-destino") as HTMLSelectElement).value = destinoVal;
+        (document.getElementById("edit-tarifa-obs") as HTMLInputElement).value = t.observaciones || "";
+        
         window.openModal("editarTarifaModal");
     };
 
-    const formEditar = document.getElementById(
-        "form-editar-tarifa",
-    ) as HTMLFormElement;
+    const formEditar = document.getElementById("form-editar-tarifa") as HTMLFormElement;
     formEditar?.addEventListener("submit", async (e: Event) => {
         e.preventDefault();
-        const id = (
-            document.getElementById("edit-tarifa-id") as HTMLInputElement
-        ).value;
+        const id = (document.getElementById("edit-tarifa-id") as HTMLInputElement).value;
+        const origenVal = (document.getElementById("edit-tarifa-origen") as HTMLSelectElement).value;
+        const destinoVal = (document.getElementById("edit-tarifa-destino") as HTMLSelectElement).value;
+
         const payload = {
-            costo_estimado: (
-                document.getElementById("edit-tarifa-costo") as HTMLInputElement
-            ).value,
-            id_tipo_transporte: (
-                document.getElementById(
-                    "edit-tarifa-transporte",
-                ) as HTMLSelectElement
-            ).value,
-            id_zona_origen: (
-                document.getElementById(
-                    "edit-tarifa-origen",
-                ) as HTMLSelectElement
-            ).value,
-            id_zona_destino: (
-                document.getElementById(
-                    "edit-tarifa-destino",
-                ) as HTMLSelectElement
-            ).value,
-            observaciones: (
-                document.getElementById("edit-tarifa-obs") as HTMLInputElement
-            ).value,
+            costo_estimado: (document.getElementById("edit-tarifa-costo") as HTMLInputElement).value,
+            id_tipo_transporte: (document.getElementById("edit-tarifa-transporte") as HTMLSelectElement).value,
+            observaciones: (document.getElementById("edit-tarifa-obs") as HTMLInputElement).value,
+            id_zona_origen: origenVal.startsWith("ZONA-") ? parseInt(origenVal.split("-")[1]) : null,
+            id_punto_origen: origenVal.startsWith("PUNTO-") ? parseInt(origenVal.split("-")[1]) : null,
+            id_zona_destino: destinoVal.startsWith("ZONA-") ? parseInt(destinoVal.split("-")[1]) : null,
+            id_punto_destino: destinoVal.startsWith("PUNTO-") ? parseInt(destinoVal.split("-")[1]) : null,
             updated_at: new Date().toISOString(),
         };
-        const { error } = await supabase
-            .from("tarifas_transporte")
-            .update(payload)
-            .eq("id", id);
+
+        const { error } = await supabase.from("tarifas_transporte").update(payload).eq("id", id);
         if (error) alert(error.message);
         else {
             window.closeModal("editarTarifaModal");
@@ -717,84 +657,37 @@ import '/src/components/dashboard/Audios.css';
         }
     });
 
-    // Aseguramos que la función sea GLOBAL (para que el botón onclick la encuentre)
     window.cambiarEstadoTarifa = async (id: number, nuevoEstado: boolean) => {
-        const accion = nuevoEstado ? "RESTAURAR" : "DAR DE BAJA";
-
-        if (!confirm(`¿Estás seguro que deseas ${accion} esta tarifa?`)) return;
+        if (!confirm(nuevoEstado ? "¿Reactivar esta tarifa?" : "¿Dar de baja esta tarifa?")) return;
 
         try {
             const { error } = await supabase
                 .from("tarifas_transporte")
-                .update({
-                    estado: nuevoEstado,
-                    updated_at: new Date().toISOString(),
-                })
+                .update({ estado: nuevoEstado, updated_at: new Date().toISOString() })
                 .eq("id", id);
 
-            if (error) {
-                console.error("Error al actualizar estado:", error.message);
-                alert("No se pudo cambiar el estado: " + error.message);
-            } else {
-                alert(
-                    `Tarifa ${nuevoEstado ? "restaurada" : "dada de baja"} con éxito.`,
-                );
-                // Llamamos a fetchTarifas para que la tabla se actualice sola
+            if (error) alert("Error al guardar: " + error.message);
+            else {
                 await fetchTarifas();
+                alert("Estado actualizado correctamente");
             }
         } catch (err) {
-            console.error("Error inesperado:", err);
+            console.error("Error:", err);
         }
     };
-    window.cambiarEstadoTarifa = async (id: number, nuevoEstado: boolean) => {
-    // Confirmación simple
-    if (!confirm(nuevoEstado ? "¿Reactivar esta tarifa?" : "¿Dar de baja esta tarifa?")) return;
 
-    try {
-        const { error } = await supabase
-            .from("tarifas_transporte")
-            .update({
-                estado: nuevoEstado,
-                updated_at: new Date().toISOString(),
-            })
-            .eq("id", id);
-
-        if (error) {
-            alert("Error al guardar: " + error.message);
-        } else {
-            // Refrescamos los datos locales inmediatamente
-            await fetchTarifas();
-            alert("Estado actualizado correctamente");
-        }
-    } catch (err) {
-        console.error("Error:", err);
-    }
-};
-
-    // NAVEGACIÓN Y BUSQUEDA
+    // Navegación de Paneles
     document.querySelectorAll(".ag-action-card").forEach((card) => {
         card.addEventListener("click", () => {
-            document
-                .querySelectorAll(".ag-action-card")
-                .forEach((c) => c.classList.remove("active-card"));
-            document
-                .querySelectorAll(".ag-panel")
-                .forEach((p) => p.classList.remove("active"));
+            document.querySelectorAll(".ag-action-card").forEach((c) => c.classList.remove("active-card"));
+            document.querySelectorAll(".ag-panel").forEach((p) => p.classList.remove("active"));
             card.classList.add("active-card");
             const panelId = card.getAttribute("data-panel");
-            if (panelId)
-                document
-                    .getElementById(`ag-panel-${panelId}`)
-                    ?.classList.add("active");
+            if (panelId) document.getElementById(`ag-panel-${panelId}`)?.classList.add("active");
         });
     });
 
-    document
-        .getElementById("search-tarifa")
-        ?.addEventListener("input", renderTarifas);
-    document
-        .getElementById("filter-tarifa-estado")
-        ?.addEventListener("change", renderTarifas);
-
+    document.getElementById("search-tarifa")?.addEventListener("input", renderTarifas);
+    document.getElementById("filter-tarifa-estado")?.addEventListener("change", renderTarifas);
     document.addEventListener("DOMContentLoaded", initTarifas);
 </script>

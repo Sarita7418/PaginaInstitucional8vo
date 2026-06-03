@@ -84,6 +84,400 @@ const features = [
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
+<style>
+  /* ===== SECCIÓN PRECIO TURISTA ===== */
+  .s-publicidad {
+    padding: 48px 3vw;
+    background: #F2EDE4;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  /* Gradiente ambiental suave */
+  .s-publicidad::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 75% 50%, rgba(29,158,117,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Decoraciones SVG de turismo ── */
+
+  /* Silueta de montaña (Illimani) — esquina inferior derecha */
+  .pub-deco-mountain {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 340px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Teleférico — esquina superior izquierda */
+  .pub-deco-cable {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    width: 260px;
+    opacity: 0.13;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Patrón wiphala / trama geométrica — fondo izquierdo */
+  .pub-deco-pattern {
+    position: absolute;
+    top: 50%;
+    left: -60px;
+    transform: translateY(-50%);
+    width: 200px;
+    height: 200px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Línea de altiplano — separador superior decorativo */
+  .pub-deco-topline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #1D9E75 30%, #5DCAA5 60%, transparent 100%);
+    z-index: 1;
+  }
+
+  /* Textura de puntos suave sobre el fondo crema */
+  .s-publicidad::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(29,158,117,0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Grid interior ── */
+  .pub-inner {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pub-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1D9E75;
+    margin-bottom: 16px;
+  }
+
+  .pub-eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #5DCAA5;
+    animation: pub-blink 2s ease-in-out infinite;
+  }
+
+  @keyframes pub-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .pub-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #1a2e25;
+    margin: 0 0 18px;
+  }
+
+  .pub-title em {
+    font-style: italic;
+    color: #1D9E75;
+  }
+
+  .pub-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: rgba(30,50,40,0.65);
+    line-height: 1.75;
+    margin: 0 0 20px;
+  }
+
+  .pub-price-block {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+
+  .pub-price-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #1a2e25;
+  }
+
+  .pub-price-meta {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    gap: 3px;
+  }
+
+  .pub-price-currency {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1D9E75;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .pub-price-period {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(30,50,40,0.5);
+  }
+
+  .pub-price-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(30,50,40,0.45);
+    margin: 0 0 30px;
+  }
+
+  /* Insignias de turismo debajo del precio */
+  .pub-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .pub-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border: 1px solid rgba(29,158,117,0.3);
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: rgba(30,50,40,0.65);
+    background: rgba(29,158,117,0.08);
+  }
+
+  .pub-badge svg {
+    color: #5DCAA5;
+    flex-shrink: 0;
+  }
+
+  .pub-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
+    background: #1D9E75;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .pub-cta-btn:hover {
+    background: #0F6E56;
+    transform: translateY(-2px);
+  }
+
+  .pub-cta-btn svg {
+    transition: transform 0.2s;
+  }
+
+  .pub-cta-btn:hover svg {
+    transform: translateX(3px);
+  }
+
+  /* ── Tarjeta derecha ── */
+  .pub-features-card {
+    background: #fff;
+    border: 1px solid rgba(29,158,117,0.15);
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 96px);
+    box-shadow: 0 8px 40px rgba(30,50,40,0.1);
+  }
+
+  .pub-card-header {
+    background: #1D9E75;
+    padding: 20px 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pub-card-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin: 0 0 4px;
+  }
+
+  .pub-card-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+  }
+
+  .pub-card-price-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 8px 16px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .pub-card-price-badge .amount {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .pub-card-price-badge .period {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .pub-features-list {
+    padding: 2px 0;
+    overflow-y: auto;
+    flex: 1;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(29,158,117,0.3) transparent;
+  }
+  .pub-features-list::-webkit-scrollbar { width: 4px; }
+  .pub-features-list::-webkit-scrollbar-track { background: transparent; }
+  .pub-features-list::-webkit-scrollbar-thumb { background: rgba(29,158,117,0.3); border-radius: 2px; }
+
+  .pub-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 20px;
+    border-bottom: 1px solid rgba(30,50,40,0.07);
+    transition: background 0.15s;
+  }
+
+  .pub-feature-item:last-child {
+    border-bottom: none;
+  }
+
+  .pub-feature-item:hover {
+    background: rgba(29,158,117,0.04);
+  }
+
+  .pub-feature-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 7px;
+    background: rgba(29,158,117,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #5DCAA5;
+  }
+
+  .pub-feature-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .pub-feature-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #1a2e25;
+    margin: 0 0 2px;
+  }
+
+  .pub-feature-detail {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.73rem;
+    color: rgba(30,50,40,0.5);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .s-publicidad {
+      padding: 44px 4vw;
+      min-height: auto;
+      align-items: flex-start;
+    }
+    .pub-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .pub-features-card {
+      max-height: none;
+    }
+    .pub-deco-mountain { width: 220px; }
+    .pub-deco-cable    { width: 160px; }
+  }
+
+  @media (max-width: 480px) {
+    .pub-price-main { font-size: 3.4rem; }
+    .s-publicidad { padding: 44px 5vw; }
+  }
+</style>
+
 <div class="inicio-root wali-root">
 
   <!-- ===== HERO ===== -->
@@ -131,7 +525,6 @@ const features = [
       <p class="feat-showcase-sub">7 funciones pensadas para tu experiencia en La Paz</p>
     </div>
 
-    <!-- TABS DE NAVEGACIÓN -->
     <div class="feat-tabs reveal from-bottom reveal-delay-1" id="feat-tabs">
       {features.map((f, i) => (
         <button class={`feat-tab ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={f.title}>
@@ -141,18 +534,12 @@ const features = [
       ))}
     </div>
 
-    <!-- PANEL PRINCIPAL -->
     <div class="feat-panel-wrapper reveal from-bottom reveal-delay-2">
       {features.map((feat, i) => (
         <div class={`feat-panel ${i === 0 ? 'active' : ''}`} data-panel={i} id={`panel-${feat.id}`}>
-          
-          <!-- Fondo con imagen -->
           <div class="feat-panel-bg" style={`background-image: url('${feat.bg}')`}></div>
           <div class="feat-panel-overlay"></div>
-
           <div class="feat-panel-inner">
-
-            <!-- LADO IZQUIERDO: Texto -->
             <div class="feat-panel-text">
               <div class="feat-panel-tag">{feat.tag}</div>
               <h3 class="feat-panel-title">{feat.title}</h3>
@@ -166,57 +553,37 @@ const features = [
                 ))}
               </div>
             </div>
-
-            <!-- LADO DERECHO: Mockup + decoraciones -->
             <div class="feat-panel-mockup">
-
-              <!-- Elementos decorativos alrededor del teléfono -->
               <div class="mockup-orb"></div>
               <div class="mockup-line-top"></div>
               <div class="mockup-line-left"></div>
               <div class="mockup-diamond"></div>
               <div class="mockup-cross"></div>
-
-              <!-- Cuadrícula de puntos (4×4) -->
               <div class="mockup-dots-grid">
                 {Array.from({ length: 16 }).map(() => (
                   <span></span>
                 ))}
               </div>
-
-              <!-- Marco del teléfono -->
               <div class="mockup-phone-frame">
                 <div class="mockup-notch"></div>
                 <div class="mockup-screen">
-                  <img 
-                    src={feat.interfaz}
-                    alt={`Interfaz de ${feat.title}`}
-                    loading="lazy"
-                  />
+                  <img src={feat.interfaz} alt={`Interfaz de ${feat.title}`} loading="lazy" />
                 </div>
               </div>
-
-              <!-- Badge flotante con ícono del módulo -->
               <div class="mockup-badge" style={`background: ${feat.color}`}>
                 <span set:html={feat.icon}></span>
               </div>
-
             </div>
-
           </div>
-
-          <!-- Contador de sección -->
           <div class="feat-panel-counter">
             <span class="counter-current">{String(i + 1).padStart(2, '0')}</span>
             <span class="counter-sep">/</span>
             <span class="counter-total">{String(features.length).padStart(2, '0')}</span>
           </div>
-
         </div>
       ))}
     </div>
 
-    <!-- NAVEGACIÓN DE PUNTOS (pills) con barra de progreso autoplay -->
     <div class="feat-dots" id="feat-dots">
       {features.map((_, i) => (
         <button class={`feat-dot ${i === 0 ? 'active' : ''}`} data-dot={i} aria-label={`Ir a ${features[i].title}`}>
@@ -225,13 +592,11 @@ const features = [
       ))}
     </div>
 
-    <!-- Botón pausa/play autoplay -->
     <button class="feat-autoplay-btn" id="feat-autoplay-btn" aria-label="Pausar autoplay" title="Pausar autoplay">
       <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
       <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
     </button>
 
-    <!-- Flechas prev / next -->
     <div class="feat-arrows">
       <button class="feat-arrow feat-arrow-prev" id="feat-prev" aria-label="Anterior">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
@@ -241,6 +606,207 @@ const features = [
       </button>
     </div>
 
+  </section>
+
+  <!-- ===== SECCIÓN PRECIO PARA EL TURISTA ===== -->
+  <section class="w-section s-publicidad" id="publicidad-section">
+
+    <!-- Línea decorativa superior (altiplano) -->
+    <div class="pub-deco-topline"></div>
+
+    <!-- Silueta montaña Illimani — esquina inferior derecha -->
+    <svg class="pub-deco-mountain" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0 220 L80 120 L120 150 L180 60 L210 90 L260 20 L290 55 L340 10 L400 80 L400 220 Z" fill="#1D9E75"/>
+      <path d="M240 35 L260 20 L280 42 L260 38 Z" fill="#1D9E75" opacity="0.6"/>
+    </svg>
+
+    <!-- Teleférico — esquina superior izquierda -->
+    <svg class="pub-deco-cable" viewBox="0 0 260 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="0" y1="10" x2="260" y2="60" stroke="#1a2e25" stroke-width="2"/>
+      <line x1="0" y1="10" x2="260" y2="60" stroke="#1a2e25" stroke-width="1" stroke-dasharray="4 6" opacity="0.4"/>
+      <!-- Cabina 1 -->
+      <rect x="50" y="18" width="28" height="20" rx="4" fill="#1D9E75"/>
+      <line x1="64" y1="18" x2="64" y2="10" stroke="#1a2e25" stroke-width="1.5"/>
+      <!-- Cabina 2 -->
+      <rect x="140" y="38" width="28" height="20" rx="4" fill="#1D9E75"/>
+      <line x1="154" y1="38" x2="154" y2="30" stroke="#1a2e25" stroke-width="1.5"/>
+      <!-- Cabina 3 -->
+      <rect x="210" y="51" width="28" height="20" rx="4" fill="#1D9E75"/>
+      <line x1="224" y1="51" x2="224" y2="43" stroke="#1a2e25" stroke-width="1.5"/>
+      <!-- Torre -->
+      <line x1="10" y1="10" x2="10" y2="100" stroke="#1a2e25" stroke-width="2.5"/>
+      <line x1="0" y1="100" x2="20" y2="100" stroke="#1a2e25" stroke-width="2"/>
+    </svg>
+
+    <!-- Patrón geométrico wiphala (fondo izquierdo) -->
+    <svg class="pub-deco-pattern" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="200" height="200" fill="none"/>
+      <!-- Cuadrícula de 7×7 como wiphala simplificada -->
+      <g fill="#1D9E75" opacity="0.6">
+        <rect x="0"   y="0"   width="25" height="25"/>
+        <rect x="29"  y="29"  width="25" height="25"/>
+        <rect x="58"  y="0"   width="25" height="25"/>
+        <rect x="87"  y="29"  width="25" height="25"/>
+        <rect x="116" y="0"   width="25" height="25"/>
+        <rect x="0"   y="58"  width="25" height="25"/>
+        <rect x="29"  y="87"  width="25" height="25"/>
+        <rect x="58"  y="58"  width="25" height="25"/>
+        <rect x="87"  y="87"  width="25" height="25"/>
+        <rect x="116" y="58"  width="25" height="25"/>
+        <rect x="145" y="29"  width="25" height="25"/>
+        <rect x="145" y="87"  width="25" height="25"/>
+        <rect x="0"   y="116" width="25" height="25"/>
+        <rect x="29"  y="145" width="25" height="25"/>
+        <rect x="58"  y="116" width="25" height="25"/>
+        <rect x="87"  y="145" width="25" height="25"/>
+        <rect x="116" y="116" width="25" height="25"/>
+        <rect x="145" y="145" width="25" height="25"/>
+      </g>
+    </svg>
+
+    <div class="pub-inner">
+
+      <!-- COLUMNA IZQUIERDA -->
+      <div class="pub-left reveal from-left">
+        <p class="pub-eyebrow">
+          <span class="pub-eyebrow-dot"></span>
+          Acceso completo · Un solo precio
+        </p>
+        <h2 class="pub-title">
+          Todo lo que necesitas<br />
+          para explorar <em>La Paz</em>,<br />
+        </h2>
+        <p class="pub-desc">
+          Por Bs&nbsp;8,09 al día accedes a las 7 funciones de Wali sin límites: mapa interactivo, audioguías históricas, itinerarios con IA, decodificador gastronómico, asistente 24/7, seguridad urbana y calculadora de tarifas. Todo diseñado para que tu visita a La Paz sea auténtica, segura y sin imprevistos.
+        </p>
+
+        <div class="pub-price-block">
+          <span class="pub-price-main">8,09</span>
+          <div class="pub-price-meta">
+            <span class="pub-price-currency">Bs / día</span>
+            <span class="pub-price-period">acceso completo</span>
+          </div>
+        </div>
+        <p class="pub-price-note">Pago diario. Sin suscripciones ni compromisos. Solo activa el día que explores.</p>
+
+        <!-- Insignias de turismo -->
+        <div class="pub-badges">
+          <span class="pub-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Viaje seguro
+          </span>
+          <span class="pub-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Sin conexión a internet
+          </span>
+          <span class="pub-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Multiidioma
+          </span>
+          <span class="pub-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            Audioguías offline
+          </span>
+        </div>
+
+        <a href="/descarga" class="pub-cta-btn">
+          Descargar Wali ahora
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- COLUMNA DERECHA -->
+      <div class="pub-right reveal from-right reveal-delay-1">
+        <div class="pub-features-card">
+
+          <div class="pub-card-header">
+            <div>
+              <p class="pub-card-label">Incluye las 7 funciones</p>
+              <p class="pub-card-title">Acceso completo a Wali</p>
+            </div>
+            <div class="pub-card-price-badge">
+              <span class="amount">8,09</span>
+              <span class="period">Bs · día</span>
+            </div>
+          </div>
+
+          <div class="pub-features-list">
+
+            <div class="pub-feature-item">
+              <div class="pub-feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+              </div>
+              <div>
+                <p class="pub-feature-name">Mapa y geolocalización</p>
+                <p class="pub-feature-detail">Museos, calles históricas, miradores y teleférico marcados en tiempo real.</p>
+              </div>
+            </div>
+
+            <div class="pub-feature-item">
+              <div class="pub-feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+              </div>
+              <div>
+                <p class="pub-feature-name">Audioguías narrativas</p>
+                <p class="pub-feature-detail">Se activan automáticamente al acercarte a un sitio turístico por geofencing.</p>
+              </div>
+            </div>
+
+            <div class="pub-feature-item">
+              <div class="pub-feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="16" y2="14"/></svg>
+              </div>
+              <div>
+                <p class="pub-feature-name">Itinerarios inteligentes</p>
+                <p class="pub-feature-detail">La IA arma tu plan del día según tus intereses, con recálculo automático de tiempos.</p>
+              </div>
+            </div>
+
+            <div class="pub-feature-item">
+              <div class="pub-feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10S2 17.5 2 12z"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div>
+                <p class="pub-feature-name">Decodificador gastronómico</p>
+                <p class="pub-feature-detail">Apunta la cámara al menú: identifica platos típicos, ingredientes y alérgenos.</p>
+              </div>
+            </div>
+
+            <div class="pub-feature-item">
+              <div class="pub-feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div>
+                <p class="pub-feature-name">Asistente IA 24/7</p>
+                <p class="pub-feature-detail">Resuelve dudas turísticas en tiempo real: horarios, rutas, recomendaciones culturales.</p>
+              </div>
+            </div>
+
+            <div class="pub-feature-item">
+              <div class="pub-feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <p class="pub-feature-name">Seguridad y emergencias</p>
+                <p class="pub-feature-detail">Mapa de zonas de precaución y botón SOS con contacto de confianza integrado.</p>
+              </div>
+            </div>
+
+            <div class="pub-feature-item">
+              <div class="pub-feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div>
+                <p class="pub-feature-name">Calculadora de tarifas</p>
+                <p class="pub-feature-detail">Precio justo punto a punto en taxi, para no pagar de más en una ciudad sin taxímetros.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <!-- ===== CTA FINAL ===== -->
@@ -267,6 +833,7 @@ const features = [
   <button class="snav-dot active" data-i="0" aria-label="Ir a sección 1"></button>
   <button class="snav-dot" data-i="1" aria-label="Ir a sección 2"></button>
   <button class="snav-dot" data-i="2" aria-label="Ir a sección 3"></button>
+  <button class="snav-dot" data-i="3" aria-label="Ir a sección 4"></button>
 </div>
 <div id="kb-hint">
   <div class="kb-key">ReP</div>
@@ -297,28 +864,22 @@ const features = [
   const autoplayBtn = document.getElementById('feat-autoplay-btn');
   let current      = 0;
 
-  // ========== AUTOPLAY ==========
-  const AUTOPLAY_DELAY = 4500; // ms entre slides
+  const AUTOPLAY_DELAY = 4500;
   let autoplayTimer: ReturnType<typeof setInterval> | null = null;
   let autoplayPaused = false;
   let progressRafId: number | null = null;
   let progressStart: number | null = null;
 
   function startProgressBar() {
-    // Reinicia la barra de progreso del dot activo
     const activeDot = dots[current] as HTMLElement;
     const bar = activeDot.querySelector('.feat-dot-progress') as HTMLElement;
     if (!bar) return;
-
-    // Reset todas las barras
     dots.forEach(d => {
       const b = d.querySelector('.feat-dot-progress') as HTMLElement;
       if (b) b.style.width = '0%';
     });
-
     progressStart = null;
     if (progressRafId) cancelAnimationFrame(progressRafId);
-
     function animateBar(ts: number) {
       if (!progressStart) progressStart = ts;
       const elapsed = ts - progressStart;
@@ -346,17 +907,12 @@ const features = [
     if (autoplayTimer) clearInterval(autoplayTimer);
     startProgressBar();
     autoplayTimer = setInterval(() => {
-      if (!autoplayPaused) {
-        goTo(current + 1);
-      }
+      if (!autoplayPaused) goTo(current + 1);
     }, AUTOPLAY_DELAY);
   }
 
   function stopAutoplay() {
-    if (autoplayTimer) {
-      clearInterval(autoplayTimer);
-      autoplayTimer = null;
-    }
+    if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
     stopProgressBar();
   }
 
@@ -381,12 +937,10 @@ const features = [
 
   autoplayBtn?.addEventListener('click', toggleAutoplay);
 
-  // Pausar autoplay si el usuario interactúa con los tabs, dots o flechas
-  // y retomar tras 8 segundos de inactividad
   let resumeTimer: ReturnType<typeof setTimeout> | null = null;
 
   function userInteracted() {
-    if (autoplayPaused) return; // si ya está pausado manualmente, no hacer nada
+    if (autoplayPaused) return;
     stopAutoplay();
     if (resumeTimer) clearTimeout(resumeTimer);
     resumeTimer = setTimeout(() => {
@@ -403,7 +957,6 @@ const features = [
     tabs[current].classList.add('active');
     dots[current].classList.add('active');
     tabs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    // Reinicia barra si autoplay está corriendo
     if (!autoplayPaused && autoplayTimer) startProgressBar();
   }
 
@@ -416,7 +969,6 @@ const features = [
   prevBtn?.addEventListener('click', () => { userInteracted(); goTo(current - 1); });
   nextBtn?.addEventListener('click', () => { userInteracted(); goTo(current + 1); });
 
-  // Touch swipe
   let touchStartX = 0;
   const panelWrapper = document.querySelector('.feat-panel-wrapper');
   panelWrapper?.addEventListener('touchstart', (e: Event) => {
@@ -430,17 +982,12 @@ const features = [
     }
   }, { passive: true });
 
-  // Pausar cuando el mouse está sobre el panel
   const featShowcase = document.getElementById('features-section');
   featShowcase?.addEventListener('mouseenter', () => {
-    if (!autoplayPaused && autoplayTimer) {
-      stopAutoplay();
-    }
+    if (!autoplayPaused && autoplayTimer) stopAutoplay();
   });
   featShowcase?.addEventListener('mouseleave', () => {
-    if (!autoplayPaused) {
-      startAutoplay();
-    }
+    if (!autoplayPaused) startAutoplay();
   });
 
   // ========== SECTION SCROLL NAV ==========
@@ -474,10 +1021,8 @@ const features = [
   document.addEventListener('keydown', (e) => {
     const activeTag = (document.activeElement as HTMLElement)?.tagName || '';
     if (['INPUT','TEXTAREA','SELECT'].includes(activeTag)) return;
-
     if (e.key === 'ArrowLeft')  { e.preventDefault(); userInteracted(); goTo(current - 1); }
     if (e.key === 'ArrowRight') { e.preventDefault(); userInteracted(); goTo(current + 1); }
-
     const isNext = e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey);
     const isPrev = e.key === 'ArrowUp'   || e.key === 'PageUp'   || (e.key === ' ' && e.shiftKey);
     if (isNext) { e.preventDefault(); scrollToSection(getActiveSection() + 1); }
@@ -497,8 +1042,6 @@ const features = [
   window.addEventListener('scroll', updateSnavDots, { passive: true });
   updateSnavDots();
 
-  // ========== ARRANCAR AUTOPLAY AL CARGAR ==========
-  // Esperar a que la sección sea visible antes de arrancar
   const showcaseObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
