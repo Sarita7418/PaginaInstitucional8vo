@@ -33,21 +33,21 @@ import './Audios.css';
         </div>
       </button>
 
-      <button class="ag-action-card ag-amber" data-panel="idiomas">
+      <button class="ag-action-card ag-amber" data-panel="reportes">
         <div class="ag-action-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+            <line x1="2" y1="20" x2="22" y2="20"/>
           </svg>
         </div>
         <div class="ag-action-text">
-          <span class="ag-action-title">Gestionar Idiomas</span>
-          <span class="ag-action-desc">Cobertura de idiomas en el sistema</span>
+          <span class="ag-action-title">Reportes</span>
+          <span class="ag-action-desc">Estadísticas y métricas de uso</span>
         </div>
       </button>
 
-      <!-- Tarjeta 4: "Gestionar Estado" en vez de "Eliminar" -->
       <button class="ag-action-card ag-terra" data-panel="gestionar-estado">
         <div class="ag-action-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -88,7 +88,7 @@ import './Audios.css';
             <div class="ag-summary-stats">
               <div class="ag-summary-stat"><span class="ag-sstat-num ag-teal-text" id="stat-total">—</span><span class="ag-sstat-lbl">Total</span></div>
               <div class="ag-summary-stat"><span class="ag-sstat-num ag-green-text" id="stat-activas">—</span><span class="ag-sstat-lbl">Activas</span></div>
-              <div class="ag-summary-stat"><span class="ag-sstat-num ag-amber-text" id="stat-idiomas">—</span><span class="ag-sstat-lbl">Idiomas</span></div>
+              <div class="ag-summary-stat"><span class="ag-sstat-num ag-amber-text" id="stat-puntos">—</span><span class="ag-sstat-lbl">Sitios</span></div>
               <div class="ag-summary-stat"><span class="ag-sstat-num ag-terra-text" id="stat-inactivas">—</span><span class="ag-sstat-lbl">Inactivas</span></div>
             </div>
             <div class="ag-recent-label">Últimas audioguías</div>
@@ -113,17 +113,30 @@ import './Audios.css';
         <form id="form-crear-audio" autocomplete="off">
           <div class="ag-form-layout">
             <div class="ag-form-main">
+
+              <!-- PUNTO TURÍSTICO PRIMERO -->
+              <div class="ag-form-group ag-full">
+                <label class="ag-label">Punto Turístico</label>
+                <select class="ag-select" id="au-punto"><option value="">Cargando puntos turísticos...</option></select>
+              </div>
+
               <div class="ag-form-group ag-full">
                 <label class="ag-label">Título de la Audioguía *</label>
                 <input type="text" class="ag-input" id="au-titulo" placeholder="Ej: Historia del Valle de la Luna" required />
               </div>
+
               <div class="ag-form-group ag-full">
                 <label class="ag-label">Descripción Corta</label>
                 <input type="text" class="ag-input" id="au-desc-corta" placeholder="Breve descripción para el listado..." />
               </div>
+
               <div class="ag-form-group ag-full">
                 <label class="ag-label">Texto / Transcripción (Guion de la Audioguía)</label>
                 <textarea class="ag-textarea ag-textarea-lg" id="au-texto" placeholder="Ingresa el contenido narrativo completo que será locutado por la Inteligencia Artificial..."></textarea>
+                <div class="ag-duracion-auto" id="ag-duracion-auto" style="display:none;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Duración estimada: <strong id="ag-duracion-auto-text">0:00</strong>&nbsp;<span class="ag-duracion-auto-words" id="ag-duracion-auto-words"></span>
+                </div>
               </div>
 
               <div id="ag-preview-box" class="ag-preview-box" style="display:none;">
@@ -134,26 +147,11 @@ import './Audios.css';
                 <div id="ag-preview-text" class="ag-preview-text"></div>
               </div>
 
-              <div class="ag-form-row">
-                <div class="ag-form-group">
-                  <label class="ag-label">Idioma</label>
-                  <select class="ag-select" id="au-idioma"><option value="">Cargando idiomas...</option></select>
-                </div>
-                <div class="ag-form-group">
-                  <label class="ag-label">Punto Turístico</label>
-                  <select class="ag-select" id="au-punto"><option value="">Cargando puntos turísticos...</option></select>
-                </div>
+              <div class="ag-form-group ag-full">
+                <label class="ag-label">URL de Audio (opcional)</label>
+                <input type="url" class="ag-input" id="au-audio-url" placeholder="https://..." />
               </div>
-              <div class="ag-form-row">
-                <div class="ag-form-group">
-                  <label class="ag-label">Duración (segundos)</label>
-                  <input type="number" class="ag-input" id="au-duracion" placeholder="Ej: 312" min="0" />
-                </div>
-                <div class="ag-form-group">
-                  <label class="ag-label">URL de Audio (opcional)</label>
-                  <input type="url" class="ag-input" id="au-audio-url" placeholder="https://..." />
-                </div>
-              </div>
+
               <div class="ag-form-group">
                 <label class="ag-label">Estado inicial</label>
                 <div class="ag-toggle-group">
@@ -233,7 +231,7 @@ import './Audios.css';
             <svg class="ag-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input type="text" class="ag-search" id="search-audios" placeholder="Buscar por título..." />
           </div>
-          <select class="ag-filter" id="filter-idioma-audios"><option value="">Todos los idiomas</option></select>
+          <select class="ag-filter" id="filter-punto-audios"><option value="">Todos los puntos</option></select>
           <select class="ag-filter" id="filter-estado-audios">
             <option value="">Todos los estados</option>
             <option value="true">Activa</option>
@@ -242,8 +240,8 @@ import './Audios.css';
         </div>
         <div class="ag-table-wrap">
           <table class="ag-table">
-            <thead><tr><th>Título</th><th>Idioma</th><th>Duración</th><th>Punto Turístico</th><th>Estado</th><th>Acciones</th></tr></thead>
-            <tbody id="tbody-audios"><tr><td colspan="6" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando datos...</td></tr></tbody>
+            <thead><tr><th>Título</th><th>Punto Turístico</th><th>Duración</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody id="tbody-audios"><tr><td colspan="5" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando datos...</td></tr></tbody>
           </table>
         </div>
         <div class="ag-pagination">
@@ -252,19 +250,72 @@ import './Audios.css';
         </div>
       </div>
 
-      <!-- IDIOMAS -->
-      <div class="ag-panel" id="ag-panel-idiomas">
+      <!-- REPORTES -->
+      <div class="ag-panel" id="ag-panel-reportes">
         <div class="ag-panel-header">
           <div class="ag-panel-icon ag-amber-bg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
           </div>
           <div>
-            <h3 class="ag-panel-title">Distribución por Idiomas</h3>
-            <p class="ag-panel-subtitle">Cobertura actual de las audioguías según el idioma</p>
+            <h3 class="ag-panel-title">Reportes de Audioguías</h3>
+            <p class="ag-panel-subtitle">Estadísticas y métricas del contenido sonoro</p>
           </div>
         </div>
-        <div class="ag-lang-grid" id="ag-lang-grid">
-          <div style="grid-column:1/-1;padding:20px;color:#8A9BA0;text-align:center;font-size:13px;">Cargando idiomas...</div>
+
+        <div class="ag-report-stats">
+          <div class="ag-report-card ag-report-teal">
+            <div class="ag-report-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+            </div>
+            <div class="ag-report-data">
+              <span class="ag-report-num" id="rep-total">—</span>
+              <span class="ag-report-lbl">Total Audioguías</span>
+            </div>
+          </div>
+          <div class="ag-report-card ag-report-green">
+            <div class="ag-report-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+            </div>
+            <div class="ag-report-data">
+              <span class="ag-report-num" id="rep-activas">—</span>
+              <span class="ag-report-lbl">Activas</span>
+            </div>
+          </div>
+          <div class="ag-report-card ag-report-amber">
+            <div class="ag-report-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="ag-report-data">
+              <span class="ag-report-num" id="rep-duracion">—</span>
+              <span class="ag-report-lbl">Duración Total</span>
+            </div>
+          </div>
+          <div class="ag-report-card ag-report-terra">
+            <div class="ag-report-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="ag-report-data">
+              <span class="ag-report-num" id="rep-puntos">—</span>
+              <span class="ag-report-lbl">Puntos cubiertos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ag-report-section">
+          <h4 class="ag-report-section-title">Audioguías por Punto Turístico</h4>
+          <div id="ag-report-puntos-list" class="ag-report-bars">
+            <div style="padding:20px;color:#8A9BA0;text-align:center;font-size:13px;">Cargando...</div>
+          </div>
+        </div>
+
+        <div class="ag-report-section">
+          <h4 class="ag-report-section-title">Detalle de Contenido</h4>
+          <div class="ag-table-wrap">
+            <table class="ag-table">
+              <thead><tr><th>Título</th><th>Punto Turístico</th><th>Duración</th><th>Estado</th></tr></thead>
+              <tbody id="tbody-reporte"><tr><td colspan="4" style="text-align:center;padding:24px;color:#8A9BA0;">Cargando...</td></tr></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -280,7 +331,6 @@ import './Audios.css';
           </div>
         </div>
 
-        <!-- Banner informativo -->
         <div class="ag-info-banner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           Las audioguías desactivadas dejan de mostrarse en la app pero permanecen en la base de datos. Puedes reactivarlas en cualquier momento.
@@ -288,9 +338,9 @@ import './Audios.css';
 
         <div class="ag-table-wrap">
           <table class="ag-table">
-            <thead><tr><th>Título</th><th>Idioma</th><th>Duración</th><th>Punto Turístico</th><th>Estado actual</th><th>Acción</th></tr></thead>
+            <thead><tr><th>Título</th><th>Punto Turístico</th><th>Duración</th><th>Estado actual</th><th>Acción</th></tr></thead>
             <tbody id="tbody-estado-audios">
-              <tr><td colspan="6" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando...</td></tr>
+              <tr><td colspan="5" style="text-align:center;padding:32px;color:#8A9BA0;">Cargando...</td></tr>
             </tbody>
           </table>
         </div>
@@ -309,17 +359,18 @@ import './Audios.css';
     </div>
     <form id="form-editar-audio" autocomplete="off">
       <input type="hidden" id="edit-au-id" />
+      <div class="ag-form-group"><label class="ag-label">Punto Turístico</label><select class="ag-select" id="edit-au-punto"></select></div>
       <div class="ag-form-group"><label class="ag-label">Título *</label><input type="text" class="ag-input" id="edit-au-titulo" required /></div>
       <div class="ag-form-group"><label class="ag-label">Descripción Corta</label><input type="text" class="ag-input" id="edit-au-desc" /></div>
-      <div class="ag-form-group"><label class="ag-label">Texto / Transcripción</label><textarea class="ag-textarea ag-textarea-lg" id="edit-au-texto"></textarea></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-        <div class="ag-form-group"><label class="ag-label">Idioma</label><select class="ag-select" id="edit-au-idioma"></select></div>
-        <div class="ag-form-group"><label class="ag-label">Punto Turístico</label><select class="ag-select" id="edit-au-punto"></select></div>
+      <div class="ag-form-group">
+        <label class="ag-label">Texto / Transcripción</label>
+        <textarea class="ag-textarea ag-textarea-lg" id="edit-au-texto"></textarea>
+        <div class="ag-duracion-auto" id="edit-ag-duracion-auto" style="display:none;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Duración estimada: <strong id="edit-ag-duracion-auto-text">0:00</strong>&nbsp;<span id="edit-ag-duracion-auto-words"></span>
+        </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-        <div class="ag-form-group"><label class="ag-label">Duración (seg.)</label><input type="number" class="ag-input" id="edit-au-duracion" /></div>
-        <div class="ag-form-group"><label class="ag-label">URL Audio</label><input type="url" class="ag-input" id="edit-au-url" /></div>
-      </div>
+      <div class="ag-form-group"><label class="ag-label">URL Audio</label><input type="url" class="ag-input" id="edit-au-url" /></div>
       <div class="ag-ia-box" style="margin-bottom:16px;">
         <div class="ag-ia-badge">IA</div>
         <span class="ag-ia-label">Simulador de Locución Integrado</span>
@@ -342,12 +393,10 @@ import './Audios.css';
   </div>
 </div>
 
-<!-- ═══ MODAL CONFIRM PERSONALIZADO (mismo diseño que Rutas) ═══ -->
+<!-- MODAL CONFIRM PERSONALIZADO -->
 <div id="ag-confirm-modal" class="ag-modal" style="display:none;">
   <div class="ag-confirm-box">
-    <div class="ag-confirm-icon-wrap" id="ag-confirm-icon-wrap">
-      <!-- Ícono inyectado dinámicamente -->
-    </div>
+    <div class="ag-confirm-icon-wrap" id="ag-confirm-icon-wrap"></div>
     <h3 class="ag-confirm-title" id="ag-confirm-title">¿Confirmar acción?</h3>
     <p class="ag-confirm-msg" id="ag-confirm-msg"></p>
     <div class="ag-confirm-detail" id="ag-confirm-detail" style="display:none;"></div>
@@ -361,20 +410,54 @@ import './Audios.css';
 <script>
   import { supabase } from '../../lib/supabase';
 
-  const DOMINIO_IDIOMA = 2;
   const PAGE_SIZE = 8;
+  const PALABRAS_POR_MIN = 150; // velocidad de locucion en español
 
-  let idiomas = [];
-  let puntos  = [];
+  let puntos       = [];
   let paginaAudios = 1;
   let filtrosBusq  = '';
-  let filtrosIdioma = '';
+  let filtrosPunto = '';
   let filtrosEstado = '';
 
-  // ════════════════════════════════════════════════
-  // MODAL CONFIRM PERSONALIZADO
-  // Mismo patrón que Rutas.astro
-  // ════════════════════════════════════════════════
+  // ════ DURACIÓN AUTO CALCULADA ════
+  function calcularDuracion(texto) {
+    if (!texto || !texto.trim()) return 0;
+    const palabras = texto.trim().split(/\s+/).filter(Boolean).length;
+    return Math.round((palabras / PALABRAS_POR_MIN) * 60);
+  }
+
+  function formatDuracion(seg) {
+    if (!seg) return '—';
+    return `${Math.floor(seg / 60)}:${String(seg % 60).padStart(2,'0')}`;
+  }
+
+  function actualizarDuracionAuto(texto, autoId, textId, wordsId, badgePreviewId, badgeTextId) {
+    const palabras = texto ? texto.trim().split(/\s+/).filter(Boolean).length : 0;
+    const seg = calcularDuracion(texto);
+    const autoEl  = document.getElementById(autoId);
+    const textEl  = document.getElementById(textId);
+    const wordsEl = document.getElementById(wordsId);
+    if (autoEl && textEl) {
+      if (palabras > 0) {
+        autoEl.style.display = 'flex';
+        textEl.textContent = formatDuracion(seg);
+        if (wordsEl) wordsEl.textContent = `(${palabras} palabras)`;
+      } else {
+        autoEl.style.display = 'none';
+      }
+    }
+    if (badgePreviewId && badgeTextId) {
+      const badge    = document.getElementById(badgePreviewId);
+      const badgeTxt = document.getElementById(badgeTextId);
+      if (badge && badgeTxt) {
+        if (seg > 0) { badge.style.display = 'flex'; badgeTxt.textContent = formatDuracion(seg); }
+        else { badge.style.display = 'none'; }
+      }
+    }
+    return seg;
+  }
+
+  // ════ MODAL CONFIRM ════
   function showConfirm(opts) {
     const modal    = document.getElementById('ag-confirm-modal');
     const iconWrap = document.getElementById('ag-confirm-icon-wrap');
@@ -382,17 +465,12 @@ import './Audios.css';
     const elM      = document.getElementById('ag-confirm-msg');
     const elD      = document.getElementById('ag-confirm-detail');
 
-    // Color e ícono según si es activar o desactivar
     if (opts.type === 'deactivate') {
       iconWrap.className = 'ag-confirm-icon-wrap ag-confirm-icon-terra';
-      iconWrap.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2">
-        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
-      </svg>`;
+      iconWrap.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>`;
     } else {
       iconWrap.className = 'ag-confirm-icon-wrap ag-confirm-icon-green';
-      iconWrap.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2">
-        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
-      </svg>`;
+      iconWrap.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>`;
     }
 
     elT.textContent = opts.title;
@@ -402,7 +480,6 @@ import './Audios.css';
 
     modal.style.display = 'flex';
 
-    // Reclonar botones para limpiar listeners anteriores
     const oldOk  = document.getElementById('ag-confirm-ok');
     const oldCan = document.getElementById('ag-confirm-cancel');
     const newOk  = oldOk.cloneNode(true);
@@ -410,12 +487,8 @@ import './Audios.css';
     oldOk.replaceWith(newOk);
     oldCan.replaceWith(newCan);
 
-    newOk.className = opts.type === 'deactivate'
-      ? 'ag-btn ag-btn-terra'
-      : 'ag-btn ag-btn-primary';
-    newOk.innerHTML = opts.type === 'deactivate'
-      ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg> ${opts.confirmLabel}`
-      : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg> ${opts.confirmLabel}`;
+    newOk.className = opts.type === 'deactivate' ? 'ag-btn ag-btn-terra' : 'ag-btn ag-btn-primary';
+    newOk.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg> ${opts.confirmLabel}`;
 
     newOk.addEventListener('click', () => { modal.style.display = 'none'; opts.onConfirm(); });
     newCan.addEventListener('click', () => { modal.style.display = 'none'; });
@@ -424,9 +497,7 @@ import './Audios.css';
     modal.addEventListener('click', closeOnBg);
   }
 
-  // ════════════════════════════════════════════════
-  // TOAST
-  // ════════════════════════════════════════════════
+  // ════ TOAST ════
   function showToast(msg, type = 'success') {
     const t = document.getElementById('ag-toast');
     if (!t) return;
@@ -435,27 +506,14 @@ import './Audios.css';
     setTimeout(() => { t.className = 'ag-toast ag-toast-hidden'; }, 3500);
   }
 
-  // ════════════════════════════════════════════════
-  // SPEECH SYNTHESIS
-  // ════════════════════════════════════════════════
-  function getIdiomaBCP47(idIdioma) {
-    const idioma = idiomas.find(i => i.id == idIdioma);
-    if (!idioma) return 'es-ES';
-    const desc = (idioma.descripcion || '').toLowerCase();
-    if (desc.includes('english') || desc.includes('inglés')) return 'en-US';
-    if (desc.includes('deutsch') || desc.includes('alemán')) return 'de-DE';
-    if (desc.includes('français') || desc.includes('francés')) return 'fr-FR';
-    if (desc.includes('português') || desc.includes('portugués')) return 'pt-BR';
-    if (desc.includes('quechua') || desc.includes('aymara')) return 'es-PE';
-    return 'es-ES';
-  }
-
-  function reproducirTexto(texto, idIdioma, btnPlay, btnStop) {
+  // ════ SPEECH — siempre español ════
+  function reproducirTexto(texto, btnPlay, btnStop) {
     if (!texto || !texto.trim()) { showToast('No hay texto para reproducir', 'error'); return; }
     window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(texto.trim());
-    utter.lang = getIdiomaBCP47(idIdioma);
-    utter.rate = 0.9; utter.pitch = 1;
+    utter.lang  = 'es-ES';
+    utter.rate  = 0.9;
+    utter.pitch = 1;
     utter.onstart = () => { if (btnPlay) btnPlay.style.display = 'none'; if (btnStop) btnStop.style.display = 'inline-flex'; };
     utter.onend = utter.onerror = () => { if (btnPlay) btnPlay.style.display = 'inline-flex'; if (btnStop) btnStop.style.display = 'none'; };
     window.speechSynthesis.speak(utter);
@@ -467,48 +525,31 @@ import './Audios.css';
     if (btnStop) btnStop.style.display = 'none';
   }
 
-  // ════════════════════════════════════════════════
-  // CARGAR SELECTS
-  // ════════════════════════════════════════════════
-  async function loadIdiomas() {
-    const { data } = await supabase.from('subdominios').select('id, descripcion').eq('id_dominio', DOMINIO_IDIOMA).order('descripcion');
-    idiomas = data || [];
-    const opts = '<option value="">Sin idioma</option>' + idiomas.map(i => `<option value="${i.id}">${i.descripcion}</option>`).join('');
-    ['au-idioma','edit-au-idioma'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = opts; });
-    const filt = document.getElementById('filter-idioma-audios');
-    if (filt) filt.innerHTML = '<option value="">Todos los idiomas</option>' + idiomas.map(i => `<option value="${i.id}">${i.descripcion}</option>`).join('');
-  }
-
+  // ════ CARGAR PUNTOS ════
   async function loadPuntos() {
     const { data } = await supabase.from('punto_turistico').select('id, nombre').eq('estado', true).order('nombre');
     puntos = data || [];
     const opts = '<option value="">Sin punto turístico</option>' + puntos.map(p => `<option value="${p.id}">${p.nombre}</option>`).join('');
     ['au-punto','edit-au-punto'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = opts; });
+    const filt = document.getElementById('filter-punto-audios');
+    if (filt) filt.innerHTML = '<option value="">Todos los puntos</option>' + puntos.map(p => `<option value="${p.id}">${p.nombre}</option>`).join('');
   }
 
-  // ════════════════════════════════════════════════
-  // HELPERS
-  // ════════════════════════════════════════════════
-  function getIdiomaNombre(id) { return idiomas.find(i => i.id == id)?.descripcion || '—'; }
-  function getPuntoNombre(id)  { return puntos.find(p => p.id == id)?.nombre        || '—'; }
-  function formatDuracion(seg) {
-    if (!seg) return '—';
-    return `${Math.floor(seg / 60)}:${String(seg % 60).padStart(2,'0')}`;
-  }
+  function getPuntoNombre(id) { return puntos.find(p => p.id == id)?.nombre || '—'; }
 
-  // ════════════════════════════════════════════════
-  // STATS Y RECIENTES
-  // ════════════════════════════════════════════════
+  // ════ STATS ════
   async function loadStats() {
-    const [{ count: total }, { count: activas }, { count: inactivas }] = await Promise.all([
+    const [{ count: total }, { count: activas }, { count: inactivas }, { data: puntosData }] = await Promise.all([
       supabase.from('audioguias').select('*', { count: 'exact', head: true }),
       supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('estado', true),
       supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('estado', false),
+      supabase.from('audioguias').select('id_punto_turistico').not('id_punto_turistico', 'is', null),
     ]);
-    document.getElementById('stat-total').textContent    = String(total    ?? 0);
-    document.getElementById('stat-activas').textContent  = String(activas  ?? 0);
-    document.getElementById('stat-inactivas').textContent= String(inactivas?? 0);
-    document.getElementById('stat-idiomas').textContent  = String(idiomas.length);
+    document.getElementById('stat-total').textContent     = String(total    ?? 0);
+    document.getElementById('stat-activas').textContent   = String(activas  ?? 0);
+    document.getElementById('stat-inactivas').textContent = String(inactivas ?? 0);
+    const puntosUnicos = new Set((puntosData || []).map(a => a.id_punto_turistico));
+    document.getElementById('stat-puntos').textContent    = String(puntosUnicos.size);
     await loadRecientes();
   }
 
@@ -528,13 +569,11 @@ import './Audios.css';
       </div>`).join('');
   }
 
-  // ════════════════════════════════════════════════
-  // TABLA VER / EDITAR
-  // ════════════════════════════════════════════════
+  // ════ TABLA VER / EDITAR ════
   async function loadAudios() {
-    let query = supabase.from('audioguias').select('*, punto_turistico(nombre), subdominios(descripcion)', { count: 'exact' }).order('id', { ascending: false });
-    if (filtrosBusq)   query = query.ilike('titulo', `%${filtrosBusq}%`);
-    if (filtrosIdioma) query = query.eq('id_idioma', filtrosIdioma);
+    let query = supabase.from('audioguias').select('*, punto_turistico(nombre)', { count: 'exact' }).order('id', { ascending: false });
+    if (filtrosBusq)    query = query.ilike('titulo', `%${filtrosBusq}%`);
+    if (filtrosPunto)   query = query.eq('id_punto_turistico', filtrosPunto);
     if (filtrosEstado !== '') query = query.eq('estado', filtrosEstado === 'true');
     const from = (paginaAudios - 1) * PAGE_SIZE;
     query = query.range(from, from + PAGE_SIZE - 1);
@@ -548,12 +587,11 @@ import './Audios.css';
     const tbody = document.getElementById('tbody-audios');
     if (!tbody) return;
     tbody.innerHTML = !rows.length
-      ? '<tr><td colspan="6" style="text-align:center;padding:32px;color:#B0BEC0;font-style:italic;font-size:13px;">No se encontraron audioguías</td></tr>'
+      ? '<tr><td colspan="5" style="text-align:center;padding:32px;color:#B0BEC0;font-style:italic;font-size:13px;">No se encontraron audioguías</td></tr>'
       : rows.map(a => `<tr>
           <td class="ag-td-title">${iconAudio} ${a.titulo}</td>
-          <td>${a.subdominios?.descripcion || getIdiomaNombre(a.id_idioma)}</td>
-          <td>${formatDuracion(a.duracion_segundos)}</td>
           <td>${a.punto_turistico?.nombre || getPuntoNombre(a.id_punto_turistico)}</td>
+          <td>${formatDuracion(a.duracion_segundos)}</td>
           <td><span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">${a.estado ? '● Activa' : '○ Inactiva'}</span></td>
           <td><button class="ag-btn-action ag-btn-edit" data-id="${a.id}" data-action="edit-audio">✏ Editar</button></td>
         </tr>`).join('');
@@ -564,13 +602,11 @@ import './Audios.css';
       btn.addEventListener('click', () => editarAudio(parseInt(btn.getAttribute('data-id')))));
   }
 
-  // ════════════════════════════════════════════════
-  // TABLA GESTIONAR ESTADO
-  // ════════════════════════════════════════════════
+  // ════ TABLA GESTIONAR ESTADO ════
   async function loadEstadoAudios() {
     const { data } = await supabase
       .from('audioguias')
-      .select('id, titulo, estado, id_idioma, duracion_segundos, id_punto_turistico, punto_turistico(nombre), subdominios(descripcion)')
+      .select('id, titulo, estado, duracion_segundos, id_punto_turistico, punto_turistico(nombre)')
       .order('titulo');
     renderTablaEstadoAudios(data || []);
   }
@@ -579,20 +615,15 @@ import './Audios.css';
     const tbody = document.getElementById('tbody-estado-audios');
     if (!tbody) return;
     if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:32px;color:#B0BEC0;font-style:italic;">No hay audioguías registradas</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:#B0BEC0;font-style:italic;">No hay audioguías registradas</td></tr>';
       return;
     }
     tbody.innerHTML = rows.map(a => `
       <tr class="${!a.estado ? 'ag-row-inactive' : ''}">
         <td class="ag-td-title">${iconAudio} ${a.titulo}</td>
-        <td>${a.subdominios?.descripcion || getIdiomaNombre(a.id_idioma)}</td>
-        <td>${formatDuracion(a.duracion_segundos)}</td>
         <td>${a.punto_turistico?.nombre || getPuntoNombre(a.id_punto_turistico)}</td>
-        <td>
-          <span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">
-            ${a.estado ? '● Activa' : '○ Inactiva'}
-          </span>
-        </td>
+        <td>${formatDuracion(a.duracion_segundos)}</td>
+        <td><span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">${a.estado ? '● Activa' : '○ Inactiva'}</span></td>
         <td>
           ${a.estado
             ? `<button class="ag-btn-action ag-btn-deactivate" data-id="${a.id}" data-titulo="${a.titulo}" data-nuevo-estado="false" data-action="toggle-audio">
@@ -617,9 +648,65 @@ import './Audios.css';
     });
   }
 
-  // ════════════════════════════════════════════════
-  // CAMBIO DE ESTADO CON CONFIRMACIÓN
-  // ════════════════════════════════════════════════
+  // ════ PANEL REPORTES ════
+  async function loadReportes() {
+    const [{ count: total }, { count: activas }, { data: allAudios }] = await Promise.all([
+      supabase.from('audioguias').select('*', { count: 'exact', head: true }),
+      supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('estado', true),
+      supabase.from('audioguias').select('duracion_segundos, id_punto_turistico, punto_turistico(nombre), titulo, estado').order('titulo'),
+    ]);
+
+    const rows = allAudios || [];
+    const totalDurSeg = rows.reduce((s, a) => s + (a.duracion_segundos || 0), 0);
+    const puntosUnicos = new Set(rows.filter(a => a.id_punto_turistico).map(a => a.id_punto_turistico));
+
+    document.getElementById('rep-total').textContent    = String(total ?? 0);
+    document.getElementById('rep-activas').textContent  = String(activas ?? 0);
+    document.getElementById('rep-duracion').textContent = formatDuracion(totalDurSeg);
+    document.getElementById('rep-puntos').textContent   = String(puntosUnicos.size);
+
+    // Barras por punto
+    const porPunto = {};
+    rows.forEach(a => {
+      const nombre = a.punto_turistico?.nombre || 'Sin punto asignado';
+      if (!porPunto[nombre]) porPunto[nombre] = 0;
+      porPunto[nombre]++;
+    });
+
+    const maxCount     = Math.max(...Object.values(porPunto), 1);
+    const sortedPuntos = Object.entries(porPunto).sort((a, b) => b[1] - a[1]);
+    const colores      = ['ag-bar-teal', 'ag-bar-green', 'ag-bar-amber'];
+
+    const barsEl = document.getElementById('ag-report-puntos-list');
+    if (barsEl) {
+      barsEl.innerHTML = !sortedPuntos.length
+        ? '<div style="padding:20px;color:#B0BEC0;text-align:center;font-size:13px;">Sin datos disponibles</div>'
+        : sortedPuntos.map(([nombre, count], i) => {
+            const pct   = Math.round((count / maxCount) * 100);
+            const color = colores[i % colores.length];
+            return `<div class="ag-report-bar-row">
+              <span class="ag-report-bar-label">${nombre}</span>
+              <div class="ag-lang-bar-track ag-report-bar-track"><div class="ag-lang-bar-fill ${color}" style="width:${pct}%"></div></div>
+              <span class="ag-report-bar-count">${count} guía${count !== 1 ? 's' : ''}</span>
+            </div>`;
+          }).join('');
+    }
+
+    // Tabla detalle
+    const tbodyRep = document.getElementById('tbody-reporte');
+    if (tbodyRep) {
+      tbodyRep.innerHTML = !rows.length
+        ? '<tr><td colspan="4" style="text-align:center;padding:24px;color:#B0BEC0;">Sin audioguías registradas</td></tr>'
+        : rows.map(a => `<tr>
+            <td class="ag-td-title">${iconAudio} ${a.titulo}</td>
+            <td>${a.punto_turistico?.nombre || '—'}</td>
+            <td>${formatDuracion(a.duracion_segundos)}</td>
+            <td><span class="ag-badge ${a.estado ? 'ag-badge-pub' : 'ag-badge-draft'}">${a.estado ? '● Activa' : '○ Inactiva'}</span></td>
+          </tr>`).join('');
+    }
+  }
+
+  // ════ CAMBIO DE ESTADO ════
   function pedirCambioEstado(id, titulo, nuevoEstado) {
     showConfirm({
       type:         nuevoEstado ? 'activate' : 'deactivate',
@@ -639,16 +726,13 @@ import './Audios.css';
       .update({ estado: nuevoEstado, updated_at: new Date().toISOString() })
       .eq('id', id);
     if (error) { showToast('Error: ' + error.message, 'error'); return; }
-    const accion = nuevoEstado ? 'activada' : 'desactivada';
-    showToast(`✅ Audioguía ${accion} correctamente`);
+    showToast(`✅ Audioguía ${nuevoEstado ? 'activada' : 'desactivada'} correctamente`);
     loadEstadoAudios();
     loadAudios();
     loadStats();
   }
 
-  // ════════════════════════════════════════════════
-  // PAGINADOR
-  // ════════════════════════════════════════════════
+  // ════ PAGINADOR ════
   function renderPaginator(containerId, total, currentPage, onPageFn) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -663,69 +747,66 @@ import './Audios.css';
     });
   }
 
-  // ════════════════════════════════════════════════
-  // CREAR AUDIOGUÍA
-  // ════════════════════════════════════════════════
+  // ════ CREAR AUDIOGUÍA ════
   document.getElementById('form-crear-audio')?.addEventListener('submit', async e => {
     e.preventDefault();
     const estadoRadio = document.querySelector('input[name="au-estado"]:checked');
-    const idiomaVal   = document.getElementById('au-idioma').value;
     const puntoVal    = document.getElementById('au-punto').value;
-    const durVal      = document.getElementById('au-duracion').value;
+    const textoVal    = document.getElementById('au-texto').value.trim();
+    const duracion    = calcularDuracion(textoVal);
     const btn         = document.getElementById('btn-guardar-audio');
     btn.disabled = true; btn.textContent = 'Guardando...';
     const { error } = await supabase.from('audioguias').insert([{
       titulo:              document.getElementById('au-titulo').value.trim(),
       descripcion_corta:   document.getElementById('au-desc-corta').value.trim() || null,
-      texto_transcripcion: document.getElementById('au-texto').value.trim() || null,
+      texto_transcripcion: textoVal || null,
       audio_url:           document.getElementById('au-audio-url').value.trim() || null,
-      duracion_segundos:   durVal ? parseInt(durVal) : null,
-      id_idioma:           idiomaVal ? parseInt(idiomaVal) : null,
-      id_punto_turistico:  puntoVal  ? parseInt(puntoVal)  : null,
+      duracion_segundos:   duracion || null,
+      id_idioma:           201,
+      id_punto_turistico:  puntoVal ? parseInt(puntoVal) : null,
       estado:              estadoRadio?.value === 'true',
     }]);
     btn.disabled = false; btn.textContent = 'Guardar Audioguía';
     if (error) { showToast('Error: ' + error.message, 'error'); return; }
     showToast('¡Audioguía creada correctamente!');
     document.getElementById('form-crear-audio').reset();
-    document.getElementById('ag-preview-box').style.display    = 'none';
-    document.getElementById('ag-duracion-preview').style.display = 'none';
+    document.getElementById('ag-preview-box').style.display       = 'none';
+    document.getElementById('ag-duracion-preview').style.display  = 'none';
+    document.getElementById('ag-duracion-auto').style.display     = 'none';
     loadStats(); loadAudios();
   });
 
-  // ════════════════════════════════════════════════
-  // EDITAR AUDIOGUÍA
-  // ════════════════════════════════════════════════
+  // ════ EDITAR AUDIOGUÍA ════
   async function editarAudio(id) {
     const { data } = await supabase.from('audioguias').select('*').eq('id', id).single();
     if (!data) return;
-    document.getElementById('edit-au-id').value       = id;
-    document.getElementById('edit-au-titulo').value   = data.titulo;
-    document.getElementById('edit-au-desc').value     = data.descripcion_corta || '';
-    document.getElementById('edit-au-texto').value    = data.texto_transcripcion || '';
-    document.getElementById('edit-au-duracion').value = data.duracion_segundos || '';
-    document.getElementById('edit-au-url').value      = data.audio_url || '';
-    const selIdioma = document.getElementById('edit-au-idioma');
-    const selPunto  = document.getElementById('edit-au-punto');
-    if (data.id_idioma)           selIdioma.value = data.id_idioma;
-    if (data.id_punto_turistico)  selPunto.value  = data.id_punto_turistico;
+    document.getElementById('edit-au-id').value    = id;
+    document.getElementById('edit-au-titulo').value = data.titulo;
+    document.getElementById('edit-au-desc').value  = data.descripcion_corta || '';
+    document.getElementById('edit-au-texto').value = data.texto_transcripcion || '';
+    document.getElementById('edit-au-url').value   = data.audio_url || '';
+    const selPunto = document.getElementById('edit-au-punto');
+    if (data.id_punto_turistico) selPunto.value = data.id_punto_turistico;
+    if (data.texto_transcripcion) {
+      actualizarDuracionAuto(data.texto_transcripcion, 'edit-ag-duracion-auto', 'edit-ag-duracion-auto-text', 'edit-ag-duracion-auto-words', null, null);
+    }
     openModal('modal-editar-audio');
   }
 
   document.getElementById('form-editar-audio')?.addEventListener('submit', async e => {
     e.preventDefault();
     const id       = parseInt(document.getElementById('edit-au-id').value);
-    const idiomaVal = document.getElementById('edit-au-idioma').value;
     const puntoVal  = document.getElementById('edit-au-punto').value;
-    const durVal    = document.getElementById('edit-au-duracion').value;
+    const textoVal  = document.getElementById('edit-au-texto').value.trim();
+    const duracion  = calcularDuracion(textoVal);
     const { error } = await supabase.from('audioguias').update({
       titulo:              document.getElementById('edit-au-titulo').value.trim(),
       descripcion_corta:   document.getElementById('edit-au-desc').value.trim() || null,
-      texto_transcripcion: document.getElementById('edit-au-texto').value.trim() || null,
+      texto_transcripcion: textoVal || null,
       audio_url:           document.getElementById('edit-au-url').value.trim() || null,
-      duracion_segundos:   durVal ? parseInt(durVal) : null,
-      id_idioma:           idiomaVal ? parseInt(idiomaVal) : null,
-      id_punto_turistico:  puntoVal  ? parseInt(puntoVal)  : null,
+      duracion_segundos:   duracion || null,
+     id_idioma:           201,
+      id_punto_turistico:  puntoVal ? parseInt(puntoVal) : null,
       updated_at:          new Date().toISOString(),
     }).eq('id', id);
     if (error) { showToast('Error: ' + error.message, 'error'); return; }
@@ -734,31 +815,7 @@ import './Audios.css';
     loadAudios(); loadStats();
   });
 
-  // ════════════════════════════════════════════════
-  // PANEL IDIOMAS
-  // ════════════════════════════════════════════════
-  async function loadIdiomasPanel() {
-    const grid = document.getElementById('ag-lang-grid');
-    if (!grid) return;
-    const { count: totalAudios } = await supabase.from('audioguias').select('*', { count: 'exact', head: true });
-    const total = totalAudios || 1;
-    const htmlCards = await Promise.all(idiomas.map(async idioma => {
-      const { count } = await supabase.from('audioguias').select('*', { count: 'exact', head: true }).eq('id_idioma', idioma.id);
-      const n   = count || 0;
-      const pct = Math.round((n / total) * 100);
-      const barColor = pct >= 75 ? 'ag-bar-teal' : pct >= 40 ? 'ag-bar-green' : 'ag-bar-amber';
-      return `<div class="ag-lang-card">
-        <div class="ag-lang-top"><span class="ag-lang-name">${idioma.descripcion}</span><span class="ag-lang-count">${n} guías</span></div>
-        <div class="ag-lang-bar-track"><div class="ag-lang-bar-fill ${barColor}" style="width:${pct}%"></div></div>
-        <span class="ag-lang-pct">${pct}% del total</span>
-      </div>`;
-    }));
-    grid.innerHTML = htmlCards.join('') || '<div style="grid-column:1/-1;color:#B0BEC0;text-align:center;padding:20px;">Sin idiomas registrados</div>';
-  }
-
-  // ════════════════════════════════════════════════
-  // MODALES
-  // ════════════════════════════════════════════════
+  // ════ MODALES ════
   function openModal(id)  { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
   function closeModal(id) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
 
@@ -768,27 +825,23 @@ import './Audios.css';
     if (e.target.id === 'modal-editar-audio') closeModal('modal-editar-audio');
   });
 
-  // ════════════════════════════════════════════════
-  // SPEECH BUTTONS
-  // ════════════════════════════════════════════════
+  // ════ SPEECH BUTTONS ════
   document.getElementById('btn-escuchar')?.addEventListener('click', () => {
-    reproducirTexto(document.getElementById('au-texto').value, document.getElementById('au-idioma').value,
+    reproducirTexto(document.getElementById('au-texto').value,
       document.getElementById('btn-escuchar'), document.getElementById('btn-detener'));
   });
   document.getElementById('btn-detener')?.addEventListener('click', () => {
     detenerAudio(document.getElementById('btn-escuchar'), document.getElementById('btn-detener'));
   });
   document.getElementById('btn-escuchar-edit')?.addEventListener('click', () => {
-    reproducirTexto(document.getElementById('edit-au-texto').value, document.getElementById('edit-au-idioma').value,
+    reproducirTexto(document.getElementById('edit-au-texto').value,
       document.getElementById('btn-escuchar-edit'), document.getElementById('btn-detener-edit'));
   });
   document.getElementById('btn-detener-edit')?.addEventListener('click', () => {
     detenerAudio(document.getElementById('btn-escuchar-edit'), document.getElementById('btn-detener-edit'));
   });
 
-  // ════════════════════════════════════════════════
-  // IA SIMULACIÓN
-  // ════════════════════════════════════════════════
+  // ════ IA SIMULACIÓN ════
   document.getElementById('btn-generar-ia')?.addEventListener('click', () => {
     const titulo = document.getElementById('au-titulo').value;
     const punto  = document.getElementById('au-punto');
@@ -796,40 +849,32 @@ import './Audios.css';
     if (!titulo) { showToast('Completa el título primero', 'error'); return; }
     const texto = `Bienvenidos a ${puntoNombre}. ${titulo}. Este fascinante lugar en La Paz, Bolivia, es un testimonio vivo de la cultura andina. A lo largo de su historia, ha sido testigo de importantes eventos que forjaron la identidad de la ciudad. Te invitamos a explorar cada rincón y descubrir los secretos que guarda.`;
     document.getElementById('au-texto').value = texto;
-    document.getElementById('ag-preview-box').style.display  = 'block';
-    document.getElementById('ag-preview-text').textContent   = texto;
+    document.getElementById('ag-preview-box').style.display = 'block';
+    document.getElementById('ag-preview-text').textContent  = texto;
+    actualizarDuracionAuto(texto, 'ag-duracion-auto', 'ag-duracion-auto-text', 'ag-duracion-auto-words', 'ag-duracion-preview', 'ag-duracion-text');
     showToast('Texto generado con IA — revísalo antes de guardar');
   });
 
-  // ════════════════════════════════════════════════
-  // PREVIEW EN TIEMPO REAL
-  // ════════════════════════════════════════════════
+  // ════ PREVIEW Y DURACIÓN EN TIEMPO REAL ════
   document.getElementById('au-texto')?.addEventListener('input', e => {
     const val = e.target.value.trim();
     const box  = document.getElementById('ag-preview-box');
     const prev = document.getElementById('ag-preview-text');
     if (val.length > 10) { box.style.display = 'block'; prev.textContent = val; }
     else { box.style.display = 'none'; }
+    actualizarDuracionAuto(val, 'ag-duracion-auto', 'ag-duracion-auto-text', 'ag-duracion-auto-words', 'ag-duracion-preview', 'ag-duracion-text');
   });
 
-  document.getElementById('au-duracion')?.addEventListener('input', e => {
-    const seg   = parseInt(e.target.value);
-    const badge = document.getElementById('ag-duracion-preview');
-    const txt   = document.getElementById('ag-duracion-text');
-    if (seg > 0) { badge.style.display = 'flex'; txt.textContent = formatDuracion(seg); }
-    else { badge.style.display = 'none'; }
+  document.getElementById('edit-au-texto')?.addEventListener('input', e => {
+    actualizarDuracionAuto(e.target.value, 'edit-ag-duracion-auto', 'edit-ag-duracion-auto-text', 'edit-ag-duracion-auto-words', null, null);
   });
 
-  // ════════════════════════════════════════════════
-  // FILTROS TABLA
-  // ════════════════════════════════════════════════
-  document.getElementById('search-audios')?.addEventListener('input',    e => { filtrosBusq   = e.target.value; paginaAudios = 1; loadAudios(); });
-  document.getElementById('filter-idioma-audios')?.addEventListener('change', e => { filtrosIdioma = e.target.value; paginaAudios = 1; loadAudios(); });
+  // ════ FILTROS TABLA ════
+  document.getElementById('search-audios')?.addEventListener('input',     e => { filtrosBusq   = e.target.value; paginaAudios = 1; loadAudios(); });
+  document.getElementById('filter-punto-audios')?.addEventListener('change',  e => { filtrosPunto  = e.target.value; paginaAudios = 1; loadAudios(); });
   document.getElementById('filter-estado-audios')?.addEventListener('change', e => { filtrosEstado = e.target.value; paginaAudios = 1; loadAudios(); });
 
-  // ════════════════════════════════════════════════
-  // TOGGLE RADIOS
-  // ════════════════════════════════════════════════
+  // ════ TOGGLE RADIOS ════
   document.querySelectorAll('.ag-toggle-group').forEach(group => {
     group.querySelectorAll('input[type=radio]').forEach(radio => {
       radio.addEventListener('change', () => {
@@ -839,9 +884,7 @@ import './Audios.css';
     });
   });
 
-  // ════════════════════════════════════════════════
-  // NAVEGACIÓN ENTRE PANELES
-  // ════════════════════════════════════════════════
+  // ════ NAVEGACIÓN ENTRE PANELES ════
   const initAudiosModule = () => {
     const cards  = document.querySelectorAll('.ag-action-card');
     const panels = document.querySelectorAll('.ag-panel');
@@ -854,7 +897,7 @@ import './Audios.css';
         panels.forEach(p => p.classList.remove('active'));
         document.getElementById(panelId)?.classList.add('active');
         if (panelId === 'ag-panel-editar')           loadAudios();
-        if (panelId === 'ag-panel-idiomas')          loadIdiomasPanel();
+        if (panelId === 'ag-panel-reportes')         loadReportes();
         if (panelId === 'ag-panel-gestionar-estado') loadEstadoAudios();
       });
     });
@@ -866,7 +909,7 @@ import './Audios.css';
       document.querySelector('[data-panel="editar"]')?.click();
     });
 
-    loadIdiomas().then(() => { loadPuntos(); loadStats(); });
+    loadPuntos().then(() => loadStats());
   };
 
   initAudiosModule();
